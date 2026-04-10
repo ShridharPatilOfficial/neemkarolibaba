@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - NKB Foundation</title>
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="shortcut icon" href="{{ asset('favicon.svg') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -14,9 +16,7 @@
     <div class="w-full max-w-md">
         <!-- Logo -->
         <div class="text-center mb-8">
-            <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                <i class="fas fa-om text-purple-900 text-3xl"></i>
-            </div>
+            <img src="{{ asset('favicon.svg') }}" alt="Om" class="w-20 h-20 rounded-2xl mx-auto mb-4 shadow-lg">
             <h1 class="text-white font-extrabold text-2xl">NKB Foundation</h1>
             <p class="text-purple-300 text-sm mt-1">Admin Panel</p>
         </div>

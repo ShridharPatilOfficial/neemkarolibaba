@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin') - NKB Admin</title>
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="shortcut icon" href="{{ asset('favicon.svg') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -23,9 +25,7 @@
 <aside class="admin-sidebar bg-gray-900 flex flex-col" style="overflow-y:auto;">
     <!-- Logo -->
     <div class="flex items-center gap-3 p-4 border-b border-gray-700">
-        <div class="w-9 h-9 bg-yellow-400 rounded-lg flex items-center justify-center flex-shrink-0">
-            <i class="fas fa-om text-purple-900 text-base"></i>
-        </div>
+        <img src="{{ asset('favicon.svg') }}" alt="Om" class="w-9 h-9 rounded-lg flex-shrink-0">
         <div>
             <p class="text-white font-bold text-sm leading-tight">NKB Foundation</p>
             <p class="text-gray-400 text-xs">Admin Panel</p>

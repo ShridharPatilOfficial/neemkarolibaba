@@ -54,9 +54,7 @@
 <header class="bg-yellow-400 py-3 px-4 shadow-sm">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-            <div class="w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center border-2 border-purple-700 shadow-md overflow-hidden flex-shrink-0">
-                <span class="text-yellow-400 font-black text-xl leading-none">NKB</span>
-            </div>
+            <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
             <div>
                 <h1 class="text-purple-900 font-extrabold text-lg md:text-xl leading-tight">
                     {{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Foundation Worldwide') }}
@@ -195,9 +193,7 @@
         {{-- Top brand row --}}
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-10 pb-10 border-b border-gray-800">
             <div class="flex items-center gap-4">
-                <div class="w-16 h-16 rounded-xl bg-purple-900 flex items-center justify-center shadow-lg flex-shrink-0">
-                    <span class="text-yellow-400 font-black text-2xl">NKB</span>
-                </div>
+                <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-16 h-16 rounded-xl shadow-lg flex-shrink-0">
                 <div>
                     <p class="font-bold text-lg leading-tight">{{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Foundation') }}</p>
                     <p class="text-gray-400 text-sm italic">"Love All, Serve All"</p>
