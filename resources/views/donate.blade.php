@@ -27,8 +27,8 @@
             </p>
         </div>
         <a href="{{ route('contact') }}"
-           class="flex-shrink-0 inline-flex items-center gap-3 bg-white text-orange-600 hover:bg-orange-50 font-black py-4 px-10 rounded-2xl transition shadow-2xl text-base">
-            <i class="fas fa-hands-holding-heart text-xl"></i>
+           class="donate-btn flex-shrink-0 inline-flex items-center gap-3 font-black py-4 px-10 rounded-2xl shadow-2xl text-base">
+            <i class="fas fa-hands-holding-heart btn-heart text-xl"></i>
             Donate Now
         </a>
     </div>

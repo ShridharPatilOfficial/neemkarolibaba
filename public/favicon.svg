@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Yellow background -->
+  <rect width="64" height="64" rx="12" fill="#FBBF24"/>
+  <!-- Purple circle -->
+  <circle cx="32" cy="32" r="26" fill="#4C1D95"/>
+  <!-- Inner ring -->
+  <circle cx="32" cy="32" r="26" fill="none" stroke="#7C3AED" stroke-width="2"/>
+  <!-- NKB text -->
+  <text x="32" y="37" text-anchor="middle" font-family="Arial Black, Arial, sans-serif"
+        font-weight="900" font-size="16" fill="#FBBF24" letter-spacing="-0.5">NKB</text>
+</svg>

@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Neem Karoli Baba Foundation Worldwide')</title>
     <meta name="description" content="@yield('meta_desc', 'Neem Karoli Baba Foundation Worldwide - Serving humanity with compassion, education, and healthcare inspired by Neem Karoli Baba.')">
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="shortcut icon" href="{{ asset('favicon.svg') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -66,9 +68,8 @@
             </div>
         </div>
         <a href="{{ route('donate') }}"
-           class="flex-shrink-0 text-white font-bold py-2.5 px-6 rounded-lg text-sm flex items-center gap-2 shadow-md hover:opacity-90 transition"
-           style="background: linear-gradient(135deg, #EA580C 0%, #DC2626 100%);">
-            <i class="fas fa-heart-pulse"></i>
+           class="donate-btn flex-shrink-0 py-2.5 px-6 rounded-xl text-sm flex items-center gap-2 shadow-lg">
+            <i class="fas fa-heart btn-heart"></i>
             Donate Now
         </a>
     </div>
@@ -201,9 +202,8 @@
                 </div>
             </div>
             <a href="{{ route('donate') }}"
-               class="text-white font-bold py-3 px-7 rounded-xl flex items-center gap-2 text-sm shadow-lg hover:opacity-90 transition flex-shrink-0"
-               style="background: linear-gradient(135deg, #EA580C 0%, #DC2626 100%);">
-                <i class="fas fa-heart-pulse"></i> Support Our Mission
+               class="donate-btn py-3 px-7 rounded-xl flex items-center gap-2 text-sm shadow-lg flex-shrink-0">
+                <i class="fas fa-heart btn-heart"></i> Support Our Mission
             </a>
         </div>
 
@@ -316,6 +316,14 @@
     </div>
 </footer>
 
+{{-- ─── Floating Donate Button ─────────────────────────────────── --}}
+<div id="float-donate" aria-label="Donate Now">
+    <a href="{{ route('donate') }}">
+        <i class="fas fa-heart btn-heart"></i>
+        Donate Now
+    </a>
+</div>
+
 {{-- ─── WhatsApp Floating Button ────────────────────────────────── --}}
 <a href="https://wa.me/{{ \App\Models\SiteSetting::get('whatsapp', '919876543210') }}"
    target="_blank" rel="noopener"
@@ -333,10 +341,13 @@
         icon.classList.toggle('fa-times');
     });
 
-    // Sticky nav shadow on scroll
+    // Sticky nav shadow on scroll + show floating donate
     const nav = document.getElementById('main-nav');
+    const floatDonate = document.getElementById('float-donate');
     window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY > 180;
         nav?.classList.toggle('nav-scrolled', window.scrollY > 50);
+        floatDonate?.classList.toggle('visible', scrolled);
     });
 
     // Reveal on scroll
