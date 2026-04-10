@@ -17,7 +17,7 @@ class AdminUserController extends Controller
 
     public function create()
     {
-        return view('admin.users.form', ['user' => null]);
+        return view('admin.users.form', ['adminUser' => null]);
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class AdminUserController extends Controller
 
     public function edit(AdminUser $user)
     {
-        return view('admin.users.form', compact('user'));
+        return view('admin.users.form', ['adminUser' => $user]);
     }
 
     public function update(Request $request, AdminUser $user)
