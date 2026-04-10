@@ -315,10 +315,15 @@
 </footer>
 
 {{-- ─── Floating Donate Button ─────────────────────────────────── --}}
-<div id="float-donate" aria-label="Donate Now">
-    <a href="{{ route('donate') }}#payment-section">
-        <i class="fas fa-heart btn-heart"></i>
-        Donate Now
+<div id="float-donate">
+    {{-- Animated glow orbs behind the button --}}
+    <div class="fd-glow-ring fd-ring1"></div>
+    <div class="fd-glow-ring fd-ring2"></div>
+    <div class="fd-glow-ring fd-ring3"></div>
+    <a href="{{ route('donate') }}#payment-section" class="fd-btn" id="fd-link">
+        <span class="fd-icon"><i class="fas fa-heart"></i></span>
+        <span class="fd-text">Donate Now</span>
+        <span class="fd-shine"></span>
     </a>
 </div>
 
@@ -339,13 +344,23 @@
         icon.classList.toggle('fa-times');
     });
 
-    // Sticky nav shadow on scroll + show floating donate
+    // Sticky nav shadow on scroll + show/hide floating donate
     const nav = document.getElementById('main-nav');
     const floatDonate = document.getElementById('float-donate');
+    let fdVisible = false;
     window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY > 180;
         nav?.classList.toggle('nav-scrolled', window.scrollY > 50);
-        floatDonate?.classList.toggle('visible', scrolled);
+        const shouldShow = window.scrollY > 200;
+        if (shouldShow && !fdVisible) {
+            fdVisible = true;
+            floatDonate?.classList.remove('hiding');
+            floatDonate?.classList.add('visible');
+        } else if (!shouldShow && fdVisible) {
+            fdVisible = false;
+            floatDonate?.classList.remove('visible');
+            floatDonate?.classList.add('hiding');
+            setTimeout(() => floatDonate?.classList.remove('hiding'), 380);
+        }
     });
 
     // Reveal on scroll
