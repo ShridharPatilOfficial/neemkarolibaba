@@ -349,33 +349,6 @@
 </section>
 @endif
 
-{{-- ════════════════════════════════════════════════════════════
-     YOUTUBE VIDEO
-════════════════════════════════════════════════════════════ --}}
-<section class="py-20 px-4" style="background:linear-gradient(135deg,#fef3ee 0%,#fff 50%,#f3f0ff 100%);">
-    <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-10 reveal">
-            <span class="section-tag">Watch & Learn</span>
-            <h2 class="text-3xl font-black text-gray-900 mt-1">See Our <span class="text-orange-600">Work in Action</span></h2>
-        </div>
-        @php
-            $ytUrl = $settings['home_youtube_url'] ?? 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-            preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]+)/', $ytUrl, $ytm);
-            $ytEmbedId = $ytm[1] ?? 'dQw4w9WgXcQ';
-        @endphp
-        <div class="reveal rounded-3xl overflow-hidden shadow-2xl border-4 border-white" style="box-shadow: 0 32px 80px rgba(76,29,149,0.2);">
-            <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-                <iframe
-                    src="https://www.youtube.com/embed/{{ $ytEmbedId }}?rel=0&modestbranding=1"
-                    style="position:absolute;top:0;left:0;width:100%;height:100%;"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
-    </div>
-</section>
 
 {{-- ════════════════════════════════════════════════════════════
      COLLABORATED PARTNERS

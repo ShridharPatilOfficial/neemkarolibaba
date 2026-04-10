@@ -26,6 +26,9 @@ class HomeController extends Controller
             'whatsapp'  => SiteSetting::get('whatsapp', '919464433808'),
             'address'   => SiteSetting::get('address', 'Chandigarh - 160002'),
             'ticker'    => SiteSetting::get('ticker', 'All donations are eligible for tax exemption as we are a 12A and 80G CSR registered organization. Donate to Neem Karoli Baba Foundation Worldwide today!'),
+            'mission'   => SiteSetting::get('mission', ''),
+            'vision'    => SiteSetting::get('vision', ''),
+            'objectives'=> SiteSetting::get('objectives', ''),
         ];
 
         $sliders          = Slider::where('is_active', true)->orderBy('sort_order')->get();
