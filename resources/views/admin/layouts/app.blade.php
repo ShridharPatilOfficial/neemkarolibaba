@@ -6,7 +6,8 @@
     <title>@yield('title', 'Admin') - NKB Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <style>
         .admin-nav-link { display:flex; align-items:center; gap:10px; padding:10px 16px; border-radius:8px; font-size:0.82rem; font-weight:500; color:#cbd5e1; transition:all 0.2s; }
         .admin-nav-link:hover, .admin-nav-link.active { background:#1e1b4b; color:#fff; }
