@@ -87,6 +87,12 @@
         <a href="{{ route('admin.gallery.index') }}" class="admin-nav-link {{ request()->routeIs('admin.gallery*') ? 'active' : '' }}">
             <i class="fas fa-photo-film"></i> Gallery
         </a>
+        <a href="{{ route('admin.work-videos.index') }}" class="admin-nav-link {{ request()->routeIs('admin.work-videos*') ? 'active' : '' }}">
+            <i class="fas fa-video"></i> Work in Action
+        </a>
+        <a href="{{ route('admin.media-coverage.index') }}" class="admin-nav-link {{ request()->routeIs('admin.media-coverage*') ? 'active' : '' }}">
+            <i class="fas fa-newspaper"></i> Media Coverage
+        </a>
 
         <p class="admin-section-title">Finance</p>
         <a href="{{ route('admin.donate.index') }}" class="admin-nav-link {{ request()->routeIs('admin.donate*') ? 'active' : '' }}">

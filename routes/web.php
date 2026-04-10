@@ -9,6 +9,7 @@ use App\Http\Controllers\FuturePlanController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JoinUsController;
+use App\Http\Controllers\MediaCoverageController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SiteSettingController;
@@ -25,6 +26,8 @@ use App\Http\Controllers\Admin\DonateSettingController;
 use App\Http\Controllers\Admin\SubmissionController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\PrincipleController;
+use App\Http\Controllers\Admin\WorkVideoController;
+use App\Http\Controllers\Admin\MediaCoverageController as AdminMediaCoverageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Document;
@@ -63,6 +66,7 @@ Route::middleware('track.visitor')->group(function () {
     Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
 
     Route::get('/donate-us', [DonateController::class, 'index'])->name('donate');
+    Route::get('/media-coverage', [MediaCoverageController::class, 'index'])->name('media-coverage');
 });
 
 // ─── Admin Auth ───────────────────────────────────────────────────────────────
@@ -115,5 +119,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('principles', PrincipleController::class)->except(['show'])
             ->parameters(['principles' => 'principle']);
+
+        Route::resource('work-videos', WorkVideoController::class)->except(['show'])
+            ->parameters(['work-videos' => 'workVideo']);
+
+        Route::resource('media-coverage', AdminMediaCoverageController::class)->except(['show'])
+            ->parameters(['media-coverage' => 'mediaCoverage']);
     });
 });

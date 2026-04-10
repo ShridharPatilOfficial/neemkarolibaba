@@ -557,6 +557,109 @@
 @endif
 
 {{-- ════════════════════════════════════════════════════════════
+     WORK IN ACTION — VIDEO CARDS
+════════════════════════════════════════════════════════════ --}}
+@if($workVideos->count())
+<section class="py-20 px-4" style="background:linear-gradient(135deg,#0a0528 0%,#1e0a3c 100%);">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-14 reveal">
+            <div class="inline-flex items-center gap-2 mb-3">
+                <div class="h-px w-10 bg-orange-500"></div>
+                <span class="text-orange-400 text-xs font-bold uppercase tracking-widest">Watch &amp; Learn</span>
+                <div class="h-px w-10 bg-orange-500"></div>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-black text-white mt-1">
+                See Our <span class="text-orange-400">Work in Action</span>
+            </h2>
+            <p class="text-purple-300 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
+                Real moments, real lives changed — watch our programmes and drives on the ground.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($workVideos as $i => $vid)
+            @php $ytId = $vid->youtube_id; @endphp
+            <div class="work-video-card group relative bg-gray-900 rounded-2xl overflow-hidden shadow-lg border border-white/10
+                        hover:border-orange-500/50 hover:-translate-y-2 hover:shadow-orange-900/40 hover:shadow-2xl
+                        transition-all duration-400 cursor-pointer reveal reveal-delay-{{ $i % 4 + 1 }}"
+                 onclick="openWorkVideo('{{ $ytId }}','{{ addslashes($vid->title) }}')">
+
+                {{-- Thumbnail --}}
+                <div class="relative overflow-hidden h-44">
+                    <img src="{{ $ytId ? 'https://img.youtube.com/vi/'.$ytId.'/maxresdefault.jpg' : 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80' }}"
+                         alt="{{ $vid->title }}"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                         onerror="this.src='https://img.youtube.com/vi/{{ $ytId }}/mqdefault.jpg'">
+
+                    {{-- Dark overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                    {{-- Play button --}}
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-14 h-14 rounded-full bg-red-600 group-hover:bg-red-500 group-hover:scale-110
+                                    flex items-center justify-center shadow-2xl transition-all duration-300
+                                    ring-4 ring-red-600/30 group-hover:ring-red-500/50">
+                            <i class="fas fa-play text-white text-base ml-1"></i>
+                        </div>
+                    </div>
+
+                    {{-- YouTube badge --}}
+                    <div class="absolute top-3 right-3">
+                        <span class="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+                            <i class="fab fa-youtube text-xs"></i> YouTube
+                        </span>
+                    </div>
+                </div>
+
+                {{-- Card content --}}
+                <div class="p-4">
+                    <h3 class="text-white font-bold text-sm leading-snug mb-1.5 line-clamp-2 group-hover:text-orange-300 transition-colors">
+                        {{ $vid->title }}
+                    </h3>
+                    @if($vid->description)
+                    <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">{{ $vid->description }}</p>
+                    @endif
+                    <div class="mt-3 flex items-center gap-1.5 text-orange-400 text-xs font-semibold">
+                        <i class="fas fa-play-circle text-sm"></i>
+                        <span>Watch Now</span>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="text-center mt-10 reveal">
+            <a href="{{ route('gallery') }}"
+               class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold py-3 px-8 rounded-xl transition backdrop-blur-sm text-sm">
+                <i class="fas fa-photo-film"></i> View Full Gallery
+            </a>
+        </div>
+    </div>
+</section>
+
+{{-- Work Video Modal --}}
+<div id="workVideoModal" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4"
+     style="background:rgba(0,0,0,0.93);backdrop-filter:blur(8px);">
+    <button onclick="closeWorkVideo()"
+            class="absolute top-4 right-5 text-white/70 hover:text-white z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+        <i class="fas fa-times text-lg"></i>
+    </button>
+    <div class="bg-gray-950 rounded-3xl overflow-hidden shadow-2xl w-full max-w-4xl" onclick="event.stopPropagation()">
+        <div class="relative bg-black" style="padding-bottom:56.25%">
+            <iframe id="workVideoFrame" src="" class="absolute inset-0 w-full h-full"
+                    frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="p-5 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-red-600/20 flex items-center justify-center flex-shrink-0">
+                <i class="fab fa-youtube text-red-400 text-sm"></i>
+            </div>
+            <p id="workVideoTitle" class="text-white font-bold text-sm"></p>
+        </div>
+    </div>
+</div>
+@endif
+
+{{-- ════════════════════════════════════════════════════════════
      DONATE CTA RIBBON
 ════════════════════════════════════════════════════════════ --}}
 <section class="donate-ribbon relative overflow-hidden">
@@ -662,5 +765,29 @@ new Swiper('.partners-swiper', {
     },
 });
 @endif
+
+// ── Work in Action video modal ──────────────────────────────
+function openWorkVideo(ytId, title) {
+    if (!ytId) return;
+    document.getElementById('workVideoFrame').src =
+        'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1';
+    document.getElementById('workVideoTitle').textContent = title || '';
+    const m = document.getElementById('workVideoModal');
+    m.classList.remove('hidden');
+    m.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+function closeWorkVideo() {
+    document.getElementById('workVideoFrame').src = '';
+    const m = document.getElementById('workVideoModal');
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+    document.body.style.overflow = '';
+}
+const wvm = document.getElementById('workVideoModal');
+if (wvm) {
+    wvm.addEventListener('click', function(e) { if (e.target === this) closeWorkVideo(); });
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeWorkVideo(); } });
 </script>
 @endpush

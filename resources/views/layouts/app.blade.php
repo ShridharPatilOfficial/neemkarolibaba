@@ -83,14 +83,13 @@
             <ul class="hidden lg:flex items-center w-full">
                 @php
                     $navLinks = [
-                        ['label' => 'Home',          'route' => 'home',           'match' => 'home'],
-                        ['label' => 'Our Activities', 'route' => 'activities',    'match' => 'activities'],
-                        ['label' => 'Events',         'route' => 'events',        'match' => 'events'],
-                        ['label' => 'Future Plan',    'route' => 'future-plan',   'match' => 'future-plan'],
-                        ['label' => 'Join Us',        'route' => 'join-us',       'match' => 'join-us'],
-                        ['label' => 'Gallery',        'route' => 'gallery',       'match' => 'gallery'],
-                        ['label' => 'Contact Us',     'route' => 'contact',       'match' => 'contact'],
-                        ['label' => 'Donate Us',      'route' => 'donate',        'match' => 'donate'],
+                        ['label' => 'Home',           'route' => 'home',         'match' => 'home'],
+                        ['label' => 'Our Activities', 'route' => 'activities',   'match' => 'activities'],
+                        ['label' => 'Events',         'route' => 'events',       'match' => 'events'],
+                        ['label' => 'Future Plan',    'route' => 'future-plan',  'match' => 'future-plan'],
+                        ['label' => 'Join Us',        'route' => 'join-us',      'match' => 'join-us'],
+                        ['label' => 'Contact Us',     'route' => 'contact',      'match' => 'contact'],
+                        ['label' => 'Donate Us',      'route' => 'donate',       'match' => 'donate'],
                     ];
                 @endphp
 
@@ -105,6 +104,17 @@
                         <a href="{{ route('about.founders') }}">Founder Member</a>
                         <a href="{{ route('about.org-profile') }}">Organisation Profile</a>
                         <a href="{{ route('about.documents') }}">Document Gallery</a>
+                    </div>
+                </li>
+
+                {{-- Media dropdown --}}
+                <li class="nav-dropdown">
+                    <button class="flex items-center gap-1 px-3 py-4 text-sm font-medium transition {{ request()->routeIs('media*') ? 'text-orange-400' : 'text-white hover:text-orange-300' }}">
+                        Media <i class="fas fa-chevron-down text-[10px] mt-0.5"></i>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <a href="{{ route('gallery') }}">Photo & Video Gallery</a>
+                        <a href="{{ route('media-coverage') }}">Media Coverage</a>
                     </div>
                 </li>
 
@@ -144,6 +154,7 @@
                 ['Future Plan','future-plan','fa-rocket'],
                 ['Join Us','join-us','fa-user-plus'],
                 ['Gallery','gallery','fa-images'],
+                ['Media Coverage','media-coverage','fa-newspaper'],
                 ['Contact Us','contact','fa-envelope'],
                 ['Donate Us','donate','fa-heart'],
             ] as [$label, $route, $icon])

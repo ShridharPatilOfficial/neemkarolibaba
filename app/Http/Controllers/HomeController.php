@@ -10,6 +10,7 @@ use App\Models\RecentActivity;
 use App\Models\SiteSetting;
 use App\Models\Principle;
 use App\Models\Slider;
+use App\Models\WorkVideo;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,6 +34,7 @@ class HomeController extends Controller
         $events           = Event::where('is_active', true)->orderBy('sort_order')->take(4)->get();
         $presidentMessage = PresidentMessage::where('is_active', true)->first();
         $principles       = Principle::where('is_active', true)->orderBy('sort_order')->get();
+        $workVideos       = WorkVideo::where('is_active', true)->orderBy('sort_order')->take(8)->get();
 
         return view('home', compact(
             'settings',
@@ -42,7 +44,8 @@ class HomeController extends Controller
             'recentActivities',
             'events',
             'presidentMessage',
-            'principles'
+            'principles',
+            'workVideos'
         ));
     }
 }

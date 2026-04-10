@@ -1,4 +1,5 @@
-@foreach($items as $item)
+@php $startIndex = $startIndex ?? 0; @endphp
+@foreach($items as $i => $item)
 @php
     $imgSrc = $item->image_url
         ? (str_starts_with($item->image_url, 'http') ? $item->image_url : asset('storage/' . $item->image_url))
@@ -7,22 +8,13 @@
     preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]+)/', $item->youtube_url ?? '', $ytm);
     $ytId = $ytm[1] ?? null;
 
-    // Thumbnail for video-only items
     $thumbSrc = $imgSrc ?: ($ytId ? "https://img.youtube.com/vi/{$ytId}/hqdefault.jpg" : null);
-
-    // JSON payload for modal (all admin fields)
-    $modalData = json_encode([
-        'type'        => $item->type,
-        'headline'    => $item->headline ?? '',
-        'image_url'   => $imgSrc,
-        'youtube_url' => $item->youtube_url ?? '',
-        'yt_id'       => $ytId,
-    ]);
+    $cardIndex = $startIndex + $i;
 @endphp
 
 <div class="gallery-card group relative rounded-2xl overflow-hidden shadow-md cursor-pointer bg-gray-100"
      onclick="openGalleryModal(this)"
-     data-item="{{ htmlspecialchars($modalData, ENT_QUOTES) }}">
+     data-index="{{ $cardIndex }}">
 
     {{-- Thumbnail --}}
     @if($thumbSrc)
@@ -64,7 +56,7 @@
         @endif
     </div>
 
-    {{-- Headline bar at bottom --}}
+    {{-- Headline bar --}}
     @if($item->headline)
     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-4 py-3">
         <p class="text-white text-sm font-semibold leading-tight">{{ $item->headline }}</p>
