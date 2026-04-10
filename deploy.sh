@@ -10,7 +10,11 @@ echo "────────────────────────�
 echo "  NKB Foundation — Deploy"
 echo "─────────────────────────────────────────"
 
-# 1. Clear all Laravel caches
+# 1. Install/update PHP dependencies (vendor is gitignored)
+echo "▶ Installing composer dependencies..."
+composer install --no-dev --optimize-autoloader --no-interaction
+
+# 2. Clear all Laravel caches
 echo "▶ Clearing caches..."
 php artisan view:clear
 php artisan cache:clear
