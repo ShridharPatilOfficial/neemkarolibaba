@@ -65,8 +65,7 @@
                 </p>
             </div>
         </div>
-        <a href="{{ route('donate') }}#payment-section"
-           class="donate-btn flex-shrink-0 py-2.5 px-6 rounded-xl text-sm flex items-center gap-2 shadow-lg">
+        <a href="{{ route('donate') }}#payment-section" class="donate-btn" style="padding:10px 24px;border-radius:12px;font-size:.85rem;display:inline-flex;align-items:center;gap:8px;flex-shrink:0;">
             <i class="fas fa-heart btn-heart"></i>
             Donate Now
         </a>
@@ -244,7 +243,8 @@
                         ['Contact Us', 'contact'],
                     ] as [$label, $route])
                     <li>
-                        <a href="{{ route($route) }}" class="flex items-center gap-2 hover:text-orange-400 transition group">
+                        @php $fLink = $route === 'donate' ? route('donate').'#payment-section' : route($route); @endphp
+                        <a href="{{ $fLink }}" class="flex items-center gap-2 hover:text-orange-400 transition group">
                             <i class="fas fa-chevron-right text-[10px] text-orange-500 group-hover:translate-x-1 transition-transform"></i>
                             {{ $label }}
                         </a>
@@ -316,13 +316,26 @@
 
 {{-- ─── Floating Donate Button ─────────────────────────────────── --}}
 <div id="float-donate">
-    {{-- Animated glow orbs behind the button --}}
-    <div class="fd-glow-ring fd-ring1"></div>
-    <div class="fd-glow-ring fd-ring2"></div>
-    <div class="fd-glow-ring fd-ring3"></div>
-    <a href="{{ route('donate') }}#payment-section" class="fd-btn" id="fd-link">
-        <span class="fd-icon"><i class="fas fa-heart"></i></span>
-        <span class="fd-text">Donate Now</span>
+    {{-- Pulse rings --}}
+    <div class="fd-ring fd-r1"></div>
+    <div class="fd-ring fd-r2"></div>
+
+    <a href="{{ route('donate') }}#payment-section" class="fd-pill">
+        {{-- Hands + heart SVG icon --}}
+        <span class="fd-icon-wrap">
+            <svg viewBox="0 0 48 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="fd-svg">
+                {{-- Left hand --}}
+                <path d="M4 34 C4 30 8 26 12 25 L18 24 C20 24 21 25 21 27 L21 38 C21 40 19 42 17 42 L9 42 C6 42 4 40 4 38 Z" fill="white" opacity="0.9"/>
+                {{-- Right hand --}}
+                <path d="M44 34 C44 30 40 26 36 25 L30 24 C28 24 27 25 27 27 L27 38 C27 40 29 42 31 42 L39 42 C42 42 44 40 44 38 Z" fill="white" opacity="0.9"/>
+                {{-- Heart --}}
+                <path d="M24 22 C24 22 12 14 12 8 C12 4 15 2 18 2 C21 2 24 5 24 5 C24 5 27 2 30 2 C33 2 36 4 36 8 C36 14 24 22 24 22 Z" fill="#fff"/>
+                {{-- Stars --}}
+                <path d="M20 7 L21 10 L24 11 L21 12 L20 15 L19 12 L16 11 L19 10 Z" fill="#FBBF24"/>
+                <path d="M28 5 L29 7 L31 8 L29 9 L28 11 L27 9 L25 8 L27 7 Z" fill="#FBBF24"/>
+            </svg>
+        </span>
+        <span class="fd-label">DONATE</span>
         <span class="fd-shine"></span>
     </a>
 </div>
