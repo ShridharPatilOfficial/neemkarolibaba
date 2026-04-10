@@ -599,12 +599,6 @@
             </div>
             <p class="text-purple-300 text-base font-semibold mb-2">Videos coming soon!</p>
             <p class="text-purple-400 text-sm">Our team is uploading programme videos. Check back shortly.</p>
-            @auth('admin')
-            <a href="{{ route('admin.work-videos.create') }}"
-               class="inline-flex items-center gap-2 mt-5 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition">
-                <i class="fas fa-plus"></i> Add Videos (Admin)
-            </a>
-            @endauth
         </div>
         @endif
 
@@ -723,12 +717,6 @@
             </div>
             <p class="text-gray-700 text-base font-semibold mb-2">Media coverage coming soon!</p>
             <p class="text-gray-400 text-sm">We'll share news and media features about our work here.</p>
-            @auth('admin')
-            <a href="{{ route('admin.media-coverage.create') }}"
-               class="inline-flex items-center gap-2 mt-5 bg-purple-900 hover:bg-purple-800 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition">
-                <i class="fas fa-plus"></i> Add Coverage (Admin)
-            </a>
-            @endauth
         </div>
         @endif
     </div>
