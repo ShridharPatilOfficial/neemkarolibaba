@@ -106,17 +106,24 @@
 
 @endsection
 
+@php
+$galleryJson = $items->map(function($i) {
+    preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $i->youtube_url ?? '', $m);
+    return [
+        'id'          => $i->id,
+        'headline'    => $i->headline,
+        'type'        => $i->type,
+        'image_url'   => $i->image_url && !str_starts_with($i->image_url,'http') ? asset('storage/'.$i->image_url) : $i->image_url,
+        'youtube_url' => $i->youtube_url,
+        'yt_id'       => $m[1] ?? null,
+    ];
+});
+@endphp
+
 @push('scripts')
 <script>
 // ── All gallery items (populated from PHP) ─────────────────────
-const galleryItems = @json($items->map(fn($i) => [
-    'id'          => $i->id,
-    'headline'    => $i->headline,
-    'type'        => $i->type,
-    'image_url'   => $i->image_url && !str_starts_with($i->image_url,'http') ? asset('storage/'.$i->image_url) : $i->image_url,
-    'youtube_url' => $i->youtube_url,
-    'yt_id'       => preg_match('/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $i->youtube_url ?? '', $m) ? $m[1] : null,
-]));
+const galleryItems = {!! json_encode($galleryJson) !!};
 
 let allItems    = [...galleryItems]; // grows as more pages load
 let currentIdx  = 0;
