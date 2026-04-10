@@ -67,7 +67,7 @@
                 </p>
             </div>
         </div>
-        <a href="{{ route('donate') }}"
+        <a href="{{ route('donate') }}#payment-section"
            class="donate-btn flex-shrink-0 py-2.5 px-6 rounded-xl text-sm flex items-center gap-2 shadow-lg">
             <i class="fas fa-heart btn-heart"></i>
             Donate Now
@@ -121,7 +121,8 @@
 
                 @foreach($navLinks as $nl)
                 @if($nl['route'] !== 'home')
-                <li><a href="{{ route($nl['route']) }}" class="block px-3 py-4 text-sm font-medium transition {{ request()->routeIs($nl['match']) ? 'text-orange-400' : 'text-white hover:text-orange-300' }}">{{ $nl['label'] }}</a></li>
+                @php $href = $nl['route'] === 'donate' ? route('donate').'#payment-section' : route($nl['route']); @endphp
+                <li><a href="{{ $href }}" class="block px-3 py-4 text-sm font-medium transition {{ request()->routeIs($nl['match']) ? 'text-orange-400' : 'text-white hover:text-orange-300' }}">{{ $nl['label'] }}</a></li>
                 @endif
                 @endforeach
             </ul>
@@ -159,7 +160,8 @@
                 ['Contact Us','contact','fa-envelope'],
                 ['Donate Us','donate','fa-heart'],
             ] as [$label, $route, $icon])
-            <a href="{{ route($route) }}" class="flex items-center gap-2 text-white hover:text-orange-400 py-2 px-3 text-sm">
+            @php $mHref = $route === 'donate' ? route('donate').'#payment-section' : route($route); @endphp
+            <a href="{{ $mHref }}" class="flex items-center gap-2 text-white hover:text-orange-400 py-2 px-3 text-sm">
                 <i class="fas {{ $icon }} w-4 text-orange-400"></i> {{ $label }}
             </a>
             @endforeach
@@ -201,7 +203,7 @@
                     <p class="text-gray-400 text-sm italic">"Love All, Serve All"</p>
                 </div>
             </div>
-            <a href="{{ route('donate') }}"
+            <a href="{{ route('donate') }}#payment-section"
                class="donate-btn py-3 px-7 rounded-xl flex items-center gap-2 text-sm shadow-lg flex-shrink-0">
                 <i class="fas fa-heart btn-heart"></i> Support Our Mission
             </a>
@@ -318,7 +320,7 @@
 
 {{-- ─── Floating Donate Button ─────────────────────────────────── --}}
 <div id="float-donate" aria-label="Donate Now">
-    <a href="{{ route('donate') }}">
+    <a href="{{ route('donate') }}#payment-section">
         <i class="fas fa-heart btn-heart"></i>
         Donate Now
     </a>

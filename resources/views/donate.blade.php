@@ -26,15 +26,15 @@
                 {{ $settings['description'] ? Str::limit($settings['description'], 120) : 'Your generosity directly funds education, healthcare, and community feeding programmes.' }}
             </p>
         </div>
-        <a href="{{ route('contact') }}"
-           class="donate-btn flex-shrink-0 inline-flex items-center gap-3 font-black py-4 px-10 rounded-2xl shadow-2xl text-base">
-            <i class="fas fa-hands-holding-heart btn-heart text-xl"></i>
-            Donate Now
+        <a href="#payment-section"
+           class="donate-btn flex-shrink-0 inline-flex items-center gap-3 font-black py-4 px-10 rounded-2xl shadow-2xl text-base scroll-to-payment">
+            <i class="fas fa-arrow-down btn-heart text-xl"></i>
+            View Payment Details
         </a>
     </div>
 </div>
 
-<section class="py-16 px-4 bg-gray-50">
+<section id="payment-section" class="py-16 px-4 bg-gray-50">
     <div class="max-w-6xl mx-auto">
 
         {{-- Description block --}}
@@ -217,6 +217,18 @@
 
 @push('scripts')
 <script>
+// Smooth scroll to #payment-section on load if hash is present
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash === '#payment-section') {
+        const target = document.getElementById('payment-section');
+        if (target) {
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 120);
+        }
+    }
+});
+
 function copyText(text, btn) {
     navigator.clipboard.writeText(text).then(() => {
         const icon = btn.querySelector('i');
