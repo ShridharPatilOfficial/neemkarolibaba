@@ -8,6 +8,7 @@ use App\Models\Partner;
 use App\Models\PresidentMessage;
 use App\Models\RecentActivity;
 use App\Models\SiteSetting;
+use App\Models\MediaCoverage;
 use App\Models\Principle;
 use App\Models\Slider;
 use App\Models\WorkVideo;
@@ -35,6 +36,7 @@ class HomeController extends Controller
         $presidentMessage = PresidentMessage::where('is_active', true)->first();
         $principles       = Principle::where('is_active', true)->orderBy('sort_order')->get();
         $workVideos       = WorkVideo::where('is_active', true)->orderBy('sort_order')->take(8)->get();
+        $mediaCoverages   = MediaCoverage::where('is_active', true)->orderByDesc('published_date')->take(6)->get();
 
         return view('home', compact(
             'settings',
@@ -45,7 +47,8 @@ class HomeController extends Controller
             'events',
             'presidentMessage',
             'principles',
-            'workVideos'
+            'workVideos',
+            'mediaCoverages'
         ));
     }
 }

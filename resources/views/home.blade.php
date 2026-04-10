@@ -559,7 +559,6 @@
 {{-- ════════════════════════════════════════════════════════════
      WORK IN ACTION — VIDEO CARDS
 ════════════════════════════════════════════════════════════ --}}
-@if($workVideos->count())
 <section class="py-20 px-4" style="background:linear-gradient(135deg,#0a0528 0%,#1e0a3c 100%);">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-14 reveal">
@@ -576,6 +575,7 @@
             </p>
         </div>
 
+        @if($workVideos->count())
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach($workVideos as $i => $vid)
             @php $ytId = $vid->youtube_id; @endphp
@@ -584,17 +584,12 @@
                         transition-all duration-400 cursor-pointer reveal reveal-delay-{{ $i % 4 + 1 }}"
                  onclick="openWorkVideo('{{ $ytId }}','{{ addslashes($vid->title) }}')">
 
-                {{-- Thumbnail --}}
                 <div class="relative overflow-hidden h-44">
                     <img src="{{ $ytId ? 'https://img.youtube.com/vi/'.$ytId.'/maxresdefault.jpg' : 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80' }}"
                          alt="{{ $vid->title }}"
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                          onerror="this.src='https://img.youtube.com/vi/{{ $ytId }}/mqdefault.jpg'">
-
-                    {{-- Dark overlay --}}
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-                    {{-- Play button --}}
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="w-14 h-14 rounded-full bg-red-600 group-hover:bg-red-500 group-hover:scale-110
                                     flex items-center justify-center shadow-2xl transition-all duration-300
@@ -602,8 +597,6 @@
                             <i class="fas fa-play text-white text-base ml-1"></i>
                         </div>
                     </div>
-
-                    {{-- YouTube badge --}}
                     <div class="absolute top-3 right-3">
                         <span class="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1">
                             <i class="fab fa-youtube text-xs"></i> YouTube
@@ -611,7 +604,6 @@
                     </div>
                 </div>
 
-                {{-- Card content --}}
                 <div class="p-4">
                     <h3 class="text-white font-bold text-sm leading-snug mb-1.5 line-clamp-2 group-hover:text-orange-300 transition-colors">
                         {{ $vid->title }}
@@ -620,13 +612,28 @@
                     <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">{{ $vid->description }}</p>
                     @endif
                     <div class="mt-3 flex items-center gap-1.5 text-orange-400 text-xs font-semibold">
-                        <i class="fas fa-play-circle text-sm"></i>
-                        <span>Watch Now</span>
+                        <i class="fas fa-play-circle text-sm"></i> Watch Now
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
+        @else
+        {{-- Empty state — shown until admin adds videos --}}
+        <div class="text-center py-16 reveal">
+            <div class="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-5">
+                <i class="fab fa-youtube text-red-400 text-3xl"></i>
+            </div>
+            <p class="text-purple-300 text-base font-semibold mb-2">Videos coming soon!</p>
+            <p class="text-purple-400 text-sm">Our team is uploading programme videos. Check back shortly.</p>
+            @auth('admin')
+            <a href="{{ route('admin.work-videos.create') }}"
+               class="inline-flex items-center gap-2 mt-5 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition">
+                <i class="fas fa-plus"></i> Add Videos (Admin)
+            </a>
+            @endauth
+        </div>
+        @endif
 
         <div class="text-center mt-10 reveal">
             <a href="{{ route('gallery') }}"
@@ -657,7 +664,123 @@
         </div>
     </div>
 </div>
-@endif
+
+{{-- ════════════════════════════════════════════════════════════
+     MEDIA COVERAGE — HOME PREVIEW
+════════════════════════════════════════════════════════════ --}}
+<section class="py-20 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+            <div class="text-center md:text-left reveal">
+                <span class="section-tag">Press &amp; Media</span>
+                <h2 class="text-3xl md:text-4xl font-black text-gray-900 mt-1">
+                    Featured In <span class="text-orange-600">Media</span>
+                </h2>
+                <p class="text-gray-500 text-sm mt-2">News channels, TV, and online media coverage of our work</p>
+            </div>
+            <a href="{{ route('media-coverage') }}"
+               class="inline-flex items-center gap-2 bg-purple-900 hover:bg-purple-800 text-white font-bold py-2.5 px-6 rounded-xl transition text-sm flex-shrink-0 reveal">
+                All Coverage <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+
+        @if($mediaCoverages->count())
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($mediaCoverages as $i => $cov)
+            @php
+                $img = $cov->cover_image_url ? (str_starts_with($cov->cover_image_url,'http') ? $cov->cover_image_url : asset('storage/'.$cov->cover_image_url)) : null;
+                if (!$img && $cov->youtube_id) $img = 'https://img.youtube.com/vi/'.$cov->youtube_id.'/maxresdefault.jpg';
+                if (!$img) $img = 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80';
+                $catColor = ['news'=>'bg-blue-600','tv'=>'bg-red-600','online'=>'bg-green-600','magazine'=>'bg-purple-600'][$cov->category] ?? 'bg-gray-600';
+                $catLabel = \App\Models\MediaCoverage::categories()[$cov->category] ?? 'News';
+            @endphp
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100
+                        hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col reveal reveal-delay-{{ $i % 3 + 1 }}">
+                {{-- Image --}}
+                <div class="relative overflow-hidden h-48 bg-gray-100">
+                    <img src="{{ $img }}" alt="{{ $cov->title }}"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <span class="absolute top-3 left-3 {{ $catColor }} text-white text-[10px] font-bold px-2 py-1 rounded-full">
+                        {{ $catLabel }}
+                    </span>
+                    <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                        <span class="bg-black/60 text-white text-[10px] font-semibold px-2 py-1 rounded-lg">
+                            <i class="fas fa-broadcast-tower text-orange-400 mr-1"></i>{{ $cov->source_name }}
+                        </span>
+                        @if($cov->published_date)
+                        <span class="bg-black/60 text-white text-[10px] px-2 py-1 rounded-lg">
+                            {{ $cov->published_date->format('d M Y') }}
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- Content --}}
+                <div class="p-5 flex flex-col flex-1">
+                    <h3 class="font-bold text-gray-900 text-sm leading-snug mb-2 line-clamp-2">{{ $cov->title }}</h3>
+                    @if($cov->description)
+                    <p class="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-4 flex-1">{{ $cov->description }}</p>
+                    @else
+                    <div class="flex-1"></div>
+                    @endif
+                    <div class="flex items-center gap-2 mt-auto pt-3 border-t border-gray-100 flex-wrap">
+                        @if($cov->youtube_id)
+                        <button onclick="openHomeMediaVideo('{{ $cov->youtube_id }}','{{ addslashes($cov->title) }}')"
+                                class="inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                            <i class="fab fa-youtube text-xs"></i> Watch
+                        </button>
+                        @endif
+                        @if($cov->source_url)
+                        <a href="{{ $cov->source_url }}" target="_blank" rel="noopener"
+                           class="inline-flex items-center gap-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 text-xs font-bold px-3 py-1.5 rounded-lg transition">
+                            <i class="fas fa-external-link-alt text-xs"></i> Read Article
+                        </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @else
+        {{-- Empty state --}}
+        <div class="text-center py-16 reveal">
+            <div class="w-20 h-20 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-5">
+                <i class="fas fa-newspaper text-orange-400 text-3xl"></i>
+            </div>
+            <p class="text-gray-700 text-base font-semibold mb-2">Media coverage coming soon!</p>
+            <p class="text-gray-400 text-sm">We'll share news and media features about our work here.</p>
+            @auth('admin')
+            <a href="{{ route('admin.media-coverage.create') }}"
+               class="inline-flex items-center gap-2 mt-5 bg-purple-900 hover:bg-purple-800 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition">
+                <i class="fas fa-plus"></i> Add Coverage (Admin)
+            </a>
+            @endauth
+        </div>
+        @endif
+    </div>
+</section>
+
+{{-- Home Media Video Modal --}}
+<div id="homeMediaModal" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4"
+     style="background:rgba(0,0,0,0.93);backdrop-filter:blur(8px);">
+    <button onclick="closeHomeMediaVideo()"
+            class="absolute top-4 right-5 text-white/70 hover:text-white z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+        <i class="fas fa-times text-lg"></i>
+    </button>
+    <div class="bg-gray-950 rounded-3xl overflow-hidden shadow-2xl w-full max-w-4xl" onclick="event.stopPropagation()">
+        <div class="relative bg-black" style="padding-bottom:56.25%">
+            <iframe id="homeMediaFrame" src="" class="absolute inset-0 w-full h-full"
+                    frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="p-5 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-red-600/20 flex items-center justify-center flex-shrink-0">
+                <i class="fab fa-youtube text-red-400 text-sm"></i>
+            </div>
+            <p id="homeMediaTitle" class="text-white font-bold text-sm"></p>
+        </div>
+    </div>
+</div>
 
 {{-- ════════════════════════════════════════════════════════════
      DONATE CTA RIBBON
@@ -788,6 +911,29 @@ const wvm = document.getElementById('workVideoModal');
 if (wvm) {
     wvm.addEventListener('click', function(e) { if (e.target === this) closeWorkVideo(); });
 }
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeWorkVideo(); } });
+
+// ── Home Media Coverage video modal ────────────────────────
+function openHomeMediaVideo(ytId, title) {
+    document.getElementById('homeMediaFrame').src =
+        'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1';
+    document.getElementById('homeMediaTitle').textContent = title || '';
+    const m = document.getElementById('homeMediaModal');
+    m.classList.remove('hidden'); m.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+function closeHomeMediaVideo() {
+    document.getElementById('homeMediaFrame').src = '';
+    const m = document.getElementById('homeMediaModal');
+    m.classList.add('hidden'); m.classList.remove('flex');
+    document.body.style.overflow = '';
+}
+const hmm = document.getElementById('homeMediaModal');
+if (hmm) {
+    hmm.addEventListener('click', function(e) { if (e.target === this) closeHomeMediaVideo(); });
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeWorkVideo(); closeHomeMediaVideo(); }
+});
 </script>
 @endpush
