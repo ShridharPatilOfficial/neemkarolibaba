@@ -147,9 +147,13 @@
 /* SVG hands+heart */
 .fd-icon-wrap {
   display:flex; align-items:center; justify-content:center;
+}
+.fd-icon-fa {
+  font-size: 1.9rem;
+  color: #fff;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.4));
   animation: fd-heartpop 2s ease-in-out infinite;
 }
-.fd-svg { width:44px; height:40px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.3)); }
 
 /* DONATE label */
 .fd-label {
