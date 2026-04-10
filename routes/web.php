@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\PrincipleController;
 use App\Http\Controllers\Admin\WorkVideoController;
 use App\Http\Controllers\Admin\MediaCoverageController as AdminMediaCoverageController;
+use App\Http\Controllers\Admin\AnalyticsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Document;
@@ -79,6 +80,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
 
         Route::get('/settings', [SiteSettingController::class, 'index'])->name('settings');
         Route::post('/settings', [SiteSettingController::class, 'update'])->name('settings.update');

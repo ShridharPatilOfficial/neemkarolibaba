@@ -8,7 +8,17 @@ class VisitorLog extends Model
 {
     protected $table = 'visitor_logs';
 
-    protected $fillable = ['ip_address', 'user_agent', 'page_url', 'visited_date'];
+    protected $fillable = [
+        'ip_address', 'user_agent', 'page_url', 'visited_date',
+        'country', 'country_code', 'region', 'city', 'timezone',
+        'isp', 'lat', 'lon', 'device_type', 'browser', 'os',
+        'referrer', 'geo_resolved',
+    ];
 
-    protected $casts = ['visited_date' => 'date'];
+    protected $casts = [
+        'visited_date' => 'date',
+        'geo_resolved' => 'boolean',
+        'lat'          => 'float',
+        'lon'          => 'float',
+    ];
 }

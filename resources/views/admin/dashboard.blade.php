@@ -87,6 +87,82 @@
     </div>
 </div>
 
+{{-- ── Row 3b: Geo Mini-Widgets ──────────────────────────────────── --}}
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+
+    {{-- Top Countries --}}
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-gray-900 text-sm flex items-center gap-2">
+                <i class="fas fa-globe text-indigo-500"></i> Top Countries
+            </h3>
+            <a href="{{ route('admin.analytics') }}" class="text-xs text-purple-600 hover:underline font-semibold">Full Analytics →</a>
+        </div>
+        @php $cntTotal = $topCountries->sum('total') ?: 1; @endphp
+        @if($topCountries->isEmpty())
+        <p class="text-gray-400 text-xs text-center py-4">No geo data yet — resolves automatically as visitors arrive</p>
+        @else
+        <div class="space-y-2">
+            @foreach($topCountries as $c)
+            @php
+                $pct = round($c->total / $cntTotal * 100);
+                $flag = '';
+                if ($c->country_code && strlen($c->country_code) === 2) {
+                    $chars = str_split(strtoupper($c->country_code));
+                    $flag = mb_chr(ord($chars[0]) - ord('A') + 0x1F1E6) . mb_chr(ord($chars[1]) - ord('A') + 0x1F1E6);
+                }
+            @endphp
+            <div class="flex items-center gap-2">
+                <span class="text-xl w-7 text-center">{{ $flag ?: '🌐' }}</span>
+                <div class="flex-1">
+                    <div class="flex justify-between text-xs mb-0.5">
+                        <span class="font-semibold text-gray-700">{{ $c->country }}</span>
+                        <span class="font-bold text-gray-600">{{ $c->total }} <span class="text-gray-400 font-normal">({{ $pct }}%)</span></span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded h-1.5 overflow-hidden">
+                        <div class="h-1.5 bg-indigo-400 rounded" style="width:{{ max(2,$pct) }}%"></div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @endif
+    </div>
+
+    {{-- Top India Cities --}}
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="font-bold text-gray-900 text-sm flex items-center gap-2">
+                <span class="text-lg">🇮🇳</span> India — Top Cities
+            </h3>
+            <a href="{{ route('admin.analytics') }}" class="text-xs text-purple-600 hover:underline font-semibold">Full Analytics →</a>
+        </div>
+        @if($topIndiaCities->isEmpty())
+        <p class="text-gray-400 text-xs text-center py-4">No Indian visitor data yet</p>
+        @else
+        @php $icMax = $topIndiaCities->first()->total ?: 1; @endphp
+        <div class="space-y-2">
+            @foreach($topIndiaCities as $city)
+            @php $pct = round($city->total / $icMax * 100); @endphp
+            <div class="flex items-center gap-2">
+                <i class="fas fa-map-pin text-orange-400 text-xs w-4 text-center"></i>
+                <div class="flex-1">
+                    <div class="flex justify-between text-xs mb-0.5">
+                        <span class="font-semibold text-gray-700">{{ $city->city }}</span>
+                        <span class="font-bold text-gray-600">{{ $city->total }}</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded h-1.5 overflow-hidden">
+                        <div class="h-1.5 bg-orange-400 rounded" style="width:{{ max(2,$pct) }}%"></div>
+                    </div>
+                </div>
+                <span class="text-[10px] text-gray-400 w-20 truncate">{{ $city->region }}</span>
+            </div>
+            @endforeach
+        </div>
+        @endif
+    </div>
+</div>
+
 {{-- ── Row 4: Content Inventory + Submissions ─────────────────────── --}}
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
 

@@ -93,6 +93,23 @@ class DashboardController extends Controller
                 ->count();
         }
 
+        // ── Top countries (for dashboard widget) ───────────────────
+        $topCountries = VisitorLog::select('country', 'country_code', DB::raw('COUNT(*) as total'))
+            ->whereNotNull('country')
+            ->groupBy('country', 'country_code')
+            ->orderByDesc('total')
+            ->limit(5)
+            ->get();
+
+        // ── Top India cities (for dashboard widget) ─────────────────
+        $topIndiaCities = VisitorLog::select('city', 'region', DB::raw('COUNT(*) as total'))
+            ->where('country_code', 'IN')
+            ->whereNotNull('city')
+            ->groupBy('city', 'region')
+            ->orderByDesc('total')
+            ->limit(5)
+            ->get();
+
         return view('admin.dashboard', compact(
             'totalVisitors',
             'todayVisitors',
@@ -107,7 +124,9 @@ class DashboardController extends Controller
             'todayJoin',
             'todayContact',
             'contentCounts',
-            'recentSubmissions'
+            'recentSubmissions',
+            'topCountries',
+            'topIndiaCities'
         ));
     }
 }

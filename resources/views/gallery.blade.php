@@ -85,22 +85,23 @@
 
     {{-- Modal card --}}
     <div id="modalBox"
-         class="relative bg-gray-950 rounded-3xl overflow-hidden shadow-2xl w-full max-w-4xl mx-16 md:mx-20 max-h-[92vh] flex flex-col"
+         class="relative bg-gray-950 rounded-2xl overflow-hidden shadow-2xl w-full max-w-4xl mx-14 md:mx-20 flex flex-col"
+         style="max-height:90vh;"
          onclick="event.stopPropagation()">
 
-        {{-- Media --}}
-        <div id="modalMedia" class="relative bg-black flex-shrink-0 min-h-[200px] flex items-center justify-center">
+        {{-- Media — fills width --}}
+        <div id="modalMedia" class="bg-black w-full flex-shrink-0" style="overflow:hidden;">
+        </div>
+
+        {{-- Thumbnail strip inside modal --}}
+        <div id="modalThumbs"
+             class="flex items-center gap-2 px-4 py-2.5 bg-black overflow-x-auto flex-shrink-0"
+             style="scrollbar-width:thin;scrollbar-color:#4b5563 transparent;">
         </div>
 
         {{-- Details --}}
-        <div id="modalDetails" class="p-5 flex-shrink-0 overflow-y-auto" style="max-height:180px;">
+        <div id="modalDetails" class="p-4 flex-shrink-0 bg-gray-950">
         </div>
-    </div>
-
-    {{-- Thumbnail strip --}}
-    <div id="modalThumbs"
-         class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2
-                bg-black/60 backdrop-blur-sm rounded-2xl overflow-x-auto max-w-[90vw]">
     </div>
 </div>
 
@@ -209,19 +210,25 @@ function renderModal() {
     // media
     let mediaHTML = '';
     if ((data.type === 'image' || data.type === 'both') && data.image_url) {
-        mediaHTML += `<img src="${data.image_url}" alt="${data.headline || ''}"
-                          class="w-full max-h-[58vh] object-contain bg-black">`;
+        mediaHTML += `<div style="width:100%;height:52vh;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="${data.image_url}" alt="${data.headline || ''}"
+                 style="max-width:100%;max-height:100%;width:auto;height:auto;display:block;object-fit:contain;">
+        </div>`;
     }
     if ((data.type === 'video' || data.type === 'both') && data.yt_id) {
-        mediaHTML += `<div style="position:relative;padding-bottom:${data.type==='both'?'38%':'56.25%'};width:100%;background:#000;">
+        const ptb = data.type === 'both' ? '35%' : '52vh';
+        const wrapStyle = data.type === 'both'
+            ? `position:relative;padding-bottom:35%;width:100%;background:#000;`
+            : `position:relative;width:100%;height:52vh;background:#000;`;
+        mediaHTML += `<div style="${wrapStyle}">
             <iframe src="https://www.youtube.com/embed/${data.yt_id}?autoplay=0&rel=0&modestbranding=1"
                     style="position:absolute;top:0;left:0;width:100%;height:100%;"
                     frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
         </div>`;
     }
     if (!mediaHTML) {
-        mediaHTML = `<div class="w-full h-48 bg-gray-800 flex items-center justify-center">
-                        <i class="fas fa-image text-gray-600 text-5xl"></i></div>`;
+        mediaHTML = `<div style="width:100%;height:52vh;background:#1f2937;display:flex;align-items:center;justify-content:center;">
+            <i class="fas fa-image" style="color:#4b5563;font-size:3rem;"></i></div>`;
     }
     mediaEl.innerHTML = mediaHTML;
 
@@ -272,11 +279,16 @@ function buildThumbs() {
 }
 
 function highlightThumb() {
+    const strip = document.getElementById('modalThumbs');
     document.querySelectorAll('#modalThumbs button').forEach((btn, i) => {
         if (i === currentIdx) {
             btn.className = btn.className.replace('border-transparent opacity-60', '');
             btn.classList.add('border-orange-500', 'scale-110');
-            btn.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+            // scroll thumb strip (not page) to keep active thumb visible
+            const btnLeft = btn.offsetLeft;
+            const btnW    = btn.offsetWidth;
+            const stripW  = strip.offsetWidth;
+            strip.scrollTo({ left: btnLeft - stripW / 2 + btnW / 2, behavior: 'smooth' });
         } else {
             btn.classList.remove('border-orange-500', 'scale-110');
             btn.classList.add('border-transparent', 'opacity-60');
