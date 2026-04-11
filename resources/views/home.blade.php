@@ -1,24 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Neem Karoli Baba Foundation Worldwide — Love All, Serve All')
-@section('meta_desc', 'Neem Karoli Baba Foundation Worldwide is a 12A & 80G registered NGO in India dedicated to healthcare, education, food distribution and community welfare inspired by Maharaj-ji.')
-@section('meta_keywords', 'Neem Karoli Baba Foundation, NKB Foundation, NGO India, Maharaj-ji, charity donate India, 80G tax exemption, CSR NGO Chandigarh')
-@section('canonical', url('/'))
-
-@push('schema')
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Neem Karoli Baba Foundation Worldwide",
-  "url": "{{ url('/') }}",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "{{ url('/') }}?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-@endpush
+@section('title', 'Home — Neem Karoli Baba Foundation Worldwide')
 
 @section('content')
 
@@ -807,7 +788,7 @@
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="{{ route('donate') }}"
                    class="inline-flex items-center gap-2 bg-white text-orange-600 hover:bg-orange-50 font-bold py-3.5 px-8 rounded-xl transition shadow-xl">
-                    <i class="fas fa-heart-pulse"></i> Donate US
+                    <i class="fas fa-heart-pulse"></i> Donate Now
                 </a>
                 <a href="{{ route('join-us') }}"
                    class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/40 text-white font-bold py-3.5 px-8 rounded-xl transition backdrop-blur-sm">

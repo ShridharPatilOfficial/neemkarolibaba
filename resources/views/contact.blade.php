@@ -1,28 +1,5 @@
 @extends('layouts.app')
 @section('title', 'Contact Us - Neem Karoli Baba Foundation Worldwide')
-@section('meta_desc', 'Get in touch with Neem Karoli Baba Foundation Worldwide. Contact us for donations, volunteering, partnerships, or any queries about our charitable work in India.')
-@section('meta_keywords', 'contact NKB Foundation, Neem Karoli Baba Foundation contact, NGO contact India, donate contact, volunteer contact NKB, NKB Foundation address')
-@section('canonical', route('contact'))
-@push('schema')
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ContactPage",
-  "name": "Contact Us — Neem Karoli Baba Foundation Worldwide",
-  "description": "Contact NKB Foundation for donations, volunteering, or partnership enquiries.",
-  "url": "{{ route('contact') }}",
-  "inLanguage": "en-IN",
-  "isPartOf": { "@type": "WebSite", "url": "{{ url('/') }}" },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-      { "@type": "ListItem", "position": 2, "name": "Contact", "item": "{{ route('contact') }}" }
-    ]
-  }
-}
-</script>
-@endpush
 
 @section('content')
 <div class="page-banner py-20 px-4 text-white relative">

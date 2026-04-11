@@ -1,28 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Future Plans - Neem Karoli Baba Foundation Worldwide')
-@section('meta_desc', 'Discover the vision and future plans of Neem Karoli Baba Foundation Worldwide — expanding schools, hospitals, ashrams, and seva programs to serve more communities in India.')
-@section('meta_keywords', 'NKB Foundation future plans, NGO vision India, NKB Foundation expansion, Neem Karoli Baba mission, seva projects India, charitable vision')
-@section('canonical', url('/future-plan'))
-@push('schema')
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Future Plans — Neem Karoli Baba Foundation Worldwide",
-  "description": "Vision and upcoming projects of NKB Foundation to expand seva, education and healthcare across India.",
-  "url": "{{ url('/future-plan') }}",
-  "inLanguage": "en-IN",
-  "isPartOf": { "@type": "WebSite", "url": "{{ url('/') }}" },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-      { "@type": "ListItem", "position": 2, "name": "Future Plans", "item": "{{ url('/future-plan') }}" }
-    ]
-  }
-}
-</script>
-@endpush
+@section('title', 'Future Plan - Neem Karoli Baba Foundation Worldwide')
 
 @section('content')
 <div class="page-banner py-20 px-4 text-white relative">

@@ -1,28 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Media Coverage — Neem Karoli Baba Foundation Worldwide')
-@section('meta_desc', 'Read media coverage and news articles featuring Neem Karoli Baba Foundation Worldwide — press coverage of our charitable initiatives, events, and humanitarian work across India.')
-@section('meta_keywords', 'NKB Foundation media coverage, Neem Karoli Baba Foundation news, NGO press coverage India, NKB Foundation in media, charity news India, foundation press')
-@section('canonical', url('/media-coverage'))
-@push('schema')
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Media Coverage — Neem Karoli Baba Foundation Worldwide",
-  "description": "Press and media coverage of NKB Foundation charitable initiatives and humanitarian work.",
-  "url": "{{ url('/media-coverage') }}",
-  "inLanguage": "en-IN",
-  "isPartOf": { "@type": "WebSite", "url": "{{ url('/') }}" },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-      { "@type": "ListItem", "position": 2, "name": "Media Coverage", "item": "{{ url('/media-coverage') }}" }
-    ]
-  }
-}
-</script>
-@endpush
+@section('title','Media Coverage — Neem Karoli Baba Foundation Worldwide')
 
 @section('content')
 {{-- Banner --}}

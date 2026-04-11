@@ -1,28 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Join Us — Volunteer with NKB Foundation Worldwide')
-@section('meta_desc', 'Join Neem Karoli Baba Foundation Worldwide as a volunteer or member. Be part of our mission to serve the poor, uplift communities, and spread love through seva across India.')
-@section('meta_keywords', 'join NKB Foundation, volunteer India NGO, become member NKB, seva volunteer, charity volunteer India, Neem Karoli Baba seva, NGO membership India')
-@section('canonical', url('/join-us'))
-@push('schema')
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Join Us — Neem Karoli Baba Foundation Worldwide",
-  "description": "Volunteer or become a member of NKB Foundation and contribute to seva and charitable work in India.",
-  "url": "{{ url('/join-us') }}",
-  "inLanguage": "en-IN",
-  "isPartOf": { "@type": "WebSite", "url": "{{ url('/') }}" },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-      { "@type": "ListItem", "position": 2, "name": "Join Us", "item": "{{ url('/join-us') }}" }
-    ]
-  }
-}
-</script>
-@endpush
+@section('title', 'Join Us - Neem Karoli Baba Foundation Worldwide')
 
 @section('content')
 <div class="page-banner py-20 px-4 text-white relative">
