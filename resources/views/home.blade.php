@@ -37,7 +37,7 @@
     <div class="swiper hero-swiper">
         <div class="swiper-wrapper">
             @foreach($slideItems as $i => $slide)
-            <div class="swiper-slide relative overflow-hidden" style="min-height:600px;">
+            <div class="swiper-slide relative overflow-hidden hero-slide-wrap">
 
                 {{-- Background --}}
                 <img src="{{ $slide['url'] }}" alt="{{ strip_tags($slide['caption']) }}"
