@@ -98,75 +98,80 @@
 </head>
 <body class="font-sans antialiased bg-white text-gray-800 overflow-x-hidden">
 
-{{-- ─── Top Info Bar ─────────────────────────────────────────────── --}}
-<div class="bg-purple-950 text-purple-200 text-xs py-2 px-4 hidden md:block">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        <div class="flex items-center gap-5">
-            <a href="mailto:{{ \App\Models\SiteSetting::get('email', 'info@nkbfoundation.org') }}"
-               class="flex items-center gap-1.5 hover:text-orange-400 transition">
-                <i class="fas fa-envelope text-orange-400"></i>
-                {{ \App\Models\SiteSetting::get('email', 'info@nkbfoundation.org') }}
-            </a>
-            <a href="tel:{{ \App\Models\SiteSetting::get('phone', '+919876543210') }}"
-               class="flex items-center gap-1.5 hover:text-orange-400 transition">
-                <i class="fas fa-phone text-orange-400"></i>
-                {{ \App\Models\SiteSetting::get('phone', '+91 98765 43210') }}
-            </a>
-        </div>
-        <div class="flex items-center gap-3">
-            <span class="text-purple-400">|</span>
-            <span class="text-purple-300">Reg. No: {{ \App\Models\SiteSetting::get('reg_no', 'XXXXXX/2024') }}</span>
-            <span class="text-purple-400">|</span>
-            @foreach(['facebook','instagram','youtube'] as $social)
-            @php $url = \App\Models\SiteSetting::get($social, '#'); @endphp
-            <a href="{{ $url }}" target="_blank" rel="noopener"
-               class="w-6 h-6 rounded-full bg-purple-800 hover:bg-orange-500 flex items-center justify-center transition">
-                <i class="fab fa-{{ $social }} text-[10px]"></i>
-            </a>
-            @endforeach
-        </div>
-    </div>
-</div>
+{{-- ─── Top Info Bar + Header wrapper (photo spans both) ─────────── --}}
+<div id="top-header-wrap" style="position:relative;">
 
-{{-- ─── Main Header ──────────────────────────────────────────────── --}}
-<header id="main-header" class="bg-yellow-400 px-4 shadow-sm" style="overflow:visible;padding-top:0.75rem;padding-bottom:0.75rem;position:relative;">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-            {{-- Header photo: spans info bar + header + nav via absolute img --}}
-            @if($headerPhoto)
-                {{-- Wrap holds space in flex row; img overflows visually above+below --}}
-                <div id="header-photo-wrap"
-                     class="flex-shrink-0"
-                     style="position:relative;z-index:200;align-self:stretch;width:90px;">
-                    <img id="header-photo" src="{{ $headerPhoto }}" alt="{{ $siteName }}"
-                         style="position:absolute;left:0;width:90px;
-                                top:-44px;bottom:-60px;
-                                object-fit:cover;object-position:top center;
-                                border-radius:0 0 10px 10px;
-                                box-shadow:4px 0 20px rgba(76,29,149,.4);
-                                border-bottom:3px solid #7c3aed;
-                                border-right:3px solid #7c3aed;
-                                transition:top .3s ease,bottom .3s ease,width .3s ease,border-radius .3s ease;">
-                </div>
-            @else
-                <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
-            @endif
-            <div>
-                <h1 class="text-purple-900 font-extrabold text-lg md:text-xl leading-tight">
-                    {{ $siteName }}
-                </h1>
-                <p class="text-purple-700 text-xs font-semibold flex items-center gap-1">
-                    <i class="fas fa-shield-halved"></i>
-                    {{ $siteTagline }}
-                </p>
+    {{-- Photo card: absolutely spans info-bar + header full height --}}
+    @if($headerPhoto)
+    <div id="header-photo-wrap"
+         style="position:absolute;top:0;bottom:0;left:0;
+                width:160px;z-index:200;overflow:hidden;
+                box-shadow:6px 0 28px rgba(76,29,149,.55);
+                border-right:4px solid #f59e0b;">
+        <img id="header-photo" src="{{ $headerPhoto }}" alt="{{ $siteName }}"
+             style="width:100%;height:100%;
+                    object-fit:cover;object-position:top center;
+                    display:block;">
+    </div>
+    @endif
+
+    {{-- Top Info Bar ─────────────────────────────────────────────── --}}
+    <div class="bg-purple-950 text-purple-200 text-xs py-2 px-4 hidden md:block">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4"
+             style="{{ $headerPhoto ? 'padding-left:175px;' : '' }}">
+            <div class="flex items-center gap-5">
+                <a href="mailto:{{ \App\Models\SiteSetting::get('email', 'info@nkbfoundation.org') }}"
+                   class="flex items-center gap-1.5 hover:text-orange-400 transition">
+                    <i class="fas fa-envelope text-orange-400"></i>
+                    {{ \App\Models\SiteSetting::get('email', 'info@nkbfoundation.org') }}
+                </a>
+                <a href="tel:{{ \App\Models\SiteSetting::get('phone', '+919876543210') }}"
+                   class="flex items-center gap-1.5 hover:text-orange-400 transition">
+                    <i class="fas fa-phone text-orange-400"></i>
+                    {{ \App\Models\SiteSetting::get('phone', '+91 98765 43210') }}
+                </a>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-purple-400">|</span>
+                <span class="text-purple-300">Reg. No: {{ \App\Models\SiteSetting::get('reg_no', 'XXXXXX/2024') }}</span>
+                <span class="text-purple-400">|</span>
+                @foreach(['facebook','instagram','youtube'] as $social)
+                @php $url = \App\Models\SiteSetting::get($social, '#'); @endphp
+                <a href="{{ $url }}" target="_blank" rel="noopener"
+                   class="w-6 h-6 rounded-full bg-purple-800 hover:bg-orange-500 flex items-center justify-center transition">
+                    <i class="fab fa-{{ $social }} text-[10px]"></i>
+                </a>
+                @endforeach
             </div>
         </div>
-        <a href="{{ route('donate') }}#payment-section" class="donate-btn" style="padding:10px 24px;border-radius:12px;font-size:.85rem;display:inline-flex;align-items:center;gap:8px;flex-shrink:0;">
-            <i class="fas fa-heart btn-heart"></i>
-            DONATE US
-        </a>
     </div>
-</header>
+
+    {{-- Main Header ──────────────────────────────────────────────── --}}
+    <header id="main-header" class="bg-yellow-400 px-4 shadow-sm" style="padding-top:0.75rem;padding-bottom:0.75rem;">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3"
+             style="{{ $headerPhoto ? 'padding-left:175px;' : '' }}">
+            <div class="flex items-center gap-3">
+                @if(!$headerPhoto)
+                    <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
+                @endif
+                <div>
+                    <h1 class="text-purple-900 font-extrabold text-lg md:text-xl leading-tight">
+                        {{ $siteName }}
+                    </h1>
+                    <p class="text-purple-700 text-xs font-semibold flex items-center gap-1">
+                        <i class="fas fa-shield-halved"></i>
+                        {{ $siteTagline }}
+                    </p>
+                </div>
+            </div>
+            <a href="{{ route('donate') }}#payment-section" class="donate-btn" style="padding:10px 24px;border-radius:12px;font-size:.85rem;display:inline-flex;align-items:center;gap:8px;flex-shrink:0;">
+                <i class="fas fa-heart btn-heart"></i>
+                DONATE US
+            </a>
+        </div>
+    </header>
+
+</div>{{-- end #top-header-wrap --}}
 
 {{-- ─── Navigation ──────────────────────────────────────────────── --}}
 <nav id="main-nav" class="bg-purple-900 sticky top-0 z-50 transition-shadow duration-300">
@@ -442,32 +447,16 @@
         icon.classList.toggle('fa-times');
     });
 
-    // Header photo: full span (info bar → nav) at top, shrink to header on scroll
-    const hPhoto = document.getElementById('header-photo');
-    const hWrap  = document.getElementById('header-photo-wrap');
-    if (hPhoto && hWrap) {
-        const isMobile = () => window.innerWidth < 640;
-        const applyPhotoState = () => {
-            const mobile = isMobile();
-            if (window.scrollY > 10) {
-                // Scrolled: sit flush inside header only
-                hPhoto.style.top          = '0px';
-                hPhoto.style.bottom       = '0px';
-                hPhoto.style.width        = mobile ? '44px' : '56px';
-                hWrap.style.width         = mobile ? '44px' : '56px';
-                hPhoto.style.borderRadius = '8px';
-            } else {
-                // Top of page: span from info bar down through nav
-                hPhoto.style.top          = mobile ? '-28px' : '-44px';
-                hPhoto.style.bottom       = mobile ? '-44px' : '-60px';
-                hPhoto.style.width        = mobile ? '64px' : '90px';
-                hWrap.style.width         = mobile ? '64px' : '90px';
-                hPhoto.style.borderRadius = '0 0 10px 10px';
-            }
+    // Header photo card: always spans full info-bar + header height (top:0 bottom:0)
+    // On scroll just keep it visible; no resize needed since CSS handles the span
+    const hWrap = document.getElementById('header-photo-wrap');
+    if (hWrap) {
+        // Responsive width adjustment only
+        const setPhotoWidth = () => {
+            hWrap.style.width = window.innerWidth < 640 ? '80px' : '160px';
         };
-        window.addEventListener('scroll', applyPhotoState, { passive: true });
-        window.addEventListener('resize', applyPhotoState, { passive: true });
-        applyPhotoState();
+        window.addEventListener('resize', setPhotoWidth, { passive: true });
+        setPhotoWidth();
     }
 
     // Sticky nav shadow on scroll + show/hide floating donate
