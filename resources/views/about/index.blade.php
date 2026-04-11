@@ -36,7 +36,73 @@
     </div>
 </div>
 
+{{-- About intro section --}}
+<section class="py-16 px-4" style="background:linear-gradient(135deg,#0C0920 0%,#1a0f3c 100%);">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
+            {{-- Left: text --}}
+            <div class="text-white">
+                <span style="color:#F97316;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;">Our Story</span>
+                <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;line-height:1.15;margin:.5rem 0 1.25rem;">
+                    About <span style="background:linear-gradient(90deg,#F97316,#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">{{ $siteName }}</span>
+                </h2>
+                <p style="color:rgba(255,255,255,.78);font-size:.95rem;line-height:1.85;margin-bottom:1.5rem;">
+                    The {{ $siteName }} is more than an organization; it is a lifeline for underserved communities in rural Maharashtra. Our mission is simple yet profound: to replace hardship with hope. Through dedicated initiatives in health and learning, we empower individuals to break the cycle of poverty and claim their dignity.
+                </p>
+                <p style="color:rgba(255,255,255,.68);font-size:.9rem;line-height:1.8;">
+                    We believe in holistic development and work hand-in-hand with generous supporters to drive lasting, positive change. Rooted in compassion, our work ensures that essential resources reach the hands that need them most, creating a world united by service.
+                </p>
+
+                <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;">
+                    <div style="text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:900;color:#F97316;">12A</div>
+                        <div style="color:rgba(255,255,255,.5);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;">Certified</div>
+                    </div>
+                    <div style="width:1px;background:rgba(255,255,255,.1);"></div>
+                    <div style="text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:900;color:#F97316;">80G</div>
+                        <div style="color:rgba(255,255,255,.5);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;">Tax Exempt</div>
+                    </div>
+                    <div style="width:1px;background:rgba(255,255,255,.1);"></div>
+                    <div style="text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:900;color:#F97316;">2025</div>
+                        <div style="color:rgba(255,255,255,.5);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;">Registered</div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Right: registration card --}}
+            <div style="background:rgba(255,255,255,.04);border:1px solid rgba(249,115,22,.2);border-radius:20px;padding:2rem;backdrop-filter:blur(10px);">
+                <h3 style="color:#F97316;font-size:1rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;">
+                    <i class="fas fa-file-shield"></i> Registration Details
+                </h3>
+                @php
+                $regDetails = [
+                    ['NGO Type',            'Charitable Trust (Non-Government)'],
+                    ['Governing Act',        'Indian Trust Act'],
+                    ['Registration No.',     'E-4030-Co'],
+                    ['City / State',         'Kolhapur, Maharashtra'],
+                    ['Date of Registration', '10 November 2025'],
+                    ['Niti Aayog Unique ID', 'MH/2026/1016757'],
+                ];
+                @endphp
+                @foreach($regDetails as [$label, $value])
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
+                            padding:.7rem 0;{{ !$loop->last ? 'border-bottom:1px solid rgba(255,255,255,.07);' : '' }}">
+                    <span style="color:rgba(255,255,255,.45);font-size:.78rem;white-space:nowrap;flex-shrink:0;">{{ $label }}</span>
+                    <span style="color:#fff;font-size:.82rem;font-weight:600;text-align:right;">{{ $value }}</span>
+                </div>
+                @endforeach
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{{-- Sub-page navigation cards --}}
 <div class="py-16 px-4 max-w-7xl mx-auto">
+    <h3 class="text-center text-2xl font-bold text-gray-800 mb-8">Explore More About Us</h3>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <a href="{{ route('about.founders') }}" class="card-hover bg-white border border-gray-100 rounded-2xl p-8 text-center shadow-sm hover:border-orange-300 group">
             <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-500 transition">
