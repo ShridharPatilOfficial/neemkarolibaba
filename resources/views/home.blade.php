@@ -807,7 +807,7 @@
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="{{ route('donate') }}"
                    class="inline-flex items-center gap-2 bg-white text-orange-600 hover:bg-orange-50 font-bold py-3.5 px-8 rounded-xl transition shadow-xl">
-                    <i class="fas fa-heart-pulse"></i> Donate Now
+                    <i class="fas fa-heart-pulse"></i> Donate US
                 </a>
                 <a href="{{ route('join-us') }}"
                    class="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/40 text-white font-bold py-3.5 px-8 rounded-xl transition backdrop-blur-sm">
