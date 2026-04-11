@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Documents & Certificates — '.$siteName)
-@section('meta_desc', 'View official documents and certificates of {{ $siteName }} — 12A & 80G registration, trust deed, annual reports, and legal certifications of our registered NGO.')
+@section('meta_desc', 'View official documents and certificates of '.$siteName.' — 12A & 80G registration, trust deed, annual reports, and legal certifications of our registered NGO.')
 @section('meta_keywords', 'NKB Foundation documents, NGO certificates India, 12A 80G certificate, trust deed NKB, annual report NGO India, foundation legal documents')
 @section('canonical', route('about.documents'))
 @push('schema')

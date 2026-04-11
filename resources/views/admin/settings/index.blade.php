@@ -7,7 +7,7 @@
         @csrf
 
         @foreach([
-            ['site_name', 'Site Name', 'text', '{{ $siteName }}'],
+            ['site_name', 'Site Name', 'text', $siteName],
             ['reg_no',    'Registration No', 'text', 'IN-CH44392214903842V'],
             ['email',     'Email Address', 'email', 'support@neemkarolibaba.org.in'],
             ['phone',     'Phone Number', 'text', '+91 94644 33808'],

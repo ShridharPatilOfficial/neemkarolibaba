@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', '{{ $siteName }} — Love All, Serve All')
-@section('meta_desc', '{{ $siteName }} is a 12A & 80G registered NGO dedicated to feeding the hungry, educating children, and providing healthcare — inspired by the teachings of Maharaj-ji.')
-@section('meta_keywords', '{{ $siteName }}, NKB Foundation, NGO India, Maharaj-ji, donate India, 80G charity, food distribution, free education, healthcare NGO, Chandigarh NGO')
+@section('title', $siteName.' — Love All, Serve All')
+@section('meta_desc', $siteName.' is a 12A & 80G registered NGO dedicated to feeding the hungry, educating children, and providing healthcare — inspired by the teachings of Maharaj-ji.')
+@section('meta_keywords', $siteName.', NKB Foundation, NGO India, Maharaj-ji, donate India, 80G charity, food distribution, free education, healthcare NGO, Chandigarh NGO')
 @section('canonical', url('/'))
 @push('schema')
 <script type="application/ld+json">
@@ -236,7 +236,7 @@
             </div>
 
             <p class="text-gray-600 leading-relaxed mb-6 text-sm">
-                {{ $settings['about_text'] ?? 'The {{ $siteName }} is a registered non-profit inspired by the life and teachings of the revered saint Neem Karoli Baba. Rooted in the values of selfless service and unconditional love, we work across North India to uplift communities through healthcare, education, and humanitarian aid.' }}
+                {{ $settings['about_text'] ?? 'The '.$siteName.' is a registered non-profit inspired by the life and teachings of the revered saint Neem Karoli Baba. Rooted in the values of selfless service and unconditional love, we work across North India to uplift communities through healthcare, education, and humanitarian aid.' }}
             </p>
 
             <div class="grid grid-cols-2 gap-3 mb-7">

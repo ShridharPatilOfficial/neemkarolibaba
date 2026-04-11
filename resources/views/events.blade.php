@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Events — '.$siteName)
-@section('meta_desc', 'Stay updated with upcoming and past events by {{ $siteName }} — spiritual gatherings, charity drives, and community programs across India.')
+@section('meta_desc', 'Stay updated with upcoming and past events by '.$siteName.' — spiritual gatherings, charity drives, and community programs across India.')
 @section('meta_keywords', 'NKB Foundation events, Neem Karoli Baba events, NGO events India, spiritual events, charity events, bhajan sandhya, NKB Foundation programs')
 @section('canonical', route('events'))
 @push('schema')

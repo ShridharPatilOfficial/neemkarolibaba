@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Photo Gallery — '.$siteName)
-@section('meta_desc', 'Browse the photo gallery of {{ $siteName }} — images from seva programs, events, charity work, spiritual gatherings, and community outreach across India.')
+@section('meta_desc', 'Browse the photo gallery of '.$siteName.' — images from seva programs, events, charity work, spiritual gatherings, and community outreach across India.')
 @section('meta_keywords', 'NKB Foundation gallery, Neem Karoli Baba photos, NGO India photos, seva gallery, charity event photos, NKB Foundation images, foundation gallery India')
 @section('canonical', route('gallery'))
 @push('schema')

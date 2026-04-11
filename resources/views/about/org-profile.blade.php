@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Organisation Profile — '.$siteName)
-@section('meta_desc', 'Organisation profile of {{ $siteName }} — legal details, registration numbers, 12A & 80G certifications, and trust deed information of our registered NGO in India.')
+@section('meta_desc', 'Organisation profile of '.$siteName.' — legal details, registration numbers, 12A & 80G certifications, and trust deed information of our registered NGO in India.')
 @section('meta_keywords', 'NKB Foundation organisation profile, NGO registration India, 12A 80G certificate, trust deed India, NKB Foundation legal, registered NGO details, foundation profile')
 @section('canonical', route('about.org-profile'))
 @push('schema')

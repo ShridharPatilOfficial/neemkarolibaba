@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Our Activities — '.$siteName)
-@section('meta_desc', 'Explore the charitable activities of {{ $siteName }} — food distribution, education, healthcare, disaster relief, and spiritual service across India.')
+@section('meta_desc', 'Explore the charitable activities of '.$siteName.' — food distribution, education, healthcare, disaster relief, and spiritual service across India.')
 @section('meta_keywords', 'NKB Foundation activities, NGO India activities, food distribution, free education, healthcare NGO, disaster relief India, Neem Karoli Baba charity work')
 @section('canonical', route('activities'))
 @push('schema')

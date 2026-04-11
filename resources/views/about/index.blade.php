@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'About Us — '.$siteName)
-@section('meta_desc', 'Learn about {{ $siteName }} — a 12A & 80G registered NGO inspired by Maharaj-ji. Dedicated to feeding the hungry, educating children, and providing healthcare across India.')
-@section('meta_keywords', 'about NKB Foundation, {{ $siteName }} about, NGO India about, Maharaj-ji foundation, 12A 80G NGO India, NKB Foundation history, charitable trust India')
+@section('meta_desc', 'Learn about '.$siteName.' — a 12A & 80G registered NGO inspired by Maharaj-ji. Dedicated to feeding the hungry, educating children, and providing healthcare across India.')
+@section('meta_keywords', 'about NKB Foundation, '.$siteName.' about, NGO India about, Maharaj-ji foundation, 12A 80G NGO India, NKB Foundation history, charitable trust India')
 @section('canonical', route('about'))
 @push('schema')
 <script type="application/ld+json">

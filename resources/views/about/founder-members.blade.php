@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Founder Members — '.$siteName)
-@section('meta_desc', 'Meet the founder members and trustees of {{ $siteName }} — dedicated individuals committed to Maharaj-ji\'s vision of selfless service and love for all.')
-@section('meta_keywords', 'NKB Foundation founders, {{ $siteName }} trustees, NGO founders India, NKB Foundation team, foundation members, charity trustees India')
+@section('meta_desc', 'Meet the founder members and trustees of '.$siteName.' — dedicated individuals committed to Maharaj-ji\'s vision of selfless service and love for all.')
+@section('meta_keywords', 'NKB Foundation founders, '.$siteName.' trustees, NGO founders India, NKB Foundation team, foundation members, charity trustees India')
 @section('canonical', route('about.founders'))
 @push('schema')
 <script type="application/ld+json">

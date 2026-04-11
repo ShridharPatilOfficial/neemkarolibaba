@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Media Coverage — '.$siteName)
-@section('meta_desc', 'Read media coverage and news articles featuring {{ $siteName }} — press coverage of our charitable initiatives, events, and humanitarian work across India.')
-@section('meta_keywords', 'NKB Foundation media coverage, {{ $siteName }} news, NGO press coverage India, NKB Foundation in media, charity news India, foundation press')
+@section('meta_desc', 'Read media coverage and news articles featuring '.$siteName.' — press coverage of our charitable initiatives, events, and humanitarian work across India.')
+@section('meta_keywords', 'NKB Foundation media coverage, '.$siteName.' news, NGO press coverage India, NKB Foundation in media, charity news India, foundation press')
 @section('canonical', route('media-coverage'))
 @push('schema')
 <script type="application/ld+json">

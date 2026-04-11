@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Join Us — Volunteer with NKB Foundation Worldwide')
-@section('meta_desc', 'Join {{ $siteName }} as a volunteer or member. Be part of our mission to serve the poor, uplift communities, and spread love through seva across India.')
+@section('meta_desc', 'Join '.$siteName.' as a volunteer or member. Be part of our mission to serve the poor, uplift communities, and spread love through seva across India.')
 @section('meta_keywords', 'join NKB Foundation, volunteer India NGO, become member NKB, seva volunteer, charity volunteer India, Neem Karoli Baba seva, NGO membership India')
 @section('canonical', route('join-us'))
 @push('schema')

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Contact Us — '.$siteName)
-@section('meta_desc', 'Get in touch with {{ $siteName }}. Contact us for donations, volunteering, partnerships, or any queries about our charitable work in India.')
-@section('meta_keywords', 'contact NKB Foundation, {{ $siteName }} contact, NGO contact India, donate contact, volunteer contact NKB, NKB Foundation address')
+@section('meta_desc', 'Get in touch with '.$siteName.'. Contact us for donations, volunteering, partnerships, or any queries about our charitable work in India.')
+@section('meta_keywords', 'contact NKB Foundation, '.$siteName.' contact, NGO contact India, donate contact, volunteer contact NKB, NKB Foundation address')
 @section('canonical', route('contact'))
 @push('schema')
 <script type="application/ld+json">

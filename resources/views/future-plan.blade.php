@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Future Plans — '.$siteName)
-@section('meta_desc', 'Discover the vision and future plans of {{ $siteName }} — expanding schools, hospitals, ashrams, and seva programs to serve more communities in India.')
+@section('meta_desc', 'Discover the vision and future plans of '.$siteName.' — expanding schools, hospitals, ashrams, and seva programs to serve more communities in India.')
 @section('meta_keywords', 'NKB Foundation future plans, NGO vision India, NKB Foundation expansion, Neem Karoli Baba mission, seva projects India, charitable vision')
 @section('canonical', route('future-plan'))
 @push('schema')
