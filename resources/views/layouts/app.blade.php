@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @php
-        $metaTitle = trim(strip_tags(\Illuminate\Support\Str::limit(@yield('title') ?: 'Neem Karoli Baba Foundation Worldwide', 60)));
-        $metaDesc  = trim(strip_tags(@yield('meta_desc') ?: 'Neem Karoli Baba Foundation Worldwide – serving humanity through education, healthcare & community welfare inspired by Neem Karoli Baba (Maharaj-ji). 12A & 80G registered NGO in India.'));
-        $metaImg   = @yield('og_image') ?: asset('images/og-default.jpg');
-        $canonical = @yield('canonical') ?: url()->current();
+        $metaTitle = trim(strip_tags(\Illuminate\Support\Str::limit($__env->yieldContent('title') ?: 'Neem Karoli Baba Foundation Worldwide', 60)));
+        $metaDesc  = trim(strip_tags($__env->yieldContent('meta_desc') ?: 'Neem Karoli Baba Foundation Worldwide – serving humanity through education, healthcare & community welfare inspired by Neem Karoli Baba (Maharaj-ji). 12A & 80G registered NGO in India.'));
+        $metaImg   = $__env->yieldContent('og_image') ?: asset('images/og-default.jpg');
+        $canonical = $__env->yieldContent('canonical') ?: url()->current();
         $siteName  = \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Foundation Worldwide');
     @endphp
 
