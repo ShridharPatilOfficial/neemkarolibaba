@@ -465,18 +465,9 @@
                             <i class="fas fa-user" style="color:rgba(255,255,255,.4);font-size:3rem;"></i>
                         </div>
                         @endif
-                        {{-- Gradient overlay so text is readable --}}
+                        {{-- Gradient overlay --}}
                         <div style="position:absolute;inset:0;
-                                    background:linear-gradient(0deg,rgba(12,9,32,.9) 0%,rgba(12,9,32,.3) 50%,transparent 100%);"></div>
-                        {{-- Name & title over photo --}}
-                        <div style="position:relative;z-index:1;">
-                            <h3 style="font-weight:800;color:#fff;font-size:.8rem;line-height:1.25;">
-                                {{ $pm->president_name }}
-                            </h3>
-                            <p style="color:#F97316;font-size:.62rem;font-weight:600;margin-top:.2rem;line-height:1.3;">
-                                {{ $pm->president_title }}
-                            </p>
-                        </div>
+                                    background:linear-gradient(0deg,rgba(12,9,32,.5) 0%,transparent 60%);"></div>
                     </div>
 
                     {{-- RIGHT — 2/3 message panel --}}
