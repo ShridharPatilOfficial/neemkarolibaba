@@ -389,6 +389,17 @@
         {{-- Bottom bar --}}
         <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
             <p>&copy; {{ date('Y') }} {{ $siteName }}. All Rights Reserved.</p>
+
+            {{-- Visitor counter --}}
+            <p class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-orange-500 inline-block animate-pulse"></span>
+                <i class="fas fa-users text-orange-500"></i>
+                <span class="text-gray-400">
+                    <span class="font-bold text-orange-400">{{ number_format($frontendVisitors) }}</span>
+                    Unique Visitors
+                </span>
+            </p>
+
             <p class="flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
                 12A &amp; 80G Registered &nbsp;|&nbsp; Reg. No: {{ \App\Models\SiteSetting::get('reg_no', 'XXXXXX/2024') }}
