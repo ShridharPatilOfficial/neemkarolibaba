@@ -434,7 +434,7 @@
             <p class="sec-sub sec-subw mt-3 max-w-lg mx-auto">Dedicated personalities striving to foster unity, compassion, and lasting change.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 {{ $presidentMessages->count() >= 3 ? 'lg:grid-cols-3' : '' }} gap-7">
+        <div class="grid grid-cols-1 md:grid-cols-2 {{ $presidentMessages->count() >= 3 ? 'lg:grid-cols-3' : '' }} gap-7 items-stretch">
             @foreach($presidentMessages as $i => $pm)
             <div class="reveal reveal-delay-{{ $i % 3 + 1 }} flex flex-col"
                  style="background:linear-gradient(160deg,#150D35,#1e1050);
@@ -453,7 +453,7 @@
                                 background:linear-gradient(180deg,#F97316,#ea580c);
                                 display:flex;flex-direction:column;align-items:center;
                                 justify-content:flex-end;padding:1.25rem .75rem 1rem;
-                                text-align:center;min-height:220px;">
+                                text-align:center;min-height:240px;align-self:stretch;">
                         {{-- Photo --}}
                         @if($pm->photo_url)
                         <img src="{{ str_starts_with($pm->photo_url,'http') ? $pm->photo_url : asset('storage/'.$pm->photo_url) }}"
@@ -488,8 +488,7 @@
                                         font-size:4.5rem;color:rgba(249,115,22,.07);
                                         font-family:Georgia,serif;line-height:1;pointer-events:none;">&ldquo;</div>
                             <p style="color:rgba(255,255,255,.82);font-size:.76rem;line-height:1.75;
-                                       font-style:italic;white-space:pre-line;position:relative;z-index:1;
-                                       display:-webkit-box;-webkit-line-clamp:8;-webkit-box-orient:vertical;overflow:hidden;">
+                                       font-style:italic;white-space:pre-line;position:relative;z-index:1;">
                                 {{ $pm->message }}
                             </p>
                         </div>
