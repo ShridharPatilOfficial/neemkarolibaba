@@ -104,8 +104,8 @@
     {{-- Photo card: absolutely spans info-bar + header full height --}}
     @if($headerPhoto)
     <div id="header-photo-wrap"
-         style="position:absolute;top:0;bottom:0;left:0;
-                width:160px;z-index:200;overflow:hidden;
+         style="position:absolute;top:10;bottom:10;left:20px;
+                width:180px;z-index:200;overflow:hidden;
                 box-shadow:6px 0 28px rgba(76,29,149,.55);
                 border-right:4px solid #f59e0b;">
         <img id="header-photo" src="{{ $headerPhoto }}" alt="{{ $siteName }}"
