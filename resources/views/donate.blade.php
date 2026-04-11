@@ -1,5 +1,26 @@
 @extends('layouts.app')
-@section('title', 'Donate Us — Neem Karoli Baba Foundation Worldwide')
+@section('title', 'Donate — Support NKB Foundation (12A & 80G Registered)')
+@section('meta_desc', 'Donate to Neem Karoli Baba Foundation Worldwide — a 12A & 80G registered NGO. Your contribution funds food, education, healthcare and spiritual seva for the underprivileged in India. Tax benefits available.')
+@section('meta_keywords', 'donate NKB Foundation, donation 80G tax benefit India, NGO donation India, Neem Karoli Baba donation, online donate NGO, charity donation India, 12A 80G registered NGO')
+@section('canonical', route('donate'))
+@push('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Donate — Neem Karoli Baba Foundation Worldwide",
+  "url": "{{ route('donate') }}",
+  "inLanguage": "en-IN",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@type": "ListItem", "position": 2, "name": "Donate", "item": "{{ route('donate') }}" }
+    ]
+  }
+}
+</script>
+@endpush
 
 @section('content')
 

@@ -1,5 +1,27 @@
 @extends('layouts.app')
-@section('title', 'About Us - Neem Karoli Baba Foundation Worldwide')
+@section('title', 'About Us — Neem Karoli Baba Foundation Worldwide')
+@section('meta_desc', 'Learn about Neem Karoli Baba Foundation Worldwide — a 12A & 80G registered NGO inspired by Maharaj-ji. Dedicated to feeding the hungry, educating children, and providing healthcare across India.')
+@section('meta_keywords', 'about NKB Foundation, Neem Karoli Baba Foundation about, NGO India about, Maharaj-ji foundation, 12A 80G NGO India, NKB Foundation history, charitable trust India')
+@section('canonical', route('about'))
+@push('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Us — Neem Karoli Baba Foundation Worldwide",
+  "description": "About NKB Foundation — 12A & 80G registered NGO inspired by Maharaj-ji's teachings of love and seva.",
+  "url": "{{ route('about') }}",
+  "inLanguage": "en-IN",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@type": "ListItem", "position": 2, "name": "About Us", "item": "{{ route('about') }}" }
+    ]
+  }
+}
+</script>
+@endpush
 
 @section('content')
 <div class="page-banner py-20 px-4 text-white relative">

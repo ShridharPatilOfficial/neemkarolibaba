@@ -1,5 +1,26 @@
 @extends('layouts.app')
-@section('title', 'Events - Neem Karoli Baba Foundation Worldwide')
+@section('title', 'Events — Neem Karoli Baba Foundation Worldwide')
+@section('meta_desc', 'Stay updated with upcoming and past events by Neem Karoli Baba Foundation Worldwide — spiritual gatherings, charity drives, and community programs across India.')
+@section('meta_keywords', 'NKB Foundation events, Neem Karoli Baba events, NGO events India, spiritual events, charity events, bhajan sandhya, NKB Foundation programs')
+@section('canonical', route('events'))
+@push('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Events — Neem Karoli Baba Foundation Worldwide",
+  "url": "{{ route('events') }}",
+  "inLanguage": "en-IN",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@type": "ListItem", "position": 2, "name": "Events", "item": "{{ route('events') }}" }
+    ]
+  }
+}
+</script>
+@endpush
 
 @section('content')
 <div class="page-banner py-20 px-4 text-white relative">

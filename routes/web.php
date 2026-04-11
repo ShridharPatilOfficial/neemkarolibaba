@@ -29,9 +29,13 @@ use App\Http\Controllers\Admin\PrincipleController;
 use App\Http\Controllers\Admin\WorkVideoController;
 use App\Http\Controllers\Admin\MediaCoverageController as AdminMediaCoverageController;
 use App\Http\Controllers\Admin\AnalyticsController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Document;
+
+// ─── Sitemap ─────────────────────────────────────────────────────────────────
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // ─── Public Routes ───────────────────────────────────────────────────────────
 Route::middleware('track.visitor')->group(function () {

@@ -1,13 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Neem Karoli Baba Foundation Worldwide')</title>
-    <meta name="description" content="@yield('meta_desc', 'Neem Karoli Baba Foundation Worldwide - Serving humanity with compassion, education, and healthcare inspired by Neem Karoli Baba.')">
-    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-    <link rel="shortcut icon" href="{{ asset('favicon.svg') }}">
+    @php
+        $metaTitle = trim(strip_tags(\Illuminate\Support\Str::limit(
+            $__env->yieldContent('title') ?: 'Neem Karoli Baba Foundation Worldwide', 60
+        )));
+        $metaDesc  = trim(strip_tags(
+            $__env->yieldContent('meta_desc') ?: 'Neem Karoli Baba Foundation Worldwide – serving humanity through education, healthcare & community welfare inspired by Neem Karoli Baba (Maharaj-ji). 12A & 80G registered NGO in India.'
+        ));
+        $metaImg   = $__env->yieldContent('og_image') ?: asset('images/og-default.jpg');
+        $canonical = $__env->yieldContent('canonical') ?: url()->current();
+        $siteName  = \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Foundation Worldwide');
+    @endphp
+
+    {{-- Primary --}}
+    <title>{{ $metaTitle }}</title>
+    <meta name="description"  content="{{ $metaDesc }}">
+    <meta name="keywords"     content="@yield('meta_keywords', 'Neem Karoli Baba Foundation, NKB Foundation, NGO India, Maharaj-ji, charity, donate India, 80G registered')">
+    <meta name="author"       content="{{ $siteName }}">
+    <meta name="robots"       content="@yield('robots', 'index, follow')">
+    <meta name="theme-color"  content="#4C1D95">
+    <link rel="canonical"     href="{{ $canonical }}">
+
+    {{-- Open Graph --}}
+    <meta property="og:type"         content="website">
+    <meta property="og:site_name"    content="{{ $siteName }}">
+    <meta property="og:title"        content="{{ $metaTitle }}">
+    <meta property="og:description"  content="{{ $metaDesc }}">
+    <meta property="og:url"          content="{{ $canonical }}">
+    <meta property="og:image"        content="{{ $metaImg }}">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale"       content="en_IN">
+
+    {{-- Twitter Card --}}
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="{{ $metaTitle }}">
+    <meta name="twitter:description" content="{{ $metaDesc }}">
+    <meta name="twitter:image"       content="{{ $metaImg }}">
+
+    {{-- Favicon --}}
+    <link rel="icon"             href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="shortcut icon"    href="{{ asset('favicon.svg') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.svg') }}">
+
+    {{-- Organisation JSON-LD (global) --}}
+    @php
+        $orgPhone   = \App\Models\SiteSetting::get('phone', '');
+        $orgEmail   = \App\Models\SiteSetting::get('email', '');
+        $orgAddress = \App\Models\SiteSetting::get('address', '');
+        $orgFb      = \App\Models\SiteSetting::get('facebook', '');
+        $orgIg      = \App\Models\SiteSetting::get('instagram', '');
+        $orgYt      = \App\Models\SiteSetting::get('youtube', '');
+    @endphp
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": "{{ $siteName }}",
+      "alternateName": "NKB Foundation",
+      "url": "{{ config('app.url') }}",
+      "logo": "{{ asset('favicon.svg') }}",
+      "description": "A registered non-profit organisation inspired by the teachings of Neem Karoli Baba (Maharaj-ji), dedicated to education, healthcare and community service.",
+      "foundingDate": "2020",
+      "areaServed": "IN",
+      "taxID": "{{ \App\Models\SiteSetting::get('reg_no', '') }}",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "{{ $orgPhone }}",
+        "email": "{{ $orgEmail }}",
+        "contactType": "customer support",
+        "availableLanguage": ["English", "Hindi"]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Chandigarh",
+        "addressCountry": "IN",
+        "streetAddress": "{{ $orgAddress }}"
+      },
+      "sameAs": ["{{ $orgFb }}", "{{ $orgIg }}", "{{ $orgYt }}"]
+    }
+    </script>
+
+    @stack('schema')
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
