@@ -42,7 +42,7 @@
             <div class="flex items-center gap-4 mb-3">
                 <img src="{{ Storage::url($settings['header_photo']) }}"
                      alt="Current header photo"
-                     class="w-20 h-20 rounded-full object-cover border-4 border-yellow-400 shadow-md">
+                     class="w-20 h-20 rounded-lg object-cover border-4 border-yellow-400 shadow-md">
                 <div class="text-xs text-gray-500">
                     <p class="font-semibold text-gray-700 mb-1">Current photo</p>
                     <p>Upload a new file below to replace it.</p>
@@ -65,7 +65,7 @@
             <div id="photo_preview_wrap" class="mt-3 hidden">
                 <p class="text-xs text-gray-500 mb-1">Preview:</p>
                 <img id="photo_preview" src="" alt="Preview"
-                     class="w-20 h-20 rounded-full object-cover border-4 border-yellow-400 shadow-md">
+                     class="w-20 h-20 rounded-lg object-cover border-4 border-yellow-400 shadow-md">
             </div>
 
             @error('header_photo')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror

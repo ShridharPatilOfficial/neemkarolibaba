@@ -136,7 +136,7 @@
             @if($headerPhoto)
                 <div class="relative flex-shrink-0">
                     <img src="{{ $headerPhoto }}" alt="{{ $siteName }}"
-                         class="w-14 h-14 rounded-full object-cover shadow-md ring-2 ring-purple-700 ring-offset-2 ring-offset-yellow-400">
+                         class="w-14 h-14 rounded-lg object-cover shadow-md ring-2 ring-purple-700 ring-offset-2 ring-offset-yellow-400">
                 </div>
             @else
                 <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
