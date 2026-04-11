@@ -1,5 +1,29 @@
 @extends('layouts.app')
-@section('title', 'Founder Member - Neem Karoli Baba Foundation Worldwide')
+@section('title', 'Founder Members - Neem Karoli Baba Foundation Worldwide')
+@section('meta_desc', 'Meet the founder members and trustees of Neem Karoli Baba Foundation Worldwide — dedicated individuals committed to Maharaj-ji\'s vision of selfless service and love for all.')
+@section('meta_keywords', 'NKB Foundation founders, Neem Karoli Baba Foundation trustees, NGO founders India, NKB Foundation team, foundation members, charity trustees India')
+@section('canonical', url('/about/founder-members'))
+@push('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Founder Members — Neem Karoli Baba Foundation Worldwide",
+  "description": "Founder members and trustees of NKB Foundation dedicated to selfless service.",
+  "url": "{{ url('/about/founder-members') }}",
+  "inLanguage": "en-IN",
+  "isPartOf": { "@type": "WebSite", "url": "{{ url('/') }}" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@type": "ListItem", "position": 2, "name": "About", "item": "{{ route('about') }}" },
+      { "@type": "ListItem", "position": 3, "name": "Founder Members", "item": "{{ url('/about/founder-members') }}" }
+    ]
+  }
+}
+</script>
+@endpush
 
 @section('content')
 <div class="page-banner py-20 px-4 text-white relative">

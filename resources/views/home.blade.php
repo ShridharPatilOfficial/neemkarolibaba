@@ -1,5 +1,24 @@
 @extends('layouts.app')
-@section('title', 'Home — Neem Karoli Baba Foundation Worldwide')
+@section('title', 'Neem Karoli Baba Foundation Worldwide — Love All, Serve All')
+@section('meta_desc', 'Neem Karoli Baba Foundation Worldwide is a 12A & 80G registered NGO in India dedicated to healthcare, education, food distribution and community welfare inspired by Maharaj-ji.')
+@section('meta_keywords', 'Neem Karoli Baba Foundation, NKB Foundation, NGO India, Maharaj-ji, charity donate India, 80G tax exemption, CSR NGO Chandigarh')
+@section('canonical', url('/'))
+
+@push('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Neem Karoli Baba Foundation Worldwide",
+  "url": "{{ url('/') }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ url('/') }}?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+@endpush
 
 @section('content')
 

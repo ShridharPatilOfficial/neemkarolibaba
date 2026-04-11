@@ -1,5 +1,28 @@
 @extends('layouts.app')
-@section('title', 'Gallery — Neem Karoli Baba Foundation Worldwide')
+@section('title', 'Photo Gallery — Neem Karoli Baba Foundation Worldwide')
+@section('meta_desc', 'Browse the photo gallery of Neem Karoli Baba Foundation Worldwide — images from seva programs, events, charity work, spiritual gatherings, and community outreach across India.')
+@section('meta_keywords', 'NKB Foundation gallery, Neem Karoli Baba photos, NGO India photos, seva gallery, charity event photos, NKB Foundation images, foundation gallery India')
+@section('canonical', url('/gallery'))
+@push('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "Photo Gallery — Neem Karoli Baba Foundation Worldwide",
+  "description": "Photos from NKB Foundation seva programs, events and community outreach.",
+  "url": "{{ url('/gallery') }}",
+  "inLanguage": "en-IN",
+  "isPartOf": { "@type": "WebSite", "url": "{{ url('/') }}" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@type": "ListItem", "position": 2, "name": "Gallery", "item": "{{ url('/gallery') }}" }
+    ]
+  }
+}
+</script>
+@endpush
 
 @section('content')
 

@@ -1,5 +1,29 @@
 @extends('layouts.app')
-@section('title', 'Documents Gallery - Neem Karoli Baba Foundation Worldwide')
+@section('title', 'Documents & Certificates - Neem Karoli Baba Foundation Worldwide')
+@section('meta_desc', 'View official documents and certificates of Neem Karoli Baba Foundation Worldwide — 12A & 80G registration, trust deed, annual reports, and legal certifications of our registered NGO.')
+@section('meta_keywords', 'NKB Foundation documents, NGO certificates India, 12A 80G certificate download, trust deed NKB, annual report NGO India, foundation legal documents')
+@section('canonical', url('/about/documents'))
+@push('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Documents & Certificates — Neem Karoli Baba Foundation Worldwide",
+  "description": "Official documents, certificates and registrations of NKB Foundation including 12A and 80G.",
+  "url": "{{ url('/about/documents') }}",
+  "inLanguage": "en-IN",
+  "isPartOf": { "@type": "WebSite", "url": "{{ url('/') }}" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@type": "ListItem", "position": 2, "name": "About", "item": "{{ route('about') }}" },
+      { "@type": "ListItem", "position": 3, "name": "Documents", "item": "{{ url('/about/documents') }}" }
+    ]
+  }
+}
+</script>
+@endpush
 
 @section('content')
 <div class="page-banner py-20 px-4 text-white relative">
