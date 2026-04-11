@@ -10,6 +10,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JoinUsController;
 use App\Http\Controllers\MediaCoverageController;
+use App\Http\Controllers\WorkInActionController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SiteSettingController;
@@ -72,6 +73,7 @@ Route::middleware('track.visitor')->group(function () {
 
     Route::get('/donate-us', [DonateController::class, 'index'])->name('donate');
     Route::get('/media-coverage', [MediaCoverageController::class, 'index'])->name('media-coverage');
+    Route::get('/work-in-action', [WorkInActionController::class, 'index'])->name('work-in-action');
 });
 
 // ─── Admin Auth ───────────────────────────────────────────────────────────────

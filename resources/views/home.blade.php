@@ -570,9 +570,9 @@
                     </div>
                 </div>
                 <div class="p-4">
-                    <h3 class="text-white font-bold text-sm leading-snug mb-1.5 line-clamp-2 group-hover:text-orange-300 transition-colors">{{ $vid->title }}</h3>
+                    <h3 class="text-white font-bold text-sm leading-snug mb-1.5 group-hover:text-orange-300 transition-colors">{{ $vid->title }}</h3>
                     @if($vid->description)
-                    <p class="text-gray-400 text-xs leading-relaxed line-clamp-2">{{ $vid->description }}</p>
+                    <p class="text-gray-400 text-xs leading-relaxed">{{ $vid->description }}</p>
                     @endif
                     <div class="mt-3 flex items-center gap-1.5 text-orange-400 text-xs font-semibold">
                         <i class="fas fa-play-circle text-sm"></i> Watch Now
@@ -592,9 +592,9 @@
         @endif
 
         <div class="text-center mt-10 reveal">
-            <a href="{{ route('gallery') }}"
+            <a href="{{ route('work-in-action') }}"
                class="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 border border-white/15 text-white font-bold py-3 px-8 rounded-xl transition text-sm">
-                <i class="fas fa-photo-film"></i> View Full Gallery
+                <i class="fab fa-youtube"></i> View All Videos
             </a>
         </div>
     </div>

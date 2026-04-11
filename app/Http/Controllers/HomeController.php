@@ -34,12 +34,12 @@ class HomeController extends Controller
         $sliders          = Slider::where('is_active', true)->orderBy('sort_order')->get();
         $partners         = Partner::where('is_active', true)->orderBy('sort_order')->get();
         $impactStats      = ImpactStat::where('is_active', true)->orderBy('sort_order')->get();
-        $recentActivities = RecentActivity::where('is_active', true)->orderBy('sort_order')->take(6)->get();
-        $events           = Event::where('is_active', true)->orderBy('sort_order')->take(4)->get();
+        $recentActivities = RecentActivity::where('is_active', true)->latest()->take(5)->get();
+        $events           = Event::where('is_active', true)->latest()->take(5)->get();
         $presidentMessages = PresidentMessage::where('is_active', true)->orderBy('id')->get();
         $principles       = Principle::where('is_active', true)->orderBy('sort_order')->get();
-        $workVideos       = WorkVideo::where('is_active', true)->orderBy('sort_order')->take(8)->get();
-        $mediaCoverages   = MediaCoverage::where('is_active', true)->orderByDesc('published_date')->take(6)->get();
+        $workVideos       = WorkVideo::where('is_active', true)->latest()->take(5)->get();
+        $mediaCoverages   = MediaCoverage::where('is_active', true)->orderByDesc('published_date')->take(5)->get();
 
         return view('home', compact(
             'settings',

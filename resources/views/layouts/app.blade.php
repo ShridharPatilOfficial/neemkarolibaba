@@ -183,11 +183,12 @@
                     </div>
                 </li>
                 <li class="nav-dd">
-                    <button class="nav-link {{ request()->routeIs('gallery','media-coverage') ? 'active' : '' }}">
+                    <button class="nav-link {{ request()->routeIs('gallery','media-coverage','work-in-action') ? 'active' : '' }}">
                         Media <i class="fas fa-chevron-down" style="font-size:.6rem;margin-left:.2rem;"></i>
                     </button>
                     <div class="nav-dd-menu">
                         <a href="{{ route('gallery') }}" class="nav-dd-item">Photo &amp; Video Gallery</a>
+                        <a href="{{ route('work-in-action') }}" class="nav-dd-item">Work in Action</a>
                         <a href="{{ route('media-coverage') }}" class="nav-dd-item">Media Coverage</a>
                     </div>
                 </li>
@@ -232,6 +233,9 @@
             <p class="nav-mob-section">Media</p>
             <a href="{{ route('gallery') }}" class="nav-mob-item">
                 <i class="fas fa-images text-orange-400 w-4"></i> Gallery
+            </a>
+            <a href="{{ route('work-in-action') }}" class="nav-mob-item">
+                <i class="fab fa-youtube text-orange-400 w-4"></i> Work in Action
             </a>
             <a href="{{ route('media-coverage') }}" class="nav-mob-item">
                 <i class="fas fa-newspaper text-orange-400 w-4"></i> Media Coverage
