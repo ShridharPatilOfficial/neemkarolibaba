@@ -129,15 +129,17 @@
 </div>
 
 {{-- ─── Main Header ──────────────────────────────────────────────── --}}
-<header id="main-header" class="bg-yellow-400 py-3 px-4 shadow-sm" style="overflow:visible;">
+<header id="main-header" class="bg-yellow-400 px-4 shadow-sm" style="overflow:visible;padding-top:0.75rem;padding-bottom:0.75rem;">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3">
             {{-- Header photo (set from Admin → Settings) or fallback Om logo --}}
             @if($headerPhoto)
-                <div class="relative flex-shrink-0" style="z-index:50;">
+                <div id="header-photo-wrap" class="flex-shrink-0" style="position:relative;z-index:60;margin-top:-28px;">
                     <img id="header-photo" src="{{ $headerPhoto }}" alt="{{ $siteName }}"
-                         class="rounded-lg object-cover shadow-lg ring-2 ring-purple-700 ring-offset-2 ring-offset-yellow-400 transition-all duration-300"
-                         style="width:72px;height:72px;margin-top:-18px;">
+                         style="width:88px;height:88px;border-radius:10px;object-fit:cover;
+                                box-shadow:0 4px 18px rgba(76,29,149,.35);
+                                border:3px solid #7c3aed;
+                                transition:width .3s ease,height .3s ease,margin-top .3s ease,border-radius .3s ease;">
                 </div>
             @else
                 <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
@@ -433,20 +435,30 @@
         icon.classList.toggle('fa-times');
     });
 
-    // Header photo: big + overflow at top, shrink on scroll
-    const headerPhoto = document.getElementById('header-photo');
-    if (headerPhoto) {
-        window.addEventListener('scroll', () => {
+    // Header photo: overflow upward at top, shrink flush on scroll
+    const hPhoto = document.getElementById('header-photo');
+    const hWrap  = document.getElementById('header-photo-wrap');
+    if (hPhoto && hWrap) {
+        const isMobile = () => window.innerWidth < 640;
+        const applyPhotoState = () => {
+            const mobile = isMobile();
             if (window.scrollY > 10) {
-                headerPhoto.style.width  = '48px';
-                headerPhoto.style.height = '48px';
-                headerPhoto.style.marginTop = '0px';
+                // Scrolled: fit inside header
+                hPhoto.style.width         = mobile ? '40px' : '52px';
+                hPhoto.style.height        = mobile ? '40px' : '52px';
+                hPhoto.style.borderRadius  = '8px';
+                hWrap.style.marginTop      = '0px';
             } else {
-                headerPhoto.style.width  = '72px';
-                headerPhoto.style.height = '72px';
-                headerPhoto.style.marginTop = '-18px';
+                // Top of page: overflow upward
+                hPhoto.style.width         = mobile ? '60px' : '88px';
+                hPhoto.style.height        = mobile ? '60px' : '88px';
+                hPhoto.style.borderRadius  = '10px';
+                hWrap.style.marginTop      = mobile ? '-16px' : '-28px';
             }
-        }, { passive: true });
+        };
+        window.addEventListener('scroll', applyPhotoState, { passive: true });
+        window.addEventListener('resize', applyPhotoState, { passive: true });
+        applyPhotoState();
     }
 
     // Sticky nav shadow on scroll + show/hide floating donate
