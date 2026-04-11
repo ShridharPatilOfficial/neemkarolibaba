@@ -45,9 +45,10 @@
                 <h2 class="text-3xl font-extrabold text-orange-400 mb-2">Support Us</h2>
                 <div class="w-12 h-1 bg-blue-400 mb-6"></div>
                 <p class="text-purple-200 leading-relaxed text-sm">
-                    Become a part of our mission to uplift communities and make a difference.
-                    Volunteer, donate, or collaborate to help create lasting positive change.
-                    Your support can transform lives.
+                    Become a part of our mission to uplift communities through our upcoming schools,
+                    skill centers, and charitable hospitals. Volunteer your time, donate generously,
+                    or collaborate with us to help create lasting positive change. Stand with the
+                    {{ $siteName }} today — your support can transform lives.
                 </p>
             </div>
         </div>
