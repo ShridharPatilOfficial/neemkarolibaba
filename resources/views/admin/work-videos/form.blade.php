@@ -78,16 +78,17 @@
             ['clean']
         ]}
     });
-    var existing = document.getElementById('desc-input').value;
+    var existing = document.getElementById('desc-input').value.trim();
     if (existing) {
-        if (existing.trim().startsWith('<')) {
-            quill.root.innerHTML = existing;
+        if (existing.startsWith('<')) {
+            quill.clipboard.dangerouslyPasteHTML(0, existing);
         } else {
             quill.setText(existing);
         }
     }
     document.querySelector('form').addEventListener('submit', function(){
-        document.getElementById('desc-input').value = quill.root.innerHTML;
+        var html = quill.root.innerHTML;
+        document.getElementById('desc-input').value = (html === '<p><br></p>') ? '' : html;
     });
 })();
 
