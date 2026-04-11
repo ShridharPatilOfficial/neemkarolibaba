@@ -32,7 +32,7 @@
 .sh-inner {
   display: flex;
   align-items: stretch;
-  min-height: 130px;
+  min-height: 150px;
   position: relative;
 }
 /* Photo card */
@@ -75,19 +75,19 @@
   padding: 1rem 1rem 1rem 0;
 }
 .sh-name {
-  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.6rem);
   font-weight: 900;
   color: #fff;
   line-height: 1.15;
-  letter-spacing: -.015em;
+  letter-spacing: -.02em;
 }
 .sh-tag {
   color: #F97316;
-  font-size: .82rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: .09em;
   text-transform: uppercase;
-  margin-top: .2rem;
+  margin-top: .3rem;
   display: flex;
   align-items: center;
   gap: .4rem;
@@ -95,13 +95,13 @@
 .sh-contacts {
   display: flex;
   gap: 1.2rem;
-  margin-top: .45rem;
+  margin-top: .55rem;
   flex-wrap: wrap;
   align-items: center;
 }
 .sh-contacts a, .sh-contacts span {
   color: #94A3B8;
-  font-size: .78rem;
+  font-size: .88rem;
   text-decoration: none;
   display: flex;
   align-items: center;
