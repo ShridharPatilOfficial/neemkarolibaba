@@ -149,7 +149,7 @@
                  class="w-14 h-14 rounded-full shadow-md flex-shrink-0 self-center">
             @endif
 
-            <div class="self-center">
+            <div class="flex flex-col justify-center">
                 <h1 class="text-purple-900 font-extrabold text-lg md:text-xl leading-tight">
                     {{ $siteName }}
                 </h1>
