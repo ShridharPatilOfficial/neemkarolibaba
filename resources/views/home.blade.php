@@ -423,70 +423,105 @@
 </section>
 @endif
 
-{{-- ════════ PRESIDENT MESSAGE ══════════════════════════════════════ --}}
-@if($presidentMessage)
-<section class="py-16 md:py-20 px-4" style="background:linear-gradient(135deg,#FFFBF5 0%,#f3e8ff 100%);">
+{{-- ════════ LEADERSHIP MESSAGES ════════════════════════════════════ --}}
+@if($presidentMessages->count())
+<section class="py-16 md:py-20 px-4" style="background:linear-gradient(135deg,#0C0920 0%,#1a0f3c 100%);">
     <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-10 reveal">
-            <span class="sec-eyebrow">Leadership</span>
-            <h2 class="sec-h2 mt-2">President's <span class="hl">Message</span></h2>
+
+        <div class="text-center mb-12 reveal">
+            <span class="sec-eyebrow" style="color:#F97316;">Leadership</span>
+            <h2 class="sec-h2 sec-h2w mt-2">A Message From Our <span class="hl">Leaders</span></h2>
+            <p class="sec-sub sec-subw mt-3 max-w-lg mx-auto">Dedicated personalities striving to foster unity, compassion, and lasting change.</p>
         </div>
 
-        <div class="president-new reveal" style="box-shadow:0 32px 80px rgba(12,9,32,.3);">
-            <div class="flex flex-col lg:flex-row">
+        <div class="grid grid-cols-1 md:grid-cols-2 {{ $presidentMessages->count() >= 3 ? 'lg:grid-cols-3' : '' }} gap-7">
+            @foreach($presidentMessages as $i => $pm)
+            <div class="reveal reveal-delay-{{ $i % 3 + 1 }} flex flex-col"
+                 style="background:linear-gradient(160deg,#150D35,#1e1050);
+                        border:1px solid rgba(249,115,22,.18);
+                        border-radius:20px;overflow:hidden;
+                        box-shadow:0 16px 48px rgba(0,0,0,.35);
+                        transition:transform .3s,box-shadow .3s;"
+                 onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 24px 60px rgba(0,0,0,.45)'"
+                 onmouseout="this.style.transform='';this.style.boxShadow='0 16px 48px rgba(0,0,0,.35)'">
 
-                {{-- Left profile --}}
-                <div class="lg:w-72 flex-shrink-0 relative p-8 flex flex-col items-center justify-center text-center"
-                     style="background:linear-gradient(135deg,#F97316,#ea580c);background-image:radial-gradient(circle at 50% 50%,rgba(255,255,255,.08) 1px,transparent 1px);background-size:20px 20px;">
-                    <div class="relative mb-5">
-                        @if($presidentMessage->photo_url)
-                        <img src="{{ str_starts_with($presidentMessage->photo_url,'http') ? $presidentMessage->photo_url : asset('storage/'.$presidentMessage->photo_url) }}"
-                             alt="{{ $presidentMessage->president_name }}"
-                             class="w-28 h-28 rounded-full object-cover border-4 border-white/60 shadow-2xl mx-auto">
+                {{-- Profile header strip --}}
+                <div class="flex items-center gap-4 p-5"
+                     style="background:linear-gradient(135deg,rgba(249,115,22,.18),rgba(124,58,237,.15));
+                            border-bottom:1px solid rgba(249,115,22,.15);">
+                    {{-- Photo --}}
+                    <div class="relative flex-shrink-0">
+                        @if($pm->photo_url)
+                        <img src="{{ str_starts_with($pm->photo_url,'http') ? $pm->photo_url : asset('storage/'.$pm->photo_url) }}"
+                             alt="{{ $pm->president_name }}"
+                             style="width:64px;height:64px;border-radius:50%;object-fit:cover;
+                                    border:3px solid rgba(249,115,22,.6);
+                                    box-shadow:0 0 16px rgba(249,115,22,.3);">
                         @else
-                        <div class="w-28 h-28 rounded-full bg-white/20 border-4 border-white/40 flex items-center justify-center mx-auto overflow-hidden">
-                            <i class="fas fa-user text-white/50 text-4xl mt-4"></i>
+                        <div style="width:64px;height:64px;border-radius:50%;
+                                    background:rgba(249,115,22,.2);border:3px solid rgba(249,115,22,.4);
+                                    display:flex;align-items:center;justify-content:center;">
+                            <i class="fas fa-user" style="color:rgba(249,115,22,.6);font-size:1.4rem;"></i>
                         </div>
                         @endif
-                        <span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-green-400 border-2 border-white shadow"></span>
+                        <span style="position:absolute;bottom:2px;right:2px;width:12px;height:12px;
+                                     border-radius:50%;background:#22c55e;border:2px solid #150D35;"></span>
                     </div>
-                    <h3 class="font-black text-white text-lg leading-tight mb-1">{{ $presidentMessage->president_name }}</h3>
-                    <p class="text-orange-100 text-sm font-medium mb-5 leading-snug">{{ $presidentMessage->president_title }}</p>
-                    @if($presidentMessage->signature_url)
-                    <div class="bg-white/15 rounded-xl p-3 w-full">
-                        <p class="text-white/50 text-[10px] uppercase tracking-widest mb-2 font-semibold">Signature</p>
-                        <img src="{{ str_starts_with($presidentMessage->signature_url,'http') ? $presidentMessage->signature_url : asset('storage/'.$presidentMessage->signature_url) }}"
-                             alt="Signature" class="h-12 mx-auto object-contain drop-shadow-lg">
+                    {{-- Name & title --}}
+                    <div class="flex-1 min-w-0">
+                        <h3 style="font-weight:800;color:#fff;font-size:.95rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                            {{ $pm->president_name }}
+                        </h3>
+                        <p style="color:#F97316;font-size:.68rem;font-weight:600;margin-top:.15rem;line-height:1.35;">
+                            {{ $pm->president_title }}
+                        </p>
                     </div>
-                    @endif
                 </div>
 
-                {{-- Right message --}}
-                <div class="flex-1 p-6 sm:p-8 md:p-12 flex flex-col justify-between">
-                    <div class="text-8xl text-orange-500/15 font-serif leading-none -mt-2 mb-2">&ldquo;</div>
-                    <p class="text-gray-200 leading-relaxed text-sm sm:text-base italic whitespace-pre-line flex-1">
-                        {{ $presidentMessage->message }}
+                {{-- Letter body --}}
+                <div class="flex-1 p-5" style="position:relative;">
+                    {{-- Large quote mark --}}
+                    <div style="position:absolute;top:.5rem;left:.75rem;
+                                font-size:5rem;color:rgba(249,115,22,.08);
+                                font-family:Georgia,serif;line-height:1;pointer-events:none;">&ldquo;</div>
+
+                    <p style="color:rgba(255,255,255,.8);font-size:.8rem;line-height:1.75;
+                               font-style:italic;white-space:pre-line;position:relative;z-index:1;
+                               display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden;">
+                        {{ $pm->message }}
                     </p>
-                    <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-orange-600/25 border border-orange-500/35 flex items-center justify-center">
-                                <i class="fas fa-om text-orange-400"></i>
-                            </div>
-                            <div>
-                                <p class="text-white font-bold text-sm">{{ $presidentMessage->president_name }}</p>
-                                <p class="text-purple-300 text-xs">{{ $presidentMessage->president_title }}</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="h-px w-10 bg-orange-500/40"></div>
-                            <span class="text-orange-400 font-bold text-sm italic">Jai Ram Ji Ki</span>
-                            <div class="h-px w-10 bg-orange-500/40"></div>
-                        </div>
+                </div>
+
+                {{-- Footer strip --}}
+                <div class="px-5 py-4"
+                     style="border-top:1px solid rgba(249,115,22,.12);
+                            display:flex;align-items:center;justify-content:space-between;gap:.75rem;">
+
+                    {{-- Signature or name --}}
+                    <div>
+                        @if($pm->signature_url)
+                        <img src="{{ str_starts_with($pm->signature_url,'http') ? $pm->signature_url : asset('storage/'.$pm->signature_url) }}"
+                             alt="Signature" style="height:32px;object-fit:contain;filter:invert(1) opacity(.7);">
+                        @else
+                        <span style="color:rgba(255,255,255,.4);font-size:.72rem;font-style:italic;">
+                            {{ $pm->president_name }}
+                        </span>
+                        @endif
+                    </div>
+
+                    {{-- Jai Ram Ji Ki --}}
+                    <div style="display:flex;align-items:center;gap:.4rem;flex-shrink:0;">
+                        <div style="height:1px;width:24px;background:rgba(249,115,22,.35);"></div>
+                        <span style="color:#F97316;font-size:.65rem;font-weight:700;font-style:italic;white-space:nowrap;">
+                            Jai Ram Ji Ki
+                        </span>
                     </div>
                 </div>
 
             </div>
+            @endforeach
         </div>
+
     </div>
 </section>
 @endif

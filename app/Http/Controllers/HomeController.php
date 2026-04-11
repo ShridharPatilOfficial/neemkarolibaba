@@ -36,7 +36,7 @@ class HomeController extends Controller
         $impactStats      = ImpactStat::where('is_active', true)->orderBy('sort_order')->get();
         $recentActivities = RecentActivity::where('is_active', true)->orderBy('sort_order')->take(6)->get();
         $events           = Event::where('is_active', true)->orderBy('sort_order')->take(4)->get();
-        $presidentMessage = PresidentMessage::where('is_active', true)->first();
+        $presidentMessages = PresidentMessage::where('is_active', true)->orderBy('id')->get();
         $principles       = Principle::where('is_active', true)->orderBy('sort_order')->get();
         $workVideos       = WorkVideo::where('is_active', true)->orderBy('sort_order')->take(8)->get();
         $mediaCoverages   = MediaCoverage::where('is_active', true)->orderByDesc('published_date')->take(6)->get();
@@ -48,7 +48,7 @@ class HomeController extends Controller
             'impactStats',
             'recentActivities',
             'events',
-            'presidentMessage',
+            'presidentMessages',
             'principles',
             'workVideos',
             'mediaCoverages'
