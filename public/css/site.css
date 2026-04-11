@@ -732,12 +732,52 @@
   #nav-toggle { display: flex !important; }
   .nav-inner { height: 58px; justify-content: flex-end; }
 
-  /* Leadership cards: stack on tablet */
+  /* Leadership cards: 3D glass stacked layout on tablet/mobile */
   .ldr-card-body { flex-direction: column !important; }
+
+  /* Outer card: glass morphism + 3D depth */
+  .ldr-card-body { flex-direction: column !important; }
+  .ldr-card-3d {
+    background: rgba(21,13,53,.55) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    border: 1px solid rgba(249,115,22,.22) !important;
+    box-shadow:
+      0 2px 0 rgba(255,255,255,.06) inset,
+      0 -1px 0 rgba(0,0,0,.4) inset,
+      0 24px 60px rgba(0,0,0,.55),
+      0 8px 20px rgba(249,115,22,.12) !important;
+    transform: perspective(900px) rotateX(1.5deg);
+    transition: transform .35s, box-shadow .35s !important;
+  }
+  .ldr-card-3d:hover {
+    transform: perspective(900px) rotateX(0deg) translateY(-6px) !important;
+    box-shadow:
+      0 2px 0 rgba(255,255,255,.08) inset,
+      0 -1px 0 rgba(0,0,0,.4) inset,
+      0 36px 80px rgba(0,0,0,.6),
+      0 12px 32px rgba(249,115,22,.22) !important;
+  }
+
+  /* Photo panel: full-width top, taller, keep contain */
   .ldr-card-body > div:first-child {
     width: 100% !important;
-    min-height: 200px !important;
+    min-height: 240px !important;
+    max-height: 280px !important;
     align-self: auto !important;
+    border-radius: 0 !important;
+    background: linear-gradient(160deg,#F97316 0%,#7c3aed 100%) !important;
+  }
+  .ldr-card-body > div:first-child img {
+    object-fit: contain !important;
+    object-position: center bottom !important;
+    padding: .75rem .5rem 0 !important;
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,.5));
+  }
+
+  /* Message panel: semi-transparent */
+  .ldr-card-body > div:last-child {
+    background: transparent !important;
   }
 
   /* Donate stats: 2-col grid */

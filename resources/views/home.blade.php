@@ -436,7 +436,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 {{ $presidentMessages->count() >= 3 ? 'lg:grid-cols-3' : '' }} gap-7 items-stretch">
             @foreach($presidentMessages as $i => $pm)
-            <div class="reveal reveal-delay-{{ $i % 3 + 1 }} flex flex-col"
+            <div class="reveal reveal-delay-{{ $i % 3 + 1 }} flex flex-col ldr-card-3d"
                  style="background:linear-gradient(160deg,#150D35,#1e1050);
                         border:1px solid rgba(249,115,22,.18);
                         border-radius:20px;overflow:hidden;
