@@ -6,16 +6,16 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
+  "@@context": "https://schema.org",
+  "@@type": "WebPage",
   "name": "Join Us — Neem Karoli Baba Foundation Worldwide",
   "url": "{{ route('join-us') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
-    "@type": "BreadcrumbList",
+    "@@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-      { "@type": "ListItem", "position": 2, "name": "Join Us", "item": "{{ route('join-us') }}" }
+      { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@@type": "ListItem", "position": 2, "name": "Join Us", "item": "{{ route('join-us') }}" }
     ]
   }
 }

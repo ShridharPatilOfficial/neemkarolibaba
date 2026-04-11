@@ -58,8 +58,8 @@
     @endphp
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "NGO",
+      "@@context": "https://schema.org",
+      "@@type": "NGO",
       "name": "{{ $siteName }}",
       "alternateName": "NKB Foundation",
       "url": "{{ config('app.url') }}",
@@ -69,14 +69,14 @@
       "areaServed": "IN",
       "taxID": "{{ \App\Models\SiteSetting::get('reg_no', '') }}",
       "contactPoint": {
-        "@type": "ContactPoint",
+        "@@type": "ContactPoint",
         "telephone": "{{ $orgPhone }}",
         "email": "{{ $orgEmail }}",
         "contactType": "customer support",
         "availableLanguage": ["English", "Hindi"]
       },
       "address": {
-        "@type": "PostalAddress",
+        "@@type": "PostalAddress",
         "addressLocality": "Chandigarh",
         "addressCountry": "IN",
         "streetAddress": "{{ $orgAddress }}"

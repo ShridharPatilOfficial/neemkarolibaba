@@ -6,17 +6,17 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
+  "@@context": "https://schema.org",
+  "@@type": "AboutPage",
   "name": "About Us — Neem Karoli Baba Foundation Worldwide",
   "description": "About NKB Foundation — 12A & 80G registered NGO inspired by Maharaj-ji's teachings of love and seva.",
   "url": "{{ route('about') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
-    "@type": "BreadcrumbList",
+    "@@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-      { "@type": "ListItem", "position": 2, "name": "About Us", "item": "{{ route('about') }}" }
+      { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@@type": "ListItem", "position": 2, "name": "About Us", "item": "{{ route('about') }}" }
     ]
   }
 }

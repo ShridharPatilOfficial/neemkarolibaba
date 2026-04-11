@@ -6,17 +6,17 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
+  "@@context": "https://schema.org",
+  "@@type": "WebPage",
   "name": "Documents & Certificates — Neem Karoli Baba Foundation Worldwide",
   "url": "{{ route('about.documents') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
-    "@type": "BreadcrumbList",
+    "@@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-      { "@type": "ListItem", "position": 2, "name": "About", "item": "{{ route('about') }}" },
-      { "@type": "ListItem", "position": 3, "name": "Documents", "item": "{{ route('about.documents') }}" }
+      { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@@type": "ListItem", "position": 2, "name": "About", "item": "{{ route('about') }}" },
+      { "@@type": "ListItem", "position": 3, "name": "Documents", "item": "{{ route('about.documents') }}" }
     ]
   }
 }

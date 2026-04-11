@@ -6,16 +6,16 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "ContactPage",
+  "@@context": "https://schema.org",
+  "@@type": "ContactPage",
   "name": "Contact Us — Neem Karoli Baba Foundation Worldwide",
   "url": "{{ route('contact') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
-    "@type": "BreadcrumbList",
+    "@@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-      { "@type": "ListItem", "position": 2, "name": "Contact", "item": "{{ route('contact') }}" }
+      { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@@type": "ListItem", "position": 2, "name": "Contact", "item": "{{ route('contact') }}" }
     ]
   }
 }

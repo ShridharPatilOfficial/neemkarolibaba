@@ -6,12 +6,12 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
+  "@@context": "https://schema.org",
+  "@@type": "WebSite",
   "name": "Neem Karoli Baba Foundation Worldwide",
   "url": "{{ url('/') }}",
   "potentialAction": {
-    "@type": "SearchAction",
+    "@@type": "SearchAction",
     "target": "{{ url('/') }}?s={search_term_string}",
     "query-input": "required name=search_term_string"
   }

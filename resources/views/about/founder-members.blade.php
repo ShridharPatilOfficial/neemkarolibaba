@@ -6,17 +6,17 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
+  "@@context": "https://schema.org",
+  "@@type": "WebPage",
   "name": "Founder Members — Neem Karoli Baba Foundation Worldwide",
   "url": "{{ route('about.founders') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
-    "@type": "BreadcrumbList",
+    "@@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
-      { "@type": "ListItem", "position": 2, "name": "About", "item": "{{ route('about') }}" },
-      { "@type": "ListItem", "position": 3, "name": "Founder Members", "item": "{{ route('about.founders') }}" }
+      { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}" },
+      { "@@type": "ListItem", "position": 2, "name": "About", "item": "{{ route('about') }}" },
+      { "@@type": "ListItem", "position": 3, "name": "Founder Members", "item": "{{ route('about.founders') }}" }
     ]
   }
 }

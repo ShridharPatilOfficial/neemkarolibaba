@@ -3,7 +3,13 @@
     "allow": [
       "Bash(php artisan:*)",
       "Bash(npm install:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(cat)",
+      "Bash(bash /tmp/check_views.sh)",
+      "Bash(grep -h \"use App\\\\\\\\\\\\\\\\Models\\\\\\\\\\\\\\\\\" \"/d/FREELANCE PROJECT/neemkarolibaba/app/Http/Controllers/\"*.php \"/d/FREELANCE PROJECT/neemkarolibaba/app/Http/Controllers/Admin/\"*.php)",
+      "Bash(grep \"use App.Models\" \"/d/FREELANCE PROJECT/neemkarolibaba/app/Http/Controllers\"/*.php \"/d/FREELANCE PROJECT/neemkarolibaba/app/Http/Controllers/Admin\"/*.php)",
+      "Bash(php -l \"/d/FREELANCE PROJECT/neemkarolibaba/routes/web.php\")",
+      "Bash(php -l \"/d/FREELANCE PROJECT/neemkarolibaba/bootstrap/app.php\")"
     ]
   }
 }
