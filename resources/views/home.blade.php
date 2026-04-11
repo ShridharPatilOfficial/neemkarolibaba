@@ -445,76 +445,74 @@
                  onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 24px 60px rgba(0,0,0,.45)'"
                  onmouseout="this.style.transform='';this.style.boxShadow='0 16px 48px rgba(0,0,0,.35)'">
 
-                {{-- Profile header strip --}}
-                <div class="flex items-center gap-4 p-5"
-                     style="background:linear-gradient(135deg,rgba(249,115,22,.18),rgba(124,58,237,.15));
-                            border-bottom:1px solid rgba(249,115,22,.15);">
-                    {{-- Photo --}}
-                    <div class="relative flex-shrink-0">
+                {{-- Card body: 1/3 photo | 2/3 message --}}
+                <div style="display:flex;flex:1;">
+
+                    {{-- LEFT — 1/3 photo panel --}}
+                    <div style="width:33.333%;flex-shrink:0;position:relative;overflow:hidden;
+                                background:linear-gradient(180deg,#F97316,#ea580c);
+                                display:flex;flex-direction:column;align-items:center;
+                                justify-content:flex-end;padding:1.25rem .75rem 1rem;
+                                text-align:center;min-height:220px;">
+                        {{-- Photo --}}
                         @if($pm->photo_url)
                         <img src="{{ str_starts_with($pm->photo_url,'http') ? $pm->photo_url : asset('storage/'.$pm->photo_url) }}"
                              alt="{{ $pm->president_name }}"
-                             style="width:64px;height:64px;border-radius:50%;object-fit:cover;
-                                    border:3px solid rgba(249,115,22,.6);
-                                    box-shadow:0 0 16px rgba(249,115,22,.3);">
+                             style="width:100%;height:100%;object-fit:cover;object-position:top center;
+                                    position:absolute;inset:0;display:block;opacity:.85;">
                         @else
-                        <div style="width:64px;height:64px;border-radius:50%;
-                                    background:rgba(249,115,22,.2);border:3px solid rgba(249,115,22,.4);
-                                    display:flex;align-items:center;justify-content:center;">
-                            <i class="fas fa-user" style="color:rgba(249,115,22,.6);font-size:1.4rem;"></i>
+                        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                            <i class="fas fa-user" style="color:rgba(255,255,255,.4);font-size:3rem;"></i>
                         </div>
                         @endif
-                        <span style="position:absolute;bottom:2px;right:2px;width:12px;height:12px;
-                                     border-radius:50%;background:#22c55e;border:2px solid #150D35;"></span>
-                    </div>
-                    {{-- Name & title --}}
-                    <div class="flex-1 min-w-0">
-                        <h3 style="font-weight:800;color:#fff;font-size:.95rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                            {{ $pm->president_name }}
-                        </h3>
-                        <p style="color:#F97316;font-size:.68rem;font-weight:600;margin-top:.15rem;line-height:1.35;">
-                            {{ $pm->president_title }}
-                        </p>
-                    </div>
-                </div>
-
-                {{-- Letter body --}}
-                <div class="flex-1 p-5" style="position:relative;">
-                    {{-- Large quote mark --}}
-                    <div style="position:absolute;top:.5rem;left:.75rem;
-                                font-size:5rem;color:rgba(249,115,22,.08);
-                                font-family:Georgia,serif;line-height:1;pointer-events:none;">&ldquo;</div>
-
-                    <p style="color:rgba(255,255,255,.8);font-size:.8rem;line-height:1.75;
-                               font-style:italic;white-space:pre-line;position:relative;z-index:1;
-                               display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden;">
-                        {{ $pm->message }}
-                    </p>
-                </div>
-
-                {{-- Footer strip --}}
-                <div class="px-5 py-4"
-                     style="border-top:1px solid rgba(249,115,22,.12);
-                            display:flex;align-items:center;justify-content:space-between;gap:.75rem;">
-
-                    {{-- Signature or name --}}
-                    <div>
-                        @if($pm->signature_url)
-                        <img src="{{ str_starts_with($pm->signature_url,'http') ? $pm->signature_url : asset('storage/'.$pm->signature_url) }}"
-                             alt="Signature" style="height:32px;object-fit:contain;filter:invert(1) opacity(.7);">
-                        @else
-                        <span style="color:rgba(255,255,255,.4);font-size:.72rem;font-style:italic;">
-                            {{ $pm->president_name }}
-                        </span>
-                        @endif
+                        {{-- Gradient overlay so text is readable --}}
+                        <div style="position:absolute;inset:0;
+                                    background:linear-gradient(0deg,rgba(12,9,32,.9) 0%,rgba(12,9,32,.3) 50%,transparent 100%);"></div>
+                        {{-- Name & title over photo --}}
+                        <div style="position:relative;z-index:1;">
+                            <h3 style="font-weight:800;color:#fff;font-size:.8rem;line-height:1.25;">
+                                {{ $pm->president_name }}
+                            </h3>
+                            <p style="color:#F97316;font-size:.62rem;font-weight:600;margin-top:.2rem;line-height:1.3;">
+                                {{ $pm->president_title }}
+                            </p>
+                        </div>
                     </div>
 
-                    {{-- Jai Ram Ji Ki --}}
-                    <div style="display:flex;align-items:center;gap:.4rem;flex-shrink:0;">
-                        <div style="height:1px;width:24px;background:rgba(249,115,22,.35);"></div>
-                        <span style="color:#F97316;font-size:.65rem;font-weight:700;font-style:italic;white-space:nowrap;">
-                            Jai Ram Ji Ki
-                        </span>
+                    {{-- RIGHT — 2/3 message panel --}}
+                    <div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+
+                        {{-- Message body --}}
+                        <div style="flex:1;padding:1.1rem 1rem .75rem;position:relative;">
+                            <div style="position:absolute;top:.3rem;left:.6rem;
+                                        font-size:4.5rem;color:rgba(249,115,22,.07);
+                                        font-family:Georgia,serif;line-height:1;pointer-events:none;">&ldquo;</div>
+                            <p style="color:rgba(255,255,255,.82);font-size:.76rem;line-height:1.75;
+                                       font-style:italic;white-space:pre-line;position:relative;z-index:1;
+                                       display:-webkit-box;-webkit-line-clamp:8;-webkit-box-orient:vertical;overflow:hidden;">
+                                {{ $pm->message }}
+                            </p>
+                        </div>
+
+                        {{-- Footer --}}
+                        <div style="padding:.65rem 1rem;border-top:1px solid rgba(249,115,22,.12);
+                                    display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
+                            @if($pm->signature_url)
+                            <img src="{{ str_starts_with($pm->signature_url,'http') ? $pm->signature_url : asset('storage/'.$pm->signature_url) }}"
+                                 alt="Signature" style="height:28px;object-fit:contain;filter:invert(1) opacity(.6);">
+                            @else
+                            <span style="color:rgba(255,255,255,.35);font-size:.65rem;font-style:italic;">
+                                {{ $pm->president_name }}
+                            </span>
+                            @endif
+                            <div style="display:flex;align-items:center;gap:.35rem;flex-shrink:0;">
+                                <div style="height:1px;width:18px;background:rgba(249,115,22,.35);"></div>
+                                <span style="color:#F97316;font-size:.6rem;font-weight:700;font-style:italic;white-space:nowrap;">
+                                    Jai Ram Ji Ki
+                                </span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
