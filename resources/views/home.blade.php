@@ -151,7 +151,7 @@
             <span class="sec-eyebrow">Who We Are</span>
             <h2 class="sec-h2 mt-2">Our Core <span class="hl">Principles</span></h2>
             <p class="sec-sub max-w-xl mx-auto mt-3">
-                Guided by Maharaj-ji's timeless wisdom — we serve with purpose, vision, and unwavering dedication.
+                Illuminated by Maharaj-ji's timeless grace, we walk a path of purposeful service, bound by vision and steadfast dedication.
             </p>
         </div>
 
