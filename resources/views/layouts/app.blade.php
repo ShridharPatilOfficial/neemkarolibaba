@@ -93,78 +93,165 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
     @stack('styles')
 </head>
 <body class="font-sans antialiased bg-white text-gray-800 overflow-x-hidden">
 
-{{-- ─── Top Info Bar ─────────────────────────────────────────────── --}}
-<div class="bg-purple-950 text-purple-200 text-xs py-2 px-4 hidden md:block">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        <div class="flex items-center gap-5">
-            <a href="mailto:{{ \App\Models\SiteSetting::get('email', 'info@nkbfoundation.org') }}"
-               class="flex items-center gap-1.5 hover:text-orange-400 transition">
-                <i class="fas fa-envelope text-orange-400"></i>
-                {{ \App\Models\SiteSetting::get('email', 'info@nkbfoundation.org') }}
-            </a>
-            <a href="tel:{{ \App\Models\SiteSetting::get('phone', '+919876543210') }}"
-               class="flex items-center gap-1.5 hover:text-orange-400 transition">
-                <i class="fas fa-phone text-orange-400"></i>
-                {{ \App\Models\SiteSetting::get('phone', '+91 98765 43210') }}
-            </a>
-        </div>
-        <div class="flex items-center gap-3">
-            <span class="text-purple-400">|</span>
-            <span class="text-purple-300">Reg. No: {{ \App\Models\SiteSetting::get('reg_no', 'XXXXXX/2024') }}</span>
-            <span class="text-purple-400">|</span>
-            @foreach(['facebook','instagram','youtube'] as $social)
-            @php $url = \App\Models\SiteSetting::get($social, '#'); @endphp
-            <a href="{{ $url }}" target="_blank" rel="noopener"
-               class="w-6 h-6 rounded-full bg-purple-800 hover:bg-orange-500 flex items-center justify-center transition">
-                <i class="fab fa-{{ $social }} text-[10px]"></i>
-            </a>
-            @endforeach
+{{-- ═══ UNIFIED SITE HEADER ═══════════════════════════════════════ --}}
+<div id="site-header">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="sh-inner">
+
+            {{-- Photo card --}}
+            @if($headerPhoto)
+            <div id="header-photo-wrap" class="sh-photo">
+                <img id="header-photo" src="{{ $headerPhoto }}" alt="{{ $siteName }}">
+            </div>
+            @else
+            <div class="sh-logo-wrap">
+                <img src="{{ asset('favicon.svg') }}" alt="NKB Logo">
+            </div>
+            @endif
+
+            {{-- Trust info --}}
+            <div class="sh-info">
+                <h1 class="sh-name">{{ $siteName }}</h1>
+                <p class="sh-tag">
+                    <i class="fas fa-shield-halved" style="font-size:.55rem;"></i>
+                    {{ $siteTagline }}
+                </p>
+                <div class="sh-contacts hidden md:flex">
+                    <a href="mailto:{{ \App\Models\SiteSetting::get('email','') }}">
+                        <i class="fas fa-envelope"></i>
+                        {{ \App\Models\SiteSetting::get('email','support@neemkarolibaba.org.in') }}
+                    </a>
+                    <a href="tel:{{ \App\Models\SiteSetting::get('phone','') }}">
+                        <i class="fas fa-phone"></i>
+                        {{ \App\Models\SiteSetting::get('phone','+91 94644 33808') }}
+                    </a>
+                    <span>Reg: {{ \App\Models\SiteSetting::get('reg_no','') }}</span>
+                </div>
+            </div>
+
+            {{-- Actions --}}
+            <div class="sh-actions">
+                <div class="sh-socials">
+                    @foreach(['facebook','instagram','youtube'] as $sn)
+                    @php $surl = \App\Models\SiteSetting::get($sn, '#'); @endphp
+                    <a href="{{ $surl }}" target="_blank" rel="noopener" class="sh-si">
+                        <i class="fab fa-{{ $sn }}"></i>
+                    </a>
+                    @endforeach
+                </div>
+                <div class="sh-donate-wrap">
+                    <a href="{{ route('donate') }}#payment-section" class="donate-btn">
+                        <i class="fas fa-heart btn-heart"></i> DONATE US
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
 
-{{-- ─── Main Header ──────────────────────────────────────────────── --}}
-<header id="main-header" class="bg-yellow-400 px-4 shadow-sm" style="padding-top:0.5rem;padding-bottom:0.5rem;">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-stretch gap-4">
+{{-- ═══ NAVIGATION ════════════════════════════════════════════════ --}}
+<nav id="main-nav">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="nav-inner">
 
-            {{-- Header photo: sits to the left of the trust name, spans full header height --}}
-            @if($headerPhoto)
-            <div id="header-photo-wrap"
-                 style="width:180px;flex-shrink:0;overflow:hidden;
-                        margin-top:-0.5rem;margin-bottom:-0.5rem;
-                        box-shadow:4px 0 20px rgba(76,29,149,.45);
-                        border-right:3px solid #f59e0b;
-                        border-radius:0 8px 8px 0;">
-                <img id="header-photo" src="{{ $headerPhoto }}" alt="{{ $siteName }}"
-                     style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
-            </div>
-            @else
-            <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo"
-                 class="w-14 h-14 rounded-full shadow-md flex-shrink-0 self-center">
-            @endif
+            {{-- NKB monogram --}}
+            <a href="{{ route('home') }}" class="nav-brand">
+                <span class="nav-brand-chip">NKB</span>
+            </a>
 
-            <div class="flex flex-col justify-center">
-                <h1 class="text-purple-900 font-extrabold text-lg md:text-xl leading-tight">
-                    {{ $siteName }}
-                </h1>
-                <p class="text-purple-700 text-xs font-semibold flex items-center gap-1">
-                    <i class="fas fa-shield-halved"></i>
-                    {{ $siteTagline }}
-                </p>
-            </div>
+            {{-- Desktop links --}}
+            <ul class="nav-links-desktop hidden lg:flex">
+                <li>
+                    <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
+                </li>
+                <li class="nav-dd">
+                    <button class="nav-link {{ request()->routeIs('about*') ? 'active' : '' }}">
+                        About Us <i class="fas fa-chevron-down" style="font-size:.6rem;margin-left:.2rem;"></i>
+                    </button>
+                    <div class="nav-dd-menu">
+                        <a href="{{ route('about.founders') }}" class="nav-dd-item">Founder Member</a>
+                        <a href="{{ route('about.org-profile') }}" class="nav-dd-item">Organisation Profile</a>
+                        <a href="{{ route('about.documents') }}" class="nav-dd-item">Document Gallery</a>
+                    </div>
+                </li>
+                <li class="nav-dd">
+                    <button class="nav-link {{ request()->routeIs('gallery','media-coverage') ? 'active' : '' }}">
+                        Media <i class="fas fa-chevron-down" style="font-size:.6rem;margin-left:.2rem;"></i>
+                    </button>
+                    <div class="nav-dd-menu">
+                        <a href="{{ route('gallery') }}" class="nav-dd-item">Photo &amp; Video Gallery</a>
+                        <a href="{{ route('media-coverage') }}" class="nav-dd-item">Media Coverage</a>
+                    </div>
+                </li>
+                @foreach([
+                    ['Our Activities','activities','activities'],
+                    ['Events','events','events'],
+                    ['Future Plan','future-plan','future-plan'],
+                    ['Join Us','join-us','join-us'],
+                    ['Contact Us','contact','contact'],
+                ] as [$lbl,$rt,$mt])
+                <li>
+                    <a href="{{ route($rt) }}" class="nav-link {{ request()->routeIs($mt) ? 'active' : '' }}">{{ $lbl }}</a>
+                </li>
+                @endforeach
+                <li>
+                    <a href="{{ route('donate') }}#payment-section" class="nav-donate-pill">Donate Us</a>
+                </li>
+            </ul>
+
+            {{-- Mobile toggle --}}
+            <button id="nav-toggle" class="nav-mobile-btn lg:hidden" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
         </div>
-        <a href="{{ route('donate') }}#payment-section" class="donate-btn" style="padding:10px 24px;border-radius:12px;font-size:.85rem;display:inline-flex;align-items:center;gap:8px;flex-shrink:0;">
-            <i class="fas fa-heart btn-heart"></i>
-            DONATE US
-        </a>
+
+        {{-- Mobile menu --}}
+        <div id="mobile-menu" class="nav-mobile-menu hidden lg:hidden">
+            <a href="{{ route('home') }}" class="nav-mob-item">
+                <i class="fas fa-home text-orange-400 w-4"></i> Home
+            </a>
+            <p class="nav-mob-section">About Us</p>
+            <a href="{{ route('about.founders') }}" class="nav-mob-item">
+                <i class="fas fa-users text-orange-400 w-4"></i> Founder Member
+            </a>
+            <a href="{{ route('about.org-profile') }}" class="nav-mob-item">
+                <i class="fas fa-building text-orange-400 w-4"></i> Organisation Profile
+            </a>
+            <a href="{{ route('about.documents') }}" class="nav-mob-item">
+                <i class="fas fa-file text-orange-400 w-4"></i> Document Gallery
+            </a>
+            <p class="nav-mob-section">Media</p>
+            <a href="{{ route('gallery') }}" class="nav-mob-item">
+                <i class="fas fa-images text-orange-400 w-4"></i> Gallery
+            </a>
+            <a href="{{ route('media-coverage') }}" class="nav-mob-item">
+                <i class="fas fa-newspaper text-orange-400 w-4"></i> Media Coverage
+            </a>
+            <p class="nav-mob-section">Pages</p>
+            @foreach([
+                ['Our Activities','activities','fa-hands-helping'],
+                ['Events','events','fa-calendar-days'],
+                ['Future Plan','future-plan','fa-rocket'],
+                ['Join Us','join-us','fa-user-plus'],
+                ['Contact Us','contact','fa-envelope'],
+                ['Donate Us','donate','fa-heart'],
+            ] as [$lbl,$rt,$ic])
+            @php $mhref = $rt==='donate' ? route('donate').'#payment-section' : route($rt); @endphp
+            <a href="{{ $mhref }}" class="nav-mob-item">
+                <i class="fas {{ $ic }} text-orange-400 w-4"></i> {{ $lbl }}
+            </a>
+            @endforeach
+        </div>
     </div>
-</header>
+</nav>
 
 {{-- ─── Navigation ──────────────────────────────────────────────── --}}
 <nav id="main-nav" class="bg-purple-900 sticky top-0 z-50 transition-shadow duration-300">
