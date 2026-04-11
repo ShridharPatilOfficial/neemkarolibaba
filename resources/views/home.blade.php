@@ -458,8 +458,8 @@
                         @if($pm->photo_url)
                         <img src="{{ str_starts_with($pm->photo_url,'http') ? $pm->photo_url : asset('storage/'.$pm->photo_url) }}"
                              alt="{{ $pm->president_name }}"
-                             style="width:100%;height:100%;object-fit:cover;object-position:top center;
-                                    position:absolute;inset:0;display:block;opacity:.85;">
+                             style="width:100%;height:100%;object-fit:contain;object-position:center top;
+                                    position:absolute;inset:0;display:block;opacity:.92;padding:.5rem .25rem 0;">
                         @else
                         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
                             <i class="fas fa-user" style="color:rgba(255,255,255,.4);font-size:3rem;"></i>
