@@ -145,7 +145,7 @@
         </div>
         <a href="{{ route('donate') }}#payment-section" class="donate-btn" style="padding:10px 24px;border-radius:12px;font-size:.85rem;display:inline-flex;align-items:center;gap:8px;flex-shrink:0;">
             <i class="fas fa-heart btn-heart"></i>
-            Donate Now
+            DONATE US
         </a>
     </div>
 </header>
@@ -402,7 +402,7 @@
         <span class="fd-icon-wrap">
             <i class="fas fa-hands-holding-heart fd-icon-fa"></i>
         </span>
-        <span class="fd-label">DONATE</span>
+        <span class="fd-label">DONATE US</span>
         <span class="fd-shine"></span>
     </a>
 </div>
