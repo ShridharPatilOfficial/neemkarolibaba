@@ -397,7 +397,7 @@
         <span class="fd-icon-wrap">
             <i class="fas fa-hands-holding-heart fd-icon-fa"></i>
         </span>
-        <span class="fd-label">DONATE</span>
+        <span class="fd-label">DONATE US</span>
         <span class="fd-shine"></span>
     </a>
 </div>
