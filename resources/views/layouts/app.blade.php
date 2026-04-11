@@ -42,10 +42,11 @@
     <meta name="twitter:description" content="{{ $metaDesc }}">
     <meta name="twitter:image"       content="{{ $metaImg }}">
 
-    {{-- Favicon --}}
-    <link rel="icon"             href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-    <link rel="shortcut icon"    href="{{ asset('favicon.svg') }}">
-    <link rel="apple-touch-icon" href="{{ asset('favicon.svg') }}">
+    {{-- Favicon — use Maharaj-ji header photo if uploaded, else fallback --}}
+    @php $faviconUrl = $headerPhoto ?? asset('favicon.svg'); @endphp
+    <link rel="icon"             href="{{ $faviconUrl }}" type="image/jpeg">
+    <link rel="shortcut icon"    href="{{ $faviconUrl }}">
+    <link rel="apple-touch-icon" href="{{ $faviconUrl }}">
 
     {{-- Organisation JSON-LD (global) --}}
     @php
@@ -63,7 +64,7 @@
       "name": "{{ $siteName }}",
       "alternateName": "NKB Foundation",
       "url": "{{ config('app.url') }}",
-      "logo": "{{ asset('favicon.svg') }}",
+      "logo": "{{ $headerPhoto ?? asset('favicon.svg') }}",
       "description": "A registered non-profit organisation inspired by the teachings of Neem Karoli Baba (Maharaj-ji), dedicated to education, healthcare and community service.",
       "foundingDate": "2020",
       "areaServed": "IN",
@@ -111,7 +112,7 @@
             </div>
             @else
             <div class="sh-logo-wrap">
-                <img src="{{ asset('favicon.svg') }}" alt="NKB Logo">
+                <span style="font-size:2.5rem;color:#F97316;font-family:serif;">ॐ</span>
             </div>
             @endif
 
@@ -280,7 +281,10 @@
         {{-- Top brand row --}}
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-10 pb-10 border-b border-gray-800">
             <div class="flex items-center gap-4">
-                <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-16 h-16 rounded-xl shadow-lg flex-shrink-0">
+                @if($headerPhoto)
+                <img src="{{ $headerPhoto }}" alt="{{ $siteName }}"
+                     class="w-16 h-16 rounded-xl shadow-lg flex-shrink-0 object-cover object-top">
+                @endif
                 <div>
                     <p class="font-bold text-lg leading-tight">{{ $siteName }}</p>
                     <p class="text-gray-400 text-sm italic">"Love All, Serve All"</p>
