@@ -19,13 +19,13 @@ class HomeController extends Controller
     public function index()
     {
         $settings = [
-            'site_name' => SiteSetting::get('site_name', 'Neem Karoli Baba Foundation Worldwide'),
+            'site_name' => SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust'),
             'reg_no'    => SiteSetting::get('reg_no', 'IN-CH44392214903842V'),
             'email'     => SiteSetting::get('email', 'support@neemkarolibaba.org.in'),
             'phone'     => SiteSetting::get('phone', '+91 94644 33808'),
             'whatsapp'  => SiteSetting::get('whatsapp', '919464433808'),
             'address'   => SiteSetting::get('address', 'Chandigarh - 160002'),
-            'ticker'    => SiteSetting::get('ticker', 'All donations are eligible for tax exemption as we are a 12A and 80G CSR registered organization. Donate to Neem Karoli Baba Foundation Worldwide today!'),
+            'ticker'    => SiteSetting::get('ticker', 'All donations are eligible for tax exemption as we are a 12A and 80G CSR registered organization. Donate to Neem Karoli Baba Charitable Trust today!'),
             'mission'   => SiteSetting::get('mission', ''),
             'vision'    => SiteSetting::get('vision', ''),
             'objectives'=> SiteSetting::get('objectives', ''),

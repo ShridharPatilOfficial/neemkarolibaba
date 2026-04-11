@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Future Plans — Neem Karoli Baba Foundation Worldwide')
-@section('meta_desc', 'Discover the vision and future plans of Neem Karoli Baba Foundation Worldwide — expanding schools, hospitals, ashrams, and seva programs to serve more communities in India.')
+@section('title', 'Future Plans — Neem Karoli Baba Charitable Trust')
+@section('meta_desc', 'Discover the vision and future plans of Neem Karoli Baba Charitable Trust — expanding schools, hospitals, ashrams, and seva programs to serve more communities in India.')
 @section('meta_keywords', 'NKB Foundation future plans, NGO vision India, NKB Foundation expansion, Neem Karoli Baba mission, seva projects India, charitable vision')
 @section('canonical', route('future-plan'))
 @push('schema')
@@ -8,7 +8,7 @@
 {
   "@@context": "https://schema.org",
   "@@type": "WebPage",
-  "name": "Future Plans — Neem Karoli Baba Foundation Worldwide",
+  "name": "Future Plans — Neem Karoli Baba Charitable Trust",
   "url": "{{ route('future-plan') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
@@ -26,7 +26,7 @@
 <div class="page-banner py-20 px-4 text-white relative">
     <div class="relative z-10 max-w-4xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Future Plan</h1>
-        <p class="text-purple-200">Neem Karoli Baba Foundation Worldwide</p>
+        <p class="text-purple-200">Neem Karoli Baba Charitable Trust</p>
         <nav class="flex mt-3 text-sm">
             <a href="{{ route('home') }}" class="text-orange-400 hover:underline">Home</a>
             <span class="mx-2 text-gray-400">/</span>

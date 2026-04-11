@@ -6,20 +6,20 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @php
         $metaTitle = trim(strip_tags(\Illuminate\Support\Str::limit(
-            $__env->yieldContent('title') ?: 'Neem Karoli Baba Foundation Worldwide', 60
+            $__env->yieldContent('title') ?: 'Neem Karoli Baba Charitable Trust', 60
         )));
         $metaDesc  = trim(strip_tags(
-            $__env->yieldContent('meta_desc') ?: 'Neem Karoli Baba Foundation Worldwide – serving humanity through education, healthcare & community welfare inspired by Neem Karoli Baba (Maharaj-ji). 12A & 80G registered NGO in India.'
+            $__env->yieldContent('meta_desc') ?: 'Neem Karoli Baba Charitable Trust – serving humanity through education, healthcare & community welfare inspired by Neem Karoli Baba (Maharaj-ji). 12A & 80G registered NGO in India.'
         ));
         $metaImg   = $__env->yieldContent('og_image') ?: asset('images/og-default.jpg');
         $canonical = $__env->yieldContent('canonical') ?: url()->current();
-        $siteName  = \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Foundation Worldwide');
+        $siteName  = \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust');
     @endphp
 
     {{-- Primary --}}
     <title>{{ $metaTitle }}</title>
     <meta name="description"  content="{{ $metaDesc }}">
-    <meta name="keywords"     content="@yield('meta_keywords', 'Neem Karoli Baba Foundation, NKB Foundation, NGO India, Maharaj-ji, charity, donate India, 80G registered')">
+    <meta name="keywords"     content="@yield('meta_keywords', 'Neem Karoli Baba Charitable Trust, NKB Foundation, NGO India, Maharaj-ji, charity, donate India, 80G registered')">
     <meta name="author"       content="{{ $siteName }}">
     <meta name="robots"       content="@yield('robots', 'index, follow')">
     <meta name="theme-color"  content="#4C1D95">
@@ -135,7 +135,7 @@
             <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
             <div>
                 <h1 class="text-purple-900 font-extrabold text-lg md:text-xl leading-tight">
-                    {{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Foundation Worldwide') }}
+                    {{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust') }}
                 </h1>
                 <p class="text-purple-700 text-xs font-semibold flex items-center gap-1">
                     <i class="fas fa-shield-halved"></i>
@@ -249,7 +249,7 @@
     <div class="ticker-wrap">
         <div class="ticker-content font-medium">
             <i class="fas fa-bullhorn text-yellow-300 mr-3"></i>
-            {{ \App\Models\SiteSetting::get('ticker_text', 'All donations are eligible for tax exemption — 12A & 80G CSR Registered Organisation. Support Neem Karoli Baba Foundation Worldwide today!') }}
+            {{ \App\Models\SiteSetting::get('ticker_text', 'All donations are eligible for tax exemption — 12A & 80G CSR Registered Organisation. Support Neem Karoli Baba Charitable Trust today!') }}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <i class="fas fa-hand-holding-heart text-yellow-300 mr-3"></i>
             {{ \App\Models\SiteSetting::get('ticker_text', 'Love All, Serve All — Join us in our mission of compassion and service') }}
@@ -272,7 +272,7 @@
             <div class="flex items-center gap-4">
                 <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-16 h-16 rounded-xl shadow-lg flex-shrink-0">
                 <div>
-                    <p class="font-bold text-lg leading-tight">{{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Foundation') }}</p>
+                    <p class="font-bold text-lg leading-tight">{{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust') }}</p>
                     <p class="text-gray-400 text-sm italic">"Love All, Serve All"</p>
                 </div>
             </div>
@@ -383,7 +383,7 @@
 
         {{-- Bottom bar --}}
         <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-            <p>&copy; {{ date('Y') }} {{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Foundation Worldwide') }}. All Rights Reserved.</p>
+            <p>&copy; {{ date('Y') }} {{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust') }}. All Rights Reserved.</p>
             <p class="flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
                 12A &amp; 80G Registered &nbsp;|&nbsp; Reg. No: {{ \App\Models\SiteSetting::get('reg_no', 'XXXXXX/2024') }}

@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('title', 'Neem Karoli Baba Foundation Worldwide — Love All, Serve All')
-@section('meta_desc', 'Neem Karoli Baba Foundation Worldwide is a 12A & 80G registered NGO dedicated to feeding the hungry, educating children, and providing healthcare — inspired by the teachings of Maharaj-ji.')
-@section('meta_keywords', 'Neem Karoli Baba Foundation, NKB Foundation, NGO India, Maharaj-ji, donate India, 80G charity, food distribution, free education, healthcare NGO, Chandigarh NGO')
+@section('title', 'Neem Karoli Baba Charitable Trust — Love All, Serve All')
+@section('meta_desc', 'Neem Karoli Baba Charitable Trust is a 12A & 80G registered NGO dedicated to feeding the hungry, educating children, and providing healthcare — inspired by the teachings of Maharaj-ji.')
+@section('meta_keywords', 'Neem Karoli Baba Charitable Trust, NKB Foundation, NGO India, Maharaj-ji, donate India, 80G charity, food distribution, free education, healthcare NGO, Chandigarh NGO')
 @section('canonical', url('/'))
 @push('schema')
 <script type="application/ld+json">
 {
   "@@context": "https://schema.org",
   "@@type": "WebSite",
-  "name": "Neem Karoli Baba Foundation Worldwide",
+  "name": "Neem Karoli Baba Charitable Trust",
   "url": "{{ url('/') }}",
   "potentialAction": {
     "@@type": "SearchAction",
@@ -88,7 +88,7 @@
                         <div class="hero-text-in mb-4">
                             <span class="inline-flex items-center gap-2 bg-orange-600/25 border border-orange-400/50 text-orange-300 text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-sm tracking-wide">
                                 <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span>
-                                Neem Karoli Baba Foundation Worldwide
+                                Neem Karoli Baba Charitable Trust
                             </span>
                         </div>
 
@@ -236,7 +236,7 @@
             </div>
 
             <p class="text-gray-600 leading-relaxed mb-6 text-sm">
-                {{ $settings['about_text'] ?? 'The Neem Karoli Baba Foundation is a registered non-profit inspired by the life and teachings of the revered saint Neem Karoli Baba. Rooted in the values of selfless service and unconditional love, we work across North India to uplift communities through healthcare, education, and humanitarian aid.' }}
+                {{ $settings['about_text'] ?? 'The Neem Karoli Baba Charitable Trust is a registered non-profit inspired by the life and teachings of the revered saint Neem Karoli Baba. Rooted in the values of selfless service and unconditional love, we work across North India to uplift communities through healthcare, education, and humanitarian aid.' }}
             </p>
 
             <div class="grid grid-cols-2 gap-3 mb-7">
