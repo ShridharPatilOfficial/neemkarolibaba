@@ -13,12 +13,16 @@
     @endphp
     <div class="rounded-xl overflow-hidden shadow-lg">
         @if($imgSrc && $ytId)
-            <img src="{{ $imgSrc }}" alt="{{ $item->heading }}" class="w-full h-64 object-cover mb-4 rounded-xl">
+            <img src="{{ $imgSrc }}" alt="{{ $item->heading }}"
+                 class="w-full h-64 object-cover mb-4 rounded-xl cursor-zoom-in"
+                 onclick="imgLb(this)" data-full="{{ $imgSrc }}" data-caption="{{ $item->heading }}">
             <div class="relative" style="padding-top:56.25%">
                 <iframe src="https://www.youtube.com/embed/{{ $ytId }}" class="absolute inset-0 w-full h-full rounded-xl" frameborder="0" allowfullscreen></iframe>
             </div>
         @elseif($imgSrc)
-            <img src="{{ $imgSrc }}" alt="{{ $item->heading }}" class="w-full h-72 object-cover rounded-xl">
+            <img src="{{ $imgSrc }}" alt="{{ $item->heading }}"
+                 class="w-full h-72 object-cover rounded-xl cursor-zoom-in"
+                 onclick="imgLb(this)" data-full="{{ $imgSrc }}" data-caption="{{ $item->heading }}">
         @elseif($ytId)
             <div class="relative rounded-xl overflow-hidden" style="padding-top:56.25%">
                 <iframe src="https://www.youtube.com/embed/{{ $ytId }}" class="absolute inset-0 w-full h-full" frameborder="0" allowfullscreen></iframe>
@@ -37,12 +41,16 @@
     @endphp
     <div class="rounded-xl overflow-hidden shadow-lg">
         @if($imgSrc && $ytId)
-            <img src="{{ $imgSrc }}" alt="{{ $item->heading }}" class="w-full h-64 object-cover mb-4 rounded-xl">
+            <img src="{{ $imgSrc }}" alt="{{ $item->heading }}"
+                 class="w-full h-64 object-cover mb-4 rounded-xl cursor-zoom-in"
+                 onclick="imgLb(this)" data-full="{{ $imgSrc }}" data-caption="{{ $item->heading }}">
             <div class="relative" style="padding-top:56.25%">
                 <iframe src="https://www.youtube.com/embed/{{ $ytId }}" class="absolute inset-0 w-full h-full rounded-xl" frameborder="0" allowfullscreen></iframe>
             </div>
         @elseif($imgSrc)
-            <img src="{{ $imgSrc }}" alt="{{ $item->heading }}" class="w-full h-72 object-cover rounded-xl">
+            <img src="{{ $imgSrc }}" alt="{{ $item->heading }}"
+                 class="w-full h-72 object-cover rounded-xl cursor-zoom-in"
+                 onclick="imgLb(this)" data-full="{{ $imgSrc }}" data-caption="{{ $item->heading }}">
         @elseif($ytId)
             <div class="relative rounded-xl overflow-hidden" style="padding-top:56.25%">
                 <iframe src="https://www.youtube.com/embed/{{ $ytId }}" class="absolute inset-0 w-full h-full" frameborder="0" allowfullscreen></iframe>

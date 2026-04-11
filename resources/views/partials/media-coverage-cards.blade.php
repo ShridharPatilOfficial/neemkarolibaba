@@ -13,7 +13,11 @@
     {{-- Thumbnail --}}
     <div class="relative overflow-hidden h-48 bg-gray-100">
         <img src="{{ $img }}" alt="{{ $c->title }}"
-             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-zoom-in"
+             onclick="imgLb(this)"
+             data-full="{{ $img }}"
+             data-caption="{{ $c->title }}"
+             style="cursor:zoom-in;">
         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
 
         {{-- Category badge top-left --}}

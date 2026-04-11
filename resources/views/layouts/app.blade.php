@@ -476,5 +476,78 @@
     reveals.forEach(el => observer.observe(el));
 </script>
 @stack('scripts')
+
+{{-- ══════════════════════════════════════════════════════════════
+     UNIVERSAL IMAGE LIGHTBOX — works on every page
+     Usage: <img onclick="imgLb(this)" data-full="URL" data-caption="Title">
+     or just: imgLb(src, caption)
+════════════════════════════════════════════════════════════════ --}}
+<div id="imgLbOverlay"
+     style="display:none;position:fixed;inset:0;z-index:99999;
+            background:rgba(0,0,0,.94);backdrop-filter:blur(10px);
+            cursor:zoom-out;align-items:center;justify-content:center;"
+     onclick="closeLb(event)">
+
+    {{-- Close btn --}}
+    <button onclick="closeLb()" aria-label="Close"
+            style="position:absolute;top:1rem;right:1rem;
+                   width:2.5rem;height:2.5rem;border-radius:50%;
+                   background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+                   color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;
+                   cursor:pointer;transition:background .2s;z-index:2;"
+            onmouseover="this.style.background='rgba(249,115,22,.7)'"
+            onmouseout="this.style.background='rgba(255,255,255,.12)'">
+        <i class="fas fa-times"></i>
+    </button>
+
+    {{-- Expand icon --}}
+    <a id="imgLbFull" href="#" target="_blank" rel="noopener"
+       style="position:absolute;top:1rem;right:4rem;
+              width:2.5rem;height:2.5rem;border-radius:50%;
+              background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+              color:#fff;font-size:.9rem;display:flex;align-items:center;justify-content:center;
+              transition:background .2s;z-index:2;"
+       title="Open full size"
+       onmouseover="this.style.background='rgba(249,115,22,.7)'"
+       onmouseout="this.style.background='rgba(255,255,255,.12)'">
+        <i class="fas fa-arrow-up-right-from-square"></i>
+    </a>
+
+    {{-- Image --}}
+    <div style="position:relative;max-width:92vw;max-height:88vh;display:flex;flex-direction:column;align-items:center;gap:.75rem;"
+         onclick="event.stopPropagation()">
+        <img id="imgLbImg" src="" alt=""
+             style="max-width:90vw;max-height:80vh;object-fit:contain;
+                    border-radius:12px;box-shadow:0 32px 80px rgba(0,0,0,.8);
+                    display:block;">
+        <p id="imgLbCaption"
+           style="color:rgba(255,255,255,.65);font-size:.82rem;text-align:center;max-width:600px;line-height:1.5;"></p>
+    </div>
+</div>
+<script>
+function imgLb(srcOrEl, caption) {
+    let src, cap;
+    if (typeof srcOrEl === 'string') {
+        src = srcOrEl; cap = caption || '';
+    } else {
+        src = srcOrEl.dataset.full || srcOrEl.src;
+        cap = srcOrEl.dataset.caption || srcOrEl.alt || '';
+    }
+    document.getElementById('imgLbImg').src = src;
+    document.getElementById('imgLbImg').alt = cap;
+    document.getElementById('imgLbCaption').textContent = cap;
+    document.getElementById('imgLbFull').href = src;
+    const ov = document.getElementById('imgLbOverlay');
+    ov.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function closeLb(e) {
+    if (e && e.currentTarget && e.currentTarget.id === 'imgLbOverlay' && e.target !== e.currentTarget) return;
+    document.getElementById('imgLbOverlay').style.display = 'none';
+    document.getElementById('imgLbImg').src = '';
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('imgLbOverlay').style.display = 'none'; document.body.style.overflow = ''; } });
+</script>
 </body>
 </html>
