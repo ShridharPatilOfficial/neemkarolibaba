@@ -492,8 +492,8 @@
                                 @if($pm->signature_url)
                                 <img src="{{ str_starts_with($pm->signature_url,'http') ? $pm->signature_url : asset('storage/'.$pm->signature_url) }}"
                                      alt="Signature"
-                                     style="max-height:40px;max-width:140px;width:auto;object-fit:contain;
-                                            filter:invert(1) brightness(1.1) opacity(.75);">
+                                     style="max-height:52px;max-width:160px;width:auto;object-fit:contain;
+                                            border-radius:6px;background:rgba(255,255,255,.06);padding:4px 6px;">
                                 @else
                                 {{-- Placeholder keeps the row height consistent --}}
                                 <span style="display:block;height:40px;"></span>
