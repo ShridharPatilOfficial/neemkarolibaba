@@ -494,21 +494,34 @@
                         </div>
 
                         {{-- Footer --}}
-                        <div style="padding:.65rem 1rem;border-top:1px solid rgba(249,115,22,.12);
-                                    display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
-                            @if($pm->signature_url)
-                            <img src="{{ str_starts_with($pm->signature_url,'http') ? $pm->signature_url : asset('storage/'.$pm->signature_url) }}"
-                                 alt="Signature" style="height:28px;object-fit:contain;filter:invert(1) opacity(.6);">
-                            @else
-                            <span style="color:rgba(255,255,255,.35);font-size:.65rem;font-style:italic;">
-                                {{ $pm->president_name }}
-                            </span>
-                            @endif
-                            <div style="display:flex;align-items:center;gap:.35rem;flex-shrink:0;">
-                                <div style="height:1px;width:18px;background:rgba(249,115,22,.35);"></div>
-                                <span style="color:#F97316;font-size:.6rem;font-weight:700;font-style:italic;white-space:nowrap;">
-                                    Jai Ram Ji Ki
-                                </span>
+                        <div style="padding:.75rem 1rem .8rem;border-top:1px solid rgba(249,115,22,.18);
+                                    display:flex;flex-direction:column;gap:.5rem;">
+                            {{-- Signature row (always shown) --}}
+                            <div style="min-height:40px;display:flex;align-items:center;">
+                                @if($pm->signature_url)
+                                <img src="{{ str_starts_with($pm->signature_url,'http') ? $pm->signature_url : asset('storage/'.$pm->signature_url) }}"
+                                     alt="Signature"
+                                     style="max-height:40px;max-width:140px;width:auto;object-fit:contain;
+                                            filter:invert(1) brightness(1.1) opacity(.75);">
+                                @else
+                                {{-- Placeholder keeps the row height consistent --}}
+                                <span style="display:block;height:40px;"></span>
+                                @endif
+                            </div>
+                            {{-- Name + Jai Ram Ji Ki --}}
+                            <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
+                                <div>
+                                    <p style="color:#fff;font-size:.78rem;font-weight:700;line-height:1.2;">{{ $pm->president_name }}</p>
+                                    @if($pm->president_title)
+                                    <p style="color:rgba(249,115,22,.8);font-size:.65rem;font-weight:500;margin-top:.15rem;">{{ $pm->president_title }}</p>
+                                    @endif
+                                </div>
+                                <div style="display:flex;align-items:center;gap:.35rem;flex-shrink:0;">
+                                    <div style="height:1px;width:18px;background:rgba(249,115,22,.4);"></div>
+                                    <span style="color:#F97316;font-size:.6rem;font-weight:700;font-style:italic;white-space:nowrap;">
+                                        Jai Ram Ji Ki
+                                    </span>
+                                </div>
                             </div>
                         </div>
 
