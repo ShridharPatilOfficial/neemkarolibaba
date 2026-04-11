@@ -339,7 +339,7 @@
                 <div class="act-body">
                     <span class="act-tag"><i class="fas fa-circle" style="font-size:.4rem;"></i> Activity</span>
                     <h3 class="act-title">{{ $activity->heading }}</h3>
-                    <p class="act-text line-clamp-2">{{ $activity->description }}</p>
+                    <p class="act-text">{{ $activity->description }}</p>
                 </div>
             </div>
             @endforeach
@@ -410,7 +410,7 @@
                 <div class="ev-body">
                     <p class="ev-cat">{{ $siteName }}</p>
                     <h3 class="ev-title">{{ $event->heading }}</h3>
-                    <p class="ev-desc line-clamp-2">{{ $event->description }}</p>
+                    <p class="ev-desc">{{ $event->description }}</p>
                     <a href="{{ route('events') }}"
                        class="inline-flex items-center gap-1 text-orange-600 font-semibold text-xs mt-3 hover:gap-2 transition-all">
                         Read More <i class="fas fa-arrow-right text-[9px]"></i>
@@ -664,9 +664,9 @@
                     </div>
                 </div>
                 <div class="p-5 flex flex-col flex-1">
-                    <h3 class="font-bold text-gray-900 text-sm leading-snug mb-2 line-clamp-2">{{ $cov->title }}</h3>
+                    <h3 class="font-bold text-gray-900 text-sm leading-snug mb-2">{{ $cov->title }}</h3>
                     @if($cov->description)
-                    <p class="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-4 flex-1">{{ $cov->description }}</p>
+                    <p class="text-gray-500 text-xs leading-relaxed mb-4 flex-1">{{ $cov->description }}</p>
                     @else
                     <div class="flex-1"></div>
                     @endif
