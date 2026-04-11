@@ -132,6 +132,11 @@
                         {{ \App\Models\SiteSetting::get('phone','+91 94644 33808') }}
                     </a>
                     <span>Reg: {{ \App\Models\SiteSetting::get('reg_no','') }}</span>
+                    <span style="display:flex;align-items:center;gap:.3rem;color:#F97316;font-weight:700;">
+                        <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;animation:pulse 2s infinite;flex-shrink:0;"></span>
+                        <i class="fas fa-users" style="font-size:.58rem;color:#F97316;"></i>
+                        {{ number_format($frontendVisitors) }} Visitors
+                    </span>
                 </div>
             </div>
 
