@@ -273,13 +273,13 @@
 }
 .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: #F97316; animation: pulse 2s infinite; }
 .hero-title-new {
-  font-size: clamp(2rem, 5.5vw, 4rem);
+  font-size: clamp(1.25rem, 3vw, 2rem);
   font-weight: 900;
   color: #fff;
-  line-height: 1.08;
+  line-height: 1.12;
   letter-spacing: -.02em;
   text-shadow: 0 4px 32px rgba(0,0,0,.5);
-  margin-bottom: 1.1rem;
+  margin-bottom: .75rem;
 }
 .hero-title-new em {
   font-style: normal;
@@ -290,10 +290,10 @@
 }
 .hero-sub-new {
   color: rgba(255,255,255,.72);
-  font-size: clamp(.83rem, 1.4vw, 1rem);
-  max-width: 480px;
-  line-height: 1.65;
-  margin-bottom: 2rem;
+  font-size: clamp(.7rem, 1vw, .82rem);
+  max-width: 420px;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 .hero-btns { display: flex; gap: .85rem; flex-wrap: wrap; }
 @media (max-width: 768px) { .hero-btns { justify-content: center; } }
