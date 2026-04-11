@@ -12,7 +12,6 @@ use App\Models\MediaCoverage;
 use App\Models\Principle;
 use App\Models\Slider;
 use App\Models\WorkVideo;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -29,6 +28,7 @@ class HomeController extends Controller
             'mission'   => SiteSetting::get('mission', ''),
             'vision'    => SiteSetting::get('vision', ''),
             'objectives'=> SiteSetting::get('objectives', ''),
+            'about_text'=> SiteSetting::get('about_text', ''),
         ];
 
         $sliders          = Slider::where('is_active', true)->orderBy('sort_order')->get();
