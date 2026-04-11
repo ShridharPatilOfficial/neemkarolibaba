@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Organisation Profile — Neem Karoli Baba Charitable Trust')
-@section('meta_desc', 'Organisation profile of Neem Karoli Baba Charitable Trust — legal details, registration numbers, 12A & 80G certifications, and trust deed information of our registered NGO in India.')
+@section('title', 'Organisation Profile — '.$siteName)
+@section('meta_desc', 'Organisation profile of {{ $siteName }} — legal details, registration numbers, 12A & 80G certifications, and trust deed information of our registered NGO in India.')
 @section('meta_keywords', 'NKB Foundation organisation profile, NGO registration India, 12A 80G certificate, trust deed India, NKB Foundation legal, registered NGO details, foundation profile')
 @section('canonical', route('about.org-profile'))
 @push('schema')
@@ -8,7 +8,7 @@
 {
   "@@context": "https://schema.org",
   "@@type": "WebPage",
-  "name": "Organisation Profile — Neem Karoli Baba Charitable Trust",
+  "name": "Organisation Profile — {{ $siteName }}",
   "url": "{{ route('about.org-profile') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
@@ -27,7 +27,7 @@
 <div class="page-banner py-20 px-4 text-white relative">
     <div class="relative z-10 max-w-4xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Organisation Profile</h1>
-        <p class="text-purple-200">Neem Karoli Baba Charitable Trust</p>
+        <p class="text-purple-200">{{ $siteName }}</p>
         <nav class="flex mt-3 text-sm">
             <a href="{{ route('home') }}" class="text-orange-400 hover:underline">Home</a>
             <span class="mx-2 text-gray-400">/</span>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Join Us — Volunteer with NKB Foundation Worldwide')
-@section('meta_desc', 'Join Neem Karoli Baba Charitable Trust as a volunteer or member. Be part of our mission to serve the poor, uplift communities, and spread love through seva across India.')
+@section('meta_desc', 'Join {{ $siteName }} as a volunteer or member. Be part of our mission to serve the poor, uplift communities, and spread love through seva across India.')
 @section('meta_keywords', 'join NKB Foundation, volunteer India NGO, become member NKB, seva volunteer, charity volunteer India, Neem Karoli Baba seva, NGO membership India')
 @section('canonical', route('join-us'))
 @push('schema')
@@ -8,7 +8,7 @@
 {
   "@@context": "https://schema.org",
   "@@type": "WebPage",
-  "name": "Join Us — Neem Karoli Baba Charitable Trust",
+  "name": "Join Us — {{ $siteName }}",
   "url": "{{ route('join-us') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
@@ -26,7 +26,7 @@
 <div class="page-banner py-20 px-4 text-white relative">
     <div class="relative z-10 max-w-4xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Join Us</h1>
-        <p class="text-purple-200">Neem Karoli Baba Charitable Trust</p>
+        <p class="text-purple-200">{{ $siteName }}</p>
         <nav class="flex mt-3 text-sm">
             <a href="{{ route('home') }}" class="text-orange-400 hover:underline">Home</a>
             <span class="mx-2 text-gray-400">/</span>

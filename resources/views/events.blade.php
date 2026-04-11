@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Events — Neem Karoli Baba Charitable Trust')
-@section('meta_desc', 'Stay updated with upcoming and past events by Neem Karoli Baba Charitable Trust — spiritual gatherings, charity drives, and community programs across India.')
+@section('title', 'Events — '.$siteName)
+@section('meta_desc', 'Stay updated with upcoming and past events by {{ $siteName }} — spiritual gatherings, charity drives, and community programs across India.')
 @section('meta_keywords', 'NKB Foundation events, Neem Karoli Baba events, NGO events India, spiritual events, charity events, bhajan sandhya, NKB Foundation programs')
 @section('canonical', route('events'))
 @push('schema')
@@ -8,7 +8,7 @@
 {
   "@@context": "https://schema.org",
   "@@type": "WebPage",
-  "name": "Events — Neem Karoli Baba Charitable Trust",
+  "name": "Events — {{ $siteName }}",
   "url": "{{ route('events') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
@@ -26,7 +26,7 @@
 <div class="page-banner py-20 px-4 text-white relative">
     <div class="relative z-10 max-w-4xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Events</h1>
-        <p class="text-purple-200">Neem Karoli Baba Charitable Trust</p>
+        <p class="text-purple-200">{{ $siteName }}</p>
         <nav class="flex mt-3 text-sm">
             <a href="{{ route('home') }}" class="text-orange-400 hover:underline">Home</a>
             <span class="mx-2 text-gray-400">/</span>

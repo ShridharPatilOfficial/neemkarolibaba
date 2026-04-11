@@ -135,7 +135,7 @@
             <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
             <div>
                 <h1 class="text-purple-900 font-extrabold text-lg md:text-xl leading-tight">
-                    {{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust') }}
+                    {{ $siteName }}
                 </h1>
                 <p class="text-purple-700 text-xs font-semibold flex items-center gap-1">
                     <i class="fas fa-shield-halved"></i>
@@ -272,7 +272,7 @@
             <div class="flex items-center gap-4">
                 <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-16 h-16 rounded-xl shadow-lg flex-shrink-0">
                 <div>
-                    <p class="font-bold text-lg leading-tight">{{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust') }}</p>
+                    <p class="font-bold text-lg leading-tight">{{ $siteName }}</p>
                     <p class="text-gray-400 text-sm italic">"Love All, Serve All"</p>
                 </div>
             </div>
@@ -383,7 +383,7 @@
 
         {{-- Bottom bar --}}
         <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-            <p>&copy; {{ date('Y') }} {{ \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust') }}. All Rights Reserved.</p>
+            <p>&copy; {{ date('Y') }} {{ $siteName }}. All Rights Reserved.</p>
             <p class="flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
                 12A &amp; 80G Registered &nbsp;|&nbsp; Reg. No: {{ \App\Models\SiteSetting::get('reg_no', 'XXXXXX/2024') }}

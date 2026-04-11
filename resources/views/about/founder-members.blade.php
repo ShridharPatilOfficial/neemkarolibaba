@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('title', 'Founder Members — Neem Karoli Baba Charitable Trust')
-@section('meta_desc', 'Meet the founder members and trustees of Neem Karoli Baba Charitable Trust — dedicated individuals committed to Maharaj-ji\'s vision of selfless service and love for all.')
-@section('meta_keywords', 'NKB Foundation founders, Neem Karoli Baba Charitable Trust trustees, NGO founders India, NKB Foundation team, foundation members, charity trustees India')
+@section('title', 'Founder Members — '.$siteName)
+@section('meta_desc', 'Meet the founder members and trustees of {{ $siteName }} — dedicated individuals committed to Maharaj-ji\'s vision of selfless service and love for all.')
+@section('meta_keywords', 'NKB Foundation founders, {{ $siteName }} trustees, NGO founders India, NKB Foundation team, foundation members, charity trustees India')
 @section('canonical', route('about.founders'))
 @push('schema')
 <script type="application/ld+json">
 {
   "@@context": "https://schema.org",
   "@@type": "WebPage",
-  "name": "Founder Members — Neem Karoli Baba Charitable Trust",
+  "name": "Founder Members — {{ $siteName }}",
   "url": "{{ route('about.founders') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
@@ -27,7 +27,7 @@
 <div class="page-banner py-20 px-4 text-white relative">
     <div class="relative z-10 max-w-4xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Founder Member</h1>
-        <p class="text-purple-200">Neem Karoli Baba Charitable Trust</p>
+        <p class="text-purple-200">{{ $siteName }}</p>
         <nav class="flex mt-3 text-sm" aria-label="Breadcrumb">
             <a href="{{ route('home') }}" class="text-orange-400 hover:underline">Home</a>
             <span class="mx-2 text-gray-400">/</span>

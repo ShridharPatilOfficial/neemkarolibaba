@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('title', 'Media Coverage — Neem Karoli Baba Charitable Trust')
-@section('meta_desc', 'Read media coverage and news articles featuring Neem Karoli Baba Charitable Trust — press coverage of our charitable initiatives, events, and humanitarian work across India.')
-@section('meta_keywords', 'NKB Foundation media coverage, Neem Karoli Baba Charitable Trust news, NGO press coverage India, NKB Foundation in media, charity news India, foundation press')
+@section('title', 'Media Coverage — '.$siteName)
+@section('meta_desc', 'Read media coverage and news articles featuring {{ $siteName }} — press coverage of our charitable initiatives, events, and humanitarian work across India.')
+@section('meta_keywords', 'NKB Foundation media coverage, {{ $siteName }} news, NGO press coverage India, NKB Foundation in media, charity news India, foundation press')
 @section('canonical', route('media-coverage'))
 @push('schema')
 <script type="application/ld+json">
 {
   "@@context": "https://schema.org",
   "@@type": "WebPage",
-  "name": "Media Coverage — Neem Karoli Baba Charitable Trust",
+  "name": "Media Coverage — {{ $siteName }}",
   "url": "{{ route('media-coverage') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {

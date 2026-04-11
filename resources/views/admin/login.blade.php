@@ -65,7 +65,7 @@
         </div>
 
         <p class="text-center text-purple-300 text-xs mt-6">
-            &copy; {{ date('Y') }} Neem Karoli Baba Charitable Trust
+            &copy; {{ date('Y') }} {{ $siteName }}
         </p>
     </div>
 </body>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Photo Gallery — Neem Karoli Baba Charitable Trust')
-@section('meta_desc', 'Browse the photo gallery of Neem Karoli Baba Charitable Trust — images from seva programs, events, charity work, spiritual gatherings, and community outreach across India.')
+@section('title', 'Photo Gallery — '.$siteName)
+@section('meta_desc', 'Browse the photo gallery of {{ $siteName }} — images from seva programs, events, charity work, spiritual gatherings, and community outreach across India.')
 @section('meta_keywords', 'NKB Foundation gallery, Neem Karoli Baba photos, NGO India photos, seva gallery, charity event photos, NKB Foundation images, foundation gallery India')
 @section('canonical', route('gallery'))
 @push('schema')
@@ -8,7 +8,7 @@
 {
   "@@context": "https://schema.org",
   "@@type": "ImageGallery",
-  "name": "Photo Gallery — Neem Karoli Baba Charitable Trust",
+  "name": "Photo Gallery — {{ $siteName }}",
   "url": "{{ route('gallery') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {

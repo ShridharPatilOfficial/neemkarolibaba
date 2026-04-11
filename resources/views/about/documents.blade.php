@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Documents & Certificates — Neem Karoli Baba Charitable Trust')
-@section('meta_desc', 'View official documents and certificates of Neem Karoli Baba Charitable Trust — 12A & 80G registration, trust deed, annual reports, and legal certifications of our registered NGO.')
+@section('title', 'Documents & Certificates — '.$siteName)
+@section('meta_desc', 'View official documents and certificates of {{ $siteName }} — 12A & 80G registration, trust deed, annual reports, and legal certifications of our registered NGO.')
 @section('meta_keywords', 'NKB Foundation documents, NGO certificates India, 12A 80G certificate, trust deed NKB, annual report NGO India, foundation legal documents')
 @section('canonical', route('about.documents'))
 @push('schema')
@@ -8,7 +8,7 @@
 {
   "@@context": "https://schema.org",
   "@@type": "WebPage",
-  "name": "Documents & Certificates — Neem Karoli Baba Charitable Trust",
+  "name": "Documents & Certificates — {{ $siteName }}",
   "url": "{{ route('about.documents') }}",
   "inLanguage": "en-IN",
   "breadcrumb": {
@@ -27,7 +27,7 @@
 <div class="page-banner py-20 px-4 text-white relative">
     <div class="relative z-10 max-w-4xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Documents Gallery</h1>
-        <p class="text-purple-200">Neem Karoli Baba Charitable Trust</p>
+        <p class="text-purple-200">{{ $siteName }}</p>
         <nav class="flex mt-3 text-sm">
             <a href="{{ route('home') }}" class="text-orange-400 hover:underline">Home</a>
             <span class="mx-2 text-gray-400">/</span>

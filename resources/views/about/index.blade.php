@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('title', 'About Us — Neem Karoli Baba Charitable Trust')
-@section('meta_desc', 'Learn about Neem Karoli Baba Charitable Trust — a 12A & 80G registered NGO inspired by Maharaj-ji. Dedicated to feeding the hungry, educating children, and providing healthcare across India.')
-@section('meta_keywords', 'about NKB Foundation, Neem Karoli Baba Charitable Trust about, NGO India about, Maharaj-ji foundation, 12A 80G NGO India, NKB Foundation history, charitable trust India')
+@section('title', 'About Us — '.$siteName)
+@section('meta_desc', 'Learn about {{ $siteName }} — a 12A & 80G registered NGO inspired by Maharaj-ji. Dedicated to feeding the hungry, educating children, and providing healthcare across India.')
+@section('meta_keywords', 'about NKB Foundation, {{ $siteName }} about, NGO India about, Maharaj-ji foundation, 12A 80G NGO India, NKB Foundation history, charitable trust India')
 @section('canonical', route('about'))
 @push('schema')
 <script type="application/ld+json">
 {
   "@@context": "https://schema.org",
   "@@type": "AboutPage",
-  "name": "About Us — Neem Karoli Baba Charitable Trust",
+  "name": "About Us — {{ $siteName }}",
   "description": "About NKB Foundation — 12A & 80G registered NGO inspired by Maharaj-ji's teachings of love and seva.",
   "url": "{{ route('about') }}",
   "inLanguage": "en-IN",
@@ -27,7 +27,7 @@
 <div class="page-banner py-20 px-4 text-white relative">
     <div class="relative z-10 max-w-4xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2">About Us</h1>
-        <p class="text-purple-200">Neem Karoli Baba Charitable Trust</p>
+        <p class="text-purple-200">{{ $siteName }}</p>
         <nav class="flex mt-3 text-sm" aria-label="Breadcrumb">
             <a href="{{ route('home') }}" class="text-orange-400 hover:underline">Home</a>
             <span class="mx-2 text-gray-400">/</span>
