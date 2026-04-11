@@ -161,11 +161,6 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="nav-inner">
 
-            {{-- NKB monogram --}}
-            <a href="{{ route('home') }}" class="nav-brand">
-                <span class="nav-brand-chip">NKB</span>
-            </a>
-
             {{-- Desktop links --}}
             <ul class="nav-links-desktop hidden lg:flex">
                 <li>
