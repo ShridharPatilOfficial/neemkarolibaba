@@ -19,6 +19,8 @@
         .admin-content { flex:1; overflow-y:auto; background:#f1f5f9; }
     </style>
     @stack('styles')
+    {{-- Quill Rich Text Editor --}}
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 </head>
 <body class="font-sans bg-gray-100" style="display:flex; min-height:100vh;">
 
@@ -181,6 +183,15 @@
     </div>
 </div>
 
+{{-- Quill Rich Text Editor --}}
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<style>
+/* Quill toolbar styling to match admin theme */
+.ql-toolbar.ql-snow { border:1px solid #e5e7eb; border-radius:8px 8px 0 0; background:#f9fafb; }
+.ql-container.ql-snow { border:1px solid #e5e7eb; border-top:0; border-radius:0 0 8px 8px; font-family:'Poppins',sans-serif; font-size:0.875rem; min-height:120px; }
+.ql-editor { min-height:120px; }
+.ql-editor p { margin-bottom:0.5em; }
+</style>
 @stack('scripts')
 </body>
 </html>

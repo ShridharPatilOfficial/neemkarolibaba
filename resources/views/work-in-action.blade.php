@@ -58,7 +58,7 @@
                 <div class="p-5 flex flex-col flex-1">
                     <h3 class="text-white font-bold text-base leading-snug mb-2 group-hover:text-orange-300 transition-colors">{{ $vid->title }}</h3>
                     @if($vid->description)
-                    <p class="text-gray-400 text-sm leading-relaxed flex-1">{{ $vid->description }}</p>
+                    <div class="text-gray-400 text-sm leading-relaxed flex-1 prose prose-sm max-w-none prose-invert">{!! $vid->description !!}</div>
                     @endif
                     <div class="mt-4 flex items-center gap-1.5 text-orange-400 text-xs font-semibold">
                         <i class="fas fa-play-circle text-sm"></i> Watch Now

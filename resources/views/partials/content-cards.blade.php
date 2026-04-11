@@ -4,7 +4,7 @@
     <!-- Text on left, media on right for even items -->
     <div>
         <h2 class="text-2xl md:text-3xl font-extrabold text-orange-600 mb-4">{{ $item->heading }}</h2>
-        <p class="text-gray-600 leading-relaxed">{{ $item->description }}</p>
+        <div class="text-gray-600 leading-relaxed prose prose-sm max-w-none">{!! $item->description !!}</div>
     </div>
     @php
         $imgSrc = $item->image_url ? (str_starts_with($item->image_url, 'http') ? $item->image_url : asset('storage/' . $item->image_url)) : null;
@@ -63,7 +63,7 @@
     </div>
     <div>
         <h2 class="text-2xl md:text-3xl font-extrabold text-orange-600 mb-4">{{ $item->heading }}</h2>
-        <p class="text-gray-600 leading-relaxed">{{ $item->description }}</p>
+        <div class="text-gray-600 leading-relaxed prose prose-sm max-w-none">{!! $item->description !!}</div>
     </div>
     @endif
 </div>

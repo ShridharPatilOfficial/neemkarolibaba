@@ -17,9 +17,8 @@
 
         <div class="mb-5">
             <label class="block text-sm font-semibold text-gray-700 mb-1">Description / Summary</label>
-            <textarea name="description" rows="3"
-                      class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm resize-y"
-                      placeholder="Brief summary of the coverage...">{{ old('description', $coverage?->description) }}</textarea>
+            <div id="desc-editor" style="min-height:110px;"></div>
+            <textarea name="description" id="desc-input" class="hidden">{{ old('description', $coverage?->description) }}</textarea>
         </div>
 
         <div class="grid grid-cols-2 gap-4 mb-5">
@@ -100,4 +99,30 @@
         </div>
     </form>
 </div>
+@push('scripts')
+<script>
+(function(){
+    var quill = new Quill('#desc-editor', {
+        theme: 'snow',
+        placeholder: 'Brief summary of the coverage...',
+        modules: { toolbar: [
+            ['bold','italic','underline'],
+            [{ list:'ordered' },{ list:'bullet' }],
+            ['clean']
+        ]}
+    });
+    var existing = document.getElementById('desc-input').value;
+    if (existing) {
+        if (existing.trim().startsWith('<')) {
+            quill.root.innerHTML = existing;
+        } else {
+            quill.setText(existing);
+        }
+    }
+    document.querySelector('form').addEventListener('submit', function(){
+        document.getElementById('desc-input').value = quill.root.innerHTML;
+    });
+})();
+</script>
+@endpush
 @endsection

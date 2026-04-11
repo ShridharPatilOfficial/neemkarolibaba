@@ -339,7 +339,7 @@
                 <div class="act-body">
                     <span class="act-tag"><i class="fas fa-circle" style="font-size:.4rem;"></i> Activity</span>
                     <h3 class="act-title">{{ $activity->heading }}</h3>
-                    <p class="act-text">{{ $activity->description }}</p>
+                    <div class="act-text prose prose-xs max-w-none">{!! $activity->description !!}</div>
                 </div>
             </div>
             @endforeach
@@ -410,7 +410,7 @@
                 <div class="ev-body">
                     <p class="ev-cat">{{ $siteName }}</p>
                     <h3 class="ev-title">{{ $event->heading }}</h3>
-                    <p class="ev-desc">{{ $event->description }}</p>
+                    <div class="ev-desc prose prose-xs max-w-none">{!! $event->description !!}</div>
                     <a href="{{ route('events') }}"
                        class="inline-flex items-center gap-1 text-orange-600 font-semibold text-xs mt-3 hover:gap-2 transition-all">
                         Read More <i class="fas fa-arrow-right text-[9px]"></i>
@@ -478,10 +478,11 @@
                             <div style="position:absolute;top:.3rem;left:.6rem;
                                         font-size:4.5rem;color:rgba(249,115,22,.07);
                                         font-family:Georgia,serif;line-height:1;pointer-events:none;">&ldquo;</div>
-                            <p style="color:rgba(255,255,255,.82);font-size:.76rem;line-height:1.75;
-                                       font-style:italic;white-space:pre-line;position:relative;z-index:1;">
-                                {{ $pm->message }}
-                            </p>
+                            <div style="color:rgba(255,255,255,.82);font-size:.76rem;line-height:1.75;
+                                       font-style:italic;position:relative;z-index:1;"
+                                 class="prose prose-xs max-w-none prose-invert prose-p:my-1">
+                                {!! $pm->message !!}
+                            </div>
                         </div>
 
                         {{-- Footer --}}
@@ -572,7 +573,7 @@
                 <div class="p-4">
                     <h3 class="text-white font-bold text-sm leading-snug mb-1.5 group-hover:text-orange-300 transition-colors">{{ $vid->title }}</h3>
                     @if($vid->description)
-                    <p class="text-gray-400 text-xs leading-relaxed">{{ $vid->description }}</p>
+                    <div class="text-gray-400 text-xs leading-relaxed prose prose-xs max-w-none prose-invert">{!! $vid->description !!}</div>
                     @endif
                     <div class="mt-3 flex items-center gap-1.5 text-orange-400 text-xs font-semibold">
                         <i class="fas fa-play-circle text-sm"></i> Watch Now
