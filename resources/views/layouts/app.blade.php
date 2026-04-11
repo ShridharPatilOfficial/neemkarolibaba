@@ -129,14 +129,15 @@
 </div>
 
 {{-- ─── Main Header ──────────────────────────────────────────────── --}}
-<header class="bg-yellow-400 py-3 px-4 shadow-sm">
+<header id="main-header" class="bg-yellow-400 py-3 px-4 shadow-sm" style="overflow:visible;">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3">
             {{-- Header photo (set from Admin → Settings) or fallback Om logo --}}
             @if($headerPhoto)
-                <div class="relative flex-shrink-0">
-                    <img src="{{ $headerPhoto }}" alt="{{ $siteName }}"
-                         class="w-14 h-14 rounded-lg object-cover shadow-md ring-2 ring-purple-700 ring-offset-2 ring-offset-yellow-400">
+                <div class="relative flex-shrink-0" style="z-index:50;">
+                    <img id="header-photo" src="{{ $headerPhoto }}" alt="{{ $siteName }}"
+                         class="rounded-lg object-cover shadow-lg ring-2 ring-purple-700 ring-offset-2 ring-offset-yellow-400 transition-all duration-300"
+                         style="width:72px;height:72px;margin-top:-18px;">
                 </div>
             @else
                 <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
@@ -431,6 +432,22 @@
         icon.classList.toggle('fa-bars');
         icon.classList.toggle('fa-times');
     });
+
+    // Header photo: big + overflow at top, shrink on scroll
+    const headerPhoto = document.getElementById('header-photo');
+    if (headerPhoto) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                headerPhoto.style.width  = '48px';
+                headerPhoto.style.height = '48px';
+                headerPhoto.style.marginTop = '0px';
+            } else {
+                headerPhoto.style.width  = '72px';
+                headerPhoto.style.height = '72px';
+                headerPhoto.style.marginTop = '-18px';
+            }
+        }, { passive: true });
+    }
 
     // Sticky nav shadow on scroll + show/hide floating donate
     const nav = document.getElementById('main-nav');
