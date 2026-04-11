@@ -129,17 +129,24 @@
 </div>
 
 {{-- ─── Main Header ──────────────────────────────────────────────── --}}
-<header id="main-header" class="bg-yellow-400 px-4 shadow-sm" style="overflow:visible;padding-top:0.75rem;padding-bottom:0.75rem;">
+<header id="main-header" class="bg-yellow-400 px-4 shadow-sm" style="overflow:visible;padding-top:0.75rem;padding-bottom:0.75rem;position:relative;">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-            {{-- Header photo (set from Admin → Settings) or fallback Om logo --}}
+            {{-- Header photo: spans info bar + header + nav via absolute img --}}
             @if($headerPhoto)
-                <div id="header-photo-wrap" class="flex-shrink-0" style="position:relative;z-index:60;margin-top:-28px;">
+                {{-- Wrap holds space in flex row; img overflows visually above+below --}}
+                <div id="header-photo-wrap"
+                     class="flex-shrink-0"
+                     style="position:relative;z-index:200;align-self:stretch;width:90px;">
                     <img id="header-photo" src="{{ $headerPhoto }}" alt="{{ $siteName }}"
-                         style="width:88px;height:88px;border-radius:10px;object-fit:cover;
-                                box-shadow:0 4px 18px rgba(76,29,149,.35);
-                                border:3px solid #7c3aed;
-                                transition:width .3s ease,height .3s ease,margin-top .3s ease,border-radius .3s ease;">
+                         style="position:absolute;left:0;width:90px;
+                                top:-44px;bottom:-60px;
+                                object-fit:cover;object-position:top center;
+                                border-radius:0 0 10px 10px;
+                                box-shadow:4px 0 20px rgba(76,29,149,.4);
+                                border-bottom:3px solid #7c3aed;
+                                border-right:3px solid #7c3aed;
+                                transition:top .3s ease,bottom .3s ease,width .3s ease,border-radius .3s ease;">
                 </div>
             @else
                 <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
@@ -435,7 +442,7 @@
         icon.classList.toggle('fa-times');
     });
 
-    // Header photo: overflow upward at top, shrink flush on scroll
+    // Header photo: full span (info bar → nav) at top, shrink to header on scroll
     const hPhoto = document.getElementById('header-photo');
     const hWrap  = document.getElementById('header-photo-wrap');
     if (hPhoto && hWrap) {
@@ -443,17 +450,19 @@
         const applyPhotoState = () => {
             const mobile = isMobile();
             if (window.scrollY > 10) {
-                // Scrolled: fit inside header
-                hPhoto.style.width         = mobile ? '40px' : '52px';
-                hPhoto.style.height        = mobile ? '40px' : '52px';
-                hPhoto.style.borderRadius  = '8px';
-                hWrap.style.marginTop      = '0px';
+                // Scrolled: sit flush inside header only
+                hPhoto.style.top          = '0px';
+                hPhoto.style.bottom       = '0px';
+                hPhoto.style.width        = mobile ? '44px' : '56px';
+                hWrap.style.width         = mobile ? '44px' : '56px';
+                hPhoto.style.borderRadius = '8px';
             } else {
-                // Top of page: overflow upward
-                hPhoto.style.width         = mobile ? '60px' : '88px';
-                hPhoto.style.height        = mobile ? '60px' : '88px';
-                hPhoto.style.borderRadius  = '10px';
-                hWrap.style.marginTop      = mobile ? '-16px' : '-28px';
+                // Top of page: span from info bar down through nav
+                hPhoto.style.top          = mobile ? '-28px' : '-44px';
+                hPhoto.style.bottom       = mobile ? '-44px' : '-60px';
+                hPhoto.style.width        = mobile ? '64px' : '90px';
+                hWrap.style.width         = mobile ? '64px' : '90px';
+                hPhoto.style.borderRadius = '0 0 10px 10px';
             }
         };
         window.addEventListener('scroll', applyPhotoState, { passive: true });
