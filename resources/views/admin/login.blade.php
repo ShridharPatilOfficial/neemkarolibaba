@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - NKB Foundation</title>
-    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-    <link rel="shortcut icon" href="{{ asset('favicon.svg') }}">
+    @php $loginFavicon = \Illuminate\Support\Facades\Storage::exists(\App\Models\SiteSetting::get('header_photo','')) ? \Illuminate\Support\Facades\Storage::url(\App\Models\SiteSetting::get('header_photo','')) : asset('favicon.svg'); @endphp
+    <link rel="icon" href="{{ $loginFavicon }}" type="image/jpeg">
+    <link rel="shortcut icon" href="{{ $loginFavicon }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -16,7 +17,7 @@
     <div class="w-full max-w-md">
         <!-- Logo -->
         <div class="text-center mb-8">
-            <img src="{{ asset('favicon.svg') }}" alt="Om" class="w-20 h-20 rounded-2xl mx-auto mb-4 shadow-lg">
+            <img src="{{ $loginFavicon }}" alt="NKB" class="w-20 h-20 rounded-2xl mx-auto mb-4 shadow-lg object-cover object-top">
             <h1 class="text-white font-extrabold text-2xl">NKB Foundation</h1>
             <p class="text-purple-300 text-sm mt-1">Admin Panel</p>
         </div>
