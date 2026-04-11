@@ -721,47 +721,112 @@
     </div>
 </div>
 
-{{-- ════════ DONATE CTA BAND ════════════════════════════════════════ --}}
-<section class="donate-cta-band py-20 px-4">
-    <div class="max-w-5xl mx-auto relative" style="z-index:2;">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+{{-- ════════ DONATE ANIMATION BAND ══════════════════════════════════ --}}
+<section id="donate-anim-band" style="
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg,#0C0920 0%,#1a0432 45%,#0C0920 100%);
+    padding:5rem 1rem;">
 
-            {{-- Left: numbers --}}
-            <div class="text-center lg:text-left reveal">
-                <div class="dcta-num">₹50L+</div>
-                <h2 class="text-white font-black text-2xl md:text-3xl mt-3 mb-2">Raised for Humanity</h2>
-                <p class="text-purple-300 text-sm leading-relaxed max-w-sm">
-                    Every rupee donated goes directly to feeding the hungry, educating children, and supporting healthcare — tax-exempt under 80G.
-                </p>
-                <div class="mt-5 flex flex-wrap gap-3 justify-center lg:justify-start">
-                    <span class="inline-flex items-center gap-2 bg-white/8 border border-white/12 text-purple-200 text-xs font-semibold px-3 py-1.5 rounded-full">
-                        <i class="fas fa-shield-halved text-orange-400 text-xs"></i> 12A &amp; 80G Certified
-                    </span>
-                    <span class="inline-flex items-center gap-2 bg-white/8 border border-white/12 text-purple-200 text-xs font-semibold px-3 py-1.5 rounded-full">
-                        <i class="fas fa-check-circle text-green-400 text-xs"></i> Govt. Registered NGO
-                    </span>
-                </div>
-            </div>
+    {{-- Animated ripple rings --}}
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+        <span class="donate-ring donate-ring-1"></span>
+        <span class="donate-ring donate-ring-2"></span>
+        <span class="donate-ring donate-ring-3"></span>
+        <span class="donate-ring donate-ring-4"></span>
+    </div>
 
-            {{-- Right: CTA --}}
-            <div class="text-center reveal reveal-delay-2">
-                <div class="w-20 h-20 rounded-full bg-orange-600/20 border-2 border-orange-500/35 flex items-center justify-center mx-auto mb-5">
-                    <i class="fas fa-hands-holding-heart text-orange-400 text-3xl"></i>
-                </div>
-                <h3 class="text-white font-black text-xl mb-2">Be the Change</h3>
-                <p class="text-purple-300 text-sm mb-6">Your support transforms lives. Donate today.</p>
-                <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                    <a href="{{ route('donate') }}" class="dcta-btn">
-                        <i class="fas fa-heart-pulse"></i> Donate Now
-                    </a>
-                    <a href="{{ route('join-us') }}"
-                       class="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 border border-white/20 text-white font-bold py-3.5 px-6 rounded-xl transition text-sm">
-                        <i class="fas fa-user-plus"></i> Join Us
-                    </a>
-                </div>
-            </div>
+    {{-- Floating dots background --}}
+    <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;">
+        @for($d=1;$d<=18;$d++)
+        <span class="donate-dot donate-dot-{{ $d }}"></span>
+        @endfor
+    </div>
 
+    <div style="position:relative;z-index:2;max-width:860px;margin:0 auto;text-align:center;">
+
+        {{-- Central icon with pulse --}}
+        <div style="display:inline-flex;align-items:center;justify-content:center;
+                    width:90px;height:90px;border-radius:50%;
+                    background:linear-gradient(135deg,#F97316,#ea580c);
+                    box-shadow:0 0 0 0 rgba(249,115,22,.6);
+                    animation:heartPulse 1.8s ease-in-out infinite;
+                    margin-bottom:1.75rem;">
+            <i class="fas fa-hands-holding-heart" style="font-size:2.2rem;color:#fff;"></i>
         </div>
+
+        {{-- Animated heading --}}
+        <h2 class="donate-anim-title">
+            Every Rupee<br>
+            <span style="background:linear-gradient(90deg,#F97316,#FCD34D,#F97316);
+                         background-size:200% auto;
+                         -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                         background-clip:text;
+                         animation:shimmerText 3s linear infinite;">
+                Transforms a Life
+            </span>
+        </h2>
+
+        <p style="color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;max-width:520px;margin:1rem auto 0;">
+            Feed the hungry. Educate a child. Support a patient.<br>
+            <strong style="color:rgba(255,255,255,.9);">Tax-exempt under 80G — every donation counts.</strong>
+        </p>
+
+        {{-- Animated stats row --}}
+        <div style="display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin:2.5rem 0;">
+            <div class="donate-stat-box">
+                <span class="donate-counter" data-target="5000">0</span><span style="color:#F97316;font-size:1.4rem;font-weight:900;">+</span>
+                <p>Families Fed</p>
+            </div>
+            <div class="donate-stat-box">
+                <span class="donate-counter" data-target="1200">0</span><span style="color:#F97316;font-size:1.4rem;font-weight:900;">+</span>
+                <p>Children Educated</p>
+            </div>
+            <div class="donate-stat-box">
+                <span class="donate-counter" data-target="800">0</span><span style="color:#F97316;font-size:1.4rem;font-weight:900;">+</span>
+                <p>Patients Helped</p>
+            </div>
+        </div>
+
+        {{-- CTA buttons --}}
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+            <a href="{{ route('donate') }}" class="donate-anim-btn">
+                <i class="fas fa-heart-pulse"></i>
+                <span>Donate Now</span>
+                <span class="donate-btn-shine"></span>
+            </a>
+            <a href="{{ route('join-us') }}" style="
+                display:inline-flex;align-items:center;gap:.5rem;
+                border:2px solid rgba(249,115,22,.45);color:#CBD5E1;
+                font-weight:700;font-size:.95rem;
+                padding:.85rem 2rem;border-radius:50px;
+                text-decoration:none;transition:all .3s;
+                background:rgba(249,115,22,.05);">
+                <i class="fas fa-user-plus"></i> Join Us
+            </a>
+        </div>
+
+        {{-- Trust badges --}}
+        <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2rem;">
+            <span style="display:inline-flex;align-items:center;gap:.4rem;
+                         background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+                         color:rgba(255,255,255,.6);font-size:.72rem;font-weight:600;
+                         padding:.35rem .9rem;border-radius:50px;">
+                <i class="fas fa-shield-halved" style="color:#F97316;"></i> 12A &amp; 80G Certified
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:.4rem;
+                         background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+                         color:rgba(255,255,255,.6);font-size:.72rem;font-weight:600;
+                         padding:.35rem .9rem;border-radius:50px;">
+                <i class="fas fa-check-circle" style="color:#4ade80;"></i> Govt. Registered NGO
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:.4rem;
+                         background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+                         color:rgba(255,255,255,.6);font-size:.72rem;font-weight:600;
+                         padding:.35rem .9rem;border-radius:50px;">
+                <i class="fas fa-lock" style="color:#60a5fa;"></i> 100% Secure &amp; Transparent
+            </span>
+        </div>
+
     </div>
 </section>
 
@@ -879,5 +944,28 @@ const revealObs = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 revealEls.forEach(el => revealObs.observe(el));
+
+// ── Donate counter animation ──────────────────────────────────────
+(function(){
+    const counters = document.querySelectorAll('.donate-counter');
+    if(!counters.length) return;
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = +el.dataset.target;
+            const duration = 2000;
+            const step = Math.ceil(target / (duration / 16));
+            let current = 0;
+            const timer = setInterval(() => {
+                current = Math.min(current + step, target);
+                el.textContent = current.toLocaleString('en-IN');
+                if(current >= target) clearInterval(timer);
+            }, 16);
+            obs.unobserve(el);
+        });
+    }, { threshold: 0.4 });
+    counters.forEach(c => obs.observe(c));
+})();
 </script>
 @endpush

@@ -549,34 +549,118 @@
 .ev-title { font-weight: 700; color: #0F0A1E; font-size: .88rem; line-height: 1.4; margin-bottom: .35rem; }
 .ev-desc { color: #64748B; font-size: .76rem; line-height: 1.55; }
 
-/* ─── Donate CTA (dark) ──────────────────────────────────────── */
-.donate-cta-band {
-  background: linear-gradient(135deg, #0C0920 0%, #1a0f3c 100%);
+/* ─── Donate Animation Band ──────────────────────────────────── */
+
+/* Ripple rings */
+.donate-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(249,115,22,.35);
+  animation: donateRipple 4s ease-out infinite;
+}
+.donate-ring-1 { width:160px;  height:160px;  animation-delay:0s; }
+.donate-ring-2 { width:320px;  height:320px;  animation-delay:.9s; }
+.donate-ring-3 { width:520px;  height:520px;  animation-delay:1.8s; }
+.donate-ring-4 { width:750px;  height:750px;  animation-delay:2.7s; }
+@keyframes donateRipple {
+  0%   { opacity:.6; transform:scale(.85); }
+  100% { opacity:0;  transform:scale(1.15); }
+}
+
+/* Floating dots */
+.donate-dot {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(249,115,22,.4);
+  animation: floatDot linear infinite;
+}
+@keyframes floatDot {
+  0%   { transform: translateY(100vh) scale(0); opacity:0; }
+  10%  { opacity:1; }
+  90%  { opacity:.6; }
+  100% { transform: translateY(-10vh) scale(1.5); opacity:0; }
+}
+.donate-dot-1  { left:5%;   animation-duration:7s;  animation-delay:0s;   width:4px;  height:4px; }
+.donate-dot-2  { left:12%;  animation-duration:9s;  animation-delay:1s; }
+.donate-dot-3  { left:20%;  animation-duration:6s;  animation-delay:2s;   width:3px;  height:3px; }
+.donate-dot-4  { left:28%;  animation-duration:11s; animation-delay:.5s; }
+.donate-dot-5  { left:35%;  animation-duration:8s;  animation-delay:3s;   width:6px;  height:6px; }
+.donate-dot-6  { left:42%;  animation-duration:7s;  animation-delay:1.5s; width:3px;  height:3px; }
+.donate-dot-7  { left:50%;  animation-duration:10s; animation-delay:0.8s; }
+.donate-dot-8  { left:57%;  animation-duration:6s;  animation-delay:2.5s; width:4px;  height:4px; }
+.donate-dot-9  { left:63%;  animation-duration:9s;  animation-delay:.3s; }
+.donate-dot-10 { left:70%;  animation-duration:7s;  animation-delay:1.8s; width:3px;  height:3px; }
+.donate-dot-11 { left:77%;  animation-duration:8s;  animation-delay:0.6s; width:5px;  height:5px; }
+.donate-dot-12 { left:83%;  animation-duration:11s; animation-delay:2.2s; }
+.donate-dot-13 { left:89%;  animation-duration:6s;  animation-delay:1s;   width:3px;  height:3px; }
+.donate-dot-14 { left:94%;  animation-duration:9s;  animation-delay:3.5s; }
+.donate-dot-15 { left:8%;   animation-duration:8s;  animation-delay:4s;   width:4px;  height:4px; }
+.donate-dot-16 { left:46%;  animation-duration:7s;  animation-delay:2.8s; width:6px;  height:6px; }
+.donate-dot-17 { left:72%;  animation-duration:10s; animation-delay:1.2s; width:3px;  height:3px; }
+.donate-dot-18 { left:30%;  animation-duration:6s;  animation-delay:3.8s; }
+
+/* Heart pulse keyframe */
+@keyframes heartPulse {
+  0%   { box-shadow: 0 0 0 0   rgba(249,115,22,.7); }
+  60%  { box-shadow: 0 0 0 28px rgba(249,115,22,0); }
+  100% { box-shadow: 0 0 0 0   rgba(249,115,22,0); }
+}
+
+/* Shimmer text */
+@keyframes shimmerText {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Heading */
+.donate-anim-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.12;
+  letter-spacing: -.02em;
+}
+
+/* Stats */
+.donate-stat-box { text-align:center; }
+.donate-stat-box span:first-child {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: #F97316;
+  line-height: 1;
+}
+.donate-stat-box p {
+  color: rgba(255,255,255,.55);
+  font-size: .78rem;
+  margin-top: .3rem;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  font-weight: 600;
+}
+
+/* Donate button */
+.donate-anim-btn {
   position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; gap: .55rem;
+  background: linear-gradient(135deg,#F97316,#ea580c);
+  color: #fff; font-weight: 800; font-size: 1rem;
+  padding: .95rem 2.5rem; border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 12px 40px rgba(249,115,22,.55);
+  transition: transform .25s, box-shadow .25s;
 }
-.donate-cta-band::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(249,115,22,.04) 1px, transparent 0);
-  background-size: 26px 26px;
+.donate-anim-btn:hover { transform:translateY(-3px); box-shadow:0 18px 50px rgba(249,115,22,.7); }
+.donate-btn-shine {
+  position: absolute; top:0; left:-100%;
+  width:60%; height:100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.3), transparent);
+  animation: btnShine 2.8s ease-in-out infinite;
 }
-.dcta-num {
-  font-size: clamp(2.5rem, 7vw, 5rem);
-  font-weight: 900; line-height: 1;
-  background: linear-gradient(90deg, #F97316, #FCD34D);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+@keyframes btnShine {
+  0%,40% { left:-100%; }
+  60%,100% { left:160%; }
 }
-.dcta-btn {
-  display: inline-flex; align-items: center; gap: .6rem;
-  background: #F97316; color: #fff;
-  font-weight: 800; font-size: .95rem;
-  padding: .95rem 2.25rem; border-radius: 14px;
-  text-decoration: none; transition: all .25s;
-  box-shadow: 0 10px 30px rgba(249,115,22,.45);
-  border: 2px solid #F97316;
-}
-.dcta-btn:hover { background: transparent; color: #F97316; transform: translateY(-2px); }
 
 /* ─── President Card ─────────────────────────────────────────── */
 .president-new {
