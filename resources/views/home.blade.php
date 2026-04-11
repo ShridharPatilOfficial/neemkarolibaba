@@ -446,7 +446,7 @@
                  onmouseout="this.style.transform='';this.style.boxShadow='0 16px 48px rgba(0,0,0,.35)'">
 
                 {{-- Card body: 1/3 photo | 2/3 message --}}
-                <div style="display:flex;flex:1;">
+                <div class="ldr-card-body" style="display:flex;flex:1;">
 
                     {{-- LEFT — 1/3 photo panel --}}
                     <div style="width:33.333%;flex-shrink:0;position:relative;overflow:hidden;
