@@ -771,21 +771,22 @@
             <strong style="color:rgba(255,255,255,.9);">Tax-exempt under 80G — every donation counts.</strong>
         </p>
 
-        {{-- Animated stats row --}}
+        {{-- Animated stats row — pulled from DB via $impactStats --}}
+        @if($impactStats->count())
         <div style="display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin:2.5rem 0;">
+            @foreach($impactStats as $stat)
             <div class="donate-stat-box">
-                <span class="donate-counter" data-target="5000">0</span><span style="color:#F97316;font-size:1.4rem;font-weight:900;">+</span>
-                <p>Families Fed</p>
+                @php
+                    // Strip non-numeric chars (e.g. "50L+", "5,000+") to get raw number for counter
+                    $rawNum = (int) preg_replace('/[^0-9]/', '', $stat->number_value);
+                    $suffix = preg_replace('/[0-9,\s]/', '', $stat->number_value); // e.g. "L+", "+"
+                @endphp
+                <span class="donate-counter" data-target="{{ $rawNum }}">0</span><span style="color:#F97316;font-size:1.4rem;font-weight:900;">{{ $suffix ?: '+' }}</span>
+                <p>{{ $stat->label }}</p>
             </div>
-            <div class="donate-stat-box">
-                <span class="donate-counter" data-target="1200">0</span><span style="color:#F97316;font-size:1.4rem;font-weight:900;">+</span>
-                <p>Children Educated</p>
-            </div>
-            <div class="donate-stat-box">
-                <span class="donate-counter" data-target="800">0</span><span style="color:#F97316;font-size:1.4rem;font-weight:900;">+</span>
-                <p>Patients Helped</p>
-            </div>
+            @endforeach
         </div>
+        @endif
 
         {{-- CTA buttons --}}
         <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
