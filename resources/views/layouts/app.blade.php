@@ -132,14 +132,22 @@
 <header class="bg-yellow-400 py-3 px-4 shadow-sm">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-            <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
+            {{-- Header photo (set from Admin → Settings) or fallback Om logo --}}
+            @if($headerPhoto)
+                <div class="relative flex-shrink-0">
+                    <img src="{{ $headerPhoto }}" alt="{{ $siteName }}"
+                         class="w-14 h-14 rounded-full object-cover shadow-md ring-2 ring-purple-700 ring-offset-2 ring-offset-yellow-400">
+                </div>
+            @else
+                <img src="{{ asset('favicon.svg') }}" alt="NKB Om Logo" class="w-14 h-14 rounded-full shadow-md flex-shrink-0">
+            @endif
             <div>
                 <h1 class="text-purple-900 font-extrabold text-lg md:text-xl leading-tight">
                     {{ $siteName }}
                 </h1>
                 <p class="text-purple-700 text-xs font-semibold flex items-center gap-1">
                     <i class="fas fa-shield-halved"></i>
-                    {{ \App\Models\SiteSetting::get('site_tagline', 'Love All, Serve All') }}
+                    {{ $siteTagline }}
                 </p>
             </div>
         </div>
