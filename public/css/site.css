@@ -890,11 +890,11 @@
   /* Footer columns stack */
   .footer-grid { grid-template-columns: 1fr !important; }
 
-  /* Overflow guard */
-  section, .max-w-7xl, .max-w-6xl, .max-w-5xl {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
+  /* Overflow guard — only body clips horizontal overflow.
+     overflow-x:hidden on sections creates scroll containers on mobile
+     which traps touch scroll inside each section. */
+  body { overflow-x: hidden; }
+  section { max-width: 100vw; }
 }
 
 /* ── Small mobile (≤479px) ────────────────────────────────────── */
