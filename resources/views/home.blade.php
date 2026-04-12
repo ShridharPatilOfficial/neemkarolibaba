@@ -180,7 +180,7 @@
                     <i class="fas {{ $card->icon }}"></i>
                 </div>
                 <h3 class="pc-title">{{ $card->title }}</h3>
-                <p class="pc-desc">{{ $card->description }}</p>
+                <div class="pc-desc rich-text">{!! $card->description !!}</div>
                 <a href="{{ $card->link_url ?? route('about.founders') }}" class="pc-link pc-link-{{ $colorName }}">
                     Learn More <i class="fas fa-arrow-right text-xs"></i>
                 </a>
