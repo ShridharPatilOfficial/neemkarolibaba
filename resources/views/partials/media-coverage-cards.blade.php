@@ -22,7 +22,7 @@
         <img src="{{ $img }}" alt="{{ $c->title }}"
              class="group-hover:scale-105 transition-transform duration-500 cursor-zoom-in"
              onclick="imgLb(this)" data-full="{{ $img }}" data-caption="{{ $c->title }}"
-             style="width:100%;height:100%;object-fit:cover;display:block;">
+             style="width:100%;height:100%;object-fit:contain;display:block;background:#f8f8f8;">
 
         {{-- Category badge --}}
         <span class="absolute top-2 left-2 {{ $catColor }} text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 z-10">
