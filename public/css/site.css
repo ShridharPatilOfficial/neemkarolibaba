@@ -907,3 +907,36 @@
   .nav-inner { padding: 0 .75rem; }
   .donate-anim-btn { padding: .8rem 1.5rem; font-size: .88rem; }
 }
+
+/* ─── Rich-text rendered output (from Quill editor) ────────────
+   Apply .rich-text on any wrapper that renders {!! $html !!}
+   Light version (.rich-text) for white/light backgrounds.
+   Dark version  (.rich-text-dark) for dark purple backgrounds.
+────────────────────────────────────────────────────────────── */
+.rich-text, .rich-text-dark {
+  line-height: 1.75;
+}
+.rich-text p, .rich-text-dark p {
+  margin-bottom: .65em;
+}
+.rich-text p:last-child, .rich-text-dark p:last-child {
+  margin-bottom: 0;
+}
+.rich-text strong, .rich-text b { color: #111827; font-weight: 700; }
+.rich-text-dark strong, .rich-text-dark b { color: #fff; font-weight: 700; }
+
+.rich-text em, .rich-text i { font-style: italic; }
+.rich-text-dark em, .rich-text-dark i { font-style: italic; }
+
+.rich-text u, .rich-text-dark u { text-decoration: underline; }
+
+.rich-text ul, .rich-text ol { padding-left: 1.4em; margin-bottom: .65em; }
+.rich-text-dark ul, .rich-text-dark ol { padding-left: 1.4em; margin-bottom: .65em; }
+.rich-text ul { list-style: disc; }
+.rich-text-dark ul { list-style: disc; }
+.rich-text ol { list-style: decimal; }
+.rich-text-dark ol { list-style: decimal; }
+.rich-text li, .rich-text-dark li { margin-bottom: .25em; }
+
+.rich-text h1,.rich-text h2,.rich-text h3 { font-weight: 700; margin-bottom: .4em; }
+.rich-text-dark h1,.rich-text-dark h2,.rich-text-dark h3 { font-weight: 700; margin-bottom: .4em; color: #fff; }
