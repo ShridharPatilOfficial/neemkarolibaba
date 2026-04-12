@@ -61,10 +61,10 @@
 ═══════════════════════════════════════════════════════════ */
 @keyframes fd-color    { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
 @keyframes fd-shine    { 0%{left:-120%;opacity:0} 25%{opacity:1} 65%{left:130%;opacity:0} 100%{left:130%;opacity:0} }
-@keyframes fd-float    { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(calc(-50% - 8px))} }
+@keyframes fd-float    { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 @keyframes fd-ring-out { 0%{transform:translate(-50%,-50%) scale(.6);opacity:.8} 100%{transform:translate(-50%,-50%) scale(2.2);opacity:0} }
-@keyframes fd-slidein  { from{right:-160px;opacity:0;transform:translateY(-50%)} to{right:0;opacity:1;transform:translateY(-50%)} }
-@keyframes fd-slideout { from{right:0;opacity:1;transform:translateY(-50%)} to{right:-160px;opacity:0;transform:translateY(-50%)} }
+@keyframes fd-slidein  { from{right:-160px;opacity:0} to{right:0;opacity:1} }
+@keyframes fd-slideout { from{right:0;opacity:1} to{right:-160px;opacity:0} }
 @keyframes fd-pill-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
 @keyframes fd-heartpop { 0%,80%,100%{transform:scale(1)} 88%{transform:scale(1.35)} 94%{transform:scale(.92)} }
 @keyframes fd-starleft { 0%,100%{opacity:1;transform:scale(1) rotate(0deg)} 50%{opacity:.7;transform:scale(1.4) rotate(20deg)} }
@@ -72,9 +72,8 @@
 /* Wrapper */
 #float-donate {
   position: fixed;
-  top: 50%;
+  bottom: 28%;
   right: -160px;
-  transform: translateY(-50%);
   z-index: 9998;
   display: flex;
   align-items: center;
@@ -85,7 +84,6 @@
 }
 #float-donate.hiding {
   animation: fd-slideout .35s ease-in forwards !important;
-  transform: translateY(-50%);
 }
 
 /* Pulse rings */

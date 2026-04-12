@@ -178,7 +178,7 @@
                     <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                 </li>
                 <li class="nav-dd">
-                    <button class="nav-link {{ request()->routeIs('about*') ? 'active' : '' }}">
+                    <button class="nav-link {{ request()->routeIs('about*') && !request()->routeIs('about.objectives') ? 'active' : '' }}">
                         About Us <i class="fas fa-chevron-down" style="font-size:.6rem;margin-left:.2rem;"></i>
                     </button>
                     <div class="nav-dd-menu">
