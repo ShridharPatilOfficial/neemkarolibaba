@@ -119,7 +119,7 @@
             quill.setText(existing);
         }
     }
-    document.querySelector('form').addEventListener('submit', function(){
+    document.getElementById('desc-input').closest('form').addEventListener('submit', function(){
         var html = quill.root.innerHTML;
         document.getElementById('desc-input').value = (html === '<p><br></p>') ? '' : html;
     });

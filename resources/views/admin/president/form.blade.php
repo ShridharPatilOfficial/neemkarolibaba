@@ -100,7 +100,7 @@
             quill.setText(existing);
         }
     }
-    document.querySelector('form').addEventListener('submit', function(){
+    document.getElementById('msg-input').closest('form').addEventListener('submit', function(){
         var html = quill.root.innerHTML;
         document.getElementById('msg-input').value = (html === '<p><br></p>') ? '' : html;
     });
