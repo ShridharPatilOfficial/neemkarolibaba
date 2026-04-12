@@ -99,7 +99,7 @@
                             </span>
                             <div class="min-w-0 flex-1">
                                 <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider leading-none mb-1">{{ $label }}</p>
-                                <p class="text-gray-800 font-bold text-sm {{ $nowrap ? 'whitespace-nowrap overflow-hidden text-ellipsis' : 'break-all' }}">{{ $value }}</p>
+                                <p class="text-gray-800 font-bold text-sm {{ $nowrap ? 'break-words' : 'break-all' }}">{{ $value }}</p>
                             </div>
                             {{-- Copy button --}}
                             <button onclick="copyText('{{ $value }}', this)"
