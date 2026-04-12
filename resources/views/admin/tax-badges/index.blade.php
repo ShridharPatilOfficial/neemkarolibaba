@@ -2,10 +2,6 @@
 @section('title', 'Tax Exemption Badges')
 
 @section('content')
-@if(session('success'))
-<div class="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">{{ session('success') }}</div>
-@endif
-
 <div class="flex items-center justify-between mb-6">
     <p class="text-sm text-gray-500">Badges shown on the donate page Tax Exemption card. Click a badge → opens linked document.</p>
     <a href="{{ route('admin.tax-badges.create') }}"
