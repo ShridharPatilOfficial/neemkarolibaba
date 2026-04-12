@@ -10,7 +10,9 @@
       "Bash(grep \"use App.Models\" \"/d/FREELANCE PROJECT/neemkarolibaba/app/Http/Controllers\"/*.php \"/d/FREELANCE PROJECT/neemkarolibaba/app/Http/Controllers/Admin\"/*.php)",
       "Bash(php -l \"/d/FREELANCE PROJECT/neemkarolibaba/routes/web.php\")",
       "Bash(php -l \"/d/FREELANCE PROJECT/neemkarolibaba/bootstrap/app.php\")",
-      "Bash(grep -n \"use App\\\\\\\\\\\\\\\\Http\\\\\\\\\\\\\\\\Controllers\\\\\\\\\\\\\\\\\" \"d:/FREELANCE PROJECT/neemkarolibaba/routes/web.php\")"
+      "Bash(grep -n \"use App\\\\\\\\\\\\\\\\Http\\\\\\\\\\\\\\\\Controllers\\\\\\\\\\\\\\\\\" \"d:/FREELANCE PROJECT/neemkarolibaba/routes/web.php\")",
+      "Bash(php -r ':*)",
+      "Bash(grep -v \"^$\")"
     ]
   }
 }
