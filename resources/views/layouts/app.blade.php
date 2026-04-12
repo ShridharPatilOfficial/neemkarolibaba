@@ -93,9 +93,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @php
+        $cssApp  = asset('css/app.css')  . '?v=' . @filemtime(public_path('css/app.css'));
+        $cssSite = asset('css/site.css') . '?v=' . @filemtime(public_path('css/site.css'));
+        $jsApp   = asset('js/app.js')    . '?v=' . @filemtime(public_path('js/app.js'));
+    @endphp
+    <link rel="stylesheet" href="{{ $cssApp }}">
+    <link rel="stylesheet" href="{{ $cssSite }}">
+    <script src="{{ $jsApp }}" defer></script>
     @stack('styles')
 </head>
 <body class="font-sans antialiased bg-white text-gray-800 overflow-x-hidden">
