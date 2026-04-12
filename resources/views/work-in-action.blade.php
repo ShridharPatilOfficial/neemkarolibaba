@@ -125,5 +125,7 @@ function closeWorkVideo() {
     document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeWorkVideo(); });
+// Move modal to body root so no ancestor stacking context traps it
+document.body.appendChild(document.getElementById('workVideoModal'));
 </script>
 @endpush
