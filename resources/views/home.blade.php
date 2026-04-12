@@ -97,11 +97,8 @@
                             <em style="font-style:normal;color:#FDBA74;font-weight:600;">"Love all, serve all."</em>
                         </p>
                         <div class="hero-btns">
-                            <a href="{{ route('about') }}" class="hbtn-primary">
+                            <a href="{{ route('about') }}" class="hbtn-primary" style="width:100%;justify-content:center;">
                                 About Us <i class="fas fa-arrow-right text-xs"></i>
-                            </a>
-                            <a href="{{ route('donate') }}" class="hbtn-ghost">
-                                <i class="fas fa-heart text-orange-400 text-xs"></i> Donate Now
                             </a>
                         </div>
                     </div>
