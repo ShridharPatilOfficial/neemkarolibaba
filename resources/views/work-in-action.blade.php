@@ -90,7 +90,7 @@
 
 {{-- Video Modal --}}
 <div id="workVideoModal"
-     class="fixed inset-0 z-[9998] hidden items-center justify-center"
+     class="fixed inset-0 z-[99999] hidden items-center justify-center"
      style="background:rgba(0,0,0,.95);backdrop-filter:blur(8px);"
      onclick="if(event.target===this)closeWorkVideo()">
     <button onclick="closeWorkVideo()"
