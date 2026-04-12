@@ -327,25 +327,42 @@
 
     {{-- Hourly heatmap (2/5 cols) --}}
     <div class="ana-card lg:col-span-2">
-        <h3 class="font-bold text-gray-800 text-sm mb-3 flex items-center gap-2">
+        <h3 class="font-bold text-gray-800 text-sm mb-1 flex items-center gap-2">
             <i class="fas fa-clock text-purple-500"></i> Visits by Hour (UTC)
         </h3>
+        <p class="text-[10px] text-gray-400 mb-3">Shows which hours of the day get the most traffic. Useful for scheduling posts or ads. Each square = 1 hour (00–23). Darker = more visitors.</p>
+
         @php $hMax = max($hourly ?: [1]); @endphp
-        <div class="grid grid-cols-6 gap-1">
+
+        {{-- Hour grid: 6 cols × 4 rows = 24 hours --}}
+        <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:4px;">
             @foreach($hourly as $h => $cnt)
             @php
                 $opacity = $hMax > 0 && $cnt > 0 ? max(0.12, round($cnt / $hMax, 2)) : 0;
-                $bg = $cnt > 0 ? "background:rgba(79,70,229,{$opacity})" : 'background:#f1f5f9';
+                $bg      = $cnt > 0 ? "rgba(79,70,229,{$opacity})" : '#f1f5f9';
+                $textCol = $opacity > 0.5 ? '#fff' : ($cnt > 0 ? '#3730a3' : '#cbd5e1');
             @endphp
-            <div title="{{ sprintf('%02d:00', $h) }}: {{ $cnt }} visits"
-                 class="rounded-md flex flex-col items-center justify-center cursor-default"
-                 style="{{ $bg }}; height:42px; min-width:0;">
-                <span class="text-[9px] font-bold leading-none {{ $cnt > 0 ? 'text-indigo-800' : 'text-gray-300' }}">{{ sprintf('%02d', $h) }}</span>
-                @if($cnt > 0)<span class="text-[8px] leading-none text-indigo-600 mt-0.5">{{ $cnt }}</span>@endif
+            <div title="{{ sprintf('%02d:00', $h) }} — {{ $cnt }} visit{{ $cnt != 1 ? 's' : '' }}"
+                 style="background:{{ $bg }}; height:44px; border-radius:6px;
+                        display:flex; flex-direction:column; align-items:center; justify-content:center;
+                        cursor:default; transition:transform .15s;"
+                 onmouseover="this.style.transform='scale(1.12)'"
+                 onmouseout="this.style.transform='scale(1)'">
+                <span style="font-size:9px; font-weight:700; color:{{ $textCol }}; line-height:1;">{{ sprintf('%02d', $h) }}</span>
+                <span style="font-size:8px; color:{{ $textCol }}; opacity:.85; line-height:1.2;">{{ $cnt > 0 ? $cnt : '' }}</span>
             </div>
             @endforeach
         </div>
-        <p class="text-[10px] text-gray-400 mt-2 text-center">Darker = more traffic · Each cell = one hour</p>
+
+        {{-- Legend --}}
+        <div style="display:flex; align-items:center; gap:6px; margin-top:10px; justify-content:center;">
+            <span style="font-size:9px; color:#94a3b8;">Low</span>
+            @foreach([0.12, 0.3, 0.5, 0.7, 1.0] as $op)
+            <div style="width:14px; height:14px; border-radius:3px; background:rgba(79,70,229,{{ $op }});"></div>
+            @endforeach
+            <span style="font-size:9px; color:#94a3b8;">High</span>
+        </div>
+        <p style="font-size:9px; color:#94a3b8; text-align:center; margin-top:4px;">Peak hour today: <strong style="color:#4f46e5;">{{ sprintf('%02d:00', array_search($hMax, $hourly)) }} UTC</strong></p>
     </div>
 </div>
 
