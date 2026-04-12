@@ -76,10 +76,9 @@
                     </div>
                 </div>
 
-                {{-- Bottom horizontal content bar --}}
+                {{-- Bottom bar: eyebrow + title only --}}
                 <div class="hero-bottom-bar" style="z-index:4;">
-                    {{-- Left: eyebrow + title --}}
-                    <div class="hbb-left hero-text-in">
+                    <div class="hbb-left hero-text-in" style="max-width:100%;flex:1;">
                         <span class="hero-eyebrow" style="margin-bottom:.5rem;">
                             <span class="dot"></span>
                             {{ $siteName }}
@@ -87,20 +86,6 @@
                         <h2 class="hero-title-new" style="margin-bottom:0;">
                             {!! $slide['caption'] !!}
                         </h2>
-                    </div>
-                    {{-- Divider --}}
-                    <div class="hbb-divider"></div>
-                    {{-- Right: description + buttons --}}
-                    <div class="hbb-right hero-text-in">
-                        <p class="hero-sub-new" style="margin-bottom:1rem;max-width:100%;">
-                            Inspired by the teachings of Neem Karoli Baba —
-                            <em style="font-style:normal;color:#FDBA74;font-weight:600;">"Love all, serve all."</em>
-                        </p>
-                        <div class="hero-btns">
-                            <a href="{{ route('about') }}" class="hbtn-primary" style="width:100%;justify-content:center;">
-                                About Us <i class="fas fa-arrow-right text-xs"></i>
-                            </a>
-                        </div>
                     </div>
                 </div>
 
