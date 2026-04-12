@@ -330,7 +330,15 @@
         <h3 class="font-bold text-gray-800 text-sm mb-1 flex items-center gap-2">
             <i class="fas fa-clock text-purple-500"></i> Visits by Hour (UTC)
         </h3>
-        <p class="text-[10px] text-gray-400 mb-3">Shows which hours of the day get the most traffic. Useful for scheduling posts or ads. Each square = 1 hour (00–23). Darker = more visitors.</p>
+        @php
+            $rangeLabel = match($range) {
+                'today' => 'today',
+                '7'     => 'last 7 days',
+                '30'    => 'last 30 days',
+                default => 'all time',
+            };
+        @endphp
+        <p class="text-[10px] text-gray-400 mb-3">Hourly traffic distribution for <strong>{{ $rangeLabel }}</strong>. Shows which hours get the most visitors — useful for scheduling posts or ads. Each square = 1 hour (00–23 UTC). Darker = more visitors.</p>
 
         @php $hMax = max($hourly ?: [1]); @endphp
 
@@ -362,7 +370,7 @@
             @endforeach
             <span style="font-size:9px; color:#94a3b8;">High</span>
         </div>
-        <p style="font-size:9px; color:#94a3b8; text-align:center; margin-top:4px;">Peak hour today: <strong style="color:#4f46e5;">{{ sprintf('%02d:00', array_search($hMax, $hourly)) }} UTC</strong></p>
+        <p style="font-size:9px; color:#94a3b8; text-align:center; margin-top:4px;">Peak hour ({{ $rangeLabel }}): <strong style="color:#4f46e5;">{{ sprintf('%02d:00', array_search($hMax, $hourly)) }} UTC</strong></p>
     </div>
 </div>
 
