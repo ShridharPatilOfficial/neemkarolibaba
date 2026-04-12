@@ -43,11 +43,11 @@
         @if($members->count())
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($members as $member)
-            <div class="card-hover bg-white border border-gray-100 rounded-2xl p-6 text-center shadow-sm">
+            <div class="card-hover bg-white border border-gray-100 rounded-2xl p-6 text-center shadow-sm hover:shadow-lg hover:border-orange-200 transition-all duration-300 flex flex-col">
                 <div class="w-32 h-32 mx-auto mb-4 rounded-xl overflow-hidden border-2 border-gray-200 bg-gray-100">
                     @if($member->photo_url)
                         <img src="{{ str_starts_with($member->photo_url, 'http') ? $member->photo_url : asset('storage/' . $member->photo_url) }}"
-                             alt="{{ $member->name }}" class="w-full h-full object-cover grayscale">
+                             alt="{{ $member->name }}" class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full flex items-center justify-center bg-purple-100">
                             <i class="fas fa-user text-purple-400 text-4xl"></i>
@@ -55,7 +55,16 @@
                     @endif
                 </div>
                 <h3 class="font-bold text-gray-900 text-lg">{{ $member->name }}</h3>
-                <p class="text-gray-500 text-sm mt-1">{{ $member->role }}</p>
+                <p class="text-orange-600 text-sm font-semibold mt-1">{{ $member->role }}</p>
+
+                @if($member->website_url)
+                <div class="mt-4 pt-4 border-t border-gray-100 mt-auto">
+                    <a href="{{ $member->website_url }}" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-orange-50 hover:bg-orange-500 text-orange-600 hover:text-white border border-orange-200 hover:border-orange-500 font-semibold text-xs px-4 py-2 rounded-lg transition-all duration-200">
+                        <i class="fas fa-globe text-xs"></i> Visit Website
+                    </a>
+                </div>
+                @endif
             </div>
             @endforeach
         </div>

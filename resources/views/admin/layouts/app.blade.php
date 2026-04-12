@@ -76,6 +76,9 @@
         <a href="{{ route('admin.org-profile.index') }}" class="admin-nav-link {{ request()->routeIs('admin.org-profile*') ? 'active' : '' }}">
             <i class="fas fa-building"></i> Org Profile
         </a>
+        <a href="{{ route('admin.trust-objectives.index') }}" class="admin-nav-link {{ request()->routeIs('admin.trust-objectives*') ? 'active' : '' }}">
+            <i class="fas fa-list-ul"></i> Trust Objectives
+        </a>
         <a href="{{ route('admin.documents.index') }}" class="admin-nav-link {{ request()->routeIs('admin.documents*') ? 'active' : '' }}">
             <i class="fas fa-file-alt"></i> Documents
         </a>

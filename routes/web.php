@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\DonateSettingController;
 use App\Http\Controllers\Admin\SubmissionController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\PrincipleController;
+use App\Http\Controllers\Admin\TrustObjectiveController;
 use App\Http\Controllers\Admin\WorkVideoController;
 use App\Http\Controllers\Admin\MediaCoverageController as AdminMediaCoverageController;
 use App\Http\Controllers\Admin\AnalyticsController;
@@ -47,6 +48,7 @@ Route::middleware('track.visitor')->group(function () {
     Route::get('/about/founder-members', [AboutController::class, 'founderMembers'])->name('about.founders');
     Route::get('/about/organisation-profile', [AboutController::class, 'orgProfile'])->name('about.org-profile');
     Route::get('/about/documents', [AboutController::class, 'documents'])->name('about.documents');
+    Route::get('/about/objectives', [AboutController::class, 'objectives'])->name('about.objectives');
 
     Route::get('/documents/{id}/view', function (int $id) {
         $doc = Document::where('is_active', true)->findOrFail($id);
@@ -127,6 +129,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('principles', PrincipleController::class)->except(['show'])
             ->parameters(['principles' => 'principle']);
+
+        Route::resource('trust-objectives', TrustObjectiveController::class)->except(['show'])
+            ->parameters(['trust-objectives' => 'trustObjective']);
 
         Route::resource('work-videos', WorkVideoController::class)->except(['show'])
             ->parameters(['work-videos' => 'workVideo']);

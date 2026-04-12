@@ -46,6 +46,13 @@
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
             <h3 class="text-base font-bold text-gray-800 mb-4 pb-3 border-b border-gray-100">Bank Account Details</h3>
             <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Account Holder Name</label>
+                <input type="text" name="account_holder" value="{{ $settings['account_holder'] ?? '' }}"
+                       class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm @error('account_holder') border-red-400 @enderror"
+                       placeholder="e.g. Neem Karoli Baba Charitable Trust">
+                @error('account_holder')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+            </div>
+            <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Bank Name *</label>
                 <input type="text" name="bank_name" value="{{ $settings['bank_name'] ?? '' }}" required
                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm @error('bank_name') border-red-400 @enderror"

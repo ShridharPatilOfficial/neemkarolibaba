@@ -86,12 +86,13 @@
 
                     {{-- Details --}}
                     <div class="p-4 space-y-1">
-                        @foreach([
+                        @foreach(array_filter([
+                            ($settings['account_holder'] ?? '') ? ['fa-user',           'orange', 'Account Holder',   $settings['account_holder']] : null,
                             ['fa-university',       'blue',   'Bank Name',       $settings['bank_name']       ?? '—'],
                             ['fa-map-marker-alt',   'indigo', 'Branch',          $settings['branch_name']     ?? '—'],
                             ['fa-hashtag',          'purple', 'Account Number',  $settings['account_number']  ?? '—'],
                             ['fa-code',             'violet', 'IFSC Code',       $settings['ifsc_code']       ?? '—'],
-                        ] as [$icon, $color, $label, $value])
+                        ]) as [$icon, $color, $label, $value])
                         <div class="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
                             <span class="w-8 h-8 rounded-lg bg-{{ $color }}-100 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-{{ $color }}-200 transition">
                                 <i class="fas {{ $icon }} text-{{ $color }}-600 text-xs"></i>

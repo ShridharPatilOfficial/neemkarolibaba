@@ -182,10 +182,14 @@
                         About Us <i class="fas fa-chevron-down" style="font-size:.6rem;margin-left:.2rem;"></i>
                     </button>
                     <div class="nav-dd-menu">
+                        <a href="{{ route('about') }}" class="nav-dd-item">About Us</a>
                         <a href="{{ route('about.founders') }}" class="nav-dd-item">Founder Member</a>
                         <a href="{{ route('about.org-profile') }}" class="nav-dd-item">Organisation Profile</a>
                         <a href="{{ route('about.documents') }}" class="nav-dd-item">Document Gallery</a>
                     </div>
+                </li>
+                <li>
+                    <a href="{{ route('about.objectives') }}" class="nav-link {{ request()->routeIs('about.objectives') ? 'active' : '' }}">Objectives of Trust</a>
                 </li>
                 <li class="nav-dd">
                     <button class="nav-link {{ request()->routeIs('gallery','media-coverage','work-in-action') ? 'active' : '' }}">
@@ -226,6 +230,9 @@
                 <i class="fas fa-home text-orange-400 w-4"></i> Home
             </a>
             <p class="nav-mob-section">About Us</p>
+            <a href="{{ route('about') }}" class="nav-mob-item">
+                <i class="fas fa-info-circle text-orange-400 w-4"></i> About Us
+            </a>
             <a href="{{ route('about.founders') }}" class="nav-mob-item">
                 <i class="fas fa-users text-orange-400 w-4"></i> Founder Member
             </a>
@@ -234,6 +241,9 @@
             </a>
             <a href="{{ route('about.documents') }}" class="nav-mob-item">
                 <i class="fas fa-file text-orange-400 w-4"></i> Document Gallery
+            </a>
+            <a href="{{ route('about.objectives') }}" class="nav-mob-item">
+                <i class="fas fa-list-ul text-orange-400 w-4"></i> Objectives of Trust
             </a>
             <p class="nav-mob-section">Media</p>
             <a href="{{ route('gallery') }}" class="nav-mob-item">
@@ -265,14 +275,18 @@
 
 
 {{-- ─── Ticker ──────────────────────────────────────────────────── --}}
+@php
+    $tickerText = \App\Models\SiteSetting::get('ticker')
+        ?: \App\Models\SiteSetting::get('ticker_text', 'Welcome to '.$siteName.' | Love All, Serve All | Join us in our mission of compassion and service');
+@endphp
 <div class="bg-emerald-700 text-white py-1.5 overflow-hidden text-xs">
     <div class="ticker-wrap">
         <div class="ticker-content font-medium">
             <i class="fas fa-bullhorn text-yellow-300 mr-3"></i>
-            {{ \App\Models\SiteSetting::get('ticker_text', 'All donations are eligible for tax exemption — 12A & 80G CSR Registered Organisation. Support Neem Karoli Baba Charitable Trust today!') }}
+            {{ $tickerText }}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <i class="fas fa-hand-holding-heart text-yellow-300 mr-3"></i>
-            {{ \App\Models\SiteSetting::get('ticker_text', 'Love All, Serve All — Join us in our mission of compassion and service') }}
+            {{ $tickerText }}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     </div>

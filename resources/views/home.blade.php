@@ -113,10 +113,10 @@
             @endforeach
         </div>
 
-        <div class="swiper-button-prev !text-white !w-10 !h-10 !bg-black/30 !rounded-full backdrop-blur-sm after:!text-sm hover:!bg-orange-600 transition-colors"
-             style="border:1px solid rgba(255,255,255,.18);"></div>
-        <div class="swiper-button-next !text-white !w-10 !h-10 !bg-black/30 !rounded-full backdrop-blur-sm after:!text-sm hover:!bg-orange-600 transition-colors"
-             style="border:1px solid rgba(255,255,255,.18);"></div>
+        <div class="swiper-button-prev !text-white !w-14 !h-14 !bg-black/40 !rounded-full backdrop-blur-sm after:!text-base hover:!bg-orange-600 transition-all duration-300"
+             style="border:1.5px solid rgba(255,255,255,.28);box-shadow:0 4px 20px rgba(0,0,0,.35);"></div>
+        <div class="swiper-button-next !text-white !w-14 !h-14 !bg-black/40 !rounded-full backdrop-blur-sm after:!text-base hover:!bg-orange-600 transition-all duration-300"
+             style="border:1.5px solid rgba(255,255,255,.28);box-shadow:0 4px 20px rgba(0,0,0,.35);"></div>
         <div class="swiper-pagination" style="bottom:20px;"></div>
     </div>
 </section>
@@ -237,7 +237,7 @@
             </div>
 
             <div class="flex flex-wrap gap-3">
-                <a href="{{ route('about.founders') }}"
+                <a href="{{ route('about') }}"
                    class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-7 rounded-xl transition shadow-lg text-sm">
                     Learn More <i class="fas fa-arrow-right text-xs"></i>
                 </a>

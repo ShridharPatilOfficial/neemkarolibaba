@@ -6,7 +6,7 @@
 
 /* ─── Global base font size (scales all rem units up ~12.5%)
    Header and hero slider are reset to original 16px below. ──── */
-html { font-size: 18px; }
+html { font-size: 18px; scroll-behavior: smooth; }
 
 /* Reset header & slider to original 16px so they don't grow */
 #site-header,
@@ -296,16 +296,32 @@ html { font-size: 18px; }
 @media (max-width: 767px) {
   .hero-redesign,
   .hero-redesign .hero-slide-wrap {
-    height: 70vw;
-    max-height: 420px;
-    min-height: 300px;
+    height: 88vw;
+    max-height: 480px;
+    min-height: 340px;
+  }
+  /* Lighten overlay so background image is visible */
+  .hero-overlay-new {
+    background: linear-gradient(to bottom,
+      rgba(0,0,0,.05) 0%,
+      rgba(8,5,25,.25) 45%,
+      rgba(8,5,25,.85) 100%);
+  }
+  /* Push content to bottom so image shows at top */
+  .hero-content-new {
+    align-items: flex-end !important;
+    padding: 1.2rem 1rem 1.4rem !important;
+    text-align: center;
+    justify-content: center;
   }
 }
 .hero-overlay-new {
-  background: linear-gradient(112deg,
-    rgba(8,5,25,.94) 0%,
-    rgba(12,9,32,.78) 38%,
-    rgba(0,0,0,.2) 100%);
+  /* Desktop: left-to-right fade — dark enough for text on left, fades to show image on right */
+  background: linear-gradient(105deg,
+    rgba(8,5,25,.82) 0%,
+    rgba(8,5,25,.68) 28%,
+    rgba(8,5,25,.35) 55%,
+    rgba(0,0,0,.08) 100%);
 }
 .hero-content-new {
   position: absolute; inset: 0;
@@ -329,13 +345,13 @@ html { font-size: 18px; }
 }
 .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: #F97316; animation: pulse 2s infinite; }
 .hero-title-new {
-  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.8rem);
   font-weight: 900;
   color: #fff;
-  line-height: 1.12;
-  letter-spacing: -.02em;
-  text-shadow: 0 4px 32px rgba(0,0,0,.5);
-  margin-bottom: .75rem;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  text-shadow: 0 4px 32px rgba(0,0,0,.6);
+  margin-bottom: .85rem;
 }
 .hero-title-new em {
   font-style: normal;
@@ -345,11 +361,12 @@ html { font-size: 18px; }
   background-clip: text;
 }
 .hero-sub-new {
-  color: rgba(255,255,255,.72);
-  font-size: clamp(.7rem, 1vw, .82rem);
-  max-width: 420px;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  color: rgba(255,255,255,.82);
+  font-size: clamp(.75rem, 1.1vw, .95rem);
+  max-width: 460px;
+  line-height: 1.65;
+  margin-bottom: 1.75rem;
+  text-shadow: 0 2px 12px rgba(0,0,0,.5);
 }
 .hero-btns { display: flex; gap: .85rem; flex-wrap: wrap; }
 @media (max-width: 768px) { .hero-btns { justify-content: center; } }
@@ -868,11 +885,12 @@ html { font-size: 18px; }
   /* Nav */
   .nav-inner { height: 54px; }
 
-  /* Hero */
-  .hero-content-new { padding: 1.5rem 1rem; text-align: center; justify-content: center; }
-  .hero-title-new { font-size: clamp(1.1rem, 5vw, 1.5rem); }
-  .hero-sub-new   { font-size: .72rem; max-width: 100%; }
-  .hero-btns { justify-content: center; }
+  /* Hero — mobile: compact content block at bottom, image visible at top */
+  .hero-eyebrow   { font-size: .6rem; padding: .25rem .75rem; margin-bottom: .6rem; }
+  .hero-title-new { font-size: clamp(1rem, 4.5vw, 1.35rem); margin-bottom: .5rem; }
+  .hero-sub-new   { font-size: .68rem; max-width: 100%; margin-bottom: .6rem; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .hero-btns      { justify-content: center; gap: .5rem; }
+  .hero-btns a, .hero-btns button { padding: .5rem 1rem; font-size: .72rem; }
 
   /* Stats strip */
   .stats-strip .grid { grid-template-columns: repeat(2, 1fr) !important; gap: .5rem !important; }

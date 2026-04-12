@@ -23,11 +23,12 @@ class FounderMemberController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'       => ['required', 'string', 'max:100'],
-            'role'       => ['required', 'string', 'max:100'],
-            'photo'      => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
-            'sort_order' => ['integer', 'min:0'],
-            'is_active'  => ['boolean'],
+            'name'        => ['required', 'string', 'max:100'],
+            'role'        => ['required', 'string', 'max:100'],
+            'website_url' => ['nullable', 'url', 'max:255'],
+            'photo'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
+            'sort_order'  => ['integer', 'min:0'],
+            'is_active'   => ['boolean'],
         ]);
 
         $photoUrl = null;
@@ -36,11 +37,12 @@ class FounderMemberController extends Controller
         }
 
         FounderMember::create([
-            'name'       => $data['name'],
-            'role'       => $data['role'],
-            'photo_url'  => $photoUrl,
-            'sort_order' => $data['sort_order'] ?? 0,
-            'is_active'  => $request->boolean('is_active'),
+            'name'        => $data['name'],
+            'role'        => $data['role'],
+            'website_url' => $data['website_url'] ?? null,
+            'photo_url'   => $photoUrl,
+            'sort_order'  => $data['sort_order'] ?? 0,
+            'is_active'   => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.members.index')->with('success', 'Member added.');
@@ -54,11 +56,12 @@ class FounderMemberController extends Controller
     public function update(Request $request, FounderMember $member)
     {
         $data = $request->validate([
-            'name'       => ['required', 'string', 'max:100'],
-            'role'       => ['required', 'string', 'max:100'],
-            'photo'      => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
-            'sort_order' => ['integer', 'min:0'],
-            'is_active'  => ['boolean'],
+            'name'        => ['required', 'string', 'max:100'],
+            'role'        => ['required', 'string', 'max:100'],
+            'website_url' => ['nullable', 'url', 'max:255'],
+            'photo'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
+            'sort_order'  => ['integer', 'min:0'],
+            'is_active'   => ['boolean'],
         ]);
 
         $photoUrl = $member->photo_url;
@@ -70,11 +73,12 @@ class FounderMemberController extends Controller
         }
 
         $member->update([
-            'name'       => $data['name'],
-            'role'       => $data['role'],
-            'photo_url'  => $photoUrl,
-            'sort_order' => $data['sort_order'] ?? 0,
-            'is_active'  => $request->boolean('is_active'),
+            'name'        => $data['name'],
+            'role'        => $data['role'],
+            'website_url' => $data['website_url'] ?? null,
+            'photo_url'   => $photoUrl,
+            'sort_order'  => $data['sort_order'] ?? 0,
+            'is_active'   => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.members.index')->with('success', 'Member updated.');

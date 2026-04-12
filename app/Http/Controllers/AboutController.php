@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Models\FounderMember;
 use App\Models\OrgProfile;
+use App\Models\TrustObjective;
 
 class AboutController extends Controller
 {
     public function index()
     {
-        return view('about.index');
+        $profiles = OrgProfile::orderBy('sort_order')->orderBy('sl_no')->get();
+        return view('about.index', compact('profiles'));
     }
 
     public function founderMembers()
@@ -29,5 +31,11 @@ class AboutController extends Controller
     {
         $documents = Document::where('is_active', true)->orderBy('sort_order')->get();
         return view('about.documents', compact('documents'));
+    }
+
+    public function objectives()
+    {
+        $objectives = TrustObjective::where('is_active', true)->orderBy('sort_order')->get();
+        return view('about.objectives', compact('objectives'));
     }
 }

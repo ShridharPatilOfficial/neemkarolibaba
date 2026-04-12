@@ -10,6 +10,7 @@ class DonateController extends Controller
     {
         $settings = [
             'description'    => DonateSetting::get('description', 'Your donation can make a significant impact in the lives of those in need. By contributing to Neem Karoli Baba Charitable Trust, you support vital initiatives in education, health, and empowerment.'),
+            'account_holder' => DonateSetting::get('account_holder', ''),
             'bank_name'      => DonateSetting::get('bank_name', 'Axis Bank'),
             'branch_name'    => DonateSetting::get('branch_name', 'CHANDIGARH, 160047'),
             'account_number' => DonateSetting::get('account_number', '924020005347509'),

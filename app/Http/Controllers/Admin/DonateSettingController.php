@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class DonateSettingController extends Controller
 {
     private array $fields = [
-        'description', 'bank_name', 'branch_name', 'account_number', 'ifsc_code', 'upi_id', 'tax_note',
+        'description', 'account_holder', 'bank_name', 'branch_name', 'account_number', 'ifsc_code', 'upi_id', 'tax_note',
     ];
 
     public function index()
@@ -27,6 +27,7 @@ class DonateSettingController extends Controller
     {
         $request->validate([
             'description'    => ['nullable', 'string', 'max:1000'],
+            'account_holder' => ['nullable', 'string', 'max:150'],
             'bank_name'      => ['required', 'string', 'max:100'],
             'branch_name'    => ['required', 'string', 'max:100'],
             'account_number' => ['required', 'string', 'max:30'],

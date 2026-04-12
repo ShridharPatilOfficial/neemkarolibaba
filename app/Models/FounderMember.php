@@ -8,7 +8,7 @@ class FounderMember extends Model
 {
     protected $table = 'founder_members';
 
-    protected $fillable = ['name', 'role', 'photo_url', 'sort_order', 'is_active'];
+    protected $fillable = ['name', 'role', 'website_url', 'photo_url', 'sort_order', 'is_active'];
 
     protected $casts = ['is_active' => 'boolean'];
 }
