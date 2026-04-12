@@ -360,12 +360,25 @@ html { font-size: 18px; scroll-behavior: smooth; }
 
 @media (max-width: 767px) {
   .hero-bottom-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: .75rem;
-    padding: 1rem 1.1rem 1.2rem;
+    flex-direction: row;
+    align-items: center;
+    gap: .6rem;
+    padding: .75rem .9rem 1rem;
   }
-  .hbb-divider { display: none; }
+  .hbb-left {
+    flex: 0 1 50%;
+    max-width: 50%;
+  }
+  .hbb-divider {
+    display: block;
+    width: 1px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .hbb-right {
+    flex: 1;
+    min-width: 0;
+  }
   .hbb-right .hero-sub-new { display: none; }
 }
 .hero-eyebrow {
