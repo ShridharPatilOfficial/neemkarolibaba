@@ -37,7 +37,7 @@ class DonateSettingController extends Controller
         ]);
 
         foreach ($this->fields as $key) {
-            DonateSetting::set($key, $request->input($key, ''));
+            DonateSetting::set($key, (string) ($request->input($key) ?? ''));
         }
 
         if ($request->hasFile('qr_image')) {
