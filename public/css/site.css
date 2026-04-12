@@ -4,6 +4,19 @@
    Colors: Saffron #F97316 | Dark #0C0920 | Gold #FCD34D
 ═══════════════════════════════════════════════════════════════ */
 
+/* ─── Global base font size (scales all rem units up ~12.5%)
+   Header and hero slider are reset to original 16px below. ──── */
+html { font-size: 18px; }
+
+/* Reset header & slider to original 16px so they don't grow */
+#site-header,
+#main-nav,
+.hero-redesign,
+.hero-redesign * { font-size-adjust: none; }
+#site-header { font-size: 16px; }
+#main-nav    { font-size: 16px; }
+.hero-redesign { font-size: 16px; }
+
 /* ─── Global tokens ──────────────────────────────────────────── */
 :root {
   --s-dark:    #0C0920;
