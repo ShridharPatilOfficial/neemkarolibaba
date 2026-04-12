@@ -908,6 +908,12 @@
   .donate-anim-btn { padding: .8rem 1.5rem; font-size: .88rem; }
 }
 
+/* ─── Horizontal media card — mobile stacks vertically ─────────── */
+@media (max-width: 600px) {
+  .media-card.flex-row { flex-direction: column !important; }
+  .media-card.flex-row > div:first-child { width: 100% !important; height: 180px; position: relative; }
+}
+
 /* ─── Rich-text rendered output (from Quill editor) ────────────
    Apply .rich-text on any wrapper that renders {!! $html !!}
    Light version (.rich-text) for white/light backgrounds.

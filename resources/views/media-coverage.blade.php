@@ -57,12 +57,12 @@
             </div>
         </div>
 
-        {{-- Cards grid --}}
-        <div id="items-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {{-- Cards list (horizontal) --}}
+        <div id="items-container" class="flex flex-col gap-4">
             @forelse($coverages as $coverage)
-                @include('partials.media-coverage-cards', ['coverages' => collect([$coverage])])
+                @include('partials.media-coverage-cards', ['coverages' => collect([$coverage]), 'horizontal' => true])
             @empty
-            <div class="col-span-3 text-center py-24">
+            <div class="text-center py-24">
                 <div class="w-24 h-24 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-newspaper text-purple-300 text-4xl"></i>
                 </div>
