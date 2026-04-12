@@ -162,8 +162,8 @@
                 ['emerald', 'from-emerald-500 to-teal-600', 'bg-emerald-50'],
             ];
             $fallbackPrinciples = collect([
-                (object)['icon'=>'fa-dove','color_theme'=>'orange','title'=>'Mission','description'=>"To serve humanity through compassion, education, and healthcare — inspired by Neem Karoli Baba's teaching: \"Love all, serve all.\"",'link_url'=>route('about')],
-                (object)['icon'=>'fa-eye','color_theme'=>'purple','title'=>'Vision','description'=>'A society where every individual, regardless of caste or creed, has access to care, knowledge, and dignity.','link_url'=>route('about')],
+                (object)['icon'=>'fa-dove','color_theme'=>'orange','title'=>'Mission','description'=>"To serve humanity through compassion, education, and healthcare — inspired by Neem Karoli Baba's teaching: \"Love all, serve all.\"",'link_url'=>route('about.objectives')],
+                (object)['icon'=>'fa-eye','color_theme'=>'purple','title'=>'Vision','description'=>'A society where every individual, regardless of caste or creed, has access to care, knowledge, and dignity.','link_url'=>route('about.objectives')],
                 (object)['icon'=>'fa-bullseye','color_theme'=>'emerald','title'=>'Objectives','description'=>'Free healthcare, education support, community feeding, and interfaith harmony — creating lasting positive impact.','link_url'=>route('about.objectives')],
             ]);
             $displayPrinciples = $principles->count() ? $principles : $fallbackPrinciples;
@@ -181,7 +181,7 @@
                 </div>
                 <h3 class="pc-title">{{ $card->title }}</h3>
                 <div class="pc-desc rich-text">{!! $card->description !!}</div>
-                <a href="{{ $card->link_url ?? route('about.founders') }}" class="pc-link pc-link-{{ $colorName }}">
+                <a href="{{ $card->link_url ?? route('about.objectives') }}" class="pc-link pc-link-{{ $colorName }}">
                     Learn More <i class="fas fa-arrow-right text-xs"></i>
                 </a>
             </div>
