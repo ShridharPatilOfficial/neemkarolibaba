@@ -18,11 +18,11 @@
             flex flex-row gap-0">
 
     {{-- Thumbnail (fixed width left panel) --}}
-    <div class="relative flex-shrink-0 overflow-hidden bg-gray-100" style="width:220px; min-height:140px;">
+    <div class="relative flex-shrink-0 overflow-hidden bg-gray-100" style="width:220px; height:160px;">
         <img src="{{ $img }}" alt="{{ $c->title }}"
-             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-zoom-in"
+             class="group-hover:scale-105 transition-transform duration-500 cursor-zoom-in"
              onclick="imgLb(this)" data-full="{{ $img }}" data-caption="{{ $c->title }}"
-             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+             style="width:100%;height:100%;object-fit:cover;display:block;">
 
         {{-- Category badge --}}
         <span class="absolute top-2 left-2 {{ $catColor }} text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 z-10">
