@@ -297,16 +297,23 @@ html { font-size: 18px; scroll-behavior: smooth; }
 @media (max-width: 767px) {
   .hero-redesign,
   .hero-redesign .hero-slide-wrap {
-    height: 88vw;
-    max-height: 480px;
-    min-height: 340px;
+    height: 92vw;
+    max-height: 520px;
+    min-height: 360px;
+    background: #0C0920;
   }
-  /* Lighten overlay so background image is visible */
+  /* object-contain so full image is always visible on mobile */
+  .hero-redesign .hero-slide-img {
+    object-fit: contain;
+    object-position: center top;
+  }
+  /* Lighter overlay — only a thin dark strip at bottom for text legibility */
   .hero-overlay-new {
     background: linear-gradient(to bottom,
-      rgba(0,0,0,.05) 0%,
-      rgba(8,5,25,.25) 45%,
-      rgba(8,5,25,.85) 100%);
+      rgba(0,0,0,.0) 0%,
+      rgba(0,0,0,.0) 55%,
+      rgba(8,5,25,.72) 85%,
+      rgba(8,5,25,.88) 100%);
   }
 }
 .hero-overlay-new {
@@ -325,11 +332,9 @@ html { font-size: 18px; scroll-behavior: smooth; }
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 1.4rem 3rem 1.6rem;
-  background: rgba(8,5,25,.45);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255,255,255,.1);
+  padding: 1.2rem 3rem 1.4rem;
+  background: transparent;
+  border-top: 1px solid rgba(255,255,255,.08);
 }
 .hbb-left {
   flex: 0 1 45%;
@@ -365,24 +370,23 @@ html { font-size: 18px; scroll-behavior: smooth; }
 }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;
-  background: rgba(249,115,22,.18);
-  border: 1px solid rgba(249,115,22,.4);
+  background: rgba(249,115,22,.15);
+  border: 1px solid rgba(249,115,22,.35);
   color: #FDBA74;
-  font-size: .63rem; font-weight: 700;
-  padding: .35rem 1rem; border-radius: 100px;
+  font-size: .6rem; font-weight: 700;
+  padding: .3rem .85rem; border-radius: 100px;
   letter-spacing: .07em; text-transform: uppercase;
-  margin-bottom: 1.1rem;
-  backdrop-filter: blur(6px);
+  margin-bottom: .85rem;
 }
 .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: #F97316; animation: pulse 2s infinite; }
 .hero-title-new {
-  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  font-size: clamp(.85rem, 1.4vw, 1.2rem);
   font-weight: 900;
   color: #fff;
   line-height: 1.25;
   letter-spacing: -.02em;
   text-shadow: 0 4px 32px rgba(0,0,0,.6);
-  margin-bottom: .85rem;
+  margin-bottom: .65rem;
   white-space: normal;
   word-break: break-word;
 }
@@ -919,9 +923,9 @@ html { font-size: 18px; scroll-behavior: smooth; }
   .nav-inner { height: 54px; }
 
   /* Hero — mobile: compact content block at bottom, image visible at top */
-  .hero-eyebrow   { font-size: .6rem; padding: .25rem .75rem; margin-bottom: .6rem; }
-  .hero-title-new { font-size: clamp(1rem, 4.5vw, 1.35rem); margin-bottom: .5rem; }
-  .hero-sub-new   { font-size: .68rem; max-width: 100%; margin-bottom: .6rem; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .hero-eyebrow   { font-size: .55rem; padding: .22rem .65rem; margin-bottom: .4rem; }
+  .hero-title-new { font-size: clamp(.8rem, 3.8vw, 1.1rem); margin-bottom: .4rem; }
+  .hero-sub-new   { font-size: .62rem; max-width: 100%; margin-bottom: .5rem; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .hero-btns      { justify-content: center; gap: .5rem; }
   .hero-btns a, .hero-btns button { padding: .5rem 1rem; font-size: .72rem; }
 
