@@ -666,7 +666,7 @@
                 <div class="p-5 flex flex-col flex-1">
                     <h3 class="font-bold text-gray-900 text-sm leading-snug mb-2">{{ $cov->title }}</h3>
                     @if($cov->description)
-                    <p class="text-gray-500 text-xs leading-relaxed mb-4 flex-1">{{ $cov->description }}</p>
+                    <div class="text-gray-500 text-xs mb-4 flex-1 rich-text">{!! $cov->description !!}</div>
                     @else
                     <div class="flex-1"></div>
                     @endif
