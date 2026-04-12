@@ -334,14 +334,14 @@
         <div class="grid grid-cols-6 gap-1">
             @foreach($hourly as $h => $cnt)
             @php
-                $opacity = $hMax > 0 && $cnt > 0 ? max(0.15, $cnt / $hMax) : 0;
+                $opacity = $hMax > 0 && $cnt > 0 ? max(0.12, round($cnt / $hMax, 2)) : 0;
                 $bg = $cnt > 0 ? "background:rgba(79,70,229,{$opacity})" : 'background:#f1f5f9';
             @endphp
             <div title="{{ sprintf('%02d:00', $h) }}: {{ $cnt }} visits"
-                 class="rounded-md flex flex-col items-center justify-center py-1.5 cursor-default"
-                 style="{{ $bg }}; aspect-ratio:1;">
-                <span class="text-[9px] font-bold {{ $cnt > 0 ? 'text-indigo-800' : 'text-gray-300' }}">{{ sprintf('%02d', $h) }}</span>
-                @if($cnt > 0)<span class="text-[8px] {{ $cnt > 0 ? 'text-indigo-600' : 'text-gray-300' }}">{{ $cnt }}</span>@endif
+                 class="rounded-md flex flex-col items-center justify-center cursor-default"
+                 style="{{ $bg }}; height:42px; min-width:0;">
+                <span class="text-[9px] font-bold leading-none {{ $cnt > 0 ? 'text-indigo-800' : 'text-gray-300' }}">{{ sprintf('%02d', $h) }}</span>
+                @if($cnt > 0)<span class="text-[8px] leading-none text-indigo-600 mt-0.5">{{ $cnt }}</span>@endif
             </div>
             @endforeach
         </div>
