@@ -308,30 +308,58 @@ html { font-size: 18px; scroll-behavior: smooth; }
       rgba(8,5,25,.25) 45%,
       rgba(8,5,25,.85) 100%);
   }
-  /* Push content to bottom so image shows at top */
-  .hero-content-new {
-    align-items: flex-end !important;
-    padding: 1.2rem 1rem 1.4rem !important;
-    text-align: center;
-    justify-content: center;
-  }
 }
 .hero-overlay-new {
-  /* Desktop: left-to-right fade — dark enough for text on left, fades to show image on right */
-  background: linear-gradient(105deg,
-    rgba(8,5,25,.82) 0%,
-    rgba(8,5,25,.68) 28%,
-    rgba(8,5,25,.35) 55%,
-    rgba(0,0,0,.08) 100%);
+  /* Bottom-fade only — image clearly visible, dark only near the bottom bar */
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,.0) 0%,
+    rgba(0,0,0,.08) 50%,
+    rgba(8,5,25,.55) 75%,
+    rgba(8,5,25,.75) 100%);
 }
-.hero-content-new {
-  position: absolute; inset: 0;
-  display: flex; align-items: center;
-  z-index: 4;
-  padding: 2rem 3rem 2rem 4rem;
+
+/* ── Bottom horizontal bar ─────────────────────────────────── */
+.hero-bottom-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.4rem 3rem 1.6rem;
+  background: rgba(8,5,25,.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255,255,255,.1);
 }
-@media (max-width: 768px) {
-  .hero-content-new { padding: 2rem 1.5rem; text-align: center; justify-content: center; }
+.hbb-left {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.hbb-divider {
+  width: 1px;
+  height: 60px;
+  background: rgba(255,255,255,.2);
+  flex-shrink: 0;
+}
+.hbb-right {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 767px) {
+  .hero-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .75rem;
+    padding: 1rem 1.1rem 1.2rem;
+  }
+  .hbb-divider { display: none; }
+  .hbb-right .hero-sub-new { display: none; }
 }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: .5rem;

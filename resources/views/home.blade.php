@@ -76,24 +76,28 @@
                     </div>
                 </div>
 
-                {{-- Main text --}}
-                <div class="hero-content-new" style="z-index:4;">
-                    <div class="max-w-xl">
-                        <div class="hero-text-in">
-                            <span class="hero-eyebrow">
-                                <span class="dot"></span>
-                                {{ $siteName }}
-                            </span>
-                        </div>
-                        <h2 class="hero-text-in hero-title-new">
+                {{-- Bottom horizontal content bar --}}
+                <div class="hero-bottom-bar" style="z-index:4;">
+                    {{-- Left: eyebrow + title --}}
+                    <div class="hbb-left hero-text-in">
+                        <span class="hero-eyebrow" style="margin-bottom:.5rem;">
+                            <span class="dot"></span>
+                            {{ $siteName }}
+                        </span>
+                        <h2 class="hero-title-new" style="margin-bottom:0;">
                             {!! $slide['caption'] !!}
                         </h2>
-                        <p class="hero-text-in hero-sub-new">
+                    </div>
+                    {{-- Divider --}}
+                    <div class="hbb-divider"></div>
+                    {{-- Right: description + buttons --}}
+                    <div class="hbb-right hero-text-in">
+                        <p class="hero-sub-new" style="margin-bottom:1rem;max-width:100%;">
                             Inspired by the teachings of Neem Karoli Baba —
                             <em style="font-style:normal;color:#FDBA74;font-weight:600;">"Love all, serve all."</em>
                         </p>
-                        <div class="hero-text-in hero-btns">
-                            <a href="{{ route('about.founders') }}" class="hbtn-primary">
+                        <div class="hero-btns">
+                            <a href="{{ route('about') }}" class="hbtn-primary">
                                 About Us <i class="fas fa-arrow-right text-xs"></i>
                             </a>
                             <a href="{{ route('donate') }}" class="hbtn-ghost">
