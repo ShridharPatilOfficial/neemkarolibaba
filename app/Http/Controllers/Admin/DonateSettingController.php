@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Storage;
 class DonateSettingController extends Controller
 {
     private array $fields = [
-        'description', 'account_holder', 'bank_name', 'branch_name', 'account_number', 'ifsc_code', 'upi_id', 'tax_note',
+        'description', 'account_holder', 'bank_name', 'branch_name', 'account_number', 'ifsc_code', 'upi_id',
+        'tax_title', 'tax_desc',
     ];
 
     public function index()
@@ -33,7 +34,8 @@ class DonateSettingController extends Controller
             'account_number' => ['required', 'string', 'max:30'],
             'ifsc_code'      => ['required', 'string', 'max:20'],
             'upi_id'         => ['nullable', 'string', 'max:50'],
-            'tax_note'       => ['nullable', 'string', 'max:300'],
+            'tax_title'      => ['nullable', 'string', 'max:100'],
+            'tax_desc'       => ['nullable', 'string', 'max:500'],
             'qr_image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
         ]);
 

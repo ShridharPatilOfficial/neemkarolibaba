@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\SubmissionController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\PrincipleController;
 use App\Http\Controllers\Admin\TrustObjectiveController;
+use App\Http\Controllers\Admin\TaxBadgeController;
 use App\Http\Controllers\Admin\WorkVideoController;
 use App\Http\Controllers\Admin\MediaCoverageController as AdminMediaCoverageController;
 use App\Http\Controllers\Admin\AnalyticsController;
@@ -118,6 +119,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/donate-settings', [DonateSettingController::class, 'index'])->name('donate.index');
         Route::post('/donate-settings', [DonateSettingController::class, 'update'])->name('donate.update');
+
+        Route::resource('tax-badges', TaxBadgeController::class)->except(['show'])
+            ->parameters(['tax-badges' => 'taxBadge']);
 
         Route::get('/submissions/join-us', [SubmissionController::class, 'joinUs'])->name('submissions.join-us');
         Route::delete('/submissions/join-us/{joinUsSubmission}', [SubmissionController::class, 'destroyJoin'])->name('submissions.join-us.destroy');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DonateSetting;
+use App\Models\TaxBadge;
 
 class DonateController extends Controller
 {
@@ -17,9 +18,16 @@ class DonateController extends Controller
             'ifsc_code'      => DonateSetting::get('ifsc_code', 'UTIB0004866'),
             'qr_image'       => DonateSetting::get('qr_image', ''),
             'upi_id'         => DonateSetting::get('upi_id', ''),
-            'tax_note'       => DonateSetting::get('tax_note', 'Donations to Neem Karoli Baba Charitable Trust are eligible for tax benefits under Section 80G.'),
+            'tax_title'      => DonateSetting::get('tax_title', 'Tax Exemption'),
+            'tax_desc'       => DonateSetting::get('tax_desc', 'All donations are eligible for tax exemption under Section 80G of the Income Tax Act. Certificate provided on request.'),
         ];
 
-        return view('donate', compact('settings'));
+        $taxBadges = TaxBadge::with('document')
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        return view('donate', compact('settings', 'taxBadges'));
     }
 }

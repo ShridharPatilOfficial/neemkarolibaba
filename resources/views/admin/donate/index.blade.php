@@ -28,17 +28,38 @@
         {{-- UPI Details --}}
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
             <h3 class="text-base font-bold text-gray-800 mb-4 pb-3 border-b border-gray-100">UPI Details</h3>
-            <div class="mb-4">
+            <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">UPI ID</label>
                 <input type="text" name="upi_id" value="{{ $settings['upi_id'] ?? '' }}"
                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm font-mono"
                        placeholder="yourname@bankname">
             </div>
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Tax Exemption Note (80G / 12A info)</label>
-                <textarea name="tax_note" rows="3"
-                          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm resize-y"
-                          placeholder="Donations are tax-exempt under 80G. Reg: XXXXXX">{{ $settings['tax_note'] ?? '' }}</textarea>
+        </div>
+
+        {{-- Tax Exemption Card Settings --}}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 lg:col-span-2">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                <h3 class="text-base font-bold text-gray-800">Tax Exemption Card</h3>
+                <a href="{{ route('admin.tax-badges.index') }}"
+                   class="inline-flex items-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 font-semibold text-xs px-4 py-2 rounded-lg transition">
+                    <i class="fas fa-certificate"></i> Manage Badges (80G, 12A…)
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Card Title</label>
+                    <input type="text" name="tax_title" value="{{ $settings['tax_title'] ?? '' }}"
+                           class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm"
+                           placeholder="Tax Exemption">
+                    <p class="text-xs text-gray-400 mt-1">Leave blank to use default "Tax Exemption"</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Card Description</label>
+                    <textarea name="tax_desc" rows="3"
+                              class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm resize-y"
+                              placeholder="All donations are eligible for tax exemption under Section 80G of the Income Tax Act.">{{ $settings['tax_desc'] ?? '' }}</textarea>
+                    <p class="text-xs text-gray-400 mt-1">Description shown inside the orange tax card</p>
+                </div>
             </div>
         </div>
 

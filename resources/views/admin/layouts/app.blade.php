@@ -107,6 +107,9 @@
         <a href="{{ route('admin.donate.index') }}" class="admin-nav-link {{ request()->routeIs('admin.donate*') ? 'active' : '' }}">
             <i class="fas fa-donate"></i> Donate Settings
         </a>
+        <a href="{{ route('admin.tax-badges.index') }}" class="admin-nav-link {{ request()->routeIs('admin.tax-badges*') ? 'active' : '' }}">
+            <i class="fas fa-certificate"></i> Tax Badges
+        </a>
 
         <p class="admin-section-title">Submissions</p>
         <a href="{{ route('admin.submissions.join-us') }}" class="admin-nav-link {{ request()->routeIs('admin.submissions.join-us') ? 'active' : '' }}">

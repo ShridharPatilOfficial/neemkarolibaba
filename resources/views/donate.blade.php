@@ -87,19 +87,19 @@
                     {{-- Details --}}
                     <div class="p-4 space-y-1">
                         @foreach(array_filter([
-                            ($settings['account_holder'] ?? '') ? ['fa-user',           'orange', 'Account Holder',   $settings['account_holder']] : null,
-                            ['fa-university',       'blue',   'Bank Name',       $settings['bank_name']       ?? '—'],
-                            ['fa-map-marker-alt',   'indigo', 'Branch',          $settings['branch_name']     ?? '—'],
-                            ['fa-hashtag',          'purple', 'Account Number',  $settings['account_number']  ?? '—'],
-                            ['fa-code',             'violet', 'IFSC Code',       $settings['ifsc_code']       ?? '—'],
-                        ]) as [$icon, $color, $label, $value])
+                            ($settings['account_holder'] ?? '') ? ['fa-user',           'orange', 'Account Holder',   $settings['account_holder'],  true ] : null,
+                            ['fa-university',       'blue',   'Bank Name',       $settings['bank_name']       ?? '—', false],
+                            ['fa-map-marker-alt',   'indigo', 'Branch',          $settings['branch_name']     ?? '—', false],
+                            ['fa-hashtag',          'purple', 'Account Number',  $settings['account_number']  ?? '—', false],
+                            ['fa-code',             'violet', 'IFSC Code',       $settings['ifsc_code']       ?? '—', false],
+                        ]) as [$icon, $color, $label, $value, $nowrap])
                         <div class="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
                             <span class="w-8 h-8 rounded-lg bg-{{ $color }}-100 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-{{ $color }}-200 transition">
                                 <i class="fas {{ $icon }} text-{{ $color }}-600 text-xs"></i>
                             </span>
-                            <div class="min-w-0">
+                            <div class="min-w-0 flex-1">
                                 <p class="text-gray-400 text-xs font-semibold uppercase tracking-wider leading-none mb-1">{{ $label }}</p>
-                                <p class="text-gray-800 font-bold text-sm break-all">{{ $value }}</p>
+                                <p class="text-gray-800 font-bold text-sm {{ $nowrap ? 'whitespace-nowrap overflow-hidden text-ellipsis' : 'break-all' }}">{{ $value }}</p>
                             </div>
                             {{-- Copy button --}}
                             <button onclick="copyText('{{ $value }}', this)"
@@ -169,15 +169,32 @@
                     <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mb-4">
                         <i class="fas fa-certificate text-white text-xl"></i>
                     </div>
-                    <h3 class="font-black text-lg mb-2">Tax Exemption</h3>
+                    <h3 class="font-black text-lg mb-2">{{ $settings['tax_title'] ?: 'Tax Exemption' }}</h3>
                     <p class="text-orange-100 text-sm leading-relaxed">
-                        {{ $settings['tax_note'] ?: 'All donations are eligible for tax exemption under Section 80G of the Income Tax Act. Certificate provided on request.' }}
+                        {{ $settings['tax_desc'] ?: 'All donations are eligible for tax exemption under Section 80G of the Income Tax Act. Certificate provided on request.' }}
                     </p>
+                    @if($taxBadges->count())
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        @foreach($taxBadges as $badge)
+                            @if($badge->document)
+                            <a href="{{ route('documents.view', $badge->document->id) }}" target="_blank" rel="noopener"
+                               class="bg-white/20 hover:bg-white/35 border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full transition-all duration-200 cursor-pointer">
+                                {{ $badge->label }}
+                            </a>
+                            @else
+                            <span class="bg-white/20 border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                {{ $badge->label }}
+                            </span>
+                            @endif
+                        @endforeach
+                    </div>
+                    @else
                     <div class="mt-4 flex gap-2">
                         <span class="bg-white/20 border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full">80G</span>
                         <span class="bg-white/20 border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full">12A</span>
                         <span class="bg-white/20 border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full">CSR</span>
                     </div>
+                    @endif
                 </div>
 
                 {{-- How to Donate steps --}}
