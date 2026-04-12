@@ -332,10 +332,12 @@ html { font-size: 18px; scroll-behavior: smooth; }
   border-top: 1px solid rgba(255,255,255,.1);
 }
 .hbb-left {
-  flex: 0 0 auto;
+  flex: 0 1 45%;
+  max-width: 45%;
   display: flex;
   flex-direction: column;
   min-width: 0;
+  word-break: break-word;
 }
 .hbb-divider {
   width: 1px;
@@ -374,13 +376,15 @@ html { font-size: 18px; scroll-behavior: smooth; }
 }
 .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: #F97316; animation: pulse 2s infinite; }
 .hero-title-new {
-  font-size: clamp(1.1rem, 2.4vw, 1.9rem);
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
   font-weight: 900;
   color: #fff;
-  line-height: 1.1;
-  letter-spacing: -.025em;
+  line-height: 1.25;
+  letter-spacing: -.02em;
   text-shadow: 0 4px 32px rgba(0,0,0,.6);
   margin-bottom: .85rem;
+  white-space: normal;
+  word-break: break-word;
 }
 .hero-title-new em {
   font-style: normal;
