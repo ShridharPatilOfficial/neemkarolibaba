@@ -161,34 +161,6 @@
     </div>
 </section>
 
-{{-- ── Vision & Mission ────────────────────────────────────────────────── --}}
-<section class="py-16 px-4 bg-white">
-    <div class="max-w-6xl mx-auto text-center">
-        <span class="section-tag">Our Purpose</span>
-        <h2 class="text-3xl font-black text-gray-900 mt-1 mb-12">Vision &amp; <span class="text-orange-600">Mission</span></h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-2xl p-8 text-left">
-                <div class="w-14 h-14 bg-orange-500 rounded-xl flex items-center justify-center mb-4">
-                    <i class="fas fa-eye text-white text-xl"></i>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Our Vision</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    A society where every individual — regardless of background or circumstance — has access to healthcare, education, and dignity. We envision communities transformed by compassion, seva, and the timeless teachings of Neem Karoli Baba.
-                </p>
-            </div>
-            <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-2xl p-8 text-left">
-                <div class="w-14 h-14 bg-purple-700 rounded-xl flex items-center justify-center mb-4">
-                    <i class="fas fa-bullseye text-white text-xl"></i>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Our Mission</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    To replace hardship with hope by delivering targeted, sustainable programmes in healthcare, education, and community support — working hand-in-hand with generous supporters to ensure essential resources reach the hands that need them most.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
 {{-- ── Explore More ─────────────────────────────────────────────────────── --}}
 <section class="py-16 px-4 bg-gray-50">
     <div class="max-w-6xl mx-auto">
