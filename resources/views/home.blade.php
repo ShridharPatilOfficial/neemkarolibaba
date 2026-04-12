@@ -91,7 +91,6 @@
 
                 {{-- Scroll hint --}}
                 <div class="hero-scroll" style="z-index:5;">
-                    <span>Scroll</span>
                     <div class="hero-scroll-line"></div>
                 </div>
 
