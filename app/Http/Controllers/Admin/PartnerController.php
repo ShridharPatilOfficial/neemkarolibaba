@@ -37,7 +37,7 @@ class PartnerController extends Controller
             'logo_url'    => $path,
             'website_url' => $data['website_url'] ?? null,
             'sort_order'  => $data['sort_order'] ?? 0,
-            'is_active'   => $request->boolean('is_active', true),
+            'is_active'   => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.partners.index')->with('success', 'Partner added successfully.');
@@ -69,7 +69,7 @@ class PartnerController extends Controller
             'logo_url'    => $logoUrl,
             'website_url' => $data['website_url'] ?? null,
             'sort_order'  => $data['sort_order'] ?? 0,
-            'is_active'   => $request->boolean('is_active', true),
+            'is_active'   => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.partners.index')->with('success', 'Partner updated successfully.');

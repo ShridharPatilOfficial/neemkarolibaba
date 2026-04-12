@@ -47,7 +47,7 @@ class PresidentMessageController extends Controller
             'photo_url'       => $photoUrl,
             'message'         => $request->message,
             'signature_url'   => $sigUrl,
-            'is_active'       => $request->boolean('is_active', true),
+            'is_active'       => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.president.index')->with('success', 'Message added.');
@@ -91,7 +91,7 @@ class PresidentMessageController extends Controller
             'photo_url'       => $photoUrl,
             'message'         => $request->message,
             'signature_url'   => $sigUrl,
-            'is_active'       => $request->boolean('is_active', true),
+            'is_active'       => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.president.index')->with('success', 'Message updated.');

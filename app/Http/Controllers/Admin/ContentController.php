@@ -104,7 +104,7 @@ class ContentController extends Controller
             'is_active'   => ['boolean'],
         ]) + [
             'sort_order' => $request->input('sort_order', 0),
-            'is_active'  => $request->boolean('is_active', true),
+            'is_active'  => $request->boolean('is_active'),
         ];
     }
 }

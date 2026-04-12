@@ -35,7 +35,7 @@ class SliderController extends Controller
             'image_url'  => $path,
             'caption'    => $data['caption'] ?? null,
             'sort_order' => $data['sort_order'] ?? 0,
-            'is_active'  => $request->boolean('is_active', true),
+            'is_active'  => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.sliders.index')->with('success', 'Slider added successfully.');
@@ -64,7 +64,7 @@ class SliderController extends Controller
             'image_url'  => $data['image_url'] ?? $slider->image_url,
             'caption'    => $data['caption'] ?? null,
             'sort_order' => $data['sort_order'] ?? 0,
-            'is_active'  => $request->boolean('is_active', true),
+            'is_active'  => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.sliders.index')->with('success', 'Slider updated successfully.');

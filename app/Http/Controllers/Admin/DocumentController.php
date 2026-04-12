@@ -39,7 +39,7 @@ class DocumentController extends Controller
             'file_path'  => $path,
             'file_type'  => $fileType,
             'sort_order' => $data['sort_order'] ?? 0,
-            'is_active'  => $request->boolean('is_active', true),
+            'is_active'  => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.documents.index')->with('success', 'Document added.');
@@ -75,7 +75,7 @@ class DocumentController extends Controller
             'file_path'  => $filePath,
             'file_type'  => $fileType,
             'sort_order' => $data['sort_order'] ?? 0,
-            'is_active'  => $request->boolean('is_active', true),
+            'is_active'  => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.documents.index')->with('success', 'Document updated.');

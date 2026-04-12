@@ -42,7 +42,7 @@ class GalleryItemController extends Controller
             'youtube_url' => $request->youtube_url,
             'type'        => $request->type,
             'sort_order'  => $request->input('sort_order', 0),
-            'is_active'   => $request->boolean('is_active', true),
+            'is_active'   => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery item added.');
@@ -78,7 +78,7 @@ class GalleryItemController extends Controller
             'youtube_url' => $request->youtube_url,
             'type'        => $request->type,
             'sort_order'  => $request->input('sort_order', 0),
-            'is_active'   => $request->boolean('is_active', true),
+            'is_active'   => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery item updated.');

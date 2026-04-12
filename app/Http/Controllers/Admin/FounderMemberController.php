@@ -40,7 +40,7 @@ class FounderMemberController extends Controller
             'role'       => $data['role'],
             'photo_url'  => $photoUrl,
             'sort_order' => $data['sort_order'] ?? 0,
-            'is_active'  => $request->boolean('is_active', true),
+            'is_active'  => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.members.index')->with('success', 'Member added.');
@@ -74,7 +74,7 @@ class FounderMemberController extends Controller
             'role'       => $data['role'],
             'photo_url'  => $photoUrl,
             'sort_order' => $data['sort_order'] ?? 0,
-            'is_active'  => $request->boolean('is_active', true),
+            'is_active'  => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.members.index')->with('success', 'Member updated.');

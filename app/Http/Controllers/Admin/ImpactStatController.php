@@ -34,7 +34,7 @@ class ImpactStatController extends Controller
             'label'        => $data['label'],
             'icon_class'   => $data['icon_class'] ?? null,
             'sort_order'   => $data['sort_order'] ?? 0,
-            'is_active'    => $request->boolean('is_active', true),
+            'is_active'    => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.stats.index')->with('success', 'Stat added.');
@@ -60,7 +60,7 @@ class ImpactStatController extends Controller
             'label'        => $data['label'],
             'icon_class'   => $data['icon_class'] ?? null,
             'sort_order'   => $data['sort_order'] ?? 0,
-            'is_active'    => $request->boolean('is_active', true),
+            'is_active'    => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('admin.stats.index')->with('success', 'Stat updated.');
