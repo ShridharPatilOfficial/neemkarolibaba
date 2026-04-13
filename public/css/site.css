@@ -284,13 +284,14 @@ html { font-size: 18px; scroll-behavior: smooth; }
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
+  background: #0C0920;
 }
 .hero-redesign .hero-slide-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
   display: block;
 }
