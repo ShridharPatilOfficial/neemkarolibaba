@@ -130,9 +130,8 @@
                     <div class="p-6 flex flex-col items-center justify-center text-center h-[calc(100%-72px)]">
                         {{-- QR Code --}}
                         @if($settings['qr_image'])
-                        <div class="mb-4 p-3 bg-white border-2 border-purple-100 rounded-2xl shadow-md inline-block">
-                            <img src="{{ str_starts_with($settings['qr_image'], 'http') ? $settings['qr_image'] : asset('storage/' . $settings['qr_image']) }}"
-                                 alt="UPI QR Code" class="w-44 h-44 object-contain">
+                        <div class="mb-4 p-3 bg-white border-2 border-purple-100 rounded-2xl shadow-md w-full">
+                        <img src="{{ str_starts_with($settings['qr_image'], 'http') ? $settings['qr_image'] : asset('storage/' . $settings['qr_image']) }}" alt="UPI QR Code" class="w-full h-auto object-contain">
                         </div>
                         <p class="text-gray-400 text-xs mb-4">Scan with any UPI app</p>
                         @else
