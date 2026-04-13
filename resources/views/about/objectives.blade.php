@@ -22,6 +22,66 @@
 </script>
 @endpush
 
+
+@push('styles')
+<style>
+.obj-card {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.obj-card.animate-in { opacity: 1; transform: translateY(0); }
+
+/* Card 1 — fade up */
+.anim-fadeup   { transition-timing-function: cubic-bezier(.22,.68,0,1.2); }
+/* Card 2 — fade left */
+.anim-fadeleft { transform: translateX(50px); }
+.anim-fadeleft.animate-in { transform: translateX(0); }
+/* Card 3 — zoom in */
+.anim-zoom     { transform: scale(0.85); opacity: 0; }
+.anim-zoom.animate-in { transform: scale(1); opacity: 1; }
+/* Card 4 — fade right */
+.anim-faderight { transform: translateX(-50px); }
+.anim-faderight.animate-in { transform: translateX(0); }
+/* Card 5 — flip up */
+.anim-flipup   { transform: perspective(600px) rotateX(20deg) translateY(30px); opacity: 0; }
+.anim-flipup.animate-in { transform: perspective(600px) rotateX(0deg) translateY(0); opacity: 1; }
+/* Card 6 — bounce */
+.anim-bounce   { transition-timing-function: cubic-bezier(.34,1.56,.64,1); }
+
+.obj-card:hover {
+    transform: translateY(-6px) scale(1.01) !important;
+    box-shadow: 0 20px 40px rgba(249,115,22,0.12), 0 4px 16px rgba(0,0,0,0.08) !important;
+    border-color: #fdba74 !important;
+}
+
+/* Number badge pulse on hover */
+.obj-card:hover .obj-num {
+    animation: badgePop 0.4s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes badgePop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.3) rotate(-8deg); }
+    100% { transform: scale(1.1); }
+}
+
+/* Shimmer line at top of each card */
+.obj-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 2px 2px 0 0;
+    background: linear-gradient(90deg, #f97316, #fcd34d, #fb923c);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+.obj-card:hover::before { transform: scaleX(1); }
+</style>
+@endpush
+
+
 @section('content')
 
 {{-- Banner --}}
@@ -56,8 +116,13 @@
         @if($objectives->count())
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @foreach($objectives as $i => $obj)
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-orange-200
-                        transition-all duration-300 overflow-hidden flex flex-col">
+            @php
+    $animClasses = ['anim-fadeup','anim-fadeleft','anim-zoom','anim-faderight','anim-flipup','anim-bounce'];
+    $anim = $animClasses[$loop->index % count($animClasses)];
+    $delay = ($loop->index % 2) * 100; // stagger left/right columns
+@endphp
+<div class="obj-card {{ $anim }} bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col relative"
+     style="transition-delay: {{ $delay }}ms;">
 
                 {{-- Optional image --}}
                 @if($obj->image_url)
@@ -120,3 +185,18 @@
 </section>
 
 @endsection
+
+@push('scripts')
+<script>
+const cards = document.querySelectorAll('.obj-card');
+const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('animate-in');
+            io.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+cards.forEach(card => io.observe(card));
+</script>
+@endpush
