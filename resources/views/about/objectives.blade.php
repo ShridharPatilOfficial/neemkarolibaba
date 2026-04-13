@@ -167,9 +167,9 @@
 
                 {{-- Optional image --}}
                 @if($obj->image_url)
-                <div class="relative overflow-hidden" style="height:210px;">
-                    <img src="{{ $obj->image_url }}" alt="{{ $obj->title }}"
-                         class="obj-img w-full h-full object-cover">
+                <div class="relative overflow-hidden" style="background:#f8fafc;">
+                <img src="{{ $obj->image_url }}" alt="{{ $obj->title }}"
+                     class="obj-img w-full h-auto object-contain block">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div class="obj-num absolute top-3 left-3 w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
                         <span class="text-white font-black text-sm">{{ $loop->iteration }}</span>
