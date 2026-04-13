@@ -22,65 +22,103 @@
 </script>
 @endpush
 
-
 @push('styles')
 <style>
 .obj-card {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: opacity 0.65s cubic-bezier(.22,.68,0,1.15),
+                transform 0.65s cubic-bezier(.22,.68,0,1.15),
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+    position: relative;
+    overflow: hidden;
 }
-.obj-card.animate-in { opacity: 1; transform: translateY(0); }
+.anim-fadeup    { transform: translateY(50px); }
+.anim-fadeleft  { transform: translateX(60px) rotate(1.5deg); }
+.anim-zoom      { transform: scale(0.82) translateY(20px); }
+.anim-faderight { transform: translateX(-60px) rotate(-1.5deg); }
+.anim-flipup    { transform: perspective(700px) rotateX(22deg) translateY(35px); }
+.anim-bounce    { transform: translateY(45px) scale(0.95); transition-timing-function: cubic-bezier(.34,1.56,.64,1); }
 
-/* Card 1 — fade up */
-.anim-fadeup   { transition-timing-function: cubic-bezier(.22,.68,0,1.2); }
-/* Card 2 — fade left */
-.anim-fadeleft { transform: translateX(50px); }
-.anim-fadeleft.animate-in { transform: translateX(0); }
-/* Card 3 — zoom in */
-.anim-zoom     { transform: scale(0.85); opacity: 0; }
-.anim-zoom.animate-in { transform: scale(1); opacity: 1; }
-/* Card 4 — fade right */
-.anim-faderight { transform: translateX(-50px); }
-.anim-faderight.animate-in { transform: translateX(0); }
-/* Card 5 — flip up */
-.anim-flipup   { transform: perspective(600px) rotateX(20deg) translateY(30px); opacity: 0; }
-.anim-flipup.animate-in { transform: perspective(600px) rotateX(0deg) translateY(0); opacity: 1; }
-/* Card 6 — bounce */
-.anim-bounce   { transition-timing-function: cubic-bezier(.34,1.56,.64,1); }
-
-.obj-card:hover {
-    transform: translateY(-6px) scale(1.01) !important;
-    box-shadow: 0 20px 40px rgba(249,115,22,0.12), 0 4px 16px rgba(0,0,0,0.08) !important;
-    border-color: #fdba74 !important;
+.obj-card.animate-in {
+    opacity: 1;
+    transform: none !important;
 }
-
-/* Number badge pulse on hover */
-.obj-card:hover .obj-num {
-    animation: badgePop 0.4s cubic-bezier(.34,1.56,.64,1) forwards;
-}
-@keyframes badgePop {
-    0%   { transform: scale(1); }
-    50%  { transform: scale(1.3) rotate(-8deg); }
-    100% { transform: scale(1.1); }
-}
-
-/* Shimmer line at top of each card */
 .obj-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
-    border-radius: 2px 2px 0 0;
-    background: linear-gradient(90deg, #f97316, #fcd34d, #fb923c);
+    height: 4px;
+    background: linear-gradient(90deg, #f97316 0%, #fcd34d 50%, #fb923c 100%);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s ease;
+    transition: transform 0.45s cubic-bezier(.22,.68,0,1.2);
+    z-index: 2;
+    border-radius: 4px 4px 0 0;
 }
 .obj-card:hover::before { transform: scaleX(1); }
+.obj-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top left, rgba(249,115,22,0.06) 0%, transparent 65%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+.obj-card:hover::after { opacity: 1; }
+.obj-card:hover {
+    transform: translateY(-8px) scale(1.015) !important;
+    box-shadow: 0 24px 48px rgba(249,115,22,0.13), 0 8px 20px rgba(0,0,0,0.09), 0 0 0 1.5px #fdba74 !important;
+    border-color: transparent !important;
+}
+.obj-num {
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+.obj-card:hover .obj-num {
+    transform: scale(1.25) rotate(-8deg);
+    box-shadow: 0 6px 18px rgba(249,115,22,0.45);
+}
+.obj-card-body { position: relative; z-index: 1; }
+.obj-title {
+    background-image: linear-gradient(90deg, #f97316, #fcd34d);
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.4s ease;
+    padding-bottom: 2px;
+    display: inline;
+}
+.obj-card:hover .obj-title { background-size: 100% 2px; }
+.obj-img { transition: transform 0.55s cubic-bezier(.22,.68,0,1.1); }
+.obj-card:hover .obj-img { transform: scale(1.06); }
+.obj-card:nth-child(6n+1) .obj-num { background: linear-gradient(135deg,#f97316,#fb923c) !important; }
+.obj-card:nth-child(6n+2) .obj-num { background: linear-gradient(135deg,#8b5cf6,#7c3aed) !important; }
+.obj-card:nth-child(6n+3) .obj-num { background: linear-gradient(135deg,#0ea5e9,#2563eb) !important; }
+.obj-card:nth-child(6n+4) .obj-num { background: linear-gradient(135deg,#10b981,#059669) !important; }
+.obj-card:nth-child(6n+5) .obj-num { background: linear-gradient(135deg,#ec4899,#db2777) !important; }
+.obj-card:nth-child(6n+6) .obj-num { background: linear-gradient(135deg,#f59e0b,#d97706) !important; }
+.obj-ribbon {
+    position: absolute;
+    top: 14px; right: -28px;
+    width: 90px;
+    padding: 3px 0;
+    background: linear-gradient(90deg,#f97316,#fcd34d);
+    color: #7c2d12;
+    font-size: 10px;
+    font-weight: 900;
+    text-align: center;
+    transform: rotate(45deg);
+    letter-spacing: .05em;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(249,115,22,.3);
+}
 </style>
 @endpush
-
 
 @section('content')
 
@@ -117,40 +155,42 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             @foreach($objectives as $i => $obj)
             @php
-    $animClasses = ['anim-fadeup','anim-fadeleft','anim-zoom','anim-faderight','anim-flipup','anim-bounce'];
-    $anim = $animClasses[$loop->index % count($animClasses)];
-    $delay = ($loop->index % 2) * 100; // stagger left/right columns
-@endphp
-<div class="obj-card {{ $anim }} bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden flex flex-col relative"
-     style="transition-delay: {{ $delay }}ms;">
+                $animClasses = ['anim-fadeup','anim-fadeleft','anim-zoom','anim-faderight','anim-flipup','anim-bounce'];
+                $anim = $animClasses[$loop->index % count($animClasses)];
+                $delay = ($loop->index % 2) * 100;
+            @endphp
+            <div class="obj-card {{ $anim }} bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col relative"
+                 style="transition-delay: {{ $delay }}ms;">
+
+                {{-- Corner ribbon --}}
+                <div class="obj-ribbon">0{{ $loop->iteration }}</div>
 
                 {{-- Optional image --}}
                 @if($obj->image_url)
-                <div class="relative overflow-hidden" style="height:200px;">
+                <div class="relative overflow-hidden" style="height:210px;">
                     <img src="{{ $obj->image_url }}" alt="{{ $obj->title }}"
-                         class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    {{-- Number badge on image --}}
-                    <div class="absolute top-3 left-3 w-9 h-9 rounded-full bg-orange-500 flex items-center justify-center shadow-lg">
+                         class="obj-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="obj-num absolute top-3 left-3 w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
                         <span class="text-white font-black text-sm">{{ $loop->iteration }}</span>
                     </div>
                 </div>
                 @endif
 
-                <div class="p-6 flex flex-col flex-1">
+                <div class="obj-card-body p-6 flex flex-col flex-1">
                     <div class="flex items-start gap-3 mb-3">
-                        {{-- Number badge (when no image) --}}
                         @if(!$obj->image_url)
-                        <div class="w-9 h-9 rounded-full bg-orange-500 flex items-center justify-center flex-shrink-0 shadow">
+                        <div class="obj-num w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center shadow-md">
                             <span class="text-white font-black text-sm">{{ $loop->iteration }}</span>
                         </div>
                         @endif
-                        <h3 class="font-bold text-gray-900 text-base leading-snug pt-1">{{ $obj->title }}</h3>
+                        <h3 class="obj-title font-bold text-gray-900 text-base leading-snug pt-1">{{ $obj->title }}</h3>
                     </div>
-                    <div class="text-gray-600 text-sm leading-relaxed rich-text flex-1">
+                    <div class="text-gray-500 text-sm leading-relaxed rich-text flex-1">
                         {!! $obj->description !!}
                     </div>
                 </div>
+
             </div>
             @endforeach
         </div>
