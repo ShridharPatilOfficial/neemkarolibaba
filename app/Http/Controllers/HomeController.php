@@ -35,7 +35,7 @@ class HomeController extends Controller
         $sliders          = Slider::where('is_active', true)->orderBy('sort_order')->get();
         $partners         = Partner::where('is_active', true)->orderBy('sort_order')->get();
         $impactStats      = ImpactStat::where('is_active', true)->orderBy('sort_order')->get();
-        $recentActivities = Activity::where('is_active', true)->latest()->orderBy('sort_order')->take(5)->get();
+        $recentActivities = Activity::where('is_active', true)->orderBy('sort_order', 'asc')->orderBy('created_at', 'desc')->take(5)->get();
         $events           = Event::where('is_active', true)->latest()->take(5)->get();
         $presidentMessages = PresidentMessage::where('is_active', true)->orderBy('id')->get();
         $principles       = Principle::where('is_active', true)->orderBy('sort_order')->get();
