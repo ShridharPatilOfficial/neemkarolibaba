@@ -39,7 +39,7 @@ class HomeController extends Controller
         $events           = Event::where('is_active', true)->latest()->take(5)->get();
         $presidentMessages = PresidentMessage::where('is_active', true)->orderBy('id')->get();
         $principles       = Principle::where('is_active', true)->orderBy('sort_order')->get();
-        $workVideos       = WorkVideo::where('is_active', true)->latest()->take(5)->get();
+        $workVideos       = WorkVideo::where('is_active', true)->orderBy('sort_order', 'asc')->orderBy('created_at', 'desc')->take(5)->get();
         $mediaCoverages   = MediaCoverage::where('is_active', true)->orderByDesc('published_date')->take(5)->get();
 
         return view('home', compact(
