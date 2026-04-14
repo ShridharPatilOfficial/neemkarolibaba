@@ -20,7 +20,7 @@
         <div class="mb-5">
             <label class="block text-sm font-semibold text-gray-700 mb-1">Description *</label>
             <div id="desc-editor" style="min-height:140px;"></div>
-            <textarea name="description" id="desc-input" class="hidden" required>{{ old('description', $item?->description) }}</textarea>
+            <textarea name="description" id="desc-input" class="hidden" >{{ old('description', $item?->description) }}</textarea>
             @error('description')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
         </div>
 
