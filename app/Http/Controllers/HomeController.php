@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Event;
 use App\Models\ImpactStat;
 use App\Models\Partner;
@@ -34,7 +35,7 @@ class HomeController extends Controller
         $sliders          = Slider::where('is_active', true)->orderBy('sort_order')->get();
         $partners         = Partner::where('is_active', true)->orderBy('sort_order')->get();
         $impactStats      = ImpactStat::where('is_active', true)->orderBy('sort_order')->get();
-        $recentActivities = RecentActivity::where('is_active', true)->latest()->take(5)->get();
+        $recentActivities = Activity::where('is_active', true)->latest()->take(5)->get();
         $events           = Event::where('is_active', true)->latest()->take(5)->get();
         $presidentMessages = PresidentMessage::where('is_active', true)->orderBy('id')->get();
         $principles       = Principle::where('is_active', true)->orderBy('sort_order')->get();
