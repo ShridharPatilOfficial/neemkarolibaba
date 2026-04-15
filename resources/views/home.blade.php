@@ -339,7 +339,7 @@
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-10 reveal">
             <span class="sec-eyebrow">Collaborations</span>
-            <h2 class="sec-h2 mt-2">Our <span class="hl">Partner Organisations</span></h2>
+            <h2 class="sec-h2 mt-2">Our <span class="hl">Mentor Organisations</span></h2>
         </div>
         <div class="swiper partners-swiper reveal">
             <div class="swiper-wrapper items-center">
