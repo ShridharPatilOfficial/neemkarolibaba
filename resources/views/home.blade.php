@@ -463,7 +463,7 @@
                             <div style="position:absolute;top:.3rem;left:.6rem;
                                         font-size:4.5rem;color:rgba(249,115,22,.07);
                                         font-family:Georgia,serif;line-height:1;pointer-events:none;">&ldquo;</div>
-                            <div style="color:rgba(255,255,255,.82);font-size:.76rem;font-style:italic;position:relative;z-index:1;"
+                            <div style="color:rgba(255,255,255,.82);font-size:.92rem;font-style:italic;position:relative;z-index:1;"
                                  class="rich-text-dark">
                                 {!! $pm->message !!}
                             </div>
