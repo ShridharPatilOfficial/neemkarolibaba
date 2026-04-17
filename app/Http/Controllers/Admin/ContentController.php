@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Event;
 use App\Models\FuturePlan;
-use App\Models\RecentActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +16,6 @@ use Illuminate\Support\Facades\Storage;
 class ContentController extends Controller
 {
     private array $types = [
-        'recent-activities' => ['model' => RecentActivity::class, 'view' => 'recent_activities', 'label' => 'Recent Activity'],
         'activities'        => ['model' => Activity::class,       'view' => 'activities',        'label' => 'Activity'],
         'events'            => ['model' => Event::class,          'view' => 'events',            'label' => 'Event'],
         'future-plans'      => ['model' => FuturePlan::class,     'view' => 'future_plans',      'label' => 'Future Plan'],

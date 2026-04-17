@@ -59,9 +59,6 @@
         <a href="{{ route('admin.stats.index') }}" class="admin-nav-link {{ request()->routeIs('admin.stats*') ? 'active' : '' }}">
             <i class="fas fa-chart-bar"></i> Impact Stats
         </a>
-        <a href="{{ route('admin.content.index', 'recent-activities') }}" class="admin-nav-link {{ request()->is('admin/content/recent-activities*') ? 'active' : '' }}">
-            <i class="fas fa-newspaper"></i> Recent Activities
-        </a>
         <a href="{{ route('admin.president.index') }}" class="admin-nav-link {{ request()->routeIs('admin.president*') ? 'active' : '' }}">
             <i class="fas fa-user-tie"></i> President Message
         </a>
