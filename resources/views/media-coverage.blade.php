@@ -47,18 +47,18 @@
                 <h2 class="text-3xl font-black text-gray-900 mt-1">Featured In <span class="text-orange-600">Media</span></h2>
             </div>
             <div class="flex flex-wrap items-center gap-2 justify-center md:justify-end">
-                {{-- Year filter --}}
-                @if($years->count())
+                {{-- Year filter (always visible, dropdown) --}}
                 <select onchange="location.href=this.value" class="text-xs font-bold border border-gray-200 rounded-full px-4 py-2 bg-white focus:outline-none focus:border-purple-400">
-                    <option value="{{ route('media-coverage') }}{{ $category ? '?category='.$category : '' }}">All Years</option>
-                    @foreach($years as $y)
-                    <option value="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year'=>$y,'category'=>$category])) }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
-                    @endforeach
+                    @for($y = $currentYear + 1; $y >= 2015; $y--)
+                    <option value="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year' => $y, 'category' => $category ?: null])) }}"
+                        {{ $year == $y ? 'selected' : '' }}>
+                        {{ $y }}{{ $y == $currentYear ? ' ★' : '' }}{{ $availYears->contains($y) ? '' : ' (no data)' }}
+                    </option>
+                    @endfor
                 </select>
-                @endif
                 {{-- Category filter --}}
                 @foreach([''=>'All','news'=>'News','tv'=>'TV / Video','online'=>'Online','magazine'=>'Magazine'] as $key => $label)
-                <a href="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year'=>$year,'category'=>$key ?: null])) }}"
+                <a href="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year' => $year, 'category' => $key ?: null])) }}"
                    class="text-xs font-bold px-4 py-2 rounded-full transition {{ $category == $key ? 'bg-purple-900 text-white' : 'bg-white text-gray-600 hover:bg-purple-100 border border-gray-200' }}">
                     {{ $label }}
                 </a>
@@ -75,7 +75,8 @@
                 <div class="w-24 h-24 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-newspaper text-purple-300 text-4xl"></i>
                 </div>
-                <p class="text-gray-400 text-lg font-medium">No media coverage found</p>
+                <p class="text-gray-500 text-lg font-semibold">No media coverage found for {{ $year }}</p>
+                <p class="text-gray-400 text-sm mt-1">Try selecting a different year from the dropdown above.</p>
             </div>
             @endforelse
         </div>

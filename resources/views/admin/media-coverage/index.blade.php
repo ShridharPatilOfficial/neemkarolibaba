@@ -4,27 +4,30 @@
 <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
     <p class="text-gray-500 text-sm">News, TV, and online media coverage · drag rows to reorder</p>
     <div class="flex items-center gap-2 flex-wrap">
-        {{-- Year filter --}}
-        @if(count($years))
+        {{-- Year filter (always visible, default = current year) --}}
         <select onchange="location.href=this.value" class="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-400 bg-white">
-            <option value="{{ route('admin.media-coverage.index') }}">All Years</option>
-            @foreach($years as $y)
-            <option value="{{ route('admin.media-coverage.index') }}?year={{ $y }}" {{ request('year') == $y ? 'selected' : '' }}>{{ $y }}</option>
-            @endforeach
+            @for($y = $currentYear + 1; $y >= 2015; $y--)
+            <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(array_merge(request()->only('category','status'), ['year' => $y])) }}"
+                {{ $year == $y ? 'selected' : '' }}>
+                {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}
+            </option>
+            @endfor
         </select>
-        @endif
         {{-- Category filter --}}
         <select onchange="location.href=this.value" class="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-400 bg-white">
-            <option value="{{ route('admin.media-coverage.index') }}{{ request('year') ? '?year='.request('year') : '' }}">All Categories</option>
+            <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(['year' => $year]) }}">All Categories</option>
             @foreach(['news'=>'News','tv'=>'TV / Video','online'=>'Online','magazine'=>'Magazine'] as $k => $v)
-            <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(array_merge(request()->only('year'), ['category'=>$k])) }}" {{ request('category')==$k ? 'selected' : '' }}>{{ $v }}</option>
+            <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(['year' => $year, 'category' => $k]) }}"
+                {{ request('category') == $k ? 'selected' : '' }}>{{ $v }}</option>
             @endforeach
         </select>
         {{-- Status filter --}}
         <select onchange="location.href=this.value" class="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-400 bg-white">
-            <option value="{{ route('admin.media-coverage.index') }}{{ request('year') ? '?year='.request('year') : '' }}">All Status</option>
-            <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(array_merge(request()->only('year','category'), ['status'=>'active'])) }}" {{ request('status')=='active' ? 'selected' : '' }}>Active</option>
-            <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(array_merge(request()->only('year','category'), ['status'=>'inactive'])) }}" {{ request('status')=='inactive' ? 'selected' : '' }}>Inactive</option>
+            <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(array_merge(request()->only('category'), ['year' => $year])) }}">All Status</option>
+            <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(array_merge(request()->only('category'), ['year' => $year, 'status' => 'active'])) }}"
+                {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
+            <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(array_merge(request()->only('category'), ['year' => $year, 'status' => 'inactive'])) }}"
+                {{ request('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
         </select>
         <a href="{{ route('admin.media-coverage.create') }}" class="bg-purple-900 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-lg text-sm transition">
             <i class="fas fa-plus mr-1"></i> Add Coverage
@@ -85,7 +88,13 @@
                 </td>
             </tr>
             @empty
-            <tr><td colspan="8" class="py-10 text-center text-gray-400">No media coverage yet.</td></tr>
+            <tr>
+                <td colspan="8" class="py-16 text-center text-gray-400">
+                    <i class="fas fa-calendar-times text-4xl mb-3 block text-gray-200"></i>
+                    No media coverage found for <strong>{{ $year }}</strong>.
+                    <a href="{{ route('admin.media-coverage.create') }}" class="text-purple-600 hover:underline ml-1">Add one?</a>
+                </td>
+            </tr>
             @endforelse
         </tbody>
     </table>

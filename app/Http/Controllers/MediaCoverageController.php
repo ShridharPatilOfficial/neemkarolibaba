@@ -7,15 +7,23 @@ class MediaCoverageController extends Controller
 {
     public function index(Request $request)
     {
-        $year     = $request->get('year');
-        $category = $request->get('category');
-        $query    = MediaCoverage::where('is_active', true)->orderByDesc('published_date')->orderBy('sort_order');
-        if ($year)     $query->whereYear('published_date', $year);
+        $currentYear = (int) now()->format('Y');
+        $year        = $request->input('year') ? (int) $request->input('year') : $currentYear;
+        $category    = $request->input('category');
+
+        $query = MediaCoverage::where('is_active', true)
+            ->whereYear('published_date', $year)
+            ->orderBy('sort_order')
+            ->orderByDesc('published_date');
+
         if ($category) $query->where('category', $category);
-        $coverages = $query->paginate(9)->withQueryString();
-        $years = MediaCoverage::where('is_active', true)
+
+        $coverages  = $query->paginate(9)->withQueryString();
+        $availYears = MediaCoverage::where('is_active', true)
             ->whereNotNull('published_date')
-            ->selectRaw('YEAR(published_date) as y')->groupBy('y')->orderByDesc('y')->pluck('y');
-        return view('media-coverage', compact('coverages', 'years', 'year', 'category'));
+            ->selectRaw('YEAR(published_date) as y')
+            ->groupBy('y')->orderByDesc('y')->pluck('y');
+
+        return view('media-coverage', compact('coverages', 'availYears', 'year', 'currentYear', 'category'));
     }
 }

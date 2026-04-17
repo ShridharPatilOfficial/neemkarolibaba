@@ -6,22 +6,31 @@
     <div class="flex items-center gap-3">
         <p class="text-gray-500 text-sm">Manage {{ strtolower($cfg['label']) }} records · drag rows to reorder</p>
     </div>
-    <div class="flex items-center gap-2">
-        {{-- Year filter --}}
-        @if(count($years))
+    <div class="flex items-center gap-2 flex-wrap">
+
+        {{-- Year filter (always visible) --}}
         <select onchange="location.href=this.value" class="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-400 bg-white">
-            <option value="{{ route('admin.content.index', $type) }}">All Years</option>
-            @foreach($years as $y)
-            <option value="{{ route('admin.content.index', $type) }}?year={{ $y }}" {{ request('year') == $y ? 'selected' : '' }}>{{ $y }}</option>
-            @endforeach
+            @php
+                $minYear = 2015;
+                $maxYear = $currentYear + 1;
+            @endphp
+            @for($y = $maxYear; $y >= $minYear; $y--)
+            <option value="{{ route('admin.content.index', $type) }}?{{ http_build_query(array_merge(request()->only('status'), ['year' => $y])) }}"
+                {{ $year == $y ? 'selected' : '' }}>
+                {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}
+            </option>
+            @endfor
         </select>
-        @endif
+
         {{-- Status filter --}}
         <select onchange="location.href=this.value" class="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-400 bg-white">
-            <option value="{{ route('admin.content.index', $type) }}{{ request('year') ? '?year='.request('year') : '' }}">All Status</option>
-            <option value="{{ route('admin.content.index', $type) }}?{{ http_build_query(array_merge(request()->only('year'), ['status'=>'active'])) }}" {{ request('status')=='active' ? 'selected' : '' }}>Active</option>
-            <option value="{{ route('admin.content.index', $type) }}?{{ http_build_query(array_merge(request()->only('year'), ['status'=>'inactive'])) }}" {{ request('status')=='inactive' ? 'selected' : '' }}>Inactive</option>
+            <option value="{{ route('admin.content.index', $type) }}?{{ http_build_query(['year' => $year]) }}">All Status</option>
+            <option value="{{ route('admin.content.index', $type) }}?{{ http_build_query(['year' => $year, 'status' => 'active']) }}"
+                {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
+            <option value="{{ route('admin.content.index', $type) }}?{{ http_build_query(['year' => $year, 'status' => 'inactive']) }}"
+                {{ request('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
         </select>
+
         <a href="{{ route('admin.content.create', $type) }}" class="bg-purple-900 hover:bg-purple-800 text-white font-bold py-2 px-4 rounded-lg text-sm transition">
             <i class="fas fa-plus mr-1"></i> Add {{ $cfg['label'] }}
         </a>
@@ -35,7 +44,7 @@
                 <th class="py-3 px-3 w-8 text-gray-400"><i class="fas fa-grip-vertical text-xs"></i></th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold w-24">Media</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Heading</th>
-                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-24">Year</th>
+                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-20">Year</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold w-20">Active</th>
                 <th class="py-3 px-4 text-right text-gray-600 font-semibold w-24">Actions</th>
             </tr>
@@ -55,7 +64,7 @@
                     @endif
                 </td>
                 <td class="py-3 px-4 font-medium text-gray-800">{{ Str::limit($item->heading, 60) }}</td>
-                <td class="py-3 px-4 text-gray-400 text-xs">{{ $item->created_at->format('Y') }}</td>
+                <td class="py-3 px-4 text-gray-500 text-xs font-semibold">{{ $item->post_year }}</td>
                 <td class="py-3 px-4">
                     <span class="inline-block px-2 py-0.5 rounded-full text-xs font-bold {{ $item->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
                         {{ $item->is_active ? 'Yes' : 'No' }}
@@ -70,7 +79,13 @@
                 </td>
             </tr>
             @empty
-            <tr><td colspan="6" class="py-10 text-center text-gray-400">No {{ strtolower($cfg['label']) }} records yet.</td></tr>
+            <tr>
+                <td colspan="6" class="py-16 text-center text-gray-400">
+                    <i class="fas fa-calendar-times text-4xl mb-3 block text-gray-200"></i>
+                    No {{ strtolower($cfg['label']) }} records found for <strong>{{ $year }}</strong>.
+                    <a href="{{ route('admin.content.create', $type) }}" class="text-purple-600 hover:underline ml-1">Add one?</a>
+                </td>
+            </tr>
             @endforelse
         </tbody>
     </table>

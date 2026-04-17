@@ -29,21 +29,22 @@ class ContentController extends Controller
 
     public function index(string $type)
     {
-        $cfg   = $this->resolve($type);
-        $query = ($cfg['model'])::orderBy('sort_order')->orderBy('id');
+        $cfg        = $this->resolve($type);
+        $currentYear = (int) now()->format('Y');
+        $year        = request('year') ? (int) request('year') : $currentYear;
 
-        if ($year = request('year')) {
-            $query->whereYear('created_at', $year);
-        }
+        $query = ($cfg['model'])::orderBy('sort_order')->orderBy('id')
+                    ->where('post_year', $year);
+
         if ($status = request('status')) {
             $query->where('is_active', $status === 'active');
         }
 
-        $items = $query->paginate(20)->withQueryString();
-        $years = ($cfg['model'])::selectRaw('YEAR(created_at) as y')
-            ->groupBy('y')->orderByDesc('y')->pluck('y');
+        $items      = $query->paginate(20)->withQueryString();
+        $availYears = ($cfg['model'])::selectRaw('post_year as y')
+            ->groupBy('post_year')->orderByDesc('post_year')->pluck('y');
 
-        return view('admin.content.index', compact('items', 'type', 'cfg', 'years'));
+        return view('admin.content.index', compact('items', 'type', 'cfg', 'availYears', 'year', 'currentYear'));
     }
 
     public function reorder(Request $request, string $type): \Illuminate\Http\JsonResponse
@@ -121,9 +122,11 @@ class ContentController extends Controller
             'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'youtube_url' => ['nullable', 'url', 'max:300'],
             'sort_order'  => ['integer', 'min:0'],
+            'post_year'   => ['required', 'integer', 'min:2000', 'max:2100'],
             'is_active'   => ['boolean'],
         ]) + [
             'sort_order' => $request->input('sort_order', 0),
+            'post_year'  => $request->input('post_year', (int) now()->format('Y')),
             'is_active'  => $request->boolean('is_active'),
         ];
     }

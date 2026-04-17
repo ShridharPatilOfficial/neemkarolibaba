@@ -38,21 +38,16 @@
 <section class="py-16 px-4">
     <div class="max-w-6xl mx-auto">
 
-        {{-- Year filter --}}
-        @if($years->count() > 1)
+        {{-- Year filter (always visible) --}}
         <div class="flex flex-wrap gap-2 mb-8 justify-center">
-            <a href="{{ route('events') }}"
-               class="text-xs font-bold px-4 py-2 rounded-full transition {{ !$year ? 'bg-purple-900 text-white' : 'bg-white text-gray-600 hover:bg-purple-100 border border-gray-200' }}">
-                All Years
-            </a>
-            @foreach($years as $y)
+            @for($y = $currentYear + 1; $y >= 2015; $y--)
             <a href="{{ route('events') }}?year={{ $y }}"
-               class="text-xs font-bold px-4 py-2 rounded-full transition {{ $year == $y ? 'bg-purple-900 text-white' : 'bg-white text-gray-600 hover:bg-purple-100 border border-gray-200' }}">
-                {{ $y }}
+               class="text-xs font-bold px-4 py-2 rounded-full transition
+                      {{ $year == $y ? 'bg-purple-900 text-white shadow' : ($availYears->contains($y) ? 'bg-white text-gray-700 hover:bg-purple-100 border border-gray-200' : 'bg-gray-100 text-gray-400 border border-gray-100 cursor-default') }}">
+                {{ $y }}{{ $y == $currentYear ? ' ★' : '' }}
             </a>
-            @endforeach
+            @endfor
         </div>
-        @endif
 
         <div class="space-y-0">
             @forelse($items as $item)
@@ -61,7 +56,8 @@
             @empty
                 <div class="text-center py-20">
                     <i class="fas fa-calendar-alt text-gray-200 text-7xl mb-4"></i>
-                    <p class="text-gray-400 text-lg">No events found. Check back soon!</p>
+                    <p class="text-gray-500 text-lg font-semibold">No events found for {{ $year }}</p>
+                    <p class="text-gray-400 text-sm mt-1">Try selecting a different year above.</p>
                 </div>
             @endforelse
         </div>

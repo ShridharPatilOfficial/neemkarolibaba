@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Storage;
 
 class MediaCoverageController extends Controller {
     public function index() {
-        $query = MediaCoverage::orderBy('sort_order')->orderByDesc('published_date');
+        $currentYear = (int) now()->format('Y');
+        $year        = request('year') ? (int) request('year') : $currentYear;
 
-        if ($year = request('year')) {
-            $query->whereYear('published_date', $year);
-        }
+        $query = MediaCoverage::orderBy('sort_order')->orderByDesc('published_date')
+                    ->whereYear('published_date', $year);
+
         if ($cat = request('category')) {
             $query->where('category', $cat);
         }
@@ -19,12 +20,12 @@ class MediaCoverageController extends Controller {
             $query->where('is_active', $status === 'active');
         }
 
-        $coverages = $query->paginate(20)->withQueryString();
-        $years = MediaCoverage::selectRaw('YEAR(published_date) as y')
+        $coverages  = $query->paginate(20)->withQueryString();
+        $availYears = MediaCoverage::selectRaw('YEAR(published_date) as y')
             ->whereNotNull('published_date')
             ->groupBy('y')->orderByDesc('y')->pluck('y');
 
-        return view('admin.media-coverage.index', compact('coverages', 'years'));
+        return view('admin.media-coverage.index', compact('coverages', 'availYears', 'year', 'currentYear'));
     }
 
     public function reorder(Request $request): \Illuminate\Http\JsonResponse
