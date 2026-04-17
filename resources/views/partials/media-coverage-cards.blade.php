@@ -126,7 +126,14 @@
     <div class="p-5 flex flex-col flex-1">
         <h3 class="font-bold text-gray-900 text-sm leading-snug mb-2 line-clamp-2">{{ $c->title }}</h3>
         @if($c->description)
-        <div class="text-gray-500 text-xs mb-4 flex-1 rich-text">{!! $c->description !!}</div>
+        <div class="flex-1 mb-3">
+            <div class="text-gray-500 text-xs rich-text card-desc-truncated" id="vdesc-{{ $c->id }}">
+                {!! $c->description !!}
+            </div>
+            <button class="card-read-more" onclick="toggleDesc('vdesc-{{ $c->id }}', this)">
+                Read More <i class="fas fa-chevron-down text-[10px]"></i>
+            </button>
+        </div>
         @else
         <div class="flex-1"></div>
         @endif

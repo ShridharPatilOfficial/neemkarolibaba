@@ -58,7 +58,12 @@
                 <div class="p-5 flex flex-col flex-1">
                     <h3 class="text-white font-bold text-base leading-snug mb-2 group-hover:text-orange-300 transition-colors">{{ $vid->title }}</h3>
                     @if($vid->description)
-                    <div class="text-gray-400 text-sm flex-1 rich-text-dark">{!! $vid->description !!}</div>
+                    <div class="text-gray-400 text-sm rich-text-dark card-desc-truncated" id="wiadesc-{{ $vid->id }}">
+                        {!! $vid->description !!}
+                    </div>
+                    <button class="card-read-more" onclick="toggleDesc('wiadesc-{{ $vid->id }}', this)">
+                        Read More <i class="fas fa-chevron-down text-[10px]"></i>
+                    </button>
                     @endif
                     <div class="mt-4 flex items-center gap-1.5 text-orange-400 text-xs font-semibold">
                         <i class="fas fa-play-circle text-sm"></i> Watch Now

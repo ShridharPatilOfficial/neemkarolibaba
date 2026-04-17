@@ -198,7 +198,12 @@
                     <i class="fas {{ $card->icon }}"></i>
                 </div>
                 <h3 class="pc-title">{{ $card->title }}</h3>
-                <div class="pc-desc rich-text">{!! $card->description !!}</div>
+                <div class="pc-desc rich-text card-desc-truncated" id="pcdesc-{{ $card->id }}">
+                    {!! $card->description !!}
+                </div>
+                <button class="card-read-more" onclick="toggleDesc('pcdesc-{{ $card->id }}', this)">
+                    Read More <i class="fas fa-chevron-down text-[10px]"></i>
+                </button>
                 <a href="{{ $card->link_url ?? route('about.objectives') }}" class="pc-link pc-link-{{ $colorName }}">
                     Learn More <i class="fas fa-arrow-right text-xs"></i>
                 </a>
@@ -357,7 +362,12 @@
                 <div class="act-body">
                     <span class="act-tag"><i class="fas fa-circle" style="font-size:.4rem;"></i> Activity</span>
                     <h3 class="act-title">{{ $activity->heading }}</h3>
-                    <div class="act-text rich-text">{!! $activity->description !!}</div>
+                    <div class="act-text rich-text card-desc-truncated" id="hadesc-{{ $activity->id }}">
+                        {!! $activity->description !!}
+                    </div>
+                    <button class="card-read-more" onclick="toggleDesc('hadesc-{{ $activity->id }}', this)">
+                        Read More <i class="fas fa-chevron-down text-[10px]"></i>
+                    </button>
                 </div>
             </div>
             @endforeach
@@ -558,7 +568,12 @@
                 <div class="p-4">
                     <h3 class="text-white font-bold text-sm leading-snug mb-1.5 group-hover:text-orange-300 transition-colors">{{ $vid->title }}</h3>
                     @if($vid->description)
-                    <div class="text-gray-400 text-xs rich-text-dark">{!! $vid->description !!}</div>
+                    <div class="text-gray-400 text-xs rich-text-dark card-desc-truncated" id="wvdesc-{{ $vid->id }}">
+                        {!! $vid->description !!}
+                    </div>
+                    <button class="card-read-more" onclick="toggleDesc('wvdesc-{{ $vid->id }}', this)">
+                        Read More <i class="fas fa-chevron-down text-[10px]"></i>
+                    </button>
                     @endif
                     <div class="mt-3 flex items-center gap-1.5 text-orange-400 text-xs font-semibold">
                         <i class="fas fa-play-circle text-sm"></i> Watch Now
@@ -652,7 +667,14 @@
                 <div class="p-5 flex flex-col flex-1">
                     <h3 class="font-bold text-gray-900 text-sm leading-snug mb-2">{{ $cov->title }}</h3>
                     @if($cov->description)
-                    <div class="text-gray-500 text-xs mb-4 flex-1 rich-text">{!! $cov->description !!}</div>
+                    <div class="flex-1 mb-3">
+                        <div class="text-gray-500 text-xs rich-text card-desc-truncated" id="hmdesc-{{ $cov->id }}">
+                            {!! $cov->description !!}
+                        </div>
+                        <button class="card-read-more" onclick="toggleDesc('hmdesc-{{ $cov->id }}', this)">
+                            Read More <i class="fas fa-chevron-down text-[10px]"></i>
+                        </button>
+                    </div>
                     @else
                     <div class="flex-1"></div>
                     @endif
