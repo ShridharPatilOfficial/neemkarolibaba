@@ -40,16 +40,25 @@
 <section class="py-16 px-4 bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto">
 
-        {{-- Header + Filter --}}
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+        {{-- Header + Filters --}}
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div class="text-center md:text-left">
                 <span class="section-tag">Press & Media</span>
                 <h2 class="text-3xl font-black text-gray-900 mt-1">Featured In <span class="text-orange-600">Media</span></h2>
             </div>
-            {{-- Category filter --}}
             <div class="flex flex-wrap items-center gap-2 justify-center md:justify-end">
+                {{-- Year filter --}}
+                @if($years->count())
+                <select onchange="location.href=this.value" class="text-xs font-bold border border-gray-200 rounded-full px-4 py-2 bg-white focus:outline-none focus:border-purple-400">
+                    <option value="{{ route('media-coverage') }}{{ $category ? '?category='.$category : '' }}">All Years</option>
+                    @foreach($years as $y)
+                    <option value="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year'=>$y,'category'=>$category])) }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
+                    @endforeach
+                </select>
+                @endif
+                {{-- Category filter --}}
                 @foreach([''=>'All','news'=>'News','tv'=>'TV / Video','online'=>'Online','magazine'=>'Magazine'] as $key => $label)
-                <a href="{{ route('media-coverage') }}{{ $key ? '?category='.$key : '' }}"
+                <a href="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year'=>$year,'category'=>$key ?: null])) }}"
                    class="text-xs font-bold px-4 py-2 rounded-full transition {{ $category == $key ? 'bg-purple-900 text-white' : 'bg-white text-gray-600 hover:bg-purple-100 border border-gray-200' }}">
                     {{ $label }}
                 </a>
@@ -57,8 +66,8 @@
             </div>
         </div>
 
-        {{-- Cards list (horizontal) --}}
-        <div id="items-container" class="flex flex-col gap-4">
+        {{-- Cards --}}
+        <div class="flex flex-col gap-4">
             @forelse($coverages as $coverage)
                 @include('partials.media-coverage-cards', ['coverages' => collect([$coverage]), 'horizontal' => true])
             @empty
@@ -66,22 +75,14 @@
                 <div class="w-24 h-24 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-newspaper text-purple-300 text-4xl"></i>
                 </div>
-                <p class="text-gray-400 text-lg font-medium">No media coverage yet</p>
-                <p class="text-gray-300 text-sm mt-1">Check back soon for news and media features.</p>
+                <p class="text-gray-400 text-lg font-medium">No media coverage found</p>
             </div>
             @endforelse
         </div>
 
-        {{-- Load More --}}
-        @if($hasMore)
-        <div class="text-center mt-12" id="load-more-wrapper">
-            <button id="load-more-btn" data-page="2"
-                    data-url="{{ route('media-coverage') }}{{ $category ? '?category='.$category.'&' : '?' }}"
-                    class="inline-flex items-center gap-2 bg-purple-900 hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg">
-                <i class="fas fa-plus-circle"></i> Load More
-            </button>
-        </div>
-        @endif
+        {{-- Pagination --}}
+        <div class="mt-10">{{ $coverages->links() }}</div>
+
     </div>
 </section>
 
@@ -107,37 +108,6 @@
 
 @push('scripts')
 <script>
-// ── Load More ──────────────────────────────────────────────────
-const btn       = document.getElementById('load-more-btn');
-const container = document.getElementById('items-container');
-if (btn) {
-    const obs = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) loadMore();
-    }, { rootMargin: '200px' });
-    obs.observe(btn);
-    btn.addEventListener('click', loadMore);
-}
-async function loadMore() {
-    if (!btn || btn.disabled) return;
-    const page = parseInt(btn.dataset.page);
-    btn.disabled = true; btn.style.opacity = '0.5';
-    try {
-        const res  = await fetch(btn.dataset.url + 'page=' + page, { headers: {'X-Requested-With':'XMLHttpRequest'} });
-        const data = await res.json();
-        if (data.html) {
-            const tmp = document.createElement('div');
-            tmp.innerHTML = data.html;
-            Array.from(tmp.children).forEach(c => container.appendChild(c));
-        }
-        if (data.has_more) {
-            btn.dataset.page = data.next_page;
-            btn.disabled = false; btn.style.opacity = '1';
-        } else {
-            document.getElementById('load-more-wrapper').innerHTML = '<p class="text-gray-400 text-sm py-2">✓ All items loaded</p>';
-        }
-    } catch(e) { btn.disabled = false; btn.style.opacity = '1'; }
-}
-
 // ── Video Modal ────────────────────────────────────────────────
 function openMediaModal(ytId, title) {
     document.getElementById('mediaModalFrame').src = `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;

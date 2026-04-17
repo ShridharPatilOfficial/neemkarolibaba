@@ -37,7 +37,24 @@
 
 <section class="py-16 px-4">
     <div class="max-w-6xl mx-auto">
-        <div id="items-container" class="space-y-0">
+
+        {{-- Year filter --}}
+        @if($years->count() > 1)
+        <div class="flex flex-wrap gap-2 mb-8 justify-center">
+            <a href="{{ route('activities') }}"
+               class="text-xs font-bold px-4 py-2 rounded-full transition {{ !$year ? 'bg-purple-900 text-white' : 'bg-white text-gray-600 hover:bg-purple-100 border border-gray-200' }}">
+                All Years
+            </a>
+            @foreach($years as $y)
+            <a href="{{ route('activities') }}?year={{ $y }}"
+               class="text-xs font-bold px-4 py-2 rounded-full transition {{ $year == $y ? 'bg-purple-900 text-white' : 'bg-white text-gray-600 hover:bg-purple-100 border border-gray-200' }}">
+                {{ $y }}
+            </a>
+            @endforeach
+        </div>
+        @endif
+
+        <div class="space-y-0">
             @forelse($items as $item)
                 @include('partials.content-cards', ['items' => collect([$item])])
                 <hr class="border-gray-100 my-4">
@@ -49,21 +66,7 @@
             @endforelse
         </div>
 
-        @if($hasMore)
-        <div class="text-center mt-10">
-            <div id="load-more-spinner" class="load-more-spinner mx-auto mb-4"></div>
-            <button id="load-more-btn" data-page="2" data-url="{{ route('activities') }}"
-                    class="inline-flex items-center gap-2 bg-purple-900 hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-full transition">
-                <i class="fas fa-plus-circle"></i> Load More
-            </button>
-        </div>
-        @endif
+        <div class="mt-10">{{ $items->links() }}</div>
     </div>
 </section>
 @endsection
-
-@push('scripts')
-<script>
-    @include('partials.load-more-script')
-</script>
-@endpush

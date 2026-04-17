@@ -7,8 +7,33 @@ use Illuminate\Support\Facades\Storage;
 
 class MediaCoverageController extends Controller {
     public function index() {
-        $coverages = MediaCoverage::orderBy('sort_order')->get();
-        return view('admin.media-coverage.index', compact('coverages'));
+        $query = MediaCoverage::orderBy('sort_order')->orderByDesc('published_date');
+
+        if ($year = request('year')) {
+            $query->whereYear('published_date', $year);
+        }
+        if ($cat = request('category')) {
+            $query->where('category', $cat);
+        }
+        if ($status = request('status')) {
+            $query->where('is_active', $status === 'active');
+        }
+
+        $coverages = $query->paginate(20)->withQueryString();
+        $years = MediaCoverage::selectRaw('YEAR(published_date) as y')
+            ->whereNotNull('published_date')
+            ->groupBy('y')->orderByDesc('y')->pluck('y');
+
+        return view('admin.media-coverage.index', compact('coverages', 'years'));
+    }
+
+    public function reorder(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $ids = $request->input('ids', []);
+        foreach ($ids as $position => $id) {
+            \App\Models\MediaCoverage::where('id', $id)->update(['sort_order' => $position]);
+        }
+        return response()->json(['ok' => true]);
     }
     public function create() {
         $coverage   = null;

@@ -577,5 +577,16 @@ function closeLb(e) {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('imgLbOverlay').style.display = 'none'; document.body.style.overflow = ''; } });
 </script>
+<script>
+function toggleDesc(id, btn) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('expanded');
+    const isExpanded = el.classList.contains('expanded');
+    btn.innerHTML = isExpanded
+        ? 'Read Less <i class="fas fa-chevron-up text-[10px]"></i>'
+        : 'Read More <i class="fas fa-chevron-down text-[10px]"></i>';
+}
+</script>
 </body>
 </html>

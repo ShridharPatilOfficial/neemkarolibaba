@@ -30,8 +30,30 @@ class ContentController extends Controller
     public function index(string $type)
     {
         $cfg   = $this->resolve($type);
-        $items = ($cfg['model'])::orderBy('sort_order')->get();
-        return view('admin.content.index', compact('items', 'type', 'cfg'));
+        $query = ($cfg['model'])::orderBy('sort_order')->orderBy('id');
+
+        if ($year = request('year')) {
+            $query->whereYear('created_at', $year);
+        }
+        if ($status = request('status')) {
+            $query->where('is_active', $status === 'active');
+        }
+
+        $items = $query->paginate(20)->withQueryString();
+        $years = ($cfg['model'])::selectRaw('YEAR(created_at) as y')
+            ->groupBy('y')->orderByDesc('y')->pluck('y');
+
+        return view('admin.content.index', compact('items', 'type', 'cfg', 'years'));
+    }
+
+    public function reorder(Request $request, string $type): \Illuminate\Http\JsonResponse
+    {
+        $cfg = $this->resolve($type);
+        $ids = $request->input('ids', []);
+        foreach ($ids as $position => $id) {
+            ($cfg['model'])::where('id', $id)->update(['sort_order' => $position]);
+        }
+        return response()->json(['ok' => true]);
     }
 
     public function create(string $type)

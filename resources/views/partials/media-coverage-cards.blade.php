@@ -57,7 +57,14 @@
 
         {{-- Description --}}
         @if($c->description)
-        <div class="text-gray-500 text-xs flex-1 rich-text mb-3">{!! $c->description !!}</div>
+        <div class="flex-1 mb-3">
+            <div class="text-gray-500 text-xs rich-text card-desc-truncated" id="desc-{{ $c->id }}">
+                {!! $c->description !!}
+            </div>
+            <button class="card-read-more" onclick="toggleDesc('desc-{{ $c->id }}', this)">
+                Read More <i class="fas fa-chevron-down text-[10px]"></i>
+            </button>
+        </div>
         @else
         <div class="flex-1"></div>
         @endif

@@ -1028,3 +1028,41 @@ html { font-size: 18px; scroll-behavior: smooth; }
 
 .rich-text h1,.rich-text h2,.rich-text h3 { font-weight: 700; margin-bottom: .4em; }
 .rich-text-dark h1,.rich-text-dark h2,.rich-text-dark h3 { font-weight: 700; margin-bottom: .4em; color: #fff; }
+
+/* ── Card description truncation ──────────────────────────────── */
+.card-desc-truncated {
+  max-height: 80px;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.4s ease;
+}
+.card-desc-truncated::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 32px;
+  background: linear-gradient(to bottom, transparent, #fff);
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.card-desc-truncated.expanded {
+  max-height: 2000px;
+}
+.card-desc-truncated.expanded::after {
+  opacity: 0;
+}
+.card-read-more {
+  font-size: .72rem;
+  font-weight: 700;
+  color: #f97316;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s;
+}
+.card-read-more:hover { color: #ea580c; }

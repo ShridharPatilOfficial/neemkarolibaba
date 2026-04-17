@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Event;
 use Illuminate\Http\Request;
 
@@ -9,24 +7,12 @@ class EventsController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = 10;
-        $page    = (int) $request->get('page', 1);
-        $total   = Event::where('is_active', true)->count();
-        $items   = Event::where('is_active', true)
-            ->orderBy('sort_order')
-            ->skip(($page - 1) * $perPage)
-            ->take($perPage)
-            ->get();
-
-        if ($request->ajax()) {
-            return response()->json([
-                'html'      => view('partials.content-cards', ['items' => $items])->render(),
-                'has_more'  => ($page * $perPage) < $total,
-                'next_page' => $page + 1,
-            ]);
-        }
-
-        $hasMore = $total > $perPage;
-        return view('events', compact('items', 'hasMore'));
+        $year  = $request->get('year');
+        $query = Event::where('is_active', true)->orderBy('sort_order')->orderByDesc('created_at');
+        if ($year) $query->whereYear('created_at', $year);
+        $items = $query->paginate(12)->withQueryString();
+        $years = Event::where('is_active', true)
+            ->selectRaw('YEAR(created_at) as y')->groupBy('y')->orderByDesc('y')->pluck('y');
+        return view('events', compact('items', 'years', 'year'));
     }
 }

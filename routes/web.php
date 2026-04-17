@@ -109,6 +109,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/content/{type}/{id}/edit', [ContentController::class, 'edit'])->name('content.edit');
         Route::put('/content/{type}/{id}', [ContentController::class, 'update'])->name('content.update');
         Route::delete('/content/{type}/{id}', [ContentController::class, 'destroy'])->name('content.destroy');
+        Route::post('/content/{type}/reorder', [ContentController::class, 'reorder'])->name('content.reorder');
+        Route::post('/media-coverage-reorder', [AdminMediaCoverageController::class, 'reorder'])->name('media-coverage.reorder');
 
         Route::resource('members', FounderMemberController::class)->except(['show'])
             ->parameters(['members' => 'member']);

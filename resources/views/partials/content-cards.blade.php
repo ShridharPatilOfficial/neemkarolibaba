@@ -4,7 +4,12 @@
     <!-- Text on left, media on right for even items -->
     <div>
         <h2 class="text-2xl md:text-3xl font-extrabold text-orange-600 mb-4">{{ $item->heading }}</h2>
-        <div class="text-gray-600 rich-text">{!! $item->description !!}</div>
+        <div class="text-gray-600 rich-text card-desc-truncated" id="cdesc-{{ $item->id }}">
+            {!! $item->description !!}
+        </div>
+        <button class="card-read-more mt-2" onclick="toggleDesc('cdesc-{{ $item->id }}', this)">
+            Read More <i class="fas fa-chevron-down text-[10px]"></i>
+        </button>
     </div>
     @php
         $imgSrc = $item->image_url ? (str_starts_with($item->image_url, 'http') ? $item->image_url : asset('storage/' . $item->image_url)) : null;
@@ -63,7 +68,12 @@
     </div>
     <div>
         <h2 class="text-2xl md:text-3xl font-extrabold text-orange-600 mb-4">{{ $item->heading }}</h2>
-        <div class="text-gray-600 rich-text">{!! $item->description !!}</div>
+        <div class="text-gray-600 rich-text card-desc-truncated" id="cdesc-{{ $item->id }}">
+            {!! $item->description !!}
+        </div>
+        <button class="card-read-more mt-2" onclick="toggleDesc('cdesc-{{ $item->id }}', this)">
+            Read More <i class="fas fa-chevron-down text-[10px]"></i>
+        </button>
     </div>
     @endif
 </div>
