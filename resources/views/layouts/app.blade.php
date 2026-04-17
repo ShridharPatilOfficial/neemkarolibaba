@@ -214,6 +214,9 @@
                 </li>
                 @endforeach
                 <li>
+                    <a href="{{ route('appeal') }}" class="nav-link {{ request()->routeIs('appeal') ? 'active' : '' }}">Appeal</a>
+                </li>
+                <li>
                     <a href="{{ route('donate') }}#payment-section" class="nav-donate-pill">Donate Us</a>
                 </li>
             </ul>
@@ -263,6 +266,7 @@
                 ['Future Plan','future-plan','fa-rocket'],
                 ['Join Us','join-us','fa-user-plus'],
                 ['Contact Us','contact','fa-envelope'],
+                ['Appeal','appeal','fa-envelope-open-text'],
                 ['Donate Us','donate','fa-heart'],
             ] as [$lbl,$rt,$ic])
             @php $mhref = $rt==='donate' ? route('donate').'#payment-section' : route($rt); @endphp

@@ -106,6 +106,39 @@
     </div>
 </section>
 
+{{-- ════════ PARTNER / MENTOR ORGANISATIONS ════════════════════════ --}}
+@if($partners->count())
+<section class="py-12 px-4 border-b border-gray-100" style="background:#FFFBF5;">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-8 reveal">
+            <span class="sec-eyebrow">Collaborations</span>
+            <h2 class="sec-h2 mt-2">Our <span class="hl">Mentor Organisations</span></h2>
+        </div>
+        <div class="swiper partners-swiper reveal">
+            <div class="swiper-wrapper items-center">
+                @foreach($partners as $partner)
+                <div class="swiper-slide px-3">
+                    @if($partner->website_url)
+                    <a href="{{ $partner->website_url }}" target="_blank" rel="noopener noreferrer"
+                       class="partner-card rounded-2xl block" title="{{ $partner->name }}">
+                    @else
+                    <div class="partner-card rounded-2xl">
+                    @endif
+                        <img src="{{ $partner->logo_url && !str_starts_with($partner->logo_url,'http') ? asset('storage/'.$partner->logo_url) : $partner->logo_url }}"
+                             alt="{{ $partner->name }}">
+                    @if($partner->website_url)
+                    </a>
+                    @else
+                    </div>
+                    @endif
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
 {{-- ════════ STATS STRIP ═══════════════════════════════════════════ --}}
 @if($impactStats->count())
 <div class="stats-strip">
@@ -333,38 +366,6 @@
 </section>
 @endif
 
-{{-- ════════ PARTNER ORGANISATIONS ════════════════════════════════ --}}
-@if($partners->count())
-<section class="py-16 px-4 border-y border-gray-100" style="background:#FFFBF5;">
-    <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-10 reveal">
-            <span class="sec-eyebrow">Collaborations</span>
-            <h2 class="sec-h2 mt-2">Our <span class="hl">Mentor Organisations</span></h2>
-        </div>
-        <div class="swiper partners-swiper reveal">
-            <div class="swiper-wrapper items-center">
-                @foreach($partners as $partner)
-                <div class="swiper-slide px-3">
-                    @if($partner->website_url)
-                    <a href="{{ $partner->website_url }}" target="_blank" rel="noopener noreferrer"
-                       class="partner-card rounded-2xl block" title="{{ $partner->name }}">
-                    @else
-                    <div class="partner-card rounded-2xl">
-                    @endif
-                        <img src="{{ $partner->logo_url && !str_starts_with($partner->logo_url,'http') ? asset('storage/'.$partner->logo_url) : $partner->logo_url }}"
-                             alt="{{ $partner->name }}">
-                    @if($partner->website_url)
-                    </a>
-                    @else
-                    </div>
-                    @endif
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</section>
-@endif
 
 {{-- ════════ EVENTS ════════════════════════════════════════════════ --}}
 @if($events->count())
@@ -815,6 +816,32 @@
 
     </div>
 </section>
+
+{{-- ════════ APPEAL LETTER FRAME ════════════════════════════════ --}}
+@php $appealImage = \App\Models\SiteSetting::get('appeal_image'); @endphp
+@if($appealImage)
+<section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-3xl mx-auto text-center">
+        <span class="sec-eyebrow">Public Appeal</span>
+        <h2 class="sec-h2 mt-2 mb-8">Appeal <span class="hl">Letter</span></h2>
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-orange-100 reveal">
+            <img src="{{ asset('storage/' . $appealImage) }}"
+                 alt="Appeal Letter"
+                 class="w-full h-auto block">
+        </div>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+            <a href="{{ route('appeal') }}"
+               class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-xl transition text-sm shadow-md">
+                <i class="fas fa-expand"></i> View Full Letter
+            </a>
+            <a href="{{ route('donate') }}#payment-section"
+               class="inline-flex items-center gap-2 bg-purple-900 hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-xl transition text-sm shadow-md">
+                <i class="fas fa-heart"></i> Donate Now
+            </a>
+        </div>
+    </div>
+</section>
+@endif
 
 @endsection
 

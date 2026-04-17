@@ -75,6 +75,11 @@ Route::middleware('track.visitor')->group(function () {
     Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
 
     Route::get('/donate-us', [DonateController::class, 'index'])->name('donate');
+    Route::get('/appeal', function () {
+        $appealImage = \App\Models\SiteSetting::get('appeal_image');
+        $siteName    = \App\Models\SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust');
+        return view('appeal', compact('appealImage', 'siteName'));
+    })->name('appeal');
     Route::get('/media-coverage', [MediaCoverageController::class, 'index'])->name('media-coverage');
     Route::get('/work-in-action', [WorkInActionController::class, 'index'])->name('work-in-action');
 });

@@ -11,7 +11,7 @@ class SiteSettingController extends Controller
 {
     public function index()
     {
-        $keys = ['site_name', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo'];
+        $keys = ['site_name', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo', 'appeal_image'];
         $settings = [];
         foreach ($keys as $key) {
             $settings[$key] = SiteSetting::get($key);
@@ -28,12 +28,14 @@ class SiteSettingController extends Controller
             'phone'        => ['required', 'string', 'max:20'],
             'whatsapp'     => ['required', 'string', 'max:20'],
             'address'      => ['required', 'string', 'max:300'],
-            'ticker'       => ['nullable', 'string', 'max:500'],
-            'header_photo' => ['nullable', 'image', 'max:2048'],
+            'ticker'        => ['nullable', 'string', 'max:500'],
+            'header_photo'  => ['nullable', 'image', 'max:2048'],
+            'appeal_image'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
         ]);
 
-        // Handle photo upload separately
+        // Handle file uploads separately
         unset($data['header_photo']);
+        unset($data['appeal_image']);
 
         foreach ($data as $key => $value) {
             SiteSetting::set($key, $value ?? '');
@@ -46,6 +48,15 @@ class SiteSettingController extends Controller
             }
             $path = $request->file('header_photo')->store('settings', 'public');
             SiteSetting::set('header_photo', $path);
+        }
+
+        if ($request->hasFile('appeal_image')) {
+            $old = SiteSetting::get('appeal_image');
+            if ($old && Storage::disk('public')->exists($old)) {
+                Storage::disk('public')->delete($old);
+            }
+            $path = $request->file('appeal_image')->store('settings', 'public');
+            SiteSetting::set('appeal_image', $path);
         }
 
         return back()->with('success', 'Site settings updated successfully.');
