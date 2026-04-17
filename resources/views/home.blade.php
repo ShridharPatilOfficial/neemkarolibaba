@@ -106,6 +106,29 @@
     </div>
 </section>
 
+{{-- ════════ STATS STRIP ═══════════════════════════════════════════ --}}
+@if($impactStats->count())
+<div class="stats-strip">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="ss-grid">
+            @foreach($impactStats->take(4) as $stat)
+            <div class="ss-item">
+                <div class="ss-icon">
+                    <i class="{{ $stat->icon_class ?: 'fas fa-star' }}"></i>
+                </div>
+                <div>
+                    <div class="ss-num counter-num" data-target="{{ preg_replace('/\D/','',$stat->number_value) }}">
+                        {{ $stat->number_value }}
+                    </div>
+                    <div class="ss-lbl">{{ $stat->label }}</div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
 {{-- ════════ PARTNER / MENTOR ORGANISATIONS ════════════════════════ --}}
 @if($partners->count())
 <section class="py-12 px-4 border-b border-gray-100" style="background:#FFFBF5;">
@@ -137,29 +160,6 @@
         </div>
     </div>
 </section>
-@endif
-
-{{-- ════════ STATS STRIP ═══════════════════════════════════════════ --}}
-@if($impactStats->count())
-<div class="stats-strip">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="ss-grid">
-            @foreach($impactStats->take(4) as $stat)
-            <div class="ss-item">
-                <div class="ss-icon">
-                    <i class="{{ $stat->icon_class ?: 'fas fa-star' }}"></i>
-                </div>
-                <div>
-                    <div class="ss-num counter-num" data-target="{{ preg_replace('/\D/','',$stat->number_value) }}">
-                        {{ $stat->number_value }}
-                    </div>
-                    <div class="ss-lbl">{{ $stat->label }}</div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</div>
 @endif
 
 {{-- ════════ MISSION / VISION / OBJECTIVES ════════════════════════ --}}
