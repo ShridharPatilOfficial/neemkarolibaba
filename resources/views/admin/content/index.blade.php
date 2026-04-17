@@ -38,15 +38,23 @@
 </div>
 
 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-    <table class="w-full text-sm">
+    <table class="w-full text-sm" style="table-layout:fixed">
+        <colgroup>
+            <col style="width:36px">
+            <col style="width:90px">
+            <col>{{-- Heading takes remaining space --}}
+            <col style="width:70px">
+            <col style="width:70px">
+            <col style="width:110px">
+        </colgroup>
         <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
-                <th class="py-3 px-3 w-8 text-gray-400"><i class="fas fa-grip-vertical text-xs"></i></th>
-                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-24">Media</th>
+                <th class="py-3 px-3 text-gray-400"><i class="fas fa-grip-vertical text-xs"></i></th>
+                <th class="py-3 px-4 text-left text-gray-600 font-semibold">Media</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Heading</th>
-                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-20">Year</th>
-                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-20">Active</th>
-                <th class="py-3 px-4 text-right text-gray-600 font-semibold w-24">Actions</th>
+                <th class="py-3 px-4 text-left text-gray-600 font-semibold">Year</th>
+                <th class="py-3 px-4 text-left text-gray-600 font-semibold">Active</th>
+                <th class="py-3 px-4 text-right text-gray-600 font-semibold">Actions</th>
             </tr>
         </thead>
         <tbody id="sortable-body" data-reorder-url="{{ route('admin.content.reorder', $type) }}">
@@ -63,7 +71,7 @@
                         <i class="fas fa-image text-gray-300 text-xl"></i>
                     @endif
                 </td>
-                <td class="py-3 px-4 font-medium text-gray-800">{{ Str::limit($item->heading, 60) }}</td>
+                <td class="py-3 px-4 font-medium text-gray-800 truncate" title="{{ $item->heading }}">{{ $item->heading }}</td>
                 <td class="py-3 px-4 text-gray-500 text-xs font-semibold">{{ $item->post_year }}</td>
                 <td class="py-3 px-4">
                     <span class="inline-block px-2 py-0.5 rounded-full text-xs font-bold {{ $item->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
