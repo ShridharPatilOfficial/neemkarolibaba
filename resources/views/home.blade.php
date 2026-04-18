@@ -131,9 +131,9 @@
 
 {{-- ════════ PARTNER / MENTOR ORGANISATIONS ════════════════════════ --}}
 @if($partners->count())
-<section class="py-12 px-4 border-b border-gray-100" style="background:#FFFBF5;">
+<section class="py-6 px-4 border-b border-gray-100" style="background:#FFFBF5;">
     <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-8 reveal">
+        <div class="text-center mb-4 reveal">
             <span class="sec-eyebrow">Collaborations</span>
             <h2 class="sec-h2 mt-2">Our <span class="hl">Mentor Organisations</span></h2>
         </div>
@@ -163,7 +163,7 @@
 @endif
 
 {{-- ════════ MISSION / VISION / OBJECTIVES ════════════════════════ --}}
-<section class="py-20 px-4" style="background:#FFFBF5;">
+<section class="py-10 px-4" style="background:#FFFBF5;">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-14 reveal">
             <span class="sec-eyebrow">Who We Are</span>
@@ -214,7 +214,7 @@
 </section>
 
 {{-- ════════ ABOUT / WELCOME ═══════════════════════════════════════ --}}
-<section class="py-20 px-4 overflow-hidden bg-white">
+<section class="py-10 px-4 overflow-hidden bg-white">
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
         {{-- Image side --}}
@@ -274,7 +274,7 @@
 </section>
 
 {{-- ════════ MAHARAJ-JI QUOTE BAND ══════════════════════════════════ --}}
-<div class="quote-band py-14 px-4">
+<div class="quote-band py-8 px-4">
     <div class="max-w-3xl mx-auto relative" style="z-index:2;">
         <p class="quote-text-big">
             "The best form of worship is service to mankind."
@@ -285,7 +285,7 @@
 
 {{-- ════════ IMPACT STATS ═══════════════════════════════════════════ --}}
 @if($impactStats->count())
-<section class="py-20 px-4 relative overflow-hidden"
+<section class="py-10 px-4 relative overflow-hidden"
          style="background:linear-gradient(135deg,#0C0920 0%,#1a0f3c 50%,#0C0920 100%);">
     <div class="absolute top-0 left-0 w-80 h-80 rounded-full bg-orange-600/8 -translate-x-1/2 -translate-y-1/2"></div>
     <div class="absolute bottom-0 right-0 w-64 h-64 rounded-full bg-purple-600/15 translate-x-1/3 translate-y-1/3"></div>
@@ -324,9 +324,9 @@
 
 {{-- ════════ RECENT ACTIVITIES ══════════════════════════════════════ --}}
 @if($recentActivities->count())
-<section class="py-20 px-4 bg-white">
+<section class="py-10 px-4 bg-white">
     <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
             <div class="reveal">
                 <span class="sec-eyebrow">What We Do</span>
                 <h2 class="sec-h2 mt-2">Recent <span class="hl">Activities</span></h2>
@@ -379,9 +379,9 @@
 
 {{-- ════════ EVENTS ════════════════════════════════════════════════ --}}
 @if($events->count())
-<section class="py-20 px-4 bg-white">
+<section class="py-10 px-4 bg-white">
     <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
             <div class="reveal">
                 <span class="sec-eyebrow">Upcoming &amp; Recent</span>
                 <h2 class="sec-h2 mt-2">Events We <span class="hl">Organise</span></h2>
@@ -421,10 +421,10 @@
 
 {{-- ════════ LEADERSHIP MESSAGES ════════════════════════════════════ --}}
 @if($presidentMessages->count())
-<section class="py-16 md:py-20 px-4" style="background:linear-gradient(135deg,#0C0920 0%,#1a0f3c 100%);">
+<section class="py-8 md:py-10 px-4" style="background:linear-gradient(135deg,#0C0920 0%,#1a0f3c 100%);">
     <div class="max-w-7xl mx-auto">
 
-        <div class="text-center mb-12 reveal">
+        <div class="text-center mb-6 reveal">
             <span class="sec-eyebrow" style="color:#F97316;">Leadership</span>
             <h2 class="sec-h2 sec-h2w mt-2">A Message From Our <span class="hl">Leaders</span></h2>
             <p class="sec-sub sec-subw mt-3 max-w-lg mx-auto">Dedicated personalities striving to foster unity, compassion, and lasting change.</p>
@@ -524,7 +524,7 @@
 @endif
 
 {{-- ════════ WORK IN ACTION — VIDEOS ═══════════════════════════════ --}}
-<section class="py-20 px-4 video-section-bg">
+<section class="py-10 px-4 video-section-bg">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-14 reveal">
             <div class="inline-flex items-center gap-2 mb-3">
@@ -583,7 +583,7 @@
             @endforeach
         </div>
         @else
-        <div class="text-center py-16 reveal">
+        <div class="text-center py-8 reveal">
             <div class="w-20 h-20 rounded-full bg-white/8 border border-white/15 flex items-center justify-center mx-auto mb-5">
                 <i class="fab fa-youtube text-red-400 text-3xl"></i>
             </div>
@@ -623,9 +623,9 @@
 </div>
 
 {{-- ════════ MEDIA COVERAGE PREVIEW ════════════════════════════════ --}}
-<section class="py-20 px-4 bg-white">
+<section class="py-10 px-4 bg-white">
     <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
             <div class="text-center md:text-left reveal">
                 <span class="sec-eyebrow">Press &amp; Media</span>
                 <h2 class="sec-h2 mt-2">Featured In <span class="hl">Media</span></h2>
@@ -697,7 +697,7 @@
             @endforeach
         </div>
         @else
-        <div class="text-center py-16 reveal">
+        <div class="text-center py-8 reveal">
             <div class="w-20 h-20 rounded-full bg-orange-100 flex items-center justify-center mx-auto mb-5">
                 <i class="fas fa-newspaper text-orange-400 text-3xl"></i>
             </div>
@@ -733,7 +733,7 @@
 <section id="donate-anim-band" style="
     position:relative;overflow:hidden;
     background:linear-gradient(135deg,#0C0920 0%,#1a0432 45%,#0C0920 100%);
-    padding:5rem 1rem;">
+    padding:2.5rem 1rem;">
 
     {{-- Animated ripple rings --}}
     <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
@@ -842,10 +842,10 @@
 {{-- ════════ APPEAL LETTER FRAME ════════════════════════════════ --}}
 @php $appealImage = \App\Models\SiteSetting::get('appeal_image'); @endphp
 @if($appealImage)
-<section class="py-16 px-4 bg-gray-50">
+<section class="py-8 px-4 bg-gray-50">
     <div class="max-w-3xl mx-auto text-center">
         <span class="sec-eyebrow">Public Appeal</span>
-        <h2 class="sec-h2 mt-2 mb-8">Appeal <span class="hl">Letter</span></h2>
+        <h2 class="sec-h2 mt-2 mb-4">Appeal <span class="hl">Letter</span></h2>
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-orange-100 reveal">
             <img src="{{ asset('storage/' . $appealImage) }}"
                  alt="Appeal Letter"
