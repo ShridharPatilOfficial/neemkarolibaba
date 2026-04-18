@@ -73,12 +73,21 @@
             @endforeach
         </div>
 
-        {{-- Pagination --}}
-        @if($videos->hasPages())
-        <div class="mt-12 flex justify-center">
-            {{ $videos->links() }}
+        {{-- Per-page + Pagination --}}
+        <div class="mt-10 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <label class="text-purple-400 text-sm font-semibold">Show:</label>
+                <select onchange="location.href=this.value" class="text-sm font-bold border-2 border-purple-700 rounded-xl px-4 py-2 bg-gray-900 text-purple-200 focus:outline-none focus:border-purple-500">
+                    @foreach([25, 50, 100] as $size)
+                    <option value="{{ route('work-in-action') }}?per_page={{ $size }}"
+                        {{ $perPage == $size ? 'selected' : '' }}>
+                        {{ $size }} per page
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+            <div>{{ $videos->links() }}</div>
         </div>
-        @endif
 
         @else
         <div class="text-center py-24">

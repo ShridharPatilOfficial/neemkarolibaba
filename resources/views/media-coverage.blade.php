@@ -47,10 +47,10 @@
                 <h2 class="text-3xl font-black text-gray-900 mt-1">Featured In <span class="text-orange-600">Media</span></h2>
             </div>
             <div class="flex flex-wrap items-center gap-2 justify-center md:justify-end">
-                {{-- Year filter (always visible, dropdown) --}}
+                {{-- Year filter --}}
                 <select onchange="location.href=this.value" class="text-xs font-bold border-2 border-purple-200 rounded-xl px-4 py-2 bg-white focus:outline-none focus:border-purple-600 text-gray-700">
                     @for($y = $currentYear + 2; $y >= $currentYear - 10; $y--)
-                    <option value="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year' => $y, 'category' => $category ?: null])) }}"
+                    <option value="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year' => $y, 'category' => $category ?: null, 'per_page' => $perPage])) }}"
                         {{ $year == $y ? 'selected' : '' }}>
                         {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}
                     </option>
@@ -58,11 +58,20 @@
                 </select>
                 {{-- Category filter --}}
                 @foreach([''=>'All','news'=>'News','tv'=>'TV / Video','online'=>'Online','magazine'=>'Magazine'] as $key => $label)
-                <a href="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year' => $year, 'category' => $key ?: null])) }}"
+                <a href="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year' => $year, 'category' => $key ?: null, 'per_page' => $perPage])) }}"
                    class="text-xs font-bold px-4 py-2 rounded-full transition {{ $category == $key ? 'bg-purple-900 text-white' : 'bg-white text-gray-600 hover:bg-purple-100 border border-gray-200' }}">
                     {{ $label }}
                 </a>
                 @endforeach
+                {{-- Per-page --}}
+                <select onchange="location.href=this.value" class="text-xs font-bold border-2 border-purple-200 rounded-xl px-4 py-2 bg-white focus:outline-none focus:border-purple-600 text-gray-700">
+                    @foreach([25, 50, 100] as $size)
+                    <option value="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year' => $year, 'category' => $category ?: null, 'per_page' => $size])) }}"
+                        {{ $perPage == $size ? 'selected' : '' }}>
+                        {{ $size }} per page
+                    </option>
+                    @endforeach
+                </select>
             </div>
         </div>
 

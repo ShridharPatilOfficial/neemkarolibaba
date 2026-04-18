@@ -41,10 +41,23 @@
 <section class="py-16 px-4 bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto">
 
-        <div class="text-center mb-10">
-            <span class="section-tag">Memories & Milestones</span>
-            <h2 class="text-3xl font-black text-gray-900 mt-1">Photo & Video <span class="text-orange-600">Gallery</span></h2>
-            <p class="text-gray-500 text-sm mt-2">Click any item to view — use arrows to browse all</p>
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+            <div>
+                <span class="section-tag">Memories & Milestones</span>
+                <h2 class="text-3xl font-black text-gray-900 mt-1">Photo & Video <span class="text-orange-600">Gallery</span></h2>
+                <p class="text-gray-500 text-sm mt-2">Click any item to view — use arrows to browse all</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <label class="text-sm font-semibold text-gray-600">Show:</label>
+                <select onchange="location.href=this.value" class="text-sm font-bold border-2 border-purple-200 rounded-xl px-4 py-2 bg-white focus:outline-none focus:border-purple-600 text-gray-700 shadow-sm">
+                    @foreach([25, 50, 100] as $size)
+                    <option value="{{ route('gallery') }}?per_page={{ $size }}"
+                        {{ $perPage == $size ? 'selected' : '' }}>
+                        {{ $size }} per page
+                    </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         {{-- Grid --}}

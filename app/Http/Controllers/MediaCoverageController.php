@@ -18,12 +18,13 @@ class MediaCoverageController extends Controller
 
         if ($category) $query->where('category', $category);
 
-        $coverages  = $query->paginate(9)->withQueryString();
+        $perPage   = in_array((int) $request->input('per_page'), [25, 50, 100]) ? (int) $request->input('per_page') : 25;
+        $coverages  = $query->paginate($perPage)->withQueryString();
         $availYears = MediaCoverage::where('is_active', true)
             ->whereNotNull('published_date')
             ->selectRaw('YEAR(published_date) as y')
             ->groupBy('y')->orderByDesc('y')->pluck('y');
 
-        return view('media-coverage', compact('coverages', 'availYears', 'year', 'currentYear', 'category'));
+        return view('media-coverage', compact('coverages', 'availYears', 'year', 'currentYear', 'category', 'perPage'));
     }
 }

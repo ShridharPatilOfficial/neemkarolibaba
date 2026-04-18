@@ -9,7 +9,7 @@ class GalleryController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = 12;
+        $perPage = in_array((int) $request->input('per_page'), [25, 50, 100]) ? (int) $request->input('per_page') : 25;
         $page    = (int) $request->get('page', 1);
         $total   = GalleryItem::where('is_active', true)->count();
         $items   = GalleryItem::where('is_active', true)
@@ -36,6 +36,6 @@ class GalleryController extends Controller
         }
 
         $hasMore = $total > $perPage;
-        return view('gallery', compact('items', 'hasMore'));
+        return view('gallery', compact('items', 'hasMore', 'perPage'));
     }
 }
