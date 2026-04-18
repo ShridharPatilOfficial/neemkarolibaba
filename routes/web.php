@@ -146,6 +146,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('work-videos', WorkVideoController::class)->except(['show'])
             ->parameters(['work-videos' => 'workVideo']);
+        Route::post('/work-videos-reorder', [WorkVideoController::class, 'reorder'])->name('work-videos.reorder');
 
         Route::resource('media-coverage', AdminMediaCoverageController::class)->except(['show'])
             ->parameters(['media-coverage' => 'mediaCoverage']);

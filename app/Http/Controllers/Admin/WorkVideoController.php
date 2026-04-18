@@ -77,4 +77,13 @@ class WorkVideoController extends Controller
         $workVideo->delete();
         return back()->with('success', 'Video deleted.');
     }
+
+    public function reorder(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        foreach ($ids as $index => $id) {
+            WorkVideo::where('id', $id)->update(['sort_order' => $index + 1]);
+        }
+        return response()->json(['ok' => true]);
+    }
 }
