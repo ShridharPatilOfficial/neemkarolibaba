@@ -11,7 +11,7 @@ class SiteSettingController extends Controller
 {
     public function index()
     {
-        $keys = ['site_name', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo', 'appeal_image'];
+        $keys = ['site_name', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo', 'appeal_image', 'facebook', 'instagram', 'youtube'];
         $settings = [];
         foreach ($keys as $key) {
             $settings[$key] = SiteSetting::get($key);
@@ -29,6 +29,9 @@ class SiteSettingController extends Controller
             'whatsapp'     => ['required', 'string', 'max:20'],
             'address'      => ['required', 'string', 'max:300'],
             'ticker'        => ['nullable', 'string', 'max:500'],
+            'facebook'      => ['nullable', 'url', 'max:300'],
+            'instagram'     => ['nullable', 'url', 'max:300'],
+            'youtube'       => ['nullable', 'url', 'max:300'],
             'header_photo'  => ['nullable', 'image', 'max:2048'],
             'appeal_image'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
         ]);

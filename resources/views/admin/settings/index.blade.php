@@ -23,6 +23,36 @@
         </div>
         @endforeach
 
+        {{-- Social Media Links --}}
+        <div class="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-200">
+            <p class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+                <i class="fas fa-share-alt text-purple-500"></i> Social Media Links
+            </p>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1"><i class="fab fa-facebook text-blue-600 mr-1"></i> Facebook URL</label>
+                    <input type="url" name="facebook" value="{{ $settings['facebook'] ?? '' }}"
+                           class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm font-mono @error('facebook') border-red-400 @enderror"
+                           placeholder="https://www.facebook.com/your-page">
+                    @error('facebook')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1"><i class="fab fa-instagram text-pink-500 mr-1"></i> Instagram URL</label>
+                    <input type="url" name="instagram" value="{{ $settings['instagram'] ?? '' }}"
+                           class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm font-mono @error('instagram') border-red-400 @enderror"
+                           placeholder="https://www.instagram.com/your-handle">
+                    @error('instagram')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1"><i class="fab fa-youtube text-red-500 mr-1"></i> YouTube URL</label>
+                    <input type="url" name="youtube" value="{{ $settings['youtube'] ?? '' }}"
+                           class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm font-mono @error('youtube') border-red-400 @enderror"
+                           placeholder="https://youtube.com/@your-channel">
+                    @error('youtube')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
+            </div>
+        </div>
+
         <div class="mb-6">
             <label class="block text-sm font-semibold text-gray-700 mb-1">Scrolling Ticker Text</label>
             <textarea name="ticker" rows="2"
