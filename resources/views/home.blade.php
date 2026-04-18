@@ -543,13 +543,12 @@
             @php $ytId = $vid->youtube_id; @endphp
             <div class="work-video-card group relative bg-gray-900 rounded-2xl overflow-hidden shadow-lg border border-white/8
                         hover:border-orange-500/45 hover:-translate-y-2 hover:shadow-orange-900/35 hover:shadow-2xl
-                        transition-all duration-400 cursor-pointer reveal reveal-delay-{{ $i%4+1 }}"
-                 onclick="openWorkVideo('{{ $ytId }}','{{ addslashes($vid->title) }}')">
-                <div class="relative overflow-hidden h-44">
-                    <img src="{{ $ytId ? 'https://img.youtube.com/vi/'.$ytId.'/maxresdefault.jpg' : 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80' }}"
+                        transition-all duration-400 reveal reveal-delay-{{ $i%4+1 }}">
+                <div class="relative overflow-hidden h-44 cursor-pointer"
+                     onclick="openWorkVideo('{{ $ytId }}','{{ addslashes($vid->title) }}')">
+                    <img src="{{ $ytId ? 'https://img.youtube.com/vi/'.$ytId.'/hqdefault.jpg' : 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&q=80' }}"
                          alt="{{ $vid->title }}"
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                         onerror="this.src='https://img.youtube.com/vi/{{ $ytId }}/mqdefault.jpg'">
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="w-14 h-14 rounded-full bg-red-600 group-hover:bg-red-500 group-hover:scale-110
@@ -570,11 +569,12 @@
                     <div class="text-gray-400 text-xs rich-text-dark card-desc-truncated" id="wvdesc-{{ $vid->id }}">
                         {!! $vid->description !!}
                     </div>
-                    <button class="card-read-more" onclick="toggleDesc('wvdesc-{{ $vid->id }}', this)">
+                    <button class="card-read-more" onclick="event.stopPropagation(); toggleDesc('wvdesc-{{ $vid->id }}', this)">
                         Read More <i class="fas fa-chevron-down text-[10px]"></i>
                     </button>
                     @endif
-                    <div class="mt-3 flex items-center gap-1.5 text-orange-400 text-xs font-semibold">
+                    <div class="mt-3 flex items-center gap-1.5 text-orange-400 text-xs font-semibold cursor-pointer"
+                         onclick="openWorkVideo('{{ $ytId }}','{{ addslashes($vid->title) }}')">
                         <i class="fas fa-play-circle text-sm"></i> Watch Now
                     </div>
                 </div>
