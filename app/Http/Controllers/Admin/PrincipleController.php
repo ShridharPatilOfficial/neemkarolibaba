@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\ManagesSortOrder;
 use App\Http\Controllers\Controller;
 use App\Models\Principle;
 use Illuminate\Http\Request;
 
 class PrincipleController extends Controller
 {
+    use ManagesSortOrder;
+
     public function index()
     {
         $principles = Principle::orderBy('sort_order')->get();
@@ -18,7 +21,8 @@ class PrincipleController extends Controller
     {
         $principle = null;
         $themes    = Principle::themeMap();
-        return view('admin.principles.form', compact('principle', 'themes'));
+        $nextOrder = $this->nextSortOrder(Principle::class);
+        return view('admin.principles.form', compact('principle', 'themes', 'nextOrder'));
     }
 
     public function store(Request $request)
@@ -33,10 +37,12 @@ class PrincipleController extends Controller
             'is_active'   => ['nullable', 'boolean'],
         ]);
 
+        $nextOrder          = $this->nextSortOrder(Principle::class);
         $data['is_active']  = $request->boolean('is_active');
         $data['sort_order'] = $data['sort_order'] ?? 0;
 
-        Principle::create($data);
+        $item = Principle::create($data);
+        $this->swapSortOrderIfConflict(Principle::class, $item->id, $item->sort_order, $nextOrder);
 
         return redirect()->route('admin.principles.index')->with('success', 'Principle added successfully.');
     }
@@ -59,10 +65,12 @@ class PrincipleController extends Controller
             'is_active'   => ['nullable', 'boolean'],
         ]);
 
+        $oldOrder           = $principle->sort_order;
         $data['is_active']  = $request->boolean('is_active');
         $data['sort_order'] = $data['sort_order'] ?? 0;
 
         $principle->update($data);
+        $this->swapSortOrderIfConflict(Principle::class, $principle->id, $principle->sort_order, $oldOrder);
 
         return redirect()->route('admin.principles.index')->with('success', 'Principle updated successfully.');
     }

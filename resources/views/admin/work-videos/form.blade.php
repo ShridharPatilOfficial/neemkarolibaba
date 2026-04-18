@@ -46,7 +46,7 @@
         <div class="grid grid-cols-2 gap-4 mb-5">
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Sort Order</label>
-                <input type="number" name="sort_order" value="{{ old('sort_order', $video?->sort_order ?? 0) }}" min="0"
+                <input type="number" name="sort_order" value="{{ old('sort_order', $video?->sort_order ?? $nextOrder ?? 0) }}" min="0"
                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm">
             </div>
             <div class="flex items-end pb-1">

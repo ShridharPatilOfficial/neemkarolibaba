@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\ManagesSortOrder;
 use App\Http\Controllers\Controller;
 use App\Models\GalleryItem;
 use Illuminate\Http\Request;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 class GalleryItemController extends Controller
 {
+    use ManagesSortOrder;
+
     public function index(Request $request)
     {
         $items = GalleryItem::orderBy('sort_order')->paginate(20);
@@ -17,7 +20,8 @@ class GalleryItemController extends Controller
 
     public function create()
     {
-        return view('admin.gallery.form', ['item' => null]);
+        $nextOrder = $this->nextSortOrder(GalleryItem::class);
+        return view('admin.gallery.form', ['item' => null, 'nextOrder' => $nextOrder]);
     }
 
     public function store(Request $request)
@@ -31,12 +35,13 @@ class GalleryItemController extends Controller
             'is_active'   => ['boolean'],
         ]);
 
-        $imageUrl = null;
+        $nextOrder = $this->nextSortOrder(GalleryItem::class);
+        $imageUrl  = null;
         if ($request->hasFile('image')) {
             $imageUrl = $request->file('image')->store('gallery', 'public');
         }
 
-        GalleryItem::create([
+        $item = GalleryItem::create([
             'headline'    => $request->headline,
             'image_url'   => $imageUrl,
             'youtube_url' => $request->youtube_url,
@@ -44,6 +49,8 @@ class GalleryItemController extends Controller
             'sort_order'  => $request->input('sort_order', 0),
             'is_active'   => $request->boolean('is_active'),
         ]);
+
+        $this->swapSortOrderIfConflict(GalleryItem::class, $item->id, $item->sort_order, $nextOrder);
 
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery item added.');
     }
@@ -64,11 +71,11 @@ class GalleryItemController extends Controller
             'is_active'   => ['boolean'],
         ]);
 
+        $oldOrder = $gallery->sort_order;
         $imageUrl = $gallery->image_url;
+
         if ($request->hasFile('image')) {
-            if ($gallery->image_url) {
-                Storage::disk('public')->delete($gallery->image_url);
-            }
+            if ($gallery->image_url) Storage::disk('public')->delete($gallery->image_url);
             $imageUrl = $request->file('image')->store('gallery', 'public');
         }
 
@@ -81,14 +88,14 @@ class GalleryItemController extends Controller
             'is_active'   => $request->boolean('is_active'),
         ]);
 
+        $this->swapSortOrderIfConflict(GalleryItem::class, $gallery->id, $gallery->sort_order, $oldOrder);
+
         return redirect()->route('admin.gallery.index')->with('success', 'Gallery item updated.');
     }
 
     public function destroy(GalleryItem $gallery)
     {
-        if ($gallery->image_url) {
-            Storage::disk('public')->delete($gallery->image_url);
-        }
+        if ($gallery->image_url) Storage::disk('public')->delete($gallery->image_url);
         $gallery->delete();
         return back()->with('success', 'Gallery item deleted.');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\ManagesSortOrder;
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 class SliderController extends Controller
 {
+    use ManagesSortOrder;
+
     public function index()
     {
         $sliders = Slider::orderBy('sort_order')->get();
@@ -17,26 +20,30 @@ class SliderController extends Controller
 
     public function create()
     {
-        return view('admin.sliders.form', ['slider' => null]);
+        $nextOrder = $this->nextSortOrder(Slider::class);
+        return view('admin.sliders.form', ['slider' => null, 'nextOrder' => $nextOrder]);
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image'       => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'caption'     => ['nullable', 'string', 'max:200'],
-            'sort_order'  => ['integer', 'min:0'],
-            'is_active'   => ['boolean'],
+            'image'      => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'caption'    => ['nullable', 'string', 'max:200'],
+            'sort_order' => ['integer', 'min:0'],
+            'is_active'  => ['boolean'],
         ]);
 
+        $nextOrder = $this->nextSortOrder(Slider::class);
         $path = $request->file('image')->store('sliders', 'public');
 
-        Slider::create([
+        $item = Slider::create([
             'image_url'  => $path,
             'caption'    => $data['caption'] ?? null,
             'sort_order' => $data['sort_order'] ?? 0,
             'is_active'  => $request->boolean('is_active'),
         ]);
+
+        $this->swapSortOrderIfConflict(Slider::class, $item->id, $item->sort_order, $nextOrder);
 
         return redirect()->route('admin.sliders.index')->with('success', 'Slider added successfully.');
     }
@@ -55,6 +62,8 @@ class SliderController extends Controller
             'is_active'  => ['boolean'],
         ]);
 
+        $oldOrder = $slider->sort_order;
+
         if ($request->hasFile('image')) {
             Storage::disk('public')->delete($slider->image_url);
             $data['image_url'] = $request->file('image')->store('sliders', 'public');
@@ -66,6 +75,8 @@ class SliderController extends Controller
             'sort_order' => $data['sort_order'] ?? 0,
             'is_active'  => $request->boolean('is_active'),
         ]);
+
+        $this->swapSortOrderIfConflict(Slider::class, $slider->id, $slider->sort_order, $oldOrder);
 
         return redirect()->route('admin.sliders.index')->with('success', 'Slider updated successfully.');
     }

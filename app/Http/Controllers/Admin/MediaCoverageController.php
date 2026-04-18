@@ -1,24 +1,27 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Admin\Concerns\ManagesSortOrder;
 use App\Http\Controllers\Controller;
 use App\Models\MediaCoverage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class MediaCoverageController extends Controller {
-    public function index() {
+class MediaCoverageController extends Controller
+{
+    use ManagesSortOrder;
+
+    public function index()
+    {
         $currentYear = (int) now()->format('Y');
         $year        = request('year') ? (int) request('year') : $currentYear;
 
         $query = MediaCoverage::orderBy('sort_order')->orderByDesc('published_date')
                     ->whereYear('published_date', $year);
 
-        if ($cat = request('category')) {
-            $query->where('category', $cat);
-        }
-        if ($status = request('status')) {
-            $query->where('is_active', $status === 'active');
-        }
+        if ($cat = request('category')) $query->where('category', $cat);
+        if ($status = request('status')) $query->where('is_active', $status === 'active');
 
         $coverages  = $query->paginate(20)->withQueryString();
         $availYears = MediaCoverage::selectRaw('YEAR(published_date) as y')
@@ -32,57 +35,75 @@ class MediaCoverageController extends Controller {
     {
         $ids = $request->input('ids', []);
         foreach ($ids as $position => $id) {
-            \App\Models\MediaCoverage::where('id', $id)->update(['sort_order' => $position]);
+            MediaCoverage::where('id', $id)->update(['sort_order' => $position]);
         }
         return response()->json(['ok' => true]);
     }
-    public function create() {
+
+    public function create()
+    {
         $coverage   = null;
         $categories = MediaCoverage::categories();
-        return view('admin.media-coverage.form', compact('coverage','categories'));
+        $nextOrder  = $this->nextSortOrder(MediaCoverage::class);
+        return view('admin.media-coverage.form', compact('coverage', 'categories', 'nextOrder'));
     }
-    public function store(Request $request) {
+
+    public function store(Request $request)
+    {
         $data = $request->validate([
-            'title'          => ['required','string','max:200'],
-            'description'    => ['nullable','string'],
-            'source_name'    => ['required','string','max:120'],
-            'source_url'     => ['nullable','url'],
-            'youtube_url'    => ['nullable','url'],
-            'cover_image'    => ['nullable','image','mimes:jpg,jpeg,png,webp','max:1024'],
-            'published_date' => ['nullable','date'],
-            'category'       => ['required','in:news,tv,online,magazine'],
-            'sort_order'     => ['nullable','integer'],
-            'is_active'      => ['nullable','boolean'],
+            'title'          => ['required', 'string', 'max:200'],
+            'description'    => ['nullable', 'string'],
+            'source_name'    => ['required', 'string', 'max:120'],
+            'source_url'     => ['nullable', 'url'],
+            'youtube_url'    => ['nullable', 'url'],
+            'cover_image'    => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
+            'published_date' => ['nullable', 'date'],
+            'category'       => ['required', 'in:news,tv,online,magazine'],
+            'sort_order'     => ['nullable', 'integer'],
+            'is_active'      => ['nullable', 'boolean'],
         ]);
+
+        $nextOrder = $this->nextSortOrder(MediaCoverage::class);
+
         if ($request->hasFile('cover_image')) {
             $data['cover_image_url'] = $request->file('cover_image')->store('media-coverage', 'public');
         }
         unset($data['cover_image']);
         $data['is_active']  = $request->boolean('is_active');
         $data['sort_order'] = $data['sort_order'] ?? 0;
-        MediaCoverage::create($data);
+
+        $item = MediaCoverage::create($data);
+        $this->swapSortOrderIfConflict(MediaCoverage::class, $item->id, $item->sort_order, $nextOrder);
+
         return redirect()->route('admin.media-coverage.index')->with('success', 'Media coverage added.');
     }
-    public function edit(MediaCoverage $mediaCoverage) {
+
+    public function edit(MediaCoverage $mediaCoverage)
+    {
         $coverage   = $mediaCoverage;
         $categories = MediaCoverage::categories();
-        return view('admin.media-coverage.form', compact('coverage','categories'));
+        return view('admin.media-coverage.form', compact('coverage', 'categories'));
     }
-    public function update(Request $request, MediaCoverage $mediaCoverage) {
+
+    public function update(Request $request, MediaCoverage $mediaCoverage)
+    {
         $data = $request->validate([
-            'title'          => ['required','string','max:200'],
-            'description'    => ['nullable','string'],
-            'source_name'    => ['required','string','max:120'],
-            'source_url'     => ['nullable','url'],
-            'youtube_url'    => ['nullable','url'],
-            'cover_image'    => ['nullable','image','mimes:jpg,jpeg,png,webp','max:1024'],
-            'published_date' => ['nullable','date'],
-            'category'       => ['required','in:news,tv,online,magazine'],
-            'sort_order'     => ['nullable','integer'],
-            'is_active'      => ['nullable','boolean'],
+            'title'          => ['required', 'string', 'max:200'],
+            'description'    => ['nullable', 'string'],
+            'source_name'    => ['required', 'string', 'max:120'],
+            'source_url'     => ['nullable', 'url'],
+            'youtube_url'    => ['nullable', 'url'],
+            'cover_image'    => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:1024'],
+            'published_date' => ['nullable', 'date'],
+            'category'       => ['required', 'in:news,tv,online,magazine'],
+            'sort_order'     => ['nullable', 'integer'],
+            'is_active'      => ['nullable', 'boolean'],
         ]);
+
+        $oldOrder = $mediaCoverage->sort_order;
+
         if ($request->hasFile('cover_image')) {
-            if ($mediaCoverage->cover_image_url && !str_starts_with($mediaCoverage->cover_image_url,'http')) {
+            if ($mediaCoverage->cover_image_url && !str_starts_with($mediaCoverage->cover_image_url, 'http')) {
                 Storage::disk('public')->delete($mediaCoverage->cover_image_url);
             }
             $data['cover_image_url'] = $request->file('cover_image')->store('media-coverage', 'public');
@@ -90,11 +111,16 @@ class MediaCoverageController extends Controller {
         unset($data['cover_image']);
         $data['is_active']  = $request->boolean('is_active');
         $data['sort_order'] = $data['sort_order'] ?? 0;
+
         $mediaCoverage->update($data);
+        $this->swapSortOrderIfConflict(MediaCoverage::class, $mediaCoverage->id, $mediaCoverage->sort_order, $oldOrder);
+
         return redirect()->route('admin.media-coverage.index')->with('success', 'Media coverage updated.');
     }
-    public function destroy(MediaCoverage $mediaCoverage) {
-        if ($mediaCoverage->cover_image_url && !str_starts_with($mediaCoverage->cover_image_url,'http')) {
+
+    public function destroy(MediaCoverage $mediaCoverage)
+    {
+        if ($mediaCoverage->cover_image_url && !str_starts_with($mediaCoverage->cover_image_url, 'http')) {
             Storage::disk('public')->delete($mediaCoverage->cover_image_url);
         }
         $mediaCoverage->delete();

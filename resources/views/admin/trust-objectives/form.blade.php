@@ -54,7 +54,7 @@
             {{-- Sort Order --}}
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Sort Order</label>
-                <input type="number" name="sort_order" value="{{ old('sort_order', $objective?->sort_order ?? 0) }}" min="0"
+                <input type="number" name="sort_order" value="{{ old('sort_order', $objective?->sort_order ?? $nextOrder ?? 0) }}" min="0"
                        class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm">
                 <p class="text-xs text-gray-400 mt-1">Lower = shown first (1, 2, 3…)</p>
             </div>

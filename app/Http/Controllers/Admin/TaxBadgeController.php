@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\ManagesSortOrder;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\TaxBadge;
@@ -9,6 +10,8 @@ use Illuminate\Http\Request;
 
 class TaxBadgeController extends Controller
 {
+    use ManagesSortOrder;
+
     public function index()
     {
         $badges = TaxBadge::with('document')->orderBy('sort_order')->orderBy('id')->get();
@@ -17,8 +20,9 @@ class TaxBadgeController extends Controller
 
     public function create()
     {
+        $nextOrder = $this->nextSortOrder(TaxBadge::class);
         $documents = Document::where('is_active', true)->orderBy('name')->get();
-        return view('admin.tax-badges.form', compact('documents'));
+        return view('admin.tax-badges.form', compact('documents', 'nextOrder'));
     }
 
     public function store(Request $request)
@@ -30,10 +34,12 @@ class TaxBadgeController extends Controller
             'is_active'   => ['nullable', 'boolean'],
         ]);
 
+        $nextOrder          = $this->nextSortOrder(TaxBadge::class);
         $data['is_active']  = $request->boolean('is_active', true);
         $data['sort_order'] = $data['sort_order'] ?? 0;
 
-        TaxBadge::create($data);
+        $item = TaxBadge::create($data);
+        $this->swapSortOrderIfConflict(TaxBadge::class, $item->id, $item->sort_order, $nextOrder);
 
         return redirect()->route('admin.tax-badges.index')->with('success', 'Badge added.');
     }
@@ -53,10 +59,12 @@ class TaxBadgeController extends Controller
             'is_active'   => ['nullable', 'boolean'],
         ]);
 
+        $oldOrder           = $taxBadge->sort_order;
         $data['is_active']  = $request->boolean('is_active', true);
         $data['sort_order'] = $data['sort_order'] ?? 0;
 
         $taxBadge->update($data);
+        $this->swapSortOrderIfConflict(TaxBadge::class, $taxBadge->id, $taxBadge->sort_order, $oldOrder);
 
         return redirect()->route('admin.tax-badges.index')->with('success', 'Badge updated.');
     }
