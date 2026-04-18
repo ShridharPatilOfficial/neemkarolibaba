@@ -50,6 +50,13 @@
                            placeholder="https://youtube.com/@your-channel">
                     @error('youtube')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1"><i class="fab fa-x-twitter text-gray-800 mr-1"></i> Twitter / X URL</label>
+                    <input type="url" name="twitter" value="{{ $settings['twitter'] ?? '' }}"
+                           class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm font-mono @error('twitter') border-red-400 @enderror"
+                           placeholder="https://x.com/your-handle">
+                    @error('twitter')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
             </div>
         </div>
 

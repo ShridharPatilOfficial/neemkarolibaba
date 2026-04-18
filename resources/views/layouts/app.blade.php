@@ -150,11 +150,13 @@
             {{-- Actions --}}
             <div class="sh-actions">
                 <div class="sh-socials">
-                    @foreach(['facebook','instagram','youtube'] as $sn)
-                    @php $surl = \App\Models\SiteSetting::get($sn, '#'); @endphp
+                    @foreach([['facebook','facebook'],['instagram','instagram'],['youtube','youtube'],['twitter','x-twitter']] as [$sn,$icon])
+                    @php $surl = \App\Models\SiteSetting::get($sn, ''); @endphp
+                    @if($surl && $surl !== '#')
                     <a href="{{ $surl }}" target="_blank" rel="noopener" class="sh-si">
-                        <i class="fab fa-{{ $sn }}"></i>
+                        <i class="fab fa-{{ $icon }}"></i>
                     </a>
+                    @endif
                     @endforeach
                 </div>
                 <div class="sh-donate-wrap">
@@ -332,18 +334,21 @@
                 <p class="text-gray-400 text-sm leading-relaxed mb-4">
                     A not-for-profit philanthropic organisation inspired by the teachings of Neem Karoli Baba — dedicated to education, healthcare &amp; community service.
                 </p>
-                <div class="flex gap-2">
+                <div class="flex gap-2 flex-wrap">
                     @foreach([
-                        ['facebook', 'bg-blue-600'],
-                        ['instagram', 'bg-gradient-to-tr from-pink-500 to-orange-400'],
-                        ['youtube', 'bg-red-600'],
-                        ['whatsapp', 'bg-green-600'],
-                    ] as [$sn, $bg])
-                    @php $url = \App\Models\SiteSetting::get($sn, '#'); @endphp
+                        ['facebook',  'facebook',  'bg-blue-600'],
+                        ['instagram', 'instagram', 'bg-gradient-to-tr from-pink-500 to-orange-400'],
+                        ['youtube',   'youtube',   'bg-red-600'],
+                        ['twitter',   'x-twitter', 'bg-gray-900'],
+                        ['whatsapp',  'whatsapp',  'bg-green-600'],
+                    ] as [$sn, $icon, $bg])
+                    @php $url = \App\Models\SiteSetting::get($sn, ''); @endphp
+                    @if($url && $url !== '#')
                     <a href="{{ $sn === 'whatsapp' ? 'https://wa.me/' . $url : $url }}" target="_blank" rel="noopener"
-                       class="w-8 h-8 rounded-lg {{ $bg }} flex items-center justify-center text-xs hover:opacity-80 transition">
-                        <i class="fab fa-{{ $sn }}"></i>
+                       class="w-8 h-8 rounded-lg {{ $bg }} flex items-center justify-center text-xs hover:opacity-80 transition text-white">
+                        <i class="fab fa-{{ $icon }}"></i>
                     </a>
+                    @endif
                     @endforeach
                 </div>
             </div>
