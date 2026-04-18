@@ -406,11 +406,10 @@
                 <div class="ev-body">
                     <p class="ev-cat">{{ $siteName }}</p>
                     <h3 class="ev-title">{{ $event->heading }}</h3>
-                    <div class="ev-desc rich-text">{!! $event->description !!}</div>
-                    <a href="{{ route('events') }}"
-                       class="inline-flex items-center gap-1 text-orange-600 font-semibold text-xs mt-3 hover:gap-2 transition-all">
-                        Read More <i class="fas fa-arrow-right text-[9px]"></i>
-                    </a>
+                    <div class="ev-desc rich-text card-desc-truncated" id="evdesc-{{ $event->id }}">{!! $event->description !!}</div>
+                    <button class="card-read-more mt-2" onclick="toggleDesc('evdesc-{{ $event->id }}', this)">
+                        Read More <i class="fas fa-chevron-down text-[10px]"></i>
+                    </button>
                 </div>
             </div>
             @endforeach

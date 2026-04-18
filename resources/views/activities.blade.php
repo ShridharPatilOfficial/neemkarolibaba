@@ -38,17 +38,27 @@
 <section class="py-16 px-4 bg-gray-50">
     <div class="max-w-7xl mx-auto">
 
-        {{-- Year filter --}}
-        <div class="flex items-center justify-center gap-3 mb-8">
-            <label class="text-sm font-semibold text-gray-600">Filter by Year:</label>
+        {{-- Filters bar --}}
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-8">
+            <label class="text-sm font-semibold text-gray-600">Year:</label>
             <select onchange="location.href=this.value"
                     class="text-sm font-bold border-2 border-purple-200 rounded-xl px-4 py-2 bg-white focus:outline-none focus:border-purple-600 text-gray-700 shadow-sm">
                 @for($y = $currentYear + 2; $y >= $currentYear - 10; $y--)
-                <option value="{{ route('activities') }}?year={{ $y }}"
+                <option value="{{ route('activities') }}?year={{ $y }}&per_page={{ $perPage }}"
                     {{ $year == $y ? 'selected' : '' }}>
                     {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}
                 </option>
                 @endfor
+            </select>
+            <label class="text-sm font-semibold text-gray-600 ml-2">Show:</label>
+            <select onchange="location.href=this.value"
+                    class="text-sm font-bold border-2 border-purple-200 rounded-xl px-4 py-2 bg-white focus:outline-none focus:border-purple-600 text-gray-700 shadow-sm">
+                @foreach([25, 50, 100] as $size)
+                <option value="{{ route('activities') }}?year={{ $year }}&per_page={{ $size }}"
+                    {{ $perPage == $size ? 'selected' : '' }}>
+                    {{ $size }} per page
+                </option>
+                @endforeach
             </select>
         </div>
 

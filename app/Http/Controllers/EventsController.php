@@ -9,12 +9,13 @@ class EventsController extends Controller
     {
         $currentYear = (int) now()->format('Y');
         $year        = $request->input('year') ? (int) $request->input('year') : $currentYear;
+        $perPage     = in_array((int) $request->input('per_page'), [25, 50, 100]) ? (int) $request->input('per_page') : 25;
 
         $items = Event::where('is_active', true)
             ->where('post_year', $year)
             ->orderBy('sort_order')
             ->orderBy('id')
-            ->paginate(12)
+            ->paginate($perPage)
             ->withQueryString();
 
         $availYears = Event::where('is_active', true)
@@ -23,6 +24,6 @@ class EventsController extends Controller
             ->orderByDesc('post_year')
             ->pluck('y');
 
-        return view('events', compact('items', 'availYears', 'year', 'currentYear'));
+        return view('events', compact('items', 'availYears', 'year', 'currentYear', 'perPage'));
     }
 }
