@@ -131,7 +131,7 @@ html { font-size: 18px; scroll-behavior: smooth; }
   align-items: flex-end;
   justify-content: center;
   padding: .75rem 0;
-  gap: .5rem;
+  gap: .85rem;
   flex-shrink: 0;
 }
 .sh-socials { display: flex; gap: .4rem; }
@@ -149,6 +149,7 @@ html { font-size: 18px; scroll-behavior: smooth; }
   border-color: #F97316; transform: translateY(-1px);
 }
 /* Donate btn in header */
+.sh-donate-wrap { margin-top: .25rem; }
 .sh-actions .donate-btn {
   padding: 8px 18px !important;
   font-size: .76rem !important;
