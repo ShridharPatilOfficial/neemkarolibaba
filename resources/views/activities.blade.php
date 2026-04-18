@@ -46,7 +46,7 @@
                 @for($y = $currentYear + 2; $y >= $currentYear - 10; $y--)
                 <option value="{{ route('activities') }}?year={{ $y }}"
                     {{ $year == $y ? 'selected' : '' }}>
-                    {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}{{ $availYears->contains($y) ? '' : ' — no data' }}
+                    {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}
                 </option>
                 @endfor
             </select>

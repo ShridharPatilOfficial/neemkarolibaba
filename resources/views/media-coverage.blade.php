@@ -52,7 +52,7 @@
                     @for($y = $currentYear + 2; $y >= $currentYear - 10; $y--)
                     <option value="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year' => $y, 'category' => $category ?: null])) }}"
                         {{ $year == $y ? 'selected' : '' }}>
-                        {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}{{ $availYears->contains($y) ? '' : ' — no data' }}
+                        {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}
                     </option>
                     @endfor
                 </select>
