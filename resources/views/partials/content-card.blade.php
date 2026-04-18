@@ -8,21 +8,21 @@
     {{-- Media --}}
     @if($imgSrc && $ytId)
         <img src="{{ $imgSrc }}" alt="{{ $item->heading }}"
-             class="w-full h-52 object-cover cursor-zoom-in"
+             class="w-full h-72 object-cover cursor-zoom-in"
              onclick="imgLb(this)" data-full="{{ $imgSrc }}" data-caption="{{ $item->heading }}">
         <div class="relative" style="padding-top:56.25%">
             <iframe src="https://www.youtube.com/embed/{{ $ytId }}" class="absolute inset-0 w-full h-full" frameborder="0" allowfullscreen></iframe>
         </div>
     @elseif($imgSrc)
         <img src="{{ $imgSrc }}" alt="{{ $item->heading }}"
-             class="w-full h-52 object-cover cursor-zoom-in"
+             class="w-full h-72 object-cover cursor-zoom-in"
              onclick="imgLb(this)" data-full="{{ $imgSrc }}" data-caption="{{ $item->heading }}">
     @elseif($ytId)
         <div class="relative" style="padding-top:56.25%">
             <iframe src="https://www.youtube.com/embed/{{ $ytId }}" class="absolute inset-0 w-full h-full" frameborder="0" allowfullscreen></iframe>
         </div>
     @else
-        <div class="w-full h-52 bg-purple-50 flex items-center justify-center">
+        <div class="w-full h-72 bg-purple-50 flex items-center justify-center">
             <i class="fas fa-image text-purple-200 text-5xl"></i>
         </div>
     @endif
