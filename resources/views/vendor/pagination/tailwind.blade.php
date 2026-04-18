@@ -1,11 +1,14 @@
-@if ($paginator->hasPages())
 <nav class="flex flex-wrap items-center justify-between gap-3 mt-6" role="navigation">
 
     {{-- Results count --}}
     <p class="text-sm text-gray-500">
-        Showing <span class="font-semibold text-gray-700">{{ $paginator->firstItem() }}</span>
-        – <span class="font-semibold text-gray-700">{{ $paginator->lastItem() }}</span>
-        of <span class="font-semibold text-gray-700">{{ $paginator->total() }}</span> results
+        @if($paginator->total() > 0)
+            Showing <span class="font-semibold text-gray-700">{{ $paginator->firstItem() ?? 1 }}</span>
+            – <span class="font-semibold text-gray-700">{{ $paginator->lastItem() ?? $paginator->total() }}</span>
+            of <span class="font-semibold text-gray-700">{{ $paginator->total() }}</span> results
+        @else
+            No results found
+        @endif
     </p>
 
     {{-- Page buttons --}}
@@ -62,4 +65,3 @@
 
     </div>
 </nav>
-@endif

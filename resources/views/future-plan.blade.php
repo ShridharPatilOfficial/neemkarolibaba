@@ -36,10 +36,10 @@
 </div>
 
 <section class="py-16 px-4 bg-gray-50">
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-7xl mx-auto">
 
-        {{-- Year filter dropdown --}}
-        <div class="flex items-center justify-center gap-3 mb-6">
+        {{-- Year filter --}}
+        <div class="flex items-center justify-center gap-3 mb-8">
             <label class="text-sm font-semibold text-gray-600">Filter by Year:</label>
             <select onchange="location.href=this.value"
                     class="text-sm font-bold border-2 border-purple-200 rounded-xl px-4 py-2 bg-white focus:outline-none focus:border-purple-600 text-gray-700 shadow-sm">
@@ -52,20 +52,24 @@
             </select>
         </div>
 
-        <div class="space-y-0">
-            @forelse($items as $item)
-                @include('partials.content-cards', ['items' => collect([$item])])
-                <hr class="border-gray-100 my-4">
-            @empty
-                <div class="text-center py-20">
-                    <i class="fas fa-rocket text-gray-200 text-7xl mb-4"></i>
-                    <p class="text-gray-500 text-lg font-semibold">No future plans found for {{ $year }}</p>
-                    <p class="text-gray-400 text-sm mt-1">Try selecting a different year above.</p>
-                </div>
-            @endforelse
+        {{-- Grid --}}
+        @if($items->count())
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            @foreach($items as $item)
+                @include('partials.content-card', ['item' => $item])
+            @endforeach
         </div>
+        @else
+        <div class="text-center py-20">
+            <i class="fas fa-rocket text-gray-200 text-7xl mb-4"></i>
+            <p class="text-gray-500 text-lg font-semibold">No future plans found for {{ $year }}</p>
+            <p class="text-gray-400 text-sm mt-1">Try selecting a different year above.</p>
+        </div>
+        @endif
 
-        <div class="mt-10">{{ $items->links() }}</div>
+        {{-- Pagination --}}
+        <div class="mt-10">{{ $items->withQueryString()->links() }}</div>
+
     </div>
 </section>
 @endsection
