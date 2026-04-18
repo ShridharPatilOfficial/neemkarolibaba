@@ -45,6 +45,20 @@
         <a href="{{ route('admin.analytics') }}" class="admin-nav-link {{ request()->routeIs('admin.analytics') ? 'active' : '' }}">
             <i class="fas fa-chart-line"></i> Visitor Analytics
         </a>
+        <a href="{{ route('admin.submissions.join-us') }}" class="admin-nav-link {{ request()->routeIs('admin.submissions.join-us') ? 'active' : '' }}">
+            <i class="fas fa-user-plus"></i> Join Us
+            @php $unreadJoin = \App\Models\JoinUsSubmission::where('is_read', false)->count(); @endphp
+            @if($unreadJoin > 0)
+                <span class="ml-auto bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full">{{ $unreadJoin }}</span>
+            @endif
+        </a>
+        <a href="{{ route('admin.submissions.contact') }}" class="admin-nav-link {{ request()->routeIs('admin.submissions.contact') ? 'active' : '' }}">
+            <i class="fas fa-envelope"></i> Contact Us
+            @php $unreadContact = \App\Models\ContactSubmission::where('is_read', false)->count(); @endphp
+            @if($unreadContact > 0)
+                <span class="ml-auto bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full">{{ $unreadContact }}</span>
+            @endif
+        </a>
 
         <p class="admin-section-title">Home Page</p>
         <a href="{{ route('admin.settings') }}" class="admin-nav-link {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
@@ -106,22 +120,6 @@
         </a>
         <a href="{{ route('admin.tax-badges.index') }}" class="admin-nav-link {{ request()->routeIs('admin.tax-badges*') ? 'active' : '' }}">
             <i class="fas fa-certificate"></i> Tax Badges
-        </a>
-
-        <p class="admin-section-title">Submissions</p>
-        <a href="{{ route('admin.submissions.join-us') }}" class="admin-nav-link {{ request()->routeIs('admin.submissions.join-us') ? 'active' : '' }}">
-            <i class="fas fa-user-plus"></i> Join Us
-            @php $unreadJoin = \App\Models\JoinUsSubmission::where('is_read', false)->count(); @endphp
-            @if($unreadJoin > 0)
-                <span class="ml-auto bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full">{{ $unreadJoin }}</span>
-            @endif
-        </a>
-        <a href="{{ route('admin.submissions.contact') }}" class="admin-nav-link {{ request()->routeIs('admin.submissions.contact') ? 'active' : '' }}">
-            <i class="fas fa-envelope"></i> Contact Us
-            @php $unreadContact = \App\Models\ContactSubmission::where('is_read', false)->count(); @endphp
-            @if($unreadContact > 0)
-                <span class="ml-auto bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full">{{ $unreadContact }}</span>
-            @endif
         </a>
 
         <p class="admin-section-title">System</p>

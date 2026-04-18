@@ -39,21 +39,23 @@
         <colgroup>
             <col style="width:36px">
             <col style="width:80px">
-            <col>{{-- Title takes remaining space --}}
-            <col style="width:120px">
-            <col style="width:90px">
-            <col style="width:100px">
-            <col style="width:70px">
-            <col style="width:110px">
+            <col style="width:160px">{{-- Title --}}
+            <col>{{-- Description takes remaining --}}
+            <col style="width:100px">{{-- Source --}}
+            <col style="width:80px">{{-- Category --}}
+            <col style="width:48px">{{-- Sort # --}}
+            <col style="width:60px">{{-- Active --}}
+            <col style="width:100px">{{-- Actions --}}
         </colgroup>
         <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
                 <th class="py-3 px-3 text-gray-400"><i class="fas fa-grip-vertical text-xs"></i></th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Image</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Title</th>
+                <th class="py-3 px-4 text-left text-gray-600 font-semibold">Description</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Source</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Category</th>
-                <th class="py-3 px-4 text-left text-gray-600 font-semibold">Date</th>
+                <th class="py-3 px-3 text-center text-gray-600 font-semibold">#</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Active</th>
                 <th class="py-3 px-4 text-right text-gray-600 font-semibold">Actions</th>
             </tr>
@@ -77,13 +79,14 @@
                     @endif
                 </td>
                 <td class="py-3 px-4 font-semibold text-gray-800 truncate" title="{{ $c->title }}">{{ $c->title }}</td>
-                <td class="py-3 px-4 text-gray-500 text-xs">{{ $c->source_name }}</td>
+                <td class="py-3 px-4 text-gray-500 text-xs truncate" title="{{ strip_tags($c->description) }}">{{ Str::limit(strip_tags($c->description), 80) }}</td>
+                <td class="py-3 px-4 text-gray-500 text-xs truncate">{{ $c->source_name }}</td>
                 <td class="py-3 px-4">
                     <span class="inline-block px-2 py-0.5 rounded-full text-xs font-bold {{ $catColors[$c->category] ?? 'bg-gray-100 text-gray-600' }}">
                         {{ ucfirst($c->category) }}
                     </span>
                 </td>
-                <td class="py-3 px-4 text-gray-500 text-xs">{{ $c->published_date?->format('d M Y') ?? '—' }}</td>
+                <td class="py-3 px-3 text-center text-gray-500 text-xs font-mono font-semibold">{{ $c->sort_order }}</td>
                 <td class="py-3 px-4">
                     <span class="inline-block px-2 py-0.5 rounded-full text-xs font-bold {{ $c->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
                         {{ $c->is_active ? 'Yes' : 'No' }}
@@ -99,7 +102,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="8" class="py-16 text-center text-gray-400">
+                <td colspan="9" class="py-16 text-center text-gray-400">
                     <i class="fas fa-calendar-times text-4xl mb-3 block text-gray-200"></i>
                     No media coverage found for <strong>{{ $year }}</strong>.
                     <a href="{{ route('admin.media-coverage.create') }}" class="text-purple-600 hover:underline ml-1">Add one?</a>

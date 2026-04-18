@@ -19,11 +19,10 @@
     <table class="w-full text-sm">
         <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
-                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-10">#</th>
+                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-12">#</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold w-16">Image</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Title</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold hidden md:table-cell">Description</th>
-                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-16">Order</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold w-20">Active</th>
                 <th class="py-3 px-4 text-right text-gray-600 font-semibold w-28">Actions</th>
             </tr>
@@ -44,7 +43,6 @@
                 </td>
                 <td class="py-3 px-4 font-semibold text-gray-800">{{ $obj->title }}</td>
                 <td class="py-3 px-4 text-gray-500 text-xs hidden md:table-cell">{{ Str::limit(strip_tags($obj->description), 90) }}</td>
-                <td class="py-3 px-4 text-gray-500">{{ $obj->sort_order }}</td>
                 <td class="py-3 px-4">
                     <span class="inline-block px-2 py-0.5 rounded-full text-xs font-bold {{ $obj->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
                         {{ $obj->is_active ? 'Yes' : 'No' }}
@@ -61,7 +59,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="7" class="py-10 text-center text-gray-400">No objectives yet. Click "Add Objective" to get started.</td>
+                <td colspan="6" class="py-10 text-center text-gray-400">No objectives yet. Click "Add Objective" to get started.</td>
             </tr>
             @endforelse
         </tbody>

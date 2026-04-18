@@ -37,17 +37,21 @@
     <table class="w-full text-sm" style="table-layout:fixed">
         <colgroup>
             <col style="width:36px">
-            <col style="width:90px">
-            <col>{{-- Heading takes remaining space --}}
-            <col style="width:70px">
-            <col style="width:70px">
-            <col style="width:110px">
+            <col style="width:80px">
+            <col style="width:180px">{{-- Heading --}}
+            <col>{{-- Description takes remaining space --}}
+            <col style="width:48px">{{-- Sort # --}}
+            <col style="width:60px">{{-- Year --}}
+            <col style="width:60px">{{-- Active --}}
+            <col style="width:100px">{{-- Actions --}}
         </colgroup>
         <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
                 <th class="py-3 px-3 text-gray-400"><i class="fas fa-grip-vertical text-xs"></i></th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Media</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Heading</th>
+                <th class="py-3 px-4 text-left text-gray-600 font-semibold">Description</th>
+                <th class="py-3 px-3 text-center text-gray-600 font-semibold">#</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Year</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Active</th>
                 <th class="py-3 px-4 text-right text-gray-600 font-semibold">Actions</th>
@@ -68,6 +72,8 @@
                     @endif
                 </td>
                 <td class="py-3 px-4 font-medium text-gray-800 truncate" title="{{ $item->heading }}">{{ $item->heading }}</td>
+                <td class="py-3 px-4 text-gray-500 text-xs truncate" title="{{ strip_tags($item->description) }}">{{ Str::limit(strip_tags($item->description), 80) }}</td>
+                <td class="py-3 px-3 text-center text-gray-500 text-xs font-mono font-semibold">{{ $item->sort_order }}</td>
                 <td class="py-3 px-4 text-gray-500 text-xs font-semibold">{{ $item->post_year }}</td>
                 <td class="py-3 px-4">
                     <span class="inline-block px-2 py-0.5 rounded-full text-xs font-bold {{ $item->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
@@ -84,7 +90,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="6" class="py-16 text-center text-gray-400">
+                <td colspan="8" class="py-16 text-center text-gray-400">
                     <i class="fas fa-calendar-times text-4xl mb-3 block text-gray-200"></i>
                     No {{ strtolower($cfg['label']) }} records found for <strong>{{ $year }}</strong>.
                     <a href="{{ route('admin.content.create', $type) }}" class="text-purple-600 hover:underline ml-1">Add one?</a>

@@ -13,12 +13,11 @@
     <table class="w-full text-sm">
         <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
-                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-8">#</th>
+                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-12">#</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Icon</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Title</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Description</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold w-24">Theme</th>
-                <th class="py-3 px-4 text-left text-gray-600 font-semibold w-16">Order</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold w-20">Active</th>
                 <th class="py-3 px-4 text-right text-gray-600 font-semibold w-24">Actions</th>
             </tr>
@@ -40,7 +39,6 @@
                         {{ ucfirst($p->color_theme) }}
                     </span>
                 </td>
-                <td class="py-3 px-4 text-gray-500">{{ $p->sort_order }}</td>
                 <td class="py-3 px-4">
                     <span class="inline-block px-2 py-0.5 rounded-full text-xs font-bold {{ $p->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
                         {{ $p->is_active ? 'Yes' : 'No' }}
@@ -55,7 +53,7 @@
                 </td>
             </tr>
             @empty
-            <tr><td colspan="8" class="py-10 text-center text-gray-400">No principles yet. Click "Add Principle" to create Mission, Vision & Objectives cards.</td></tr>
+            <tr><td colspan="7" class="py-10 text-center text-gray-400">No principles yet. Click "Add Principle" to create Mission, Vision & Objectives cards.</td></tr>
             @endforelse
         </tbody>
     </table>
