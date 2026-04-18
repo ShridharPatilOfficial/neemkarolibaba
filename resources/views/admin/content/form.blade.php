@@ -49,8 +49,10 @@
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Year *</label>
                 <select name="post_year" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-400 text-sm bg-white">
                     @php $selYear = old('post_year', $item?->post_year ?? date('Y')) @endphp
-                    @for($y = date('Y') + 1; $y >= 2015; $y--)
-                    <option value="{{ $y }}" {{ $selYear == $y ? 'selected' : '' }}>{{ $y }}</option>
+                    @for($y = date('Y') + 2; $y >= date('Y') - 10; $y--)
+                    <option value="{{ $y }}" {{ $selYear == $y ? 'selected' : '' }}>
+                        {{ $y }}{{ $y == date('Y') ? ' (Current)' : '' }}
+                    </option>
                     @endfor
                 </select>
                 @error('post_year')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror

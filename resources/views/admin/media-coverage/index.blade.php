@@ -6,7 +6,7 @@
     <div class="flex items-center gap-2 flex-wrap">
         {{-- Year filter (always visible, default = current year) --}}
         <select onchange="location.href=this.value" class="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-400 bg-white">
-            @for($y = $currentYear + 1; $y >= 2015; $y--)
+            @for($y = $currentYear + 2; $y >= $currentYear - 10; $y--)
             <option value="{{ route('admin.media-coverage.index') }}?{{ http_build_query(array_merge(request()->only('category','status'), ['year' => $y])) }}"
                 {{ $year == $y ? 'selected' : '' }}>
                 {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}

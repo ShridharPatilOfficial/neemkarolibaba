@@ -10,11 +10,7 @@
 
         {{-- Year filter (always visible) --}}
         <select onchange="location.href=this.value" class="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-400 bg-white">
-            @php
-                $minYear = 2015;
-                $maxYear = $currentYear + 1;
-            @endphp
-            @for($y = $maxYear; $y >= $minYear; $y--)
+            @for($y = $currentYear + 2; $y >= $currentYear - 10; $y--)
             <option value="{{ route('admin.content.index', $type) }}?{{ http_build_query(array_merge(request()->only('status'), ['year' => $y])) }}"
                 {{ $year == $y ? 'selected' : '' }}>
                 {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}

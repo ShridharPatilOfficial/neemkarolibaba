@@ -48,11 +48,11 @@
             </div>
             <div class="flex flex-wrap items-center gap-2 justify-center md:justify-end">
                 {{-- Year filter (always visible, dropdown) --}}
-                <select onchange="location.href=this.value" class="text-xs font-bold border border-gray-200 rounded-full px-4 py-2 bg-white focus:outline-none focus:border-purple-400">
-                    @for($y = $currentYear + 1; $y >= 2015; $y--)
+                <select onchange="location.href=this.value" class="text-xs font-bold border-2 border-purple-200 rounded-xl px-4 py-2 bg-white focus:outline-none focus:border-purple-600 text-gray-700">
+                    @for($y = $currentYear + 2; $y >= $currentYear - 10; $y--)
                     <option value="{{ route('media-coverage') }}?{{ http_build_query(array_filter(['year' => $y, 'category' => $category ?: null])) }}"
                         {{ $year == $y ? 'selected' : '' }}>
-                        {{ $y }}{{ $y == $currentYear ? ' ★' : '' }}{{ $availYears->contains($y) ? '' : ' (no data)' }}
+                        {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}{{ $availYears->contains($y) ? '' : ' — no data' }}
                     </option>
                     @endfor
                 </select>

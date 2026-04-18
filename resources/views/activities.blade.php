@@ -38,15 +38,18 @@
 <section class="py-16 px-4">
     <div class="max-w-6xl mx-auto">
 
-        {{-- Year filter (always visible) --}}
-        <div class="flex flex-wrap gap-2 mb-8 justify-center">
-            @for($y = $currentYear + 1; $y >= 2015; $y--)
-            <a href="{{ route('activities') }}?year={{ $y }}"
-               class="text-xs font-bold px-4 py-2 rounded-full transition
-                      {{ $year == $y ? 'bg-purple-900 text-white shadow' : ($availYears->contains($y) ? 'bg-white text-gray-700 hover:bg-purple-100 border border-gray-200' : 'bg-gray-100 text-gray-400 border border-gray-100 cursor-default') }}">
-                {{ $y }}{{ $y == $currentYear ? ' ★' : '' }}
-            </a>
-            @endfor
+        {{-- Year filter dropdown --}}
+        <div class="flex items-center justify-center gap-3 mb-6">
+            <label class="text-sm font-semibold text-gray-600">Filter by Year:</label>
+            <select onchange="location.href=this.value"
+                    class="text-sm font-bold border-2 border-purple-200 rounded-xl px-4 py-2 bg-white focus:outline-none focus:border-purple-600 text-gray-700 shadow-sm">
+                @for($y = $currentYear + 2; $y >= $currentYear - 10; $y--)
+                <option value="{{ route('activities') }}?year={{ $y }}"
+                    {{ $year == $y ? 'selected' : '' }}>
+                    {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}{{ $availYears->contains($y) ? '' : ' — no data' }}
+                </option>
+                @endfor
+            </select>
         </div>
 
         <div class="space-y-0">
