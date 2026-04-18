@@ -98,10 +98,10 @@ class AnalyticsController extends Controller
             ->limit(15)
             ->get();
 
-        // ── Hourly distribution (0–23) ─────────────────────────────
+        // ── Hourly distribution (0–23) in IST (UTC+5:30) ──────────────
         $hourlyRaw = (clone $query)
-            ->select(DB::raw('HOUR(created_at) as hour'), DB::raw('COUNT(*) as total'))
-            ->groupBy(DB::raw('HOUR(created_at)'))
+            ->select(DB::raw('HOUR(DATE_ADD(created_at, INTERVAL 330 MINUTE)) as hour'), DB::raw('COUNT(*) as total'))
+            ->groupBy(DB::raw('HOUR(DATE_ADD(created_at, INTERVAL 330 MINUTE))'))
             ->orderBy('hour')
             ->get()
             ->keyBy('hour');

@@ -328,7 +328,7 @@
     {{-- Hourly heatmap (2/5 cols) --}}
     <div class="ana-card lg:col-span-2">
         <h3 class="font-bold text-gray-800 text-sm mb-1 flex items-center gap-2">
-            <i class="fas fa-clock text-purple-500"></i> Visits by Hour (UTC)
+            <i class="fas fa-clock text-purple-500"></i> Visits by Hour (IST)
         </h3>
         @php
             $rangeLabel = match($range) {
@@ -338,7 +338,7 @@
                 default => 'all time',
             };
         @endphp
-        <p class="text-[10px] text-gray-400 mb-3">Hourly traffic distribution for <strong>{{ $rangeLabel }}</strong>. Shows which hours get the most visitors — useful for scheduling posts or ads. Each square = 1 hour (00–23 UTC). Darker = more visitors.</p>
+        <p class="text-[10px] text-gray-400 mb-3">Hourly traffic distribution for <strong>{{ $rangeLabel }}</strong>. Shows which hours get the most visitors — useful for scheduling posts or ads. Each square = 1 hour (00–23 IST). Darker = more visitors.</p>
 
         @php $hMax = max($hourly ?: [1]); @endphp
 
@@ -350,7 +350,7 @@
                 $bg      = $cnt > 0 ? "rgba(79,70,229,{$opacity})" : '#f1f5f9';
                 $textCol = $opacity > 0.5 ? '#fff' : ($cnt > 0 ? '#3730a3' : '#cbd5e1');
             @endphp
-            <div title="{{ sprintf('%02d:00', $h) }} — {{ $cnt }} visit{{ $cnt != 1 ? 's' : '' }}"
+            <div title="{{ sprintf('%02d:00 IST', $h) }} — {{ $cnt }} visit{{ $cnt != 1 ? 's' : '' }}"
                  style="background:{{ $bg }}; height:44px; border-radius:6px;
                         display:flex; flex-direction:column; align-items:center; justify-content:center;
                         cursor:default; transition:transform .15s;"
@@ -370,7 +370,7 @@
             @endforeach
             <span style="font-size:9px; color:#94a3b8;">High</span>
         </div>
-        <p style="font-size:9px; color:#94a3b8; text-align:center; margin-top:4px;">Peak hour ({{ $rangeLabel }}): <strong style="color:#4f46e5;">{{ sprintf('%02d:00', array_search($hMax, $hourly)) }} UTC</strong></p>
+        <p style="font-size:9px; color:#94a3b8; text-align:center; margin-top:4px;">Peak hour ({{ $rangeLabel }}): <strong style="color:#4f46e5;">{{ sprintf('%02d:00', array_search($hMax, $hourly)) }} IST</strong></p>
     </div>
 </div>
 
