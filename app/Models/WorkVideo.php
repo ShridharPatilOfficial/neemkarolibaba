@@ -3,7 +3,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class WorkVideo extends Model {
-    protected $fillable = ['title','description','youtube_url','thumbnail_url','sort_order','is_active'];
+    protected $fillable = ['title','description','youtube_url','thumbnail_url','sort_order','post_year','is_active'];
     protected $casts    = ['is_active' => 'boolean'];
 
     public function getYoutubeIdAttribute(): ?string {

@@ -32,12 +32,14 @@ class WorkVideoController extends Controller
             'youtube_url'   => ['required', 'url'],
             'thumbnail_url' => ['nullable', 'url'],
             'sort_order'    => ['nullable', 'integer'],
+            'post_year'     => ['nullable', 'integer', 'min:2000', 'max:2100'],
             'is_active'     => ['nullable', 'boolean'],
         ]);
 
         $nextOrder          = $this->nextSortOrder(WorkVideo::class);
         $data['is_active']  = $request->boolean('is_active');
         $data['sort_order'] = $data['sort_order'] ?? 0;
+        $data['post_year']  = $data['post_year'] ?? now()->year;
 
         $item = WorkVideo::create($data);
         $this->swapSortOrderIfConflict(WorkVideo::class, $item->id, $item->sort_order, $nextOrder);
@@ -59,12 +61,14 @@ class WorkVideoController extends Controller
             'youtube_url'   => ['required', 'url'],
             'thumbnail_url' => ['nullable', 'url'],
             'sort_order'    => ['nullable', 'integer'],
+            'post_year'     => ['nullable', 'integer', 'min:2000', 'max:2100'],
             'is_active'     => ['nullable', 'boolean'],
         ]);
 
         $oldOrder           = $workVideo->sort_order;
         $data['is_active']  = $request->boolean('is_active');
         $data['sort_order'] = $data['sort_order'] ?? 0;
+        $data['post_year']  = $data['post_year'] ?? now()->year;
 
         $workVideo->update($data);
         $this->swapSortOrderIfConflict(WorkVideo::class, $workVideo->id, $workVideo->sort_order, $oldOrder);

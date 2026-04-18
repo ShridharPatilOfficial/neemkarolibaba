@@ -23,6 +23,32 @@
 <section class="py-16 px-4" style="background:linear-gradient(135deg,#0C0920 0%,#150D35 100%);">
     <div class="max-w-7xl mx-auto">
 
+        {{-- Year filter + per-page --}}
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-8">
+            <div class="flex flex-wrap items-center gap-2">
+                <label class="text-purple-400 text-sm font-semibold">Year:</label>
+                <select onchange="location.href=this.value" class="text-sm font-bold border-2 border-purple-700 rounded-xl px-4 py-2 bg-gray-900 text-purple-200 focus:outline-none focus:border-purple-500">
+                    @for($y = $currentYear + 1; $y >= $currentYear - 10; $y--)
+                    <option value="{{ route('work-in-action') }}?{{ http_build_query(['year' => $y, 'per_page' => $perPage]) }}"
+                        {{ $year == $y ? 'selected' : '' }}>
+                        {{ $y }}{{ $y == $currentYear ? ' (Current)' : '' }}
+                    </option>
+                    @endfor
+                </select>
+            </div>
+            <div class="flex items-center gap-2">
+                <label class="text-purple-400 text-sm font-semibold">Show:</label>
+                <select onchange="location.href=this.value" class="text-sm font-bold border-2 border-purple-700 rounded-xl px-4 py-2 bg-gray-900 text-purple-200 focus:outline-none focus:border-purple-500">
+                    @foreach([25, 50, 100] as $size)
+                    <option value="{{ route('work-in-action') }}?{{ http_build_query(['year' => $year, 'per_page' => $size]) }}"
+                        {{ $perPage == $size ? 'selected' : '' }}>
+                        {{ $size }} per page
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
         @if($videos->count())
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
             @foreach($videos as $vid)
@@ -73,29 +99,16 @@
             @endforeach
         </div>
 
-        {{-- Per-page + Pagination --}}
-        <div class="mt-10 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-2">
-                <label class="text-purple-400 text-sm font-semibold">Show:</label>
-                <select onchange="location.href=this.value" class="text-sm font-bold border-2 border-purple-700 rounded-xl px-4 py-2 bg-gray-900 text-purple-200 focus:outline-none focus:border-purple-500">
-                    @foreach([25, 50, 100] as $size)
-                    <option value="{{ route('work-in-action') }}?per_page={{ $size }}"
-                        {{ $perPage == $size ? 'selected' : '' }}>
-                        {{ $size }} per page
-                    </option>
-                    @endforeach
-                </select>
-            </div>
-            <div>{{ $videos->links() }}</div>
-        </div>
+        {{-- Pagination --}}
+        <div class="mt-10">{{ $videos->links() }}</div>
 
         @else
         <div class="text-center py-24">
             <div class="w-24 h-24 rounded-full bg-white/8 border border-white/15 flex items-center justify-center mx-auto mb-5">
                 <i class="fab fa-youtube text-red-400 text-4xl"></i>
             </div>
-            <p class="text-purple-300 text-lg font-semibold mb-2">Videos coming soon!</p>
-            <p class="text-purple-400 text-sm">Our team is uploading programme videos. Check back shortly.</p>
+            <p class="text-purple-300 text-lg font-semibold mb-2">No videos found for {{ $year }}.</p>
+            <p class="text-purple-400 text-sm">Try selecting a different year from the dropdown above.</p>
         </div>
         @endif
 

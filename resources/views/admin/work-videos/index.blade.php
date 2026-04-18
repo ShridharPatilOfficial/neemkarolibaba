@@ -15,6 +15,7 @@
             <col>
             <col style="width:220px">
             <col style="width:56px">
+            <col style="width:56px">
             <col style="width:64px">
             <col style="width:96px">
         </colgroup>
@@ -24,6 +25,7 @@
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Thumb</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Title</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Description</th>
+                <th class="py-3 px-4 text-center text-gray-600 font-semibold">Year</th>
                 <th class="py-3 px-4 text-center text-gray-600 font-semibold">#</th>
                 <th class="py-3 px-4 text-left text-gray-600 font-semibold">Active</th>
                 <th class="py-3 px-4 text-right text-gray-600 font-semibold">Actions</th>
@@ -47,6 +49,7 @@
                 </td>
                 <td class="py-3 px-4 font-semibold text-gray-800 truncate">{{ $v->title }}</td>
                 <td class="py-3 px-4 text-gray-500 text-xs truncate">{{ Str::limit(strip_tags($v->description), 80) }}</td>
+                <td class="py-3 px-4 text-center text-gray-500 font-mono text-xs">{{ $v->post_year ?: '—' }}</td>
                 <td class="py-3 px-4 text-center text-gray-400 font-mono text-xs">{{ $v->sort_order }}</td>
                 <td class="py-3 px-4">
                     <span class="inline-block px-2 py-0.5 rounded-full text-xs font-bold {{ $v->is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500' }}">
@@ -62,7 +65,7 @@
                 </td>
             </tr>
             @empty
-            <tr><td colspan="7" class="py-10 text-center text-gray-400">No videos yet. Add some to show in "Work in Action" section.</td></tr>
+            <tr><td colspan="8" class="py-10 text-center text-gray-400">No videos yet. Add some to show in "Work in Action" section.</td></tr>
             @endforelse
         </tbody>
     </table>
