@@ -110,6 +110,9 @@
 (function() {
     const tbody = document.getElementById('sortable-body');
     if (!tbody) return;
+    const csrfToken = () => document.querySelector('meta[name=csrf-token]')?.content
+                          || document.querySelector('input[name=_token]')?.value
+                          || '';
     Sortable.create(tbody, {
         handle: '.drag-handle',
         animation: 150,
@@ -117,9 +120,11 @@
             const ids = Array.from(tbody.querySelectorAll('.sortable-row')).map(r => r.dataset.id);
             fetch(tbody.dataset.reorderUrl, {
                 method: 'POST',
-                headers: {'Content-Type':'application/json','X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content},
+                headers: {'Content-Type':'application/json','X-CSRF-TOKEN': csrfToken()},
                 body: JSON.stringify({ ids })
-            });
+            }).then(r => {
+                if (!r.ok) console.warn('Reorder save failed', r.status);
+            }).catch(e => console.warn('Reorder error', e));
         }
     });
 })();

@@ -1033,23 +1033,10 @@ html { font-size: 18px; scroll-behavior: smooth; }
 .card-desc-truncated {
   max-height: 80px;
   overflow: hidden;
-  position: relative;
   transition: max-height 0.4s ease;
-}
-.card-desc-truncated::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 32px;
-  background: linear-gradient(to bottom, transparent, #fff);
-  pointer-events: none;
-  transition: opacity 0.3s;
 }
 .card-desc-truncated.expanded {
   max-height: 2000px;
-}
-.card-desc-truncated.expanded::after {
-  opacity: 0;
 }
 .card-read-more {
   font-size: .72rem;

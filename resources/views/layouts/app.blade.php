@@ -587,6 +587,19 @@ function toggleDesc(id, btn) {
         ? 'Read Less <i class="fas fa-chevron-up text-[10px]"></i>'
         : 'Read More <i class="fas fa-chevron-down text-[10px]"></i>';
 }
+// Auto-hide Read More button when content fits within the fixed height
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.card-desc-truncated').forEach(function(el) {
+        var btn = el.nextElementSibling;
+        if (!btn || !btn.classList.contains('card-read-more')) return;
+        // If content height is no taller than the clamped max-height, no button needed
+        if (el.scrollHeight <= el.clientHeight + 2) {
+            el.style.maxHeight = 'none';
+            el.style.overflow = 'visible';
+            btn.style.display = 'none';
+        }
+    });
+});
 </script>
 </body>
 </html>

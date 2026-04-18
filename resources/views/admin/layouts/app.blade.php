@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin') - NKB Admin</title>
     @php $adminFavicon = \Illuminate\Support\Facades\Storage::exists(\App\Models\SiteSetting::get('header_photo','')) ? \Illuminate\Support\Facades\Storage::url(\App\Models\SiteSetting::get('header_photo','')) : asset('favicon.svg'); @endphp
     <link rel="icon" href="{{ $adminFavicon }}" type="image/jpeg">
