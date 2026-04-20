@@ -14,7 +14,7 @@ class WorkInActionController extends Controller
 
         $videos = WorkVideo::where('is_active', true)
             ->where('post_year', $year)
-            ->orderBy('sort_order')
+            ->latest()
             ->paginate($perPage)
             ->withQueryString();
 

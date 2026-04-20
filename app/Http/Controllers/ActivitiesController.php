@@ -13,8 +13,7 @@ class ActivitiesController extends Controller
 
         $items = Activity::where('is_active', true)
             ->where('post_year', $year)
-            ->orderBy('sort_order')
-            ->orderBy('id')
+            ->latest()
             ->paginate($perPage)
             ->withQueryString();
 

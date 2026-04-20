@@ -13,8 +13,7 @@ class EventsController extends Controller
 
         $items = Event::where('is_active', true)
             ->where('post_year', $year)
-            ->orderBy('sort_order')
-            ->orderBy('id')
+            ->latest()
             ->paginate($perPage)
             ->withQueryString();
 
