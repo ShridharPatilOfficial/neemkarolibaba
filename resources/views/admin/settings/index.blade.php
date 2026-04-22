@@ -160,6 +160,60 @@
             </div>
         </div>
 
+        {{-- ── Site Lock ──────────────────────────────────────────────── --}}
+        <div class="mb-6 pt-4 border-t border-gray-100">
+            <p class="text-sm font-bold text-gray-700 mb-4 flex items-center gap-2">
+                <i class="fas fa-lock text-red-500"></i> Site Lock (Inauguration Mode)
+            </p>
+
+            {{-- Lock toggle --}}
+            <div class="flex items-center gap-4 mb-5 p-4 rounded-xl border-2 {{ !empty($settings['site_locked']) && $settings['site_locked'] === '1' ? 'bg-red-50 border-red-200' : 'bg-gray-50 border-gray-200' }}">
+                <label class="flex items-center gap-3 cursor-pointer select-none">
+                    <input type="checkbox" name="site_locked" value="1" id="site-locked-chk"
+                           {{ !empty($settings['site_locked']) && $settings['site_locked'] === '1' ? 'checked' : '' }}
+                           class="w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-400">
+                    <span class="text-sm font-bold text-gray-800">Lock entire site (show inauguration page to visitors)</span>
+                </label>
+                @if(!empty($settings['site_locked']) && $settings['site_locked'] === '1')
+                <span class="ml-auto inline-flex items-center gap-1.5 bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse inline-block"></span> SITE IS LOCKED
+                </span>
+                @else
+                <span class="ml-auto inline-flex items-center gap-1.5 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span> Site is Live
+                </span>
+                @endif
+            </div>
+            <p class="text-xs text-gray-400 mb-5">When locked, all public pages redirect to the inauguration page. Admin panel remains accessible.</p>
+
+            {{-- Lock image upload --}}
+            <div class="bg-red-50 border border-red-100 rounded-xl p-4">
+                <label class="block text-sm font-semibold text-red-800 mb-2">
+                    <i class="fas fa-image mr-1"></i> Inauguration / Lock Page Image
+                    <span class="text-gray-400 font-normal ml-1">(shown fullscreen when site is locked)</span>
+                </label>
+                @if(!empty($settings['lock_image']))
+                <div class="flex items-center gap-3 mb-3">
+                    <img src="{{ Storage::url($settings['lock_image']) }}"
+                         alt="Lock Image"
+                         class="w-20 h-24 rounded-lg object-cover border-2 border-red-300 shadow-sm">
+                    <div class="text-xs text-gray-500">
+                        <p class="font-semibold text-gray-700 mb-1">Current lock image</p>
+                        <p>Upload below to replace.</p>
+                        <a href="{{ route('inauguration') }}" target="_blank"
+                           class="inline-flex items-center gap-1 mt-2 text-purple-600 hover:underline font-semibold">
+                            <i class="fas fa-eye text-xs"></i> Preview lock page
+                        </a>
+                    </div>
+                </div>
+                @endif
+                <input type="file" name="lock_image" accept="image/*"
+                       class="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-red-100 file:text-red-700 file:font-semibold hover:file:bg-red-200">
+                <p class="text-xs text-gray-400 mt-1">Upload your inauguration poster/letter image (max 5 MB)</p>
+                @error('lock_image')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+            </div>
+        </div>
+
         <button type="submit" class="bg-purple-900 hover:bg-purple-800 text-white font-bold py-2.5 px-6 rounded-lg transition text-sm">
             <i class="fas fa-save mr-2"></i> Save Settings
         </button>

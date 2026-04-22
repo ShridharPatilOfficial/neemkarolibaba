@@ -11,7 +11,7 @@ class SiteSettingController extends Controller
 {
     public function index()
     {
-        $keys = ['site_name', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo', 'appeal_image', 'appeal_image_mr', 'facebook', 'instagram', 'youtube', 'twitter'];
+        $keys = ['site_name', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo', 'appeal_image', 'appeal_image_mr', 'facebook', 'instagram', 'youtube', 'twitter', 'site_locked', 'lock_image'];
         $settings = [];
         foreach ($keys as $key) {
             $settings[$key] = SiteSetting::get($key);
@@ -36,12 +36,18 @@ class SiteSettingController extends Controller
             'header_photo'  => ['nullable', 'image', 'max:2048'],
             'appeal_image'    => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'appeal_image_mr' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'lock_image'      => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'site_locked'     => ['nullable', 'boolean'],
         ]);
 
         // Handle file uploads separately
         unset($data['header_photo']);
         unset($data['appeal_image']);
         unset($data['appeal_image_mr']);
+        unset($data['lock_image']);
+
+        // site_locked is a checkbox — save '1' if checked, '0' if not submitted
+        $data['site_locked'] = $request->has('site_locked') ? '1' : '0';
 
         foreach ($data as $key => $value) {
             SiteSetting::set($key, $value ?? '');
@@ -72,6 +78,15 @@ class SiteSettingController extends Controller
             }
             $path = $request->file('appeal_image_mr')->store('settings', 'public');
             SiteSetting::set('appeal_image_mr', $path);
+        }
+
+        if ($request->hasFile('lock_image')) {
+            $old = SiteSetting::get('lock_image');
+            if ($old && Storage::disk('public')->exists($old)) {
+                Storage::disk('public')->delete($old);
+            }
+            $path = $request->file('lock_image')->store('settings', 'public');
+            SiteSetting::set('lock_image', $path);
         }
 
         return back()->with('success', 'Site settings updated successfully.');

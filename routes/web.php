@@ -36,9 +36,14 @@ use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Document;
+use App\Http\Controllers\InaugurationController;
 
 // ─── Sitemap ─────────────────────────────────────────────────────────────────
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
+// ─── Inauguration / Site Lock (always accessible) ────────────────────────────
+Route::get('/inauguration', [InaugurationController::class, 'show'])->name('inauguration');
+Route::post('/site-unlock', [InaugurationController::class, 'unlock'])->name('site.unlock');
 
 // ─── Public Routes ───────────────────────────────────────────────────────────
 Route::middleware('track.visitor')->group(function () {
