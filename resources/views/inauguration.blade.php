@@ -217,38 +217,192 @@ body{
 
     {{-- Unlock button --}}
     <div class="fade-up fade-up-d5">
-        <form method="POST" action="{{ route('site.unlock') }}">
-            @csrf
-            <button type="submit" class="unlock-btn">
-                <i class="fas fa-unlock-alt"></i>
-                Unlock Site
-            </button>
-        </form>
+        <button type="button" class="unlock-btn" id="unlock-btn" onclick="doUnlock()">
+            <i class="fas fa-unlock-alt"></i>
+            Unlock Site
+        </button>
         <p style="color:rgba(255,255,255,.2);font-size:.72rem;margin-top:10px;">Admin only</p>
     </div>
 
 </div>
 </div>
 
+{{-- ── Celebration overlay (hidden until unlock) ── --}}
+<canvas id="conf-canvas" style="position:fixed;inset:0;pointer-events:none;z-index:100;display:none;"></canvas>
+
+<div id="celebrate-overlay" style="
+    display:none;position:fixed;inset:0;z-index:99;
+    background:rgba(5,0,16,.55);backdrop-filter:blur(6px);
+    align-items:center;justify-content:center;
+">
+    {{-- Burst rings --}}
+    <div id="burst-wrap"></div>
+
+    {{-- Card --}}
+    <div style="
+        text-align:center;padding:52px 40px 44px;
+        background:rgba(255,255,255,.06);backdrop-filter:blur(20px);
+        border:1px solid rgba(255,255,255,.12);border-radius:28px;
+        max-width:420px;width:90%;position:relative;z-index:2;
+        box-shadow:0 32px 80px rgba(0,0,0,.6);
+    " id="cel-card">
+
+        {{-- Check --}}
+        <div id="cel-check" style="
+            width:84px;height:84px;border-radius:50%;
+            background:linear-gradient(135deg,#16a34a,#22c55e);
+            display:flex;align-items:center;justify-content:center;
+            margin:0 auto 22px;
+            box-shadow:0 0 0 14px rgba(34,197,94,.12),0 0 0 28px rgba(34,197,94,.06);
+            transform:scale(0);transition:transform .6s cubic-bezier(.34,1.56,.64,1);
+        ">
+            <i class="fas fa-check" style="font-size:2rem;color:#fff;"></i>
+        </div>
+
+        <h2 style="
+            font-family:'Cinzel',serif;font-weight:900;
+            font-size:clamp(1.4rem,4vw,2rem);margin-bottom:10px;
+            background:linear-gradient(90deg,#fbbf24,#fff8e7,#ffd700,#fff8e7,#fbbf24);
+            background-size:200% auto;
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            animation:shine 3s linear infinite;
+        ">Site is Now Live!</h2>
+
+        <p style="color:rgba(200,220,255,.75);font-size:.9rem;line-height:1.7;margin-bottom:28px;">
+            <strong style="color:#fff;">{{ $siteName }}</strong> has been successfully unlocked.<br>
+            All visitors can now access the website.
+        </p>
+
+        {{-- Countdown ring --}}
+        <p style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(180,200,255,.5);margin-bottom:8px;">Redirecting to home in</p>
+        <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;">
+            <svg viewBox="0 0 76 76" width="76" height="76" style="transform:rotate(-90deg);">
+                <defs>
+                    <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#22c55e"/>
+                        <stop offset="100%" stop-color="#fbbf24"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="38" cy="38" r="33" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/>
+                <circle id="r-fill" cx="38" cy="38" r="33" fill="none" stroke="url(#rg)" stroke-width="5"
+                        stroke-linecap="round" stroke-dasharray="207" stroke-dashoffset="0"
+                        style="transition:stroke-dashoffset 1s linear;"/>
+            </svg>
+            <div id="r-num" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:700;font-family:'Cinzel',serif;color:#fff;">5</div>
+        </div>
+        <p style="font-size:.78rem;color:rgba(200,220,255,.45);">Taking you to the home page&hellip;</p>
+
+        {{-- Progress bar --}}
+        <div style="margin-top:18px;height:4px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;">
+            <div id="r-prog" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#22c55e,#fbbf24);width:100%;transition:width 1s linear;"></div>
+        </div>
+    </div>
+</div>
+
 <script>
-// Generate random stars
+// ── Stars ────────────────────────────────────
 (function(){
-    var layer = document.getElementById('stars');
+    var layer=document.getElementById('stars');
     for(var i=0;i<120;i++){
-        var s=document.createElement('div');
-        s.className='star';
+        var s=document.createElement('div');s.className='star';
         var size=(Math.random()*2.5+.5)+'px';
-        s.style.cssText=[
-            'width:'+size,'height:'+size,
-            'top:'+(Math.random()*100)+'%',
-            'left:'+(Math.random()*100)+'%',
-            '--dur:'+(Math.random()*4+2)+'s',
-            '--delay:-'+(Math.random()*5)+'s',
-            'opacity:'+(Math.random()*.5+.1)
-        ].join(';');
+        s.style.cssText='width:'+size+';height:'+size+';top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--dur:'+(Math.random()*4+2)+'s;--delay:-'+(Math.random()*5)+'s;opacity:'+(Math.random()*.5+.1);
         layer.appendChild(s);
     }
 })();
+
+// ── Unlock via fetch ─────────────────────────
+function doUnlock() {
+    var btn = document.getElementById('unlock-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Unlocking…';
+
+    fetch('{{ route('site.unlock') }}', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+        if (data.ok) showCelebration(data.redirect || '{{ route('home') }}');
+    })
+    .catch(function(){ btn.disabled=false; btn.innerHTML='<i class="fas fa-unlock-alt"></i> Unlock Site'; });
+}
+
+// ── Show celebration overlay ─────────────────
+function showCelebration(redirectUrl) {
+    var overlay = document.getElementById('celebrate-overlay');
+    overlay.style.display = 'flex';
+
+    // Animate check
+    setTimeout(function(){
+        document.getElementById('cel-check').style.transform = 'scale(1)';
+    }, 100);
+
+    // Burst rings
+    var bw = document.getElementById('burst-wrap');
+    ['rgba(255,210,50,.8)','rgba(100,220,120,.6)','rgba(80,160,255,.5)'].forEach(function(color, i){
+        var el = document.createElement('div');
+        el.style.cssText = 'position:fixed;top:50%;left:50%;width:280px;height:280px;border-radius:50%;border:3px solid '+color+';pointer-events:none;animation:burst-ring '+(1.4+i*.3)+'s ease-out '+(i*.25)+'s forwards;';
+        bw.appendChild(el);
+    });
+
+    // Confetti
+    var canvas = document.getElementById('conf-canvas');
+    canvas.style.display = 'block';
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    var ctx = canvas.getContext('2d');
+    var cols = ['#fbbf24','#22c55e','#60a5fa','#f472b6','#a78bfa','#fb923c','#fff'];
+    var pieces = [];
+    for(var i=0;i<160;i++){
+        pieces.push({
+            x:Math.random()*canvas.width, y:Math.random()*canvas.height - canvas.height,
+            w:Math.random()*10+5, h:Math.random()*5+3,
+            color:cols[Math.floor(Math.random()*cols.length)],
+            rot:Math.random()*360, vx:(Math.random()-.5)*3,
+            vy:Math.random()*4+2, vr:Math.random()*6-3, op:1
+        });
+    }
+    var confStart = null;
+    function drawConf(ts){
+        if(!confStart) confStart=ts;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        pieces.forEach(function(p){
+            p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+            if(ts-confStart>3000) p.op=Math.max(0,p.op-.012);
+            ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+            ctx.globalAlpha=p.op; ctx.fillStyle=p.color;
+            ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+        });
+        if(ts-confStart<6000) requestAnimationFrame(drawConf);
+        else ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
+    requestAnimationFrame(drawConf);
+
+    // Countdown
+    var total=5, remaining=5;
+    var numEl=document.getElementById('r-num');
+    var ringEl=document.getElementById('r-fill');
+    var progEl=document.getElementById('r-prog');
+    var circ=2*Math.PI*33;
+    function tick(){
+        numEl.textContent=remaining;
+        ringEl.style.strokeDashoffset=circ*(1-remaining/total);
+        progEl.style.width=(remaining/total*100)+'%';
+    }
+    tick();
+    var iv=setInterval(function(){
+        remaining--;
+        tick();
+        if(remaining<=0){
+            clearInterval(iv);
+            setTimeout(function(){ window.location.href=redirectUrl; },600);
+        }
+    },1000);
+}
 </script>
 </body>
 </html>

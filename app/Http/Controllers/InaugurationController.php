@@ -13,10 +13,13 @@ class InaugurationController extends Controller
         return view('inauguration', compact('lockImage', 'siteName'));
     }
 
-    public function unlock()
+    public function unlock(\Illuminate\Http\Request $request)
     {
         SiteSetting::set('site_locked', '0');
-        return redirect()->route('site.unlocked');
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json(['ok' => true, 'redirect' => route('home')]);
+        }
+        return redirect()->route('home');
     }
 
     public function unlocked()
