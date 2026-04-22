@@ -217,7 +217,7 @@ body{
 
     {{-- Unlock button --}}
     <div class="fade-up fade-up-d5">
-        <form method="POST" action="{{ route('site.unlock') }}" onsubmit="return confirm('Unlock the site and go live?')">
+        <form method="POST" action="{{ route('site.unlock') }}">
             @csrf
             <button type="submit" class="unlock-btn">
                 <i class="fas fa-unlock-alt"></i>
