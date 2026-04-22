@@ -239,11 +239,15 @@ body{
     {{-- Burst rings --}}
     <div id="burst-wrap"></div>
 
-    {{-- Card — fully transparent, floats at bottom --}}
+    {{-- Card — frosted white pill at bottom --}}
     <div style="
         text-align:center;padding:28px 32px 24px;
-        background:transparent;
+        background:rgba(255,255,255,.88);
+        backdrop-filter:blur(4px);
+        border-radius:24px;
+        border:1px solid rgba(255,255,255,.6);
         max-width:420px;width:90%;position:relative;z-index:2;
+        box-shadow:0 8px 32px rgba(0,0,0,.25);
     " id="cel-card">
 
         {{-- Check --}}
