@@ -268,13 +268,13 @@ body{
             filter:drop-shadow(0 3px 10px rgba(0,0,0,1));
         ">Site is Now Live!</h2>
 
-        <p style="color:rgba(220,240,255,.9);font-size:.9rem;line-height:1.7;margin-bottom:20px;text-shadow:0 2px 8px rgba(0,0,0,.9);">
-            <strong style="color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.9);">{{ $siteName }}</strong> has been successfully unlocked.<br>
+        <p style="color:#111;font-size:.9rem;line-height:1.7;margin-bottom:20px;">
+            <strong style="color:#000;">{{ $siteName }}</strong> has been successfully unlocked.<br>
             All visitors can now access the website.
         </p>
 
         {{-- Countdown ring --}}
-        <p style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(220,240,255,.8);margin-bottom:8px;text-shadow:0 2px 6px rgba(0,0,0,.9);">Redirecting to home in</p>
+        <p style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#222;margin-bottom:8px;font-weight:700;">Redirecting to home in</p>
         <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;">
             <svg viewBox="0 0 76 76" width="76" height="76" style="transform:rotate(-90deg);">
                 <defs>
@@ -288,9 +288,9 @@ body{
                         stroke-linecap="round" stroke-dasharray="207" stroke-dashoffset="0"
                         style="transition:stroke-dashoffset 1s linear;"/>
             </svg>
-            <div id="r-num" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:700;font-family:'Cinzel',serif;color:#fff;">5</div>
+            <div id="r-num" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:700;font-family:'Cinzel',serif;color:#000;">5</div>
         </div>
-        <p style="font-size:.78rem;color:rgba(220,240,255,.7);text-shadow:0 2px 6px rgba(0,0,0,.9);">Taking you to the home page&hellip;</p>
+        <p style="font-size:.78rem;color:#333;font-weight:600;">Taking you to the home page&hellip;</p>
 
         {{-- Progress bar --}}
         <div style="margin-top:14px;height:4px;background:rgba(255,255,255,.15);border-radius:4px;overflow:hidden;max-width:260px;margin-left:auto;margin-right:auto;">
