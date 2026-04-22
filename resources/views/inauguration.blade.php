@@ -232,19 +232,18 @@ body{
 
 <div id="celebrate-overlay" style="
     display:none;position:fixed;inset:0;z-index:99;
-    background:rgba(5,0,16,.18);
-    align-items:center;justify-content:center;
+    background:transparent;
+    align-items:flex-end;justify-content:center;
+    padding-bottom:32px;
 ">
     {{-- Burst rings --}}
     <div id="burst-wrap"></div>
 
-    {{-- Card --}}
+    {{-- Card — fully transparent, floats at bottom --}}
     <div style="
-        text-align:center;padding:52px 40px 44px;
-        background:rgba(255,255,255,.06);backdrop-filter:blur(20px);
-        border:1px solid rgba(255,255,255,.12);border-radius:28px;
+        text-align:center;padding:28px 32px 24px;
+        background:transparent;
         max-width:420px;width:90%;position:relative;z-index:2;
-        box-shadow:0 32px 80px rgba(0,0,0,.6);
     " id="cel-card">
 
         {{-- Check --}}
@@ -266,15 +265,16 @@ body{
             background-size:200% auto;
             -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
             animation:shine 3s linear infinite;
+            filter:drop-shadow(0 3px 10px rgba(0,0,0,1));
         ">Site is Now Live!</h2>
 
-        <p style="color:rgba(200,220,255,.75);font-size:.9rem;line-height:1.7;margin-bottom:28px;">
-            <strong style="color:#fff;">{{ $siteName }}</strong> has been successfully unlocked.<br>
+        <p style="color:rgba(220,240,255,.9);font-size:.9rem;line-height:1.7;margin-bottom:20px;text-shadow:0 2px 8px rgba(0,0,0,.9);">
+            <strong style="color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.9);">{{ $siteName }}</strong> has been successfully unlocked.<br>
             All visitors can now access the website.
         </p>
 
         {{-- Countdown ring --}}
-        <p style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(180,200,255,.5);margin-bottom:8px;">Redirecting to home in</p>
+        <p style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(220,240,255,.8);margin-bottom:8px;text-shadow:0 2px 6px rgba(0,0,0,.9);">Redirecting to home in</p>
         <div style="position:relative;width:76px;height:76px;margin:0 auto 10px;">
             <svg viewBox="0 0 76 76" width="76" height="76" style="transform:rotate(-90deg);">
                 <defs>
@@ -290,10 +290,10 @@ body{
             </svg>
             <div id="r-num" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:700;font-family:'Cinzel',serif;color:#fff;">5</div>
         </div>
-        <p style="font-size:.78rem;color:rgba(200,220,255,.45);">Taking you to the home page&hellip;</p>
+        <p style="font-size:.78rem;color:rgba(220,240,255,.7);text-shadow:0 2px 6px rgba(0,0,0,.9);">Taking you to the home page&hellip;</p>
 
         {{-- Progress bar --}}
-        <div style="margin-top:18px;height:4px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;">
+        <div style="margin-top:14px;height:4px;background:rgba(255,255,255,.15);border-radius:4px;overflow:hidden;max-width:260px;margin-left:auto;margin-right:auto;">
             <div id="r-prog" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#22c55e,#fbbf24);width:100%;transition:width 1s linear;"></div>
         </div>
     </div>
