@@ -232,7 +232,7 @@ body{
 
 <div id="celebrate-overlay" style="
     display:none;position:fixed;inset:0;z-index:99;
-    background:rgba(5,0,16,.55);backdrop-filter:blur(6px);
+    background:rgba(5,0,16,.18);
     align-items:center;justify-content:center;
 ">
     {{-- Burst rings --}}
