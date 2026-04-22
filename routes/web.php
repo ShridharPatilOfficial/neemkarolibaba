@@ -44,6 +44,7 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 // ─── Inauguration / Site Lock (always accessible) ────────────────────────────
 Route::get('/inauguration', [InaugurationController::class, 'show'])->name('inauguration');
 Route::post('/site-unlock', [InaugurationController::class, 'unlock'])->name('site.unlock');
+Route::get('/site-unlocked', [InaugurationController::class, 'unlocked'])->name('site.unlocked');
 
 // ─── Public Routes ───────────────────────────────────────────────────────────
 Route::middleware('track.visitor')->group(function () {

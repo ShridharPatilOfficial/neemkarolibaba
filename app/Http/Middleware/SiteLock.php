@@ -21,6 +21,7 @@ class SiteLock
             str_starts_with($path, 'admin') ||
             $path === 'inauguration' ||
             $path === 'site-unlock' ||
+            $path === 'site-unlocked' ||
             $path === 'sitemap.xml' ||
             $path === 'up'
         ) {

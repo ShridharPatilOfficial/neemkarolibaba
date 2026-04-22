@@ -16,6 +16,12 @@ class InaugurationController extends Controller
     public function unlock()
     {
         SiteSetting::set('site_locked', '0');
-        return redirect()->route('home');
+        return redirect()->route('site.unlocked');
+    }
+
+    public function unlocked()
+    {
+        $siteName = SiteSetting::get('site_name', 'NKB Foundation');
+        return view('site-unlocked', compact('siteName'));
     }
 }
