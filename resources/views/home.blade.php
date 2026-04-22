@@ -839,17 +839,47 @@
 </section>
 
 {{-- ════════ APPEAL LETTER FRAME ════════════════════════════════ --}}
-@php $appealImage = \App\Models\SiteSetting::get('appeal_image'); @endphp
-@if($appealImage)
+@php
+    $appealEn = \App\Models\SiteSetting::get('appeal_image');
+    $appealMr = \App\Models\SiteSetting::get('appeal_image_mr');
+    $hasBoth  = $appealEn && $appealMr;
+@endphp
+@if($appealEn || $appealMr)
 <section class="py-8 px-4 bg-gray-50">
     <div class="max-w-3xl mx-auto text-center">
         <span class="sec-eyebrow">Public Appeal</span>
         <h2 class="sec-h2 mt-2 mb-4">Appeal <span class="hl">Letter</span></h2>
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-orange-100 reveal">
-            <img src="{{ asset('storage/' . $appealImage) }}"
-                 alt="Appeal Letter"
-                 class="w-full h-auto block">
+
+        {{-- Language tabs --}}
+        @if($hasBoth)
+        <div class="flex gap-2 mb-5 justify-center">
+            <button id="home-tab-en" onclick="homeAppealTab('en')"
+                    class="px-5 py-2 rounded-xl font-bold text-sm transition border-2 border-orange-400 bg-orange-500 text-white">
+                English
+            </button>
+            <button id="home-tab-mr" onclick="homeAppealTab('mr')"
+                    class="px-5 py-2 rounded-xl font-bold text-sm transition border-2 border-gray-200 bg-white text-gray-600 hover:border-purple-400 hover:text-purple-700">
+                मराठी
+            </button>
         </div>
+        @endif
+
+        @if($appealEn)
+        <div id="home-panel-en" class="reveal">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-orange-100">
+                <img src="{{ asset('storage/' . $appealEn) }}" alt="Appeal Letter (English)" class="w-full h-auto block">
+            </div>
+        </div>
+        @endif
+
+        @if($appealMr)
+        <div id="home-panel-mr" class="reveal" {{ $hasBoth ? 'style=display:none' : '' }}>
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-purple-100">
+                <img src="{{ asset('storage/' . $appealMr) }}" alt="Appeal Letter (Marathi)" class="w-full h-auto block">
+            </div>
+        </div>
+        @endif
+
         <div class="mt-6 flex flex-wrap justify-center gap-4">
             <a href="{{ route('appeal') }}"
                class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-xl transition text-sm shadow-md">
@@ -868,6 +898,22 @@
 
 @push('scripts')
 <script>
+function homeAppealTab(lang) {
+    var enPanel = document.getElementById('home-panel-en');
+    var mrPanel = document.getElementById('home-panel-mr');
+    var enTab   = document.getElementById('home-tab-en');
+    var mrTab   = document.getElementById('home-tab-mr');
+    if (!enPanel || !mrPanel) return;
+    if (lang === 'en') {
+        enPanel.style.display = ''; mrPanel.style.display = 'none';
+        enTab.className = 'px-5 py-2 rounded-xl font-bold text-sm transition border-2 border-orange-400 bg-orange-500 text-white';
+        mrTab.className = 'px-5 py-2 rounded-xl font-bold text-sm transition border-2 border-gray-200 bg-white text-gray-600 hover:border-purple-400 hover:text-purple-700';
+    } else {
+        enPanel.style.display = 'none'; mrPanel.style.display = '';
+        mrTab.className = 'px-5 py-2 rounded-xl font-bold text-sm transition border-2 border-purple-500 bg-purple-700 text-white';
+        enTab.className = 'px-5 py-2 rounded-xl font-bold text-sm transition border-2 border-gray-200 bg-white text-gray-600 hover:border-orange-400 hover:text-orange-600';
+    }
+}
 // Hero slider
 new Swiper('.hero-swiper', {
     loop: true,

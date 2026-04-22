@@ -11,7 +11,7 @@ class SiteSettingController extends Controller
 {
     public function index()
     {
-        $keys = ['site_name', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo', 'appeal_image', 'facebook', 'instagram', 'youtube', 'twitter'];
+        $keys = ['site_name', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo', 'appeal_image', 'appeal_image_mr', 'facebook', 'instagram', 'youtube', 'twitter'];
         $settings = [];
         foreach ($keys as $key) {
             $settings[$key] = SiteSetting::get($key);
@@ -34,12 +34,14 @@ class SiteSettingController extends Controller
             'youtube'       => ['nullable', 'url', 'max:300'],
             'twitter'       => ['nullable', 'url', 'max:300'],
             'header_photo'  => ['nullable', 'image', 'max:2048'],
-            'appeal_image'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'appeal_image'    => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'appeal_image_mr' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
         ]);
 
         // Handle file uploads separately
         unset($data['header_photo']);
         unset($data['appeal_image']);
+        unset($data['appeal_image_mr']);
 
         foreach ($data as $key => $value) {
             SiteSetting::set($key, $value ?? '');
@@ -61,6 +63,15 @@ class SiteSettingController extends Controller
             }
             $path = $request->file('appeal_image')->store('settings', 'public');
             SiteSetting::set('appeal_image', $path);
+        }
+
+        if ($request->hasFile('appeal_image_mr')) {
+            $old = SiteSetting::get('appeal_image_mr');
+            if ($old && Storage::disk('public')->exists($old)) {
+                Storage::disk('public')->delete($old);
+            }
+            $path = $request->file('appeal_image_mr')->store('settings', 'public');
+            SiteSetting::set('appeal_image_mr', $path);
         }
 
         return back()->with('success', 'Site settings updated successfully.');

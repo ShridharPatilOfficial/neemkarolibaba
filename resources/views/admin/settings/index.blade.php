@@ -108,27 +108,56 @@
             @error('header_photo')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
         </div>
 
-        {{-- Appeal Letter Image --}}
+        {{-- Appeal Letter Images --}}
         <div class="mb-6 pt-4 border-t border-gray-100">
-            <label class="block text-sm font-semibold text-gray-700 mb-1">
-                Appeal Letter Image
-                <span class="text-gray-400 font-normal ml-1">(shown on the Appeal page and home page bottom frame)</span>
-            </label>
-            @if(!empty($settings['appeal_image']))
-            <div class="flex items-center gap-4 mb-3">
-                <img src="{{ Storage::url($settings['appeal_image']) }}"
-                     alt="Appeal Letter"
-                     class="w-20 h-24 rounded-lg object-cover border-2 border-orange-300 shadow-sm">
-                <div class="text-xs text-gray-500">
-                    <p class="font-semibold text-gray-700 mb-1">Current appeal image</p>
-                    <p>Upload a new file below to replace it.</p>
+            <p class="text-sm font-bold text-gray-700 mb-4">Appeal Letter Images</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {{-- English --}}
+                <div class="bg-orange-50 border border-orange-100 rounded-xl p-4">
+                    <label class="block text-sm font-semibold text-orange-800 mb-2">
+                        <i class="fas fa-file-image mr-1"></i> English Appeal Letter
+                    </label>
+                    @if(!empty($settings['appeal_image']))
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="{{ Storage::url($settings['appeal_image']) }}"
+                             alt="English Appeal Letter"
+                             class="w-16 h-20 rounded-lg object-cover border-2 border-orange-300 shadow-sm">
+                        <div class="text-xs text-gray-500">
+                            <p class="font-semibold text-gray-700 mb-1">Current image</p>
+                            <p>Upload below to replace.</p>
+                        </div>
+                    </div>
+                    @endif
+                    <input type="file" name="appeal_image" accept="image/*"
+                           class="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-orange-100 file:text-orange-700 file:font-semibold hover:file:bg-orange-200">
+                    <p class="text-xs text-gray-400 mt-1">Portrait image, max 4 MB</p>
+                    @error('appeal_image')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
+
+                {{-- Marathi --}}
+                <div class="bg-purple-50 border border-purple-100 rounded-xl p-4">
+                    <label class="block text-sm font-semibold text-purple-800 mb-2">
+                        <i class="fas fa-file-image mr-1"></i> Marathi Appeal Letter (मराठी अपील पत्र)
+                    </label>
+                    @if(!empty($settings['appeal_image_mr']))
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="{{ Storage::url($settings['appeal_image_mr']) }}"
+                             alt="Marathi Appeal Letter"
+                             class="w-16 h-20 rounded-lg object-cover border-2 border-purple-300 shadow-sm">
+                        <div class="text-xs text-gray-500">
+                            <p class="font-semibold text-gray-700 mb-1">Current image</p>
+                            <p>Upload below to replace.</p>
+                        </div>
+                    </div>
+                    @endif
+                    <input type="file" name="appeal_image_mr" accept="image/*"
+                           class="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-100 file:text-purple-700 file:font-semibold hover:file:bg-purple-200">
+                    <p class="text-xs text-gray-400 mt-1">Portrait image, max 4 MB</p>
+                    @error('appeal_image_mr')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
+
             </div>
-            @endif
-            <input type="file" name="appeal_image" accept="image/*"
-                   class="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-orange-100 file:text-orange-700 file:font-semibold hover:file:bg-orange-200">
-            <p class="text-xs text-gray-400 mt-1">Recommended: portrait image (max 4 MB)</p>
-            @error('appeal_image')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
         </div>
 
         <button type="submit" class="bg-purple-900 hover:bg-purple-800 text-white font-bold py-2.5 px-6 rounded-lg transition text-sm">
