@@ -135,7 +135,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 ]);
             }
             return Storage::disk('public')->download($doc->file_path, $doc->name . '.' . $doc->file_type);
-        })->name('admin.documents.preview');
+        })->name('documents.preview');
         Route::resource('gallery', GalleryItemController::class)->except(['show'])
             ->parameters(['gallery' => 'gallery']);
         Route::resource('president', PresidentMessageController::class)->except(['show'])

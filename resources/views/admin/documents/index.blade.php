@@ -29,7 +29,7 @@
                 <th class="py-3 px-4 text-right text-gray-600 font-semibold">Actions</th>
             </tr>
         </thead>
-        <tbody id="docs-tbody" data-reorder-url="{{ route('documents.reorder') }}">
+        <tbody id="docs-tbody" data-reorder-url="{{ route('admin.documents.reorder') }}">
             @forelse($documents as $doc)
             <tr class="sortable-row border-b border-gray-50 hover:bg-gray-50 transition {{ !$doc->is_active ? 'opacity-50' : '' }}" data-id="{{ $doc->id }}">
                 <td class="py-3 px-2 text-center text-gray-300 drag-handle cursor-grab" title="Drag to reorder">
