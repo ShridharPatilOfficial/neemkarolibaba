@@ -125,6 +125,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->parameters(['org-profile' => 'orgProfile']);
 
         Route::resource('documents', DocumentController::class)->except(['show']);
+        Route::post('/documents-reorder', [DocumentController::class, 'reorder'])->name('documents.reorder');
+        Route::get('/documents/{id}/preview', function (int $id) {
+            $doc = Document::findOrFail($id);
+            if ($doc->file_type === 'pdf') {
+                return response()->file(Storage::disk('public')->path($doc->file_path), [
+                    'Content-Type'        => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="' . basename($doc->file_path) . '"',
+                ]);
+            }
+            return Storage::disk('public')->download($doc->file_path, $doc->name . '.' . $doc->file_type);
+        })->name('admin.documents.preview');
         Route::resource('gallery', GalleryItemController::class)->except(['show'])
             ->parameters(['gallery' => 'gallery']);
         Route::resource('president', PresidentMessageController::class)->except(['show'])

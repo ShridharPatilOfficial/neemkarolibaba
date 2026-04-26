@@ -43,13 +43,21 @@
         @if($documents->count())
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             @foreach($documents as $doc)
-            <a href="{{ route('documents.view', $doc->id) }}"
-               target="{{ $doc->file_type === 'pdf' ? '_blank' : '_self' }}"
-               class="card-hover flex items-center gap-3 bg-purple-900 hover:bg-purple-800 text-white font-semibold py-4 px-5 rounded-xl transition shadow-sm">
-                <i class="fas {{ $doc->file_type === 'pdf' ? 'fa-file-pdf text-red-300' : 'fa-file-word text-blue-300' }} text-2xl flex-shrink-0"></i>
+            @if($doc->file_type === 'pdf')
+            <button onclick="viewDoc('{{ route('documents.view', $doc->id) }}','{{ addslashes($doc->name) }}')"
+                    class="card-hover flex items-center gap-3 bg-purple-900 hover:bg-purple-800 text-white font-semibold py-4 px-5 rounded-xl transition shadow-sm w-full text-left">
+                <i class="fas fa-file-pdf text-red-300 text-2xl flex-shrink-0"></i>
                 <span class="text-sm">{{ $doc->name }}</span>
-                <i class="fas fa-external-link-alt text-xs ml-auto text-purple-300"></i>
+                <i class="fas fa-eye text-xs ml-auto text-purple-300"></i>
+            </button>
+            @else
+            <a href="{{ route('documents.view', $doc->id) }}"
+               class="card-hover flex items-center gap-3 bg-purple-900 hover:bg-purple-800 text-white font-semibold py-4 px-5 rounded-xl transition shadow-sm">
+                <i class="fas fa-file-word text-blue-300 text-2xl flex-shrink-0"></i>
+                <span class="text-sm">{{ $doc->name }}</span>
+                <i class="fas fa-download text-xs ml-auto text-purple-300"></i>
             </a>
+            @endif
             @endforeach
         </div>
         @else
@@ -57,4 +65,41 @@
         @endif
     </div>
 </section>
+
+{{-- PDF Viewer Modal --}}
+<div id="pubDocModal" class="fixed inset-0 z-[99999] hidden items-center justify-center"
+     style="background:rgba(0,0,0,.88);backdrop-filter:blur(5px);"
+     onclick="if(event.target===this)closeDocModal()">
+    <div class="w-full max-w-4xl mx-4 flex flex-col" style="height:90vh;" onclick="event.stopPropagation()">
+        <div class="flex items-center justify-between mb-3">
+            <p id="pubDocTitle" class="text-white font-bold text-sm truncate"></p>
+            <button onclick="closeDocModal()"
+                    class="w-9 h-9 rounded-full bg-white/10 hover:bg-orange-500 text-white flex items-center justify-center transition flex-shrink-0 ml-3">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <iframe id="pubDocFrame" src="" class="w-full flex-1 rounded-xl border-0 bg-white"></iframe>
+    </div>
+</div>
+
 @endsection
+
+@push('scripts')
+<script>
+function viewDoc(url, title) {
+    document.getElementById('pubDocFrame').src = url;
+    document.getElementById('pubDocTitle').textContent = title || 'Document';
+    var m = document.getElementById('pubDocModal');
+    m.classList.remove('hidden'); m.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+function closeDocModal() {
+    document.getElementById('pubDocFrame').src = '';
+    var m = document.getElementById('pubDocModal');
+    m.classList.add('hidden'); m.classList.remove('flex');
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDocModal(); });
+document.body.appendChild(document.getElementById('pubDocModal'));
+</script>
+@endpush
