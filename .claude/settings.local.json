@@ -14,7 +14,10 @@
       "Bash(php -r ':*)",
       "Bash(grep -v \"^$\")",
       "Bash(sed -i 's/\\\\.partner-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;justify-content:center;align-items:center;height:100px;padding:20px 24px;transition:all .3s;display:flex}/.partner-card{background:#fff;border:1px solid #e5e7eb;border-radius:20px;justify-content:center;align-items:center;height:140px;padding:24px 32px;transition:all .3s;display:flex}/' app.css)",
-      "Bash(sed -i 's/\\\\.partner-card img{object-fit:contain;filter:grayscale\\(\\)opacity\\(.7\\);width:auto;max-width:140px;max-height:52px;transition:filter .3s}/.partner-card img{object-fit:contain;filter:grayscale\\(\\)opacity\\(.7\\);width:auto;max-width:180px;max-height:88px;transition:filter .3s}/' app.css)"
+      "Bash(sed -i 's/\\\\.partner-card img{object-fit:contain;filter:grayscale\\(\\)opacity\\(.7\\);width:auto;max-width:140px;max-height:52px;transition:filter .3s}/.partner-card img{object-fit:contain;filter:grayscale\\(\\)opacity\\(.7\\);width:auto;max-width:180px;max-height:88px;transition:filter .3s}/' app.css)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
