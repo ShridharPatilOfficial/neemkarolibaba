@@ -67,8 +67,8 @@
 </section>
 
 {{-- PDF Viewer Modal --}}
-<div id="pubDocModal" class="fixed inset-0 z-[99999] hidden items-center justify-center"
-     style="background:rgba(0,0,0,.88);backdrop-filter:blur(5px);"
+<div id="pubDocModal" class="hidden items-center justify-center"
+     style="position:fixed;inset:0;z-index:9999999;background:rgba(0,0,0,.92);backdrop-filter:blur(5px);"
      onclick="if(event.target===this)closeDocModal()">
     <div class="w-full max-w-4xl mx-4 flex flex-col" style="height:90vh;" onclick="event.stopPropagation()">
         <div class="flex items-center justify-between mb-3">
