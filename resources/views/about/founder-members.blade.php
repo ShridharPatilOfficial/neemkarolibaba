@@ -26,6 +26,7 @@
 @section('content')
 <div class="page-banner py-20 px-4 text-white relative">
     <div class="relative z-10 max-w-4xl mx-auto">
+         <span class="text-orange-500 md:text-2xl mx-auto text-4xl">Love All, Serve All</span>
         <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Founder Member</h1>
         <p class="text-purple-200">{{ $siteName }}</p>
         <nav class="flex mt-3 text-sm" aria-label="Breadcrumb">
