@@ -284,7 +284,7 @@
 {{-- ─── Ticker ──────────────────────────────────────────────────── --}}
 @php
     $tickerText = \App\Models\SiteSetting::get('ticker')
-        ?: \App\Models\SiteSetting::get('ticker_text', 'Welcome to '.$siteName.' | Love All, Serve All | Join us in our mission of compassion and service');
+        ?: \App\Models\SiteSetting::get('ticker_text', 'Welcome to '.$siteName.' | Love All, Serve All and Feed All  | Join us in our mission of compassion and service');
 @endphp
 <div class="bg-emerald-700 text-white py-1.5 overflow-hidden text-xs">
     <div class="ticker-wrap">
@@ -317,7 +317,7 @@
                 @endif
                 <div>
                     <p class="font-bold text-lg leading-tight">{{ $siteName }}</p>
-                    <p class="text-gray-400 text-sm italic">"Love All, Serve All"</p>
+                    <p class="text-gray-400 text-sm italic">"Love All, Serve All and Feed All "</p>
                 </div>
             </div>
             <a href="{{ route('donate') }}#payment-section"

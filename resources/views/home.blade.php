@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', $siteName.' — Love All, Serve All')
+@section('title', $siteName.' — Love All, Serve All and Feed All  and Feed All ')
 @section('meta_desc', $siteName.' is a 12A & 80G registered NGO dedicated to feeding the hungry, educating children, and providing healthcare — inspired by the teachings of Maharaj-ji.')
 @section('meta_keywords', $siteName.', NKB Foundation, NGO India, Maharaj-ji, donate India, 80G charity, food distribution, free education, healthcare NGO, Chandigarh NGO')
 @section('canonical', url('/'))
@@ -180,7 +180,7 @@
                 ['emerald', 'from-emerald-500 to-teal-600', 'bg-emerald-50'],
             ];
             $fallbackPrinciples = collect([
-                (object)['icon'=>'fa-dove','color_theme'=>'orange','title'=>'Mission','description'=>"To serve humanity through compassion, education, and healthcare — inspired by Neem Karoli Baba's teaching: \"Love all, serve all.\"",'link_url'=>route('about.objectives')],
+                (object)['icon'=>'fa-dove','color_theme'=>'orange','title'=>'Mission','description'=>"To serve humanity through compassion, education, and healthcare — inspired by Neem Karoli Baba's teaching: \"Love All, Serve All and Feed All .\"",'link_url'=>route('about.objectives')],
                 (object)['icon'=>'fa-eye','color_theme'=>'purple','title'=>'Vision','description'=>'A society where every individual, regardless of caste or creed, has access to care, knowledge, and dignity.','link_url'=>route('about.objectives')],
                 (object)['icon'=>'fa-bullseye','color_theme'=>'emerald','title'=>'Objectives','description'=>'Free healthcare, education support, community feeding, and interfaith harmony — creating lasting positive impact.','link_url'=>route('about.objectives')],
             ]);

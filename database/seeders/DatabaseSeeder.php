@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         // ── Site Settings ─────────────────────────────────────────────────────
         $siteSettings = [
             'site_name'        => 'Neem Karoli Baba Foundation Worldwide',
-            'site_tagline'     => 'Love All, Serve All',
+            'site_tagline'     => 'Love All, Serve All and Feed All ',
             'reg_no'           => 'Reg. No. XXXXXX/2024',
             'email'            => 'info@nkbfoundation.org',
             'phone'            => '+91 98765 43210',
@@ -33,12 +33,12 @@ class DatabaseSeeder extends Seeder
             'instagram'        => 'https://instagram.com/',
             'youtube'          => 'https://youtube.com/',
             'home_youtube_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-            'mission'          => 'To serve humanity through compassion, education, and healthcare, inspired by the teachings of Neem Karoli Baba — "Love all, serve all."',
+            'mission'          => 'To serve humanity through compassion, education, and healthcare, inspired by the teachings of Neem Karoli Baba — "Love All, Serve All and Feed All ."',
             'vision'           => 'A society where every individual, regardless of caste, creed, or background, has access to care, knowledge, and dignity.',
             'objectives'       => 'Provide free/subsidized healthcare; support underprivileged education; run community feeding programs (Bhandara); promote interfaith harmony and mental well-being.',
             'about_text'       => 'The Neem Karoli Baba Foundation is a registered non-profit inspired by the life and teachings of the revered saint Neem Karoli Baba (Maharaj-ji). Rooted in the values of selfless service and unconditional love, we work across North India to uplift communities through healthcare, education, and humanitarian aid.',
             'nkb_image_url'    => 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Neem_Karoli_Baba.jpg/440px-Neem_Karoli_Baba.jpg',
-            'ticker_text'      => 'Welcome to Neem Karoli Baba Foundation Worldwide | Love All, Serve All | Join us in our mission of compassion and service',
+            'ticker_text'      => 'Welcome to Neem Karoli Baba Foundation Worldwide | Love All, Serve All and Feed All  | Join us in our mission of compassion and service',
         ];
         foreach ($siteSettings as $key => $value) {
             DB::table('site_settings')->updateOrInsert(
@@ -245,7 +245,7 @@ class DatabaseSeeder extends Seeder
         DB::table('president_messages')->insertOrIgnore([
             'president_name'  => 'Shri Rajesh Kumar Sharma',
             'president_title' => 'President, NKB Foundation Worldwide',
-            'message'         => "Jai Jai Shri Maharaj-ji!\n\nIn the name of our beloved Neem Karoli Baba, I warmly welcome you to the Neem Karoli Baba Foundation Worldwide.\n\nMaharaj-ji's timeless wisdom — \"Love all, serve all\" — is not merely a saying but the very foundation on which this organisation stands. Every meal we serve, every child we educate, every life we touch is a humble offering at his lotus feet.\n\nI invite you to be a part of this sacred mission. Whether through volunteering, donating, or simply spreading awareness, your contribution matters enormously. Together, we can build a more compassionate, equitable world.\n\nJai Ram Ji Ki.",
+            'message'         => "Jai Jai Shri Maharaj-ji!\n\nIn the name of our beloved Neem Karoli Baba, I warmly welcome you to the Neem Karoli Baba Foundation Worldwide.\n\nMaharaj-ji's timeless wisdom — \"Love All, Serve All and Feed All \" — is not merely a saying but the very foundation on which this organisation stands. Every meal we serve, every child we educate, every life we touch is a humble offering at his lotus feet.\n\nI invite you to be a part of this sacred mission. Whether through volunteering, donating, or simply spreading awareness, your contribution matters enormously. Together, we can build a more compassionate, equitable world.\n\nJai Ram Ji Ki.",
             'signature_url'   => null,
             'is_active'       => true,
             'created_at'      => now(),
@@ -287,7 +287,7 @@ class DatabaseSeeder extends Seeder
         $principles = [
             [
                 'title'       => 'Mission',
-                'description' => 'To serve humanity through compassion, education, and healthcare — inspired by Neem Karoli Baba\'s teaching: "Love all, serve all." We strive to uplift communities through selfless action and spiritual dedication.',
+                'description' => 'To serve humanity through compassion, education, and healthcare — inspired by Neem Karoli Baba\'s teaching: "Love All, Serve All and Feed All ." We strive to uplift communities through selfless action and spiritual dedication.',
                 'icon'        => 'fa-dove',
                 'color_theme' => 'orange',
                 'link_url'    => null,

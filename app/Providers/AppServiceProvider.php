@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with([
                 'siteName'         => SiteSetting::get('site_name', 'Neem Karoli Baba Charitable Trust'),
-                'siteTagline'      => SiteSetting::get('site_tagline', 'Love All, Serve All'),
+                'siteTagline'      => SiteSetting::get('site_tagline', 'Love All, Serve All and Feed All '),
                 'headerPhoto'      => $headerPhotoPath ? \Illuminate\Support\Facades\Storage::url($headerPhotoPath) : null,
                 'frontendVisitors' => $frontendVisitors,
             ]);
