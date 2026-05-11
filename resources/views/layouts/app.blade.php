@@ -128,6 +128,7 @@
                 <p class="sh-tag">
                     <i class="fas fa-shield-halved" style="font-size:.55rem;"></i>
                     {{ $siteTagline }}
+                    <i class="fas fa-shield-halved" style="font-size:.55rem;"></i>
                 </p>
                 <div class="sh-contacts hidden md:flex">
                     <a href="mailto:{{ \App\Models\SiteSetting::get('email','') }}">
