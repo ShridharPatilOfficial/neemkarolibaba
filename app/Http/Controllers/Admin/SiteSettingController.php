@@ -11,7 +11,7 @@ class SiteSettingController extends Controller
 {
     public function index()
     {
-        $keys = ['site_name', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo', 'appeal_image', 'appeal_image_mr', 'facebook', 'instagram', 'youtube', 'twitter', 'site_locked', 'lock_image'];
+        $keys = ['site_name', 'site_tagline', 'reg_no', 'email', 'phone', 'whatsapp', 'address', 'ticker', 'header_photo', 'appeal_image', 'appeal_image_mr', 'facebook', 'instagram', 'youtube', 'twitter', 'site_locked', 'lock_image'];
         $settings = [];
         foreach ($keys as $key) {
             $settings[$key] = SiteSetting::get($key);
@@ -25,6 +25,7 @@ class SiteSettingController extends Controller
             'site_name'    => ['required', 'string', 'max:200'],
             'reg_no'       => ['required', 'string', 'max:100'],
             'email'        => ['required', 'email', 'max:100'],
+            'site_tagline' => ['nullable', 'string', 'max:300'],
             'phone'        => ['required', 'string', 'max:20'],
             'whatsapp'     => ['required', 'string', 'max:20'],
             'address'      => ['required', 'string', 'max:300'],

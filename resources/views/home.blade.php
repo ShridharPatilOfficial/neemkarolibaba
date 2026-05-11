@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', $siteName.' — Love All, Serve All and Feed All  and Feed All ')
+@section('title', $siteName.' — Love All, Serve All and Feed All')
 @section('meta_desc', $siteName.' is a 12A & 80G registered NGO dedicated to feeding the hungry, educating children, and providing healthcare — inspired by the teachings of Maharaj-ji.')
 @section('meta_keywords', $siteName.', NKB Foundation, NGO India, Maharaj-ji, donate India, 80G charity, food distribution, free education, healthcare NGO, Chandigarh NGO')
 @section('canonical', url('/'))
